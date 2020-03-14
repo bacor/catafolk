@@ -24,7 +24,7 @@ excerpt: >
       </div>
       <div class="card-body">
         {% assign datasets = site.datasets | where: "analyzed", true %}
-        <table class="table rtable-responsive table-hover">
+        <table class="table table-responsive table-hover">
         <thead>
             <tr>
             <th scope="col" class="border-top-0">id</th>
