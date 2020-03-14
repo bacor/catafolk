@@ -10,6 +10,6 @@ Gemfile.lock
 # Python
 env
 .vscode
-datasets
+/datasets
 tmp/
 __pycache__/
