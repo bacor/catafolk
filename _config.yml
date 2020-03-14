@@ -1,0 +1,39 @@
+baseurl: ""
+github: bacor/catafolk
+
+source: website
+destination: docs
+
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+
+sass:
+  style: :compressed 
+  sass_dir: assets/_scss
+
+exclude:
+  - env
+  - datasets/
+  - .vscode/
+  - README.md
+  - src/
+  - tmp
+
+collections:
+  datasets:
+    output: true
+
+plugins: ['jekyll/scholar']
+
+scholar:
+  style: apa-no-doi-no-issue
+  # sort_by: author
+  order: ascending
+  bibliography: sources.bib
+  bibliography_template: bib
+  # source: bibliography
+  # bibtex_skip_fields: [clc-a-conference]
+  #mendeley-tags, file, url]
+  bibtex_filters:
+    - latex

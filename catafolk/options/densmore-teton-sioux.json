@@ -1,0 +1,13 @@
+{
+    "dataset_id": "densmore-teton-sioux",
+    "file_pattern": "kern/*.krn",
+    "meta_fields_map": {
+        "title": "OTL@ENG",
+        "region": "MLC",
+        "url": "URL"
+    },
+    "shared_fields": {
+        "source": "densmore1918teton",
+        "preview": "http://verovio.humdrum.org/?file=folk/sioux/{id}.krn"
+    }
+}

@@ -1,0 +1,29 @@
+// Two-column bibliography
+.bibliography-col-2 {
+    @include media-breakpoint-up(lg) {
+        column-count: 2;
+    }
+
+    li {
+        break-inside: avoid;
+    }
+
+    li:first-of-type div {
+        margin-top:0 !important;
+    }
+}
+
+.bibliography-not-numbered {
+    .bibliography {
+        padding-left: 1.5em;
+
+        li {
+            list-style: none;
+            text-indent: -1.5em;
+        }
+
+        a {
+            text-indent: 0;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "dataset_id": "sagrillo-ireland",
+    "file_pattern": "*.krn",
+    "file_encoding": "ISO-8859-1",
+    "meta_fields_map": {
+        "title": "OTL",
+        "source": "trd"
+    },
+    "meta_values_map": {
+        "source": {
+            "O BOYLE, Sean: 25 Irish Folksongs, Dublin 1976": "oboyle1976irish",
+            "O'SULLIVAN, Donal: Song of the Irish": "osullivan1981songs"
+        }
+    },
+    "shared_fields": {
+        "region": "Ireland",
+        "preview": "http://verovio.humdrum.org/?file=sagrillo/ireland/{id}.krn",
+        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={id}.krn&l=users/sagrillo/ireland&format=kern"
+    }
+}

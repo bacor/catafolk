@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}</title>
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/styles.css" />
+    <script src="{{ site.baseurl }}/assets/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="copyright" content="" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top border-bottom">
+    <div class="container justify-content-start">
+      <div class="navbar-brand mr-1">
+        <a class="navbar-brand mr-0" href="{{ site.baseurl }}/index.html">
+          <strong>Catafolk</strong>
+        </a>
+        {%- if page.url == "/" %}
+        {%- else %}
+          {%- if page.dataset_id -%}://{{ page.dataset_id }}
+          {%- else if page.title %}://{{ page.title | lower }}{% endif %}
+        {% endif %}
+      </div>
+      <p class="small mt-3">
+        <a class="badge badge-pill badge-danger text-light"
+          data-toggle="tooltip" data-html="true" data-placement="right"
+          title="Project in a very early stage"
+        >beta</a>
+      </p>      
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item {% if page.url == '/pages/datasets.html' %}active{% endif %}">
+            <a class="nav-link" href="{{ site.base_url }}/pages/datasets.html">Datasets</a>
+          </li>
+          <li class="nav-item {% if page.url == '/pages/sources.html' %}active{% endif %}">
+            <a class="nav-link" href="{{ site.base_url }}/pages/sources.html">Sources</a>
+          </li>
+          <li class="nav-item {% if page.url == '/pages/contributing.html' %}active{% endif %}">
+            <a class="nav-link" href="{{ site.base_url }}/pages/contributing.html">Contribute</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {{ content }}
+
+  <div class="bg-light mt-5 py-5 border-top small text-muted">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 align-top">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ site.baseurl }}/"><strong>Catafolk</strong> home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ site.baseurl }}/pages/datasets.html">Datasets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ site.baseurl }}/pages/contributing.html">Contributing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ site.baseurl }}/pages/sources.html">Sources</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/{{ site.github }}/">Github</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          
+        </div>
+        <div class="col-lg-3 align-top my-2">
+          <p>Copyright {{ site.time | date: '%Y' }} Bas Cornelissen</p>
+          <p>
+            <a href="http://www.mcg.uva.nl/">Music cognition group</a> &amp;
+            <a href="http://illc.uva.nl/clclab">clclab</a><br />
+            <a href="http://illc.uva.nl/">Institute for Logic, Language &amp; computation</a><br />
+            <a href="http://uva.nl/">University of Amsterdam</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ site.baseurl }}/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){ 
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "dataset_id": "sagrillo-scotland",
+    "file_pattern": "*.krn",
+    "file_encoding": "ISO-8859-1",
+    "meta_fields_map": {
+        "title": "OTL"
+    },
+    "shared_fields": {
+        "region": "Scotland",
+        "source": "haydnvolsliedbearbeitungen",
+        "preview": "http://verovio.humdrum.org/?file=sagrillo/scotland/{id}.krn",
+        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={id}.krn&l=users/sagrillo/scotland&format=kern"
+    }
+}

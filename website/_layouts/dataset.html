@@ -1,0 +1,283 @@
+---
+layout: default
+---
+{% capture github_dataset_url -%}
+  https://github.com/{{ site.github }}/_datasets/{{ page.dataset_id }}.md
+{%- endcapture %}
+{% capture github_index_url -%}
+  https://github.com/{{ site.github }}/_data/{{ page.dataset_id }}.csv
+{%- endcapture %}
+
+{% assign index_name = page.dataset_id | append: "-index" %}
+{% assign index = site.data[index_name] %}
+{% assign has_analysis = true %}
+{% if page.analyzed == false or page.analyzed == blank %}
+  {% assign has_analysis = false %}
+{% endif %}
+
+{% assign max_num_files = 250 %}
+
+<main class="container mt-5">
+  <div class="jumbotron row">
+    <div>
+      <h1 class="display-4">{{ page.title }}</h1>
+      <p class="lead" style="max-width: 700px">
+        {% if page.description %}
+          {{ page.description | markdownify }}
+        {% else %}
+          <span class="text-muted">This dataset has no description yet...</span>
+        {% endif %}
+      </p>
+      
+      {% if page.tags %}
+      <div class="mb-4">
+        {% for tag in page.tags %}
+        <span class="badge badge-pill badge-dark">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <a href="{{ page.dataset_url }}" class="btn btn-dark mr-2" target="_blank">View dataset</a>
+      {% if has_analysis %}
+      <a href="{{ github_index_url }}" class="btn btn-outline-secondary">View full index</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="card-deck">
+      {% assign props_name = page.dataset_id | append: "-properties" %}
+      {% assign props = site.data[props_name] %}
+
+      <div class="card">
+        <div class="card-header">
+          Properties
+        </div>
+        <div class="card-body">
+          <dl class="row">            
+            <dt class="col-lg-3">Authors</dt>
+            <dd class="col-lg-9">
+              {% if page.authors %}
+                {% for author in page.authors %}
+                  {% if author.url %}<a href="{{ contributor.url }}" target="_blank">{% endif %}
+                  {{ author.name }} <em>({{ author.role}})</em>
+                  {%- if forloop.index < forloop.length %}<br />{% endif %}
+                  {% if author.url %}</a>{% endif %}
+                {% endfor %}
+              {% else %}
+                <span class="text-muted">This information is missing...</span>
+              {% endif %}
+            </dd>
+
+            {% if page.contributors %}
+            <dt class="col-lg-3">Contributors</dt>
+            <dd class="col-lg-9">
+              {% for contributor in page.contributors %}
+                {% if contributor.url %}<a href="{{ contributor.url }}" target="_blank">{% endif %}
+                {{ contributor.name }}
+                {%- if forloop.index < forloop.length %};{% endif %}
+                {% if contributor.url %}</a>{% endif %}
+              {% endfor %}
+            </dd>
+            {% endif %}
+
+            <dt class="col-lg-3">Copyright</dt>
+            <dd class="col-lg-9">
+              {% if page.copyright == 'unknown' %}
+                <span class="text-danger">Unknown</span>
+              {% else if page.copyright %}
+                {{ page.copyright }}</a>
+              {% else %}
+                <span class="text-muted">This information is missing...</span>
+              {% endif %}
+            </dd>
+
+            <dt class="col-lg-3">License</dt>
+            <dd class="col-lg-9">
+              {% if page.licence_abbr == 'unknown' %}
+                <span class="text-danger">Unknown</span>
+              {% else if page.licence_abbr %}
+                <a href="{{page.license_url }}" target="_blank">{{ page.licence_abbr }}</a>
+              {% else %}
+                <span class="text-muted">This information is missing...</span>
+              {% endif %}
+            </dd>
+          </dl>
+        </div>
+        {% if page.description == blank or page.sources == blank %}
+        <div class="card-footer text-muted small">
+          Some info is missing... Please consider <a href="{{ github_dataset }}">contributing</a> on GitHub</a>.
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          Technicalities
+        </div>
+        <div class="card-body">
+          <dl class="row">
+            <dt class="col-lg-3">Dataset ID</dt>
+            <dd class="col-lg-9"><code class="text-muted">{{ props.dataset_id | default: page.dataset_id }}</code></dd>
+
+            <dt class="col-lg-3">Version</dt>
+            <dd class="col-lg-9">
+              <code class="text-muted">
+                {{ page.version | default: "unknown" }}
+              </code>
+            </dd>
+
+            <dt class="col-lg-3">Checksum</dt>
+            <dd class="col-lg-9">
+              {% if props.checksum %}
+                <code class="text-muted">{{ props.checksum }}</code></dd>
+              {% else %}
+                <span class="text-muted">The dataset has not yet been analyzed...</span>
+              {% endif %}
+              
+            <dt class="col-lg-3">File format</dt>
+            <dd class="col-lg-9">
+              {% for format in page.formats %}
+                <span class="badge badge-secondary badge-pill">{{format}}</span>
+              {% endfor %}
+            </dd>
+
+            <dt class="col-lg-3">Files</dt>
+            <dd class="col-lg-9">
+              <code class="text-muted">{{ props.num_files | default: page.files }}</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if content == '' %}
+  <div class="row mt-5">
+    <div class="card w-100">
+      <div class="card-header">
+        Readme
+      </div>
+      <div class="card-body">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="row mt-5">
+    <div class="card w-100 text-center bg-secondary text-light">
+      <div class="card-header">
+        Read me
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Contribute!</h5>
+        <p>
+          This dataset has no readme yet, describing how to download or use the dataset. <br/> 
+          Are you familiar with this dataset? 
+          Please consider <a class="text-dark" href="{{ site.baseurl }}/pages/contributing.html">contributing</a>.
+        </p>
+        <a href="{{ github_dataset_url }}" class="btn btn-light">Edit me on GitHub!</a>
+      </div>
+    </div>
+  </div>  
+  {% endif %}
+
+  {% if has_analysis %}
+  <div class="row mt-5">
+    <div class="card w-100">
+      <div class="card-header">
+        Index
+      </div>
+      <div class="card-body">
+        <table class="table table-hover border-top-0 table-sm small">
+          <thead>
+            <tr>
+              <th scope="col" class="border-top-0" width=5 class="text-muted">#</th>
+              <th scope="col" class="border-top-0">ID</th>
+              <th scope="col" class="border-top-0"></th>
+              <th scope="col" class="border-top-0">Title</th>
+              <th scope="col" class="border-top-0">Source</th>
+              <th scope="col" class="border-top-0">Region</th>
+              <th scope="col" class="border-top-0">md5</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for file in index %}
+            {% if forloop.index < max_num_files %}
+            <tr>
+              <td class="text-muted">{{ forloop.index }}</td>
+              <th scope="row">{{ file.id }}</th>
+              <td>
+                {% if file.url %}
+                  <a href="{{ file.url }}" target="_blank" class="badge badge-pill badge-light">
+                    <span class="oi oi-external-link" title="View the file" aria-hidden="true"></span></a>
+                {% endif %}
+
+                {% if file.preview %}
+                  <a href="{{ file.preview }}" target="_blank" class="badge badge-pill badge-light">
+                    <span class="oi oi-magnifying-glass" title="Online preview" aria-hidden="true"></span></a>
+                {% endif %}
+              </td>
+              <td>{{ file.title | truncate: 70 }}</td>
+              <td>
+                {% capture citation %}{% cite file.source %}{% endcapture %}
+                {% if citation == '(missing reference)' %}
+                  {{ file.source | truncate: 20 }}
+                {% else %}
+                 {{ citation }}
+                {% endif %}
+              </td>
+              <td>{{ file.region | truncatewords: 4 }}</td>
+              <td>
+                <a class="small text-muted"
+                  data-toggle="popover" data-html="true"
+                  data-content="<code class='text-muted small'>{{ file.checksum }}</code>">
+                  <code>{{ file.checksum | truncate: 5, "" }}</code>
+                </a>
+              </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer text-center text-muted small">
+        {% if max_num_files < props.num_files %}
+          <span class="text-danger">Showing only the first {{ max_num_files }} of {{ props.num_files}} files. </span>
+        {% endif %}
+        You can <a href="{{ github_index_url }}" target="_blank">download the full index</a> as a csv file.
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="row mt-5">
+    <div class="card w-100 text-center bg-dark text-light">
+      <div class="card-header">
+        Index
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Index not yet available</h5>
+        <p>
+          This dataset has not yet been analyzed...<br/> 
+          Please consider <a class="text-light" href="{{ site.baseurl }}/pages/contributing.html">contributing</a>.
+        </p>
+      </div>
+    </div>
+  </div>  
+  {% endif %}
+
+  {% capture num_cited_sources %}{% bibliography_count --cited %}{% endcapture %}
+  {% if num_cited_sources != "0" %}
+  <div class="row mt-5">
+    <div class="card w-100">
+      <div class="card-header">
+        Sources
+      </div>
+      <div class="card-body ">
+        <div class="bibliography-col-2 bibliography-not-numbered mt-3">
+        {% bibliography --cited %}
+        </div>
+    </div>
+  </div> 
+  {% endif %}
+</main>

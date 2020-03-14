@@ -1,0 +1,22 @@
+{
+    "dataset_id": "sagrillo-lorraine",
+    "file_pattern": "*.krn",
+    "file_encoding": "ISO-8859-1",
+    "meta_fields_map": {
+        "title": "OTL",
+        "source": "trd",
+        "region": "reg"
+    },
+    "meta_values_map": {
+        "source": {
+            "PINCK, Louis: Verklingende Weisen, Bd 1, Metz 1928": "pinck1926verklingende1",
+            "PINCK, Louis: Verklingende Weisen, Bd 2, Metz 1928": "pinck1928verklingende2",
+            "PINCK, Louis: Verklingende Weisen, Bd3, Metz 1933": "pinck1933verklingende3",
+            "PINCK, Louis: Verklingende Weisen Bd 4, Kassel 1939": "pinck1939verklingende4"
+        }
+    },
+    "shared_fields": {
+        "preview": "http://verovio.humdrum.org/?file=sagrillo/lorraine/{id}.krn",
+        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={id}.krn&l=users/sagrillo/lorraine&format=kern"
+    }
+}
