@@ -2,10 +2,10 @@
 layout: default
 ---
 {% capture github_dataset_url -%}
-  https://github.com/{{ site.github }}/_datasets/{{ page.dataset_id }}.md
+  https://github.com/{{ site.github }}/tree/master/website/_datasets/{{ page.dataset_id }}.md
 {%- endcapture %}
 {% capture github_index_url -%}
-  https://github.com/{{ site.github }}/_data/{{ page.dataset_id }}.csv
+  https://github.com/{{ site.github }}/tree/master/website/_data/{{ page.dataset_id }}-index.csv
 {%- endcapture %}
 
 {% assign index_name = page.dataset_id | append: "-index" %}
@@ -59,7 +59,7 @@ layout: default
             <dd class="col-lg-9">
               {% if page.authors %}
                 {% for author in page.authors %}
-                  {% if author.url %}<a href="{{ contributor.url }}" target="_blank">{% endif %}
+                  {% if author.url %}<a href="{{ author.url }}" target="_blank">{% endif %}
                   {{ author.name }} <em>({{ author.role}})</em>
                   {%- if forloop.index < forloop.length %}<br />{% endif %}
                   {% if author.url %}</a>{% endif %}
@@ -106,7 +106,7 @@ layout: default
         </div>
         {% if page.description == blank or page.sources == blank %}
         <div class="card-footer text-muted small">
-          Some info is missing... Please consider <a href="{{ github_dataset }}">contributing</a> on GitHub</a>.
+          Some info is missing... Please consider <a href="{{ github_dataset_url }}">contributing</a> on GitHub</a>.
         </div>
         {% endif %}
       </div>
@@ -152,18 +152,8 @@ layout: default
     </div>
   </div>
 
+  {% assign content = page.content | strip_newlines %}
   {% if content == '' %}
-  <div class="row mt-5">
-    <div class="card w-100">
-      <div class="card-header">
-        Readme
-      </div>
-      <div class="card-body">
-        {{ content }}
-      </div>
-    </div>
-  </div>
-  {% else %}
   <div class="row mt-5">
     <div class="card w-100 text-center bg-secondary text-light">
       <div class="card-header">
@@ -179,7 +169,19 @@ layout: default
         <a href="{{ github_dataset_url }}" class="btn btn-light">Edit me on GitHub!</a>
       </div>
     </div>
-  </div>  
+  </div>
+  {% else %}
+  <div class="row mt-5">
+    <div class="card w-100">
+      <div class="card-header">
+        Readme
+      </div>
+      <div class="card-body">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+  
   {% endif %}
 
   {% if has_analysis %}

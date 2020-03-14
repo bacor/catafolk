@@ -40,7 +40,7 @@ layout: default
             {% endfor %}
           </div>
           {% endif %}
-          <a href="{{ dataset.url }}" class="btn btn-dark">View {{ dataset.dataset_id }}</a>
+          <a href="{{ site.baseurl }}{{ dataset.url }}" class="btn btn-dark">View {{ dataset.dataset_id }}</a>
         </div>
       </div>
       {% endfor %}

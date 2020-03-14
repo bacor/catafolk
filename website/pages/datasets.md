@@ -42,7 +42,7 @@ excerpt: >
             {% assign analysis = site.data[dataset.dataset_id] %}
             <tr>
             <th scope="row">
-                <a href="{{ dataset.url }}">{{ dataset.dataset_id }}</a>
+                <a href="{{ site.baseurl }}{{ dataset.url }}">{{ dataset.dataset_id }}</a>
             </th>
             <td>{{ dataset.name }}</td>
             <td>{{ dataset.region }}</td>
