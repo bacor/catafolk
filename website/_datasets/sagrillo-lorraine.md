@@ -2,9 +2,11 @@
 layout: dataset
 dataset_id: sagrillo-lorraine
 analyzed: true
-title: Songs of Lorraine
+title: Pinck's Songs of Lorraine
 dataset_url: http://kern.ccarh.org/cgi-bin/ksbrowse?l=/users/sagrillo/lorraine
 authors:
+    - name: Louis Pinck
+      role: author
     - name: Damien Sagrillo
       role: digitization
 tags: [symbolic]
@@ -15,6 +17,9 @@ duration:
 licence_abbr: unknown
 copyright: unknown
 version: none
+description: >
+    A collection of 326 folk songs from the Lorraine, first published by Louis Pick
+    between 1926 and 1939, and later digitized by Damien Sagrillo.
 ---
 
 

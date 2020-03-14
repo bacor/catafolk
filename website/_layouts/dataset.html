@@ -21,13 +21,13 @@ layout: default
   <div class="jumbotron row">
     <div>
       <h1 class="display-4">{{ page.title }}</h1>
-      <p class="lead" style="max-width: 700px">
+      <div class="lead" style="max-width: 700px">
         {% if page.description %}
           {{ page.description | markdownify }}
         {% else %}
           <span class="text-muted">This dataset has no description yet...</span>
         {% endif %}
-      </p>
+      </div>
       
       {% if page.tags %}
       <div class="mb-4">
@@ -37,9 +37,14 @@ layout: default
       </div>
       {% endif %}
 
-      <a href="{{ page.dataset_url }}" class="btn btn-dark mr-2" target="_blank">View dataset</a>
+      <a href="{{ page.dataset_url }}" class="btn btn-dark mr-2">
+        Go to dataset <span class="oi oi-external-link small ml-2" title="View the file" aria-hidden="true"></span>
+      </a>
       {% if has_analysis %}
-      <a href="{{ github_index_url }}" class="btn btn-outline-secondary">View full index</a>
+      <a href="{{ github_index_url }}" class="btn btn-outline-secondary">
+        View full index
+        <span class="oi oi-external-link small ml-2" title="View the file" aria-hidden="true"></span>
+      </a>
       {% endif %}
     </div>
   </div>
@@ -276,7 +281,7 @@ layout: default
         Sources
       </div>
       <div class="card-body ">
-        <div class="bibliography-col-2 bibliography-not-numbered mt-3">
+        <div class="{% if num_cited_sources != '1' %}bibliography-col-2 bibliography-not-numbered mt-3{%endif%}">
         {% bibliography --cited %}
         </div>
     </div>

@@ -7,8 +7,8 @@ dataset_url: http://kern.ccarh.org/cgi-bin/ksbrowse?l=/users/sagrillo/ireland
 sources: [oboyle1976irish,osullivan1981songs]
 authors:
     - name: Damien Sagrillo
-      role: digitization
-tags: [symbolic]
+      role: digitisation
+tags: [symbolic,no lyrics,phrases]
 formats: [kern]
 files: 62
 notes: 
@@ -17,7 +17,8 @@ licence_abbr: unknown
 copyright: unknown
 version: none
 description: >
-    A collection of Irish folk songs from various sources, digitized by Damien Sagrillo.
+    A collection of 62 Irish folk songs from books by Seán O Boyle and Donal O'Sullivan, 
+    digitized by Damien Sagrillo.
 ---
 
 

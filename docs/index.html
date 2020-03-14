@@ -50,13 +50,15 @@
   </nav>
 
   <main class="container mt-5">
-  <div class="jumbotron row">
-    <div>
-      <h1 class="display-4">Catafolk</h1>
-      <p class="lead" style="max-width: 700px">A catalogue of folk music datasets for computational ethnomusicology</p>
-      <hr class="my-4">
-      <p style="max-width: 700px">The project hopes to make datasets of folk music more easily accessible. 
-      It provides a reference of datasets, but also aims to include some basic automatic analyses.</p>
+  <div class="row">
+    <div class="jumbotron">
+      <div>
+        <h1 class="display-4">Catafolk</h1>
+        <p class="lead" style="max-width: 700px">A catalogue of folk music datasets for computational ethnomusicology</p>
+        <hr class="my-4">
+        <p style="max-width: 700px">The project hopes to make datasets of folk music more easily accessible. 
+        It provides a reference of datasets, but also aims to include some basic automatic analyses.</p>
+      </div>
     </div>
   </div>
 
@@ -69,11 +71,10 @@
           If you are interested in the project, or want to contribute, please get in touch.
           Your comments and suggestions are also very welcome.
           </p>
-
           <a class="btn btn-outline-light text-light">Get in touch</a>
         </div>
       </div>
-
+      
       
       
       <div class="card">
@@ -95,12 +96,16 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Songs of Ireland</h5>
-          <p class="card-text"><p>A collection of Irish folk songs from various sources, digitized by Damien Sagrillo.</p>
+          <p class="card-text"><p>A collection of 62 Irish folk songs from books by Seán O Boyle and Donal O’Sullivan,  digitized by Damien Sagrillo.</p>
 </p>
           
           <div class="mb-4">
             
             <span class="badge badge-pill badge-light">symbolic</span>
+            
+            <span class="badge badge-pill badge-light">no lyrics</span>
+            
+            <span class="badge badge-pill badge-light">phrases</span>
             
           </div>
           
@@ -110,8 +115,8 @@
       
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Songs of Lorraine</h5>
-          <p class="card-text">
+          <h5 class="card-title">Pinck's Songs of Lorraine</h5>
+          <p class="card-text"><p>A collection of 326 folk songs from the Lorraine, first published by Louis Pick between 1926 and 1939, and later digitized by Damien Sagrillo.</p>
 </p>
           
           <div class="mb-4">
@@ -134,6 +139,10 @@
             
             <span class="badge badge-pill badge-light">symbolic</span>
             
+            <span class="badge badge-pill badge-light">no text</span>
+            
+            <span class="badge badge-pill badge-light">phrases</span>
+            
           </div>
           
           <a href="/catafolk/datasets/sagrillo-scotland.html" class="btn btn-dark">View sagrillo-scotland</a>
@@ -153,40 +162,53 @@
 
 
 
-  <div class="bg-light mt-5 py-5 border-top small text-muted">
+  <div class="bg-light mt-5 py-5 border-top small">
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 align-top">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/catafolk/"><strong>Catafolk</strong> home</a>
+        <div class="col-lg-3 col-md-5 my-2">
+          <p>
+            <a href="/catafolk/" class="text-dark"><strong>Catafolk</strong></a><br />
+            A catalogue of folk music datasets for computational ethnomusicology
+          </p>
+          <hr />
+          <p>
+            Copyright 2020 Bas Cornelissen</br>
+            <a href="http://www.mcg.uva.nl/" class="text-muted">Music Cognition Group</a> &amp;
+            <a href="http://illc.uva.nl/clclab" class="text-muted">clclab</a><br />
+            <a href="http://illc.uva.nl/" class="text-muted">ILLC</a>,
+            <a href="http://uva.nl/" class="text-muted">University of Amsterdam</a>
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <ul class="nav flex-column d-table d-md-block">
+            <li class="nav-item d-inline d-md-block">
+              <a class="nav-link d-inline-block pl-0 pl-md-3" href="/catafolk/pages/datasets.html">Datasets</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/catafolk/pages/datasets.html">Datasets</a>
+            <li class="nav-item d-inline d-md-block">
+              <a class="nav-link d-inline-block pl-0 pl-md-3" href="/catafolk/pages/contributing.html">Contributing</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/catafolk/pages/contributing.html">Contributing</a>
+            <li class="nav-item d-inline d-md-block">
+              <a class="nav-link d-inline-block pl-0 pl-md-3" href="/catafolk/pages/sources.html">Sources</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/catafolk/pages/sources.html">Sources</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://github.com/bacor/catafolk/">Github</a>
+            <li class="nav-item d-inline d-md-block">
+              <a class="nav-link d-inline-block pl-0 pl-md-3" href="https://github.com/bacor/catafolk/">Github</a>
             </li>
           </ul>
         </div>
-        <div class="col-lg-6">
-          
+        <div class="col-lg-4 offset-lg-3 col-md-4 d-none d-md-block">
+          <div class="card bg-dark text-light">
+            <div class="card-header d-md-none d-lg-block">Project in infancy</div>
+            <div class="card-body">
+              <p>
+              This project is in its infancy: many things are still likely to change.
+              If you are interested in the project, or want to contribute, please get in touch.
+              Your comments and suggestions are also very welcome.
+              </p>
+              <a class="btn btn-danger btn-sm">Get in touch</a>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-3 align-top my-2">
-          <p>Copyright 2020 Bas Cornelissen</p>
-          <p>
-            <a href="http://www.mcg.uva.nl/">Music cognition group</a> &amp;
-            <a href="http://illc.uva.nl/clclab">clclab</a><br />
-            <a href="http://illc.uva.nl/">Institute for Logic, Language &amp; computation</a><br />
-            <a href="http://uva.nl/">University of Amsterdam</a>
-          </p>
-        </div>
+        
       </div>
     </div>
   </div>

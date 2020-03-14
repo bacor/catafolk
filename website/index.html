@@ -3,13 +3,15 @@ layout: default
 ---
 
 <main class="container mt-5">
-  <div class="jumbotron row">
-    <div>
-      <h1 class="display-4">Catafolk</h1>
-      <p class="lead" style="max-width: 700px">A catalogue of folk music datasets for computational ethnomusicology</p>
-      <hr class="my-4">
-      <p style="max-width: 700px">The project hopes to make datasets of folk music more easily accessible. 
-      It provides a reference of datasets, but also aims to include some basic automatic analyses.</p>
+  <div class="row">
+    <div class="jumbotron">
+      <div>
+        <h1 class="display-4">Catafolk</h1>
+        <p class="lead" style="max-width: 700px">A catalogue of folk music datasets for computational ethnomusicology</p>
+        <hr class="my-4">
+        <p style="max-width: 700px">The project hopes to make datasets of folk music more easily accessible. 
+        It provides a reference of datasets, but also aims to include some basic automatic analyses.</p>
+      </div>
     </div>
   </div>
 
@@ -22,11 +24,10 @@ layout: default
           If you are interested in the project, or want to contribute, please get in touch.
           Your comments and suggestions are also very welcome.
           </p>
-
           <a class="btn btn-outline-light text-light">Get in touch</a>
         </div>
       </div>
-
+      
       {% assign datasets = site.datasets | where: "analyzed", true %}
       {% for dataset in datasets %}
       <div class="card">

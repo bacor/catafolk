@@ -4,11 +4,10 @@ dataset_id: sagrillo-scotland
 analyzed: true
 title: Songs of Scotland
 dataset_url: https://kern.humdrum.org/cgi-bin/browse?l=users/sagrillo/scotland
-sources: []
 authors:
     - name: Damien Sagrillo
       role: digitization
-tags: [symbolic]
+tags: [symbolic,no text,phrases]
 formats: [kern]
 files: 51
 notes: 
