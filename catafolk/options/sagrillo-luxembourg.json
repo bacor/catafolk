@@ -1,0 +1,30 @@
+{
+    "dataset_id": "sagrillo-luxembourg",
+    "file_pattern": "*/*.krn",
+    "file_encoding": "ISO-8859-1",
+    "meta_fields_map": {
+        "title": "OTL",
+        "source": "trd",
+        "region": "reg"
+    },
+    "meta_values_map": {
+        "source": {
+            "D'Fraen um Kanddaaf an der aler Zeit, Luxemburg 1929": "ruden1934fraen",
+            "Singendes Volk, Esch-Alzette,? 1937,? posth.": "thill1937singendes",
+            "Die Bauernhochzeit in fr&uuml;heren Zeiten": "spedener1886bauernhochzeit",
+            "Die (L|l)uxemburger Volkslieder &auml;lterer Zeit, Luxemburg 1904 posth.": "delafontaine1094luxemburger",
+            "KINTZELE, Guillaume: An der Ucht, Bd. 1, Luxemburg 1926": "kintzele1926ucht1",
+            "KINTZELE, Guillaume: An der Ucht, Bd. 2, Luxemburg 1927": "kintzele1927ucht2",
+            "KINTZELE, Guillaume: An der Ucht, Bd. 3,? Luxemburg 1928": "kintzele1928ucht3"
+        }
+    },
+    "shared_fields": {
+        "preview": "http://verovio.humdrum.org/?file=sagrillo/lux/{path}",
+        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={path}&l=users/sagrillo/lux&format=kern"
+    },
+    "corrections": {
+        "t0298|t0309": {
+            "source": "thill1937singendes"
+        }
+    }
+}

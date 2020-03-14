@@ -17,17 +17,6 @@ layout: default
 
   <div class="row mt-5">
     <div class="card-columns">
-      <div class="card bg-danger text-light">
-        <div class="card-body">
-          <p>
-          This project is in its infancy: many things are still likely to change.
-          If you are interested in the project, or want to contribute, please get in touch.
-          Your comments and suggestions are also very welcome.
-          </p>
-          <a class="btn btn-outline-light text-light">Get in touch</a>
-        </div>
-      </div>
-      
       {% assign datasets = site.datasets | where: "analyzed", true %}
       {% for dataset in datasets %}
       <div class="card">

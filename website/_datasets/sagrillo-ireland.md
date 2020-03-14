@@ -4,7 +4,6 @@ dataset_id: sagrillo-ireland
 analyzed: true
 title: Songs of Ireland
 dataset_url: http://kern.ccarh.org/cgi-bin/ksbrowse?l=/users/sagrillo/ireland
-sources: [oboyle1976irish,osullivan1981songs]
 authors:
     - name: Damien Sagrillo
       role: digitisation

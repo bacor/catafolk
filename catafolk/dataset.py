@@ -15,6 +15,7 @@ _DATASET_IDS = [
     'sagrillo-ireland',
     'sagrillo-scotland',
     'sagrillo-lorraine',
+    'sagrillo-luxembourg'
 ]
 
 class Dataset(object):
@@ -36,6 +37,7 @@ class Dataset(object):
         file_preview_url=None,
         meta_fields_map={}, 
         meta_values_map={},
+        corrections={},
         shared_fields={}, dataset_id=None,):
 
         if not os.path.exists(data_dir):
@@ -51,6 +53,7 @@ class Dataset(object):
         self.file_format = file_format
         self.meta_fields_map = meta_fields_map
         self.meta_values_map = meta_values_map
+        self.corrections = corrections
         self.shared_fields = shared_fields
         self.dataset_id = dataset_id
 
@@ -85,7 +88,8 @@ class Dataset(object):
             # Shared fields; overrides metadata
             for field, value in self.shared_fields.items():
                 if field in self.index_columns:
-                    item[field] = value.format(id=file.id)
+                    path = file.relpath(root=self.data_dir)
+                    item[field] = value.format(id=file.id, path=path)
 
             # Finally set automatically computed fields
             item["id"] = file.id
@@ -104,6 +108,12 @@ class Dataset(object):
                             item[field] = target_value
                 else:
                     raise NotImplemented('Only strings are currently supported')
+            
+            # Finally apply individual corrections
+            for pattern, corrections in self.corrections.items():
+                if re.match(pattern, id):
+                    for field, value in corrections.items():
+                        item[field] = value
 
             items.append(item)
 
@@ -172,6 +182,6 @@ if __name__ == '__main__':
     # d.save_index()
     # d.save_properties()
 
-    d2 = get_dataset('sagrillo-ireland', data_dir, index_dir)
+    d2 = get_dataset('sagrillo-luxembourg', data_dir, index_dir)
     d2.save_index()
     d2.save_properties()
