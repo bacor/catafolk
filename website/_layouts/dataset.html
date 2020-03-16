@@ -158,36 +158,35 @@ layout: default
   </div>
 
   {% assign content = page.content | strip_newlines %}
-  {% if content == '' %}
   <div class="row mt-5">
-    <div class="card w-100 text-center bg-secondary text-light">
-      <div class="card-header">
-        Read me
+    <!-- <div class="col-12"> -->
+      {% if content == '' %}
+      <div class="card w-100 text-center bg-secondary text-light">
+        <div class="card-header">
+          Read me
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Contribute!</h5>
+          <p>
+            This dataset has no readme yet, describing how to download or use the dataset. <br/> 
+            Are you familiar with this dataset? 
+            Please consider <a class="text-dark" href="{{ site.baseurl }}/pages/contributing.html">contributing</a>.
+          </p>
+          <a href="{{ github_dataset_url }}" class="btn btn-light">Edit me on GitHub!</a>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">Contribute!</h5>
-        <p>
-          This dataset has no readme yet, describing how to download or use the dataset. <br/> 
-          Are you familiar with this dataset? 
-          Please consider <a class="text-dark" href="{{ site.baseurl }}/pages/contributing.html">contributing</a>.
-        </p>
-        <a href="{{ github_dataset_url }}" class="btn btn-light">Edit me on GitHub!</a>
+      {% else %}
+      <div class="card w-100">
+        <div class="card-header">
+          Readme
+        </div>
+        <div class="card-body">
+          {{ content }}
+        </div>
       </div>
-    </div>
+      {% endif %}
+    <!-- </div> -->
   </div>
-  {% else %}
-  <div class="row mt-5">
-    <div class="card w-100">
-      <div class="card-header">
-        Readme
-      </div>
-      <div class="card-body">
-        {{ content }}
-      </div>
-    </div>
-  </div>
-  
-  {% endif %}
 
   {% if has_analysis %}
   <div class="row mt-5">
@@ -345,18 +344,36 @@ layout: default
   </div>  
   {% endif %}
 
-  {% capture num_cited_sources %}{% bibliography_count --cited %}{% endcapture %}
-  {% if num_cited_sources != "0" %}
   <div class="row mt-5">
-    <div class="card w-100">
-      <div class="card-header">
-        Sources
-      </div>
-      <div class="card-body ">
-        <div class="{% if num_cited_sources != '1' %}bibliography-col-2 bibliography-not-numbered mt-3{%endif%}">
-        {% bibliography --cited %}
+    {%- capture num_cited_sources %}{% bibliography_count --cited %}{% endcapture %}
+    {% if num_cited_sources != "0" and page.issues %}<div class="card-deck">{% endif %}
+      {%- if num_cited_sources != "0" %}
+      <div class="card w-100">
+        <div class="card-header">Sources</div>
+        <div class="card-body small">
+          <div class="bibliography-not-numbered{% if num_cited_sources != '1' %} bibliography-col-2{%endif%}">
+          {% bibliography --cited %}
+          </div>
         </div>
-    </div>
-  </div> 
-  {% endif %}
+      </div>
+      {%- endif %}
+    
+      {%- if page.issues %}
+      <div class="card w-100 border-danger bg-light">
+        <div class="card-header">Issues</div>
+        <ul class="list-group list-group-flush small">
+          {%- for issue in page.issues %}
+          <li class="list-group-item bg-light">
+            <p><strong>{{ issue.title }}</strong></p>
+            {{ issue.description | markdownify }}
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+    
+    {%- if num_cited_sources != "0" and page.issues %}</div>{% endif %}
+  </div>
+
+  
 </main>

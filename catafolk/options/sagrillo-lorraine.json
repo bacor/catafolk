@@ -32,7 +32,7 @@
             "pattern": "([^\\]\\?]+) ?\\??\\] +AMBITUS\\[(\\w+)",
             "groups": ["modality", "ambitus"],
             "default": "modality",
-            "lowercase": true
+            "transform": "lowercase"
         },
         "key": {
             "type": "regex",

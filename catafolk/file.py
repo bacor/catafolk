@@ -20,6 +20,18 @@ _FIELDS = ['id', 'title', 'title_eng', 'location', 'latitude', 'longitude',
            'genre', 'language', 'language_iso', 
            'url', 'preview_url', 'path', 'format', 'checksum']
 
+def transform_string(string, how=None):
+    if how == 'lowercase':
+        return string.lower()
+    elif how == 'uppercase':
+        return string.upper()
+    elif how == 'titlecase':
+        return string.title()
+    elif how == 'capitalize':
+        return string.capitalize()
+    else:
+        return string
+
 def convert_meta_fields(metadata, conversion): 
     out = {}
     for orig_field, converter in conversion.items():
@@ -40,17 +52,17 @@ def convert_meta_fields(metadata, conversion):
             if matches:
                 for group_num, new_field in enumerate(converter['groups']):
                     if new_field is not None and matches[group_num + 1] is not None:
-                        new_value = matches[group_num + 1] 
-                        if 'lowercase' in converter:
-                            new_value = new_value.lower()
-                        out[new_field] = new_value
+                        new_value = matches[group_num + 1]
+                        out[new_field] = transform_string(new_value, converter.get('transform'))
 
             elif "default" in converter:
                 new_field = converter["default"]
-                new_value = orig_value
-                if 'lowercase' in converter:
-                    new_value = new_value.lower()
-                out[new_field] = orig_value
+                out[new_field] = transform_string(orig_value, converter.get('transform'))
+        
+        elif type(converter) == dict and converter['type'] == 'transform':
+            new_field = converter['field']
+            new_value = transform_string(metadata[orig_field], converter['transform'])
+            out[new_field] = new_value
             
         else:
             raise ValueError('Invalid conversion')

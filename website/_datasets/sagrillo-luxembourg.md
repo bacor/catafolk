@@ -18,6 +18,15 @@ version: none
 description: >
     A large collection of 612 folk songs from Luxembourg. The songs were digitized
     by Damien Sagrillo from various sources. 
+issues:
+    - title: other meta fields
+      description: >
+        The files contain several other metafields that are currently ignored,
+        like `rhy1`, `rhy2`, `kad`, `akz`, `fot`, `for` and `fok`
+    - title: Another issue
+      description: >
+        The files contain several other metafields that are currently ignored,
+        like `rhy1`, `rhy2`, `kad`, `akz`, `fot`, `for` and `fok`
 ---
 
 
