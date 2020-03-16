@@ -5,8 +5,12 @@ analyzed: true
 title: Deutscher Liederhort
 dataset_url: https://kern.humdrum.org/cgi-bin/browse?l=essen/europa/deutschl/erk
 authors: 
-  - name: Helmuth Schaffrath
+  - name: Ludwig Erk
+    role: collector
+  - name: Franz Magnus Böhme
     role: editor
+  - name: Helmuth Schaffrath
+    role: digitization
 tags: [symbolic,phrases]
 formats: [kern]
 files: 1700
