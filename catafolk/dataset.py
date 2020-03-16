@@ -23,7 +23,8 @@ _DATASET_IDS = [
     'essen-china-shanxi',
     'essen-china-xinhua',
     'essen-deutschl-boehme',
-    'essen-deutschl-erk'
+    'essen-deutschl-erk',
+    'essen-deutschl-altdeu1'
 ]
 
 class Dataset(object):
