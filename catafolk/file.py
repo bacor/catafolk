@@ -85,8 +85,20 @@ def convert_meta_values(metadata, conversion):
                         metadata[field] = target_value
                     found_match = True
                     break
+            # TODO replace default_null by default option as in numeric bins
             if not found_match and 'default_null' in converter:
                 metadata[field] = None
+        
+        elif converter['type'] == 'numeric_bins':
+            orig_value = int(metadata[field])
+            found_match = False
+            for value_bin in converter['bins']:
+                if value_bin['min'] <= orig_value <= value_bin['max']:
+                    metadata[field] = value_bin['value']
+                    found_match = True
+                    break
+            if not found_match and 'default' in converter:
+                metadata[field] = converter['default']
         
         elif converter['type'] == 'dtype':
             if converter['dtype'] == 'int':

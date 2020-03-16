@@ -15,7 +15,7 @@ layout: default
   {% assign has_analysis = false %}
 {% endif %}
 
-{% assign max_num_files = 1000 %}
+{% assign max_num_files = 500 %}
 
 <main class="container mt-5">
   <div class="jumbotron row">
@@ -352,7 +352,7 @@ layout: default
         <div class="card-header">Sources</div>
         <div class="card-body small">
           <div class="bibliography-not-numbered{% if num_cited_sources != '1' %} bibliography-col-2{%endif%}">
-          {% bibliography --cited %}
+          {% bibliography --cited --sort_by author,year --order ascending %}
           </div>
         </div>
       </div>
