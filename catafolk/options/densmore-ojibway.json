@@ -1,0 +1,47 @@
+{
+    "dataset_id": "densmore-ojibway",
+    "file_pattern": "*.krn",
+    "default_field_values": {
+        "encoding_date": "1998",
+        "encoder": "Paul von Hippel",
+        "has_music": true,
+        "has_lyrics": false
+    },
+    "override_field_values": {
+        "preview_url": "https://verovio.humdrum.org/?file=osu/densmore/ojibway/{path}",
+        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={path}&l=osu/densmore/pawnee&format=kern"
+    },
+    "meta_fields_conversion": {
+        "XEN": "title_eng",
+        "AGN": "genre",
+        "CNT": "culture",
+        "TXO": "language",
+        "OTL": "title",
+        "MRD": "collection_date",
+        "MPN": "performer",
+        "MLC": "location",
+        "OCL": "collector",
+        "ONM": "source_song_num",
+        "PPG": "source_page_num",
+        "YEC": "copyright",
+        "YOR": ["source_key", "source_url"]
+    },
+    "meta_values_conversion": {
+        "source_key": {
+            "type": "regex",
+            "map": {
+                "Chippewa \\[i.e., Ojibway\\] Music--II, Bulletin 53": "densmore1913ojibway",
+                "Chippewa \\[i.e., Ojibway\\] Music, Bulletin 45": "densmore1910chippewa"
+            },
+            "default_null": true
+        },
+        "source_url": {
+            "type": "regex",
+            "map": {
+                "Chippewa \\[i.e., Ojibway\\] Music--II, Bulletin 53": "https://books.google.com/books?id=BOc_AAAAYAAJ&pg=PA{source_page_num}",
+                "Chippewa \\[i.e., Ojibway\\] Music, Bulletin 45": "https://books.google.com/books?id=_ARNAQAAMAAJ&pg=PA{source_page_num}"
+            },
+            "default_null": true
+        }
+    }
+}
