@@ -204,7 +204,12 @@ layout: default
               <th scope="col" class="border-top-0"></th>
               <th scope="col" class="border-top-0">Title</th>
               <th scope="col" class="border-top-0">Source</th>
-              <th scope="col" class="border-top-0">Region</th>
+              <th scope="col" class="border-top-0">Location</th>
+              <th scope="col" class="border-top-0">Genre</th>
+              <th scope="col" class="border-top-0" data-toggle="tooltip" title="Meter(s)">Mtr</th>
+              <th scope="col" class="border-top-0" data-toggle="tooltip" title="Key">Key</th>
+              <th scope="col" class="border-top-0" data-toggle="tooltip" title="Modality">Mod</th>
+              <th scope="col" class="border-top-0" data-toggle="tooltip" title="Ambitus">Amb</th>
               <th scope="col" class="border-top-0">md5</th>
             </tr>
           </thead>
@@ -215,26 +220,93 @@ layout: default
               <td class="text-muted">{{ forloop.index }}</td>
               <th scope="row">{{ file.id }}</th>
               <td>
+                {% if file.has_music == 'True' %}
+                  <span class="badge badge-pill badge-dark" data-toggle="tooltip" title="Has music">
+                    <span class="oi oi-musical-note"></span>
+                  </span>
+                {% else if file.has_music == 'False' %}
+                  <span class="badge badge-pill badge-light" data-toggle="tooltip" title="Has no music">
+                    <span class="oi oi-musical-note"></span>
+                  </span>
+                {% endif -%}
+
+                {% if file.has_lyrics == 'True' %}
+                  <span class="badge badge-pill badge-dark" data-toggle="tooltip" title="Has lyrics">
+                    <span class="oi oi-text"></span>
+                  </span>
+                {% else if file.has_lyrics == 'False'%}
+                  <span class="badge badge-pill badge-light" data-toggle="tooltip" title="Has no lyrics">
+                    <span class="oi oi-text"></span>
+                  </span>
+                {% endif -%}
+
                 {% if file.url %}
-                  <a href="{{ file.url }}" target="_blank" class="badge badge-pill badge-light">
-                    <span class="oi oi-external-link" title="View the file" aria-hidden="true"></span></a>
+                  <a href="{{ file.url }}" target="_blank" class="badge badge-pill badge-light"
+                    data-toggle="tooltip" title="View file">
+                    <span class="oi oi-external-link" aria-hidden="true"></span></a>
                 {% endif %}
 
-                {% if file.preview %}
-                  <a href="{{ file.preview }}" target="_blank" class="badge badge-pill badge-light">
-                    <span class="oi oi-magnifying-glass" title="Online preview" aria-hidden="true"></span></a>
+                {% if file.preview_url %}
+                  <a href="{{ file.preview_url }}" target="_blank" class="badge badge-pill badge-light"
+                    data-toggle="tooltip" title="Online preview">
+                    <span class="oi oi-magnifying-glass" aria-hidden="true"></span></a>
+                {% endif %}
+
+                {% if file.source_url %}
+                  <a href="{{ file.source_url }}" target="_blank" class="badge badge-pill badge-light"
+                    data-toggle="tooltip" title="View the original source">
+                    <span class="oi oi-book" aria-hidden="true"></span></a>
                 {% endif %}
               </td>
-              <td>{{ file.title | truncate: 70 }}</td>
               <td>
-                {% capture citation %}{% cite file.source %}{% endcapture %}
-                {% if citation == '(missing reference)' %}
-                  {{ file.source | truncate: 20 }}
-                {% else %}
-                 {{ citation }}
-                {% endif %}
+                {%- if file.source_song_num %}
+                  <span class="text-muted">{{ file.source_song_num }}. </span>
+                {%- endif %}
+                {%- if file.title %}
+                  {%- assign title = file.title %}
+                {%- else if file.title_eng %}
+                  {%- assign title = file.title_eng %}
+                {%- endif %}
+                {%- assign title_len = title | size %}
+                {%- if title_len > 30 %}
+                  <span data-toggle="tooltip" title="{{file.title}}">{{ title | truncate: 30 }}</span>
+                {%- else %}
+                  {{ title }}
+                {%- endif %}
               </td>
-              <td>{{ file.region | truncatewords: 4 }}</td>
+              <td>
+                {%- capture citation %}{% cite file.source_key %}{% endcapture %}
+                {%- if citation == '(missing reference)' %}
+                  {{ file.source | truncate: 20 }}
+                {%- else %}
+                  {%- if file.source_page_num -%}
+                    <span data-toggle="tooltip" title="p. {{file.source_page_num}}">
+                  {%- endif %}
+                  {{ citation }}
+                  {%- if file.source_page_num %}</span>{% endif %}
+                {%- endif %}
+              </td>
+              <td>
+                {%- assign loc_len = file.location | size %}
+                {%- if loc_len > 20 %}
+                  <span data-toggle="tooltip" title="{{file.location}}">{{ file.location | truncate: 20 }}</span>
+                {%- else %}
+                  {{file.location}}
+                {%- endif %}
+              </td>
+              <td data-toggle="tooltip" title="{{ file.genre }}">{{ file.genre | truncate: 10 }}</td>
+              <td>
+                {%- if file.meter -%}
+                  {{ file.meter }}
+                {%- else if file.metric_classification -%}
+                  {{ file.metric_classification }}
+                {%- endif -%}
+              </td>
+              <td>{{ file.key }}</td>
+              <td>
+                <span data-toggle="tooltip" title="{{file.modality}}">{{ file.modality | truncatewords: 1 }}</span>
+              </td>
+              <td>{{ file.ambitus }}</td>
               <td>
                 <a class="small text-muted"
                   data-toggle="popover" data-html="true"

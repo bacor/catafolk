@@ -2,13 +2,28 @@
     "dataset_id": "sagrillo-scotland",
     "file_pattern": "*.krn",
     "file_encoding": "ISO-8859-1",
-    "meta_fields_map": {
-        "title": "OTL"
+    "default_field_values": {
+        "encoder": "Damien Sagrillo",
+        "has_music": true,
+        "has_lyrics": false
     },
-    "shared_fields": {
-        "region": "Scotland",
-        "source": "haydnvolsliedbearbeitungen",
-        "preview": "http://verovio.humdrum.org/?file=sagrillo/scotland/{id}.krn",
-        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={id}.krn&l=users/sagrillo/scotland&format=kern"
-    }
+    "override_field_values": {
+        "location": "Scotland",
+        "source_key": "haydnvolsliedbearbeitungen",
+        "preview_url": "http://verovio.humdrum.org/?file=sagrillo/scotland/{path}",
+        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={path}&l=users/sagrillo/scotland&format=kern"
+    },
+    "meta_fields_conversion": {
+        "OTL": "title",
+        "meter": "meter",
+        "meters": "meter",
+        "fkt": "genre",
+        "key": {
+            "type": "regex",
+            "pattern": "(\\w+) +(\\d+) +(\\w+) +([\\w\/]+)",
+            "groups": [null, null, "key", null],
+            "default": "key"
+        }
+    },
+    "meta_values_conversion": {}
 }

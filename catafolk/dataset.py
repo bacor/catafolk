@@ -12,33 +12,25 @@ from file import is_supported_format
 # List of all included datasets
 _DATASET_IDS = [
     'densmore-teton-sioux',
+    'densmore-pawnee',
+    'densmore-ojibway',
     'sagrillo-ireland',
     'sagrillo-scotland',
     'sagrillo-lorraine',
-    'sagrillo-luxembourg'
+    'sagrillo-luxembourg',
 ]
 
 class Dataset(object):
 
-    index_columns = [
-        'id',
-        'title',
-        'region',
-        'source',
-        'preview',
-        'url',
-        'format',
-        'path',
-        'checksum'
-    ]
-
     def __init__(self, data_dir, index_path, props_path,
         file_pattern, file_encoding='utf-8', file_format='infer', 
         file_preview_url=None,
-        meta_fields_map={}, 
-        meta_values_map={},
+        default_field_values={},
+        override_field_values={},
+        meta_fields_conversion={}, 
+        meta_values_conversion={},
         corrections={},
-        shared_fields={}, dataset_id=None,):
+        dataset_id=None,):
 
         if not os.path.exists(data_dir):
             raise FileExistsError('The data directory does not exist')
@@ -51,10 +43,12 @@ class Dataset(object):
         self.file_pattern = file_pattern
         self.file_encoding = file_encoding
         self.file_format = file_format
-        self.meta_fields_map = meta_fields_map
-        self.meta_values_map = meta_values_map
+        
+        self.default_field_values = default_field_values
+        self.override_field_values = override_field_values
+        self.meta_fields_conversion = meta_fields_conversion
+        self.meta_values_conversion = meta_values_conversion
         self.corrections = corrections
-        self.shared_fields = shared_fields
         self.dataset_id = dataset_id
 
         self._files = {}
@@ -78,48 +72,16 @@ class Dataset(object):
     def save_index(self):
         items = []
         for id, file in self.files.items():
-            item = { column: None for column in self.index_columns }
-            
-            # Metadata
-            for indexKey, metaKey in self.meta_fields_map.items():
-                if indexKey in self.index_columns:
-                    item[indexKey] = file.metadata.get(metaKey, None)
-
-            # Shared fields; overrides metadata
-            for field, value in self.shared_fields.items():
-                if field in self.index_columns:
-                    path = file.relpath(root=self.data_dir)
-                    item[field] = value.format(id=file.id, path=path)
-
-            # Finally set automatically computed fields
-            item["id"] = file.id
-            item["format"] = file.format
-            item["path"] = file.relpath(root=self.data_dir)
-            item["checksum"] = file.checksum
-
-            # Replace values according to the the meta_values_map
-            for field, values_map in self.meta_values_map.items():
-                if item[field] is None:
-                    continue
-                if type(item[field]) == str:
-                    for pattern, target_value in values_map.items():
-                        matches = re.match(pattern, item[field])
-                        if matches:
-                            item[field] = target_value
-                else:
-                    raise NotImplemented('Only strings are currently supported')
-            
-            # Finally apply individual corrections
-            for pattern, corrections in self.corrections.items():
-                if re.match(pattern, id):
-                    for field, value in corrections.items():
-                        item[field] = value
-
+            item = file.export(meta_fields_conversion=self.meta_fields_conversion,
+                               meta_values_conversion=self.meta_values_conversion,
+                               default_field_values=self.default_field_values,
+                               override_field_values=self.override_field_values,
+                               corrections=self.corrections,
+                               data_dir=self.data_dir)
             items.append(item)
-
         self._index = pd.DataFrame(items).set_index('id').sort_index()
         self._index.to_csv(self.index_path, index=True)
-
+    
     @property
     def index(self):
         if self._index is None:
@@ -182,6 +144,6 @@ if __name__ == '__main__':
     # d.save_index()
     # d.save_properties()
 
-    d2 = get_dataset('sagrillo-luxembourg', data_dir, index_dir)
+    d2 = get_dataset('sagrillo-ireland', data_dir, index_dir)
     d2.save_index()
     d2.save_properties()
