@@ -1,5 +1,11 @@
 ---
 layout: default
+highlight:
+  - densmore-teton-sioux
+  - densmore-pawnee
+  - densmore-ojibway
+  - sagrillo-lorraine
+  - sagrillo-luxembourg
 ---
 
 <main class="container mt-5">
@@ -19,6 +25,7 @@ layout: default
     <div class="card-columns">
       {% assign datasets = site.datasets | where: "analyzed", true %}
       {% for dataset in datasets %}
+      {% if page.highlight contains dataset.dataset_id %}
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ dataset.title }}</h5>
@@ -33,6 +40,7 @@ layout: default
           <a href="{{ site.baseurl }}{{ dataset.url }}" class="btn btn-dark">View {{ dataset.dataset_id }}</a>
         </div>
       </div>
+      {% endif %}
       {% endfor %}
       <div class="card bg-dark text-light">
         <div class="card-body">

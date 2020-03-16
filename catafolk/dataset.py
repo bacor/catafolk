@@ -18,6 +18,10 @@ _DATASET_IDS = [
     'sagrillo-scotland',
     'sagrillo-lorraine',
     'sagrillo-luxembourg',
+    'essen-china-han',
+    'essen-china-natmin',
+    'essen-china-shanxi',
+    'essen-china-xinhua'
 ]
 
 class Dataset(object):
