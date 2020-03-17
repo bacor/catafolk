@@ -25,7 +25,8 @@ _DATASET_IDS = [
     'essen-deutschl-boehme',
     'essen-deutschl-erk',
     'essen-deutschl-altdeu1',
-    'creighton-nova-scotia'
+    'creighton-nova-scotia',
+    'bronson-child-ballads',
 ]
 
 class Dataset(object):
