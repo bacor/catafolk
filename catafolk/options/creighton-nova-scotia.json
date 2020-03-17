@@ -1,0 +1,31 @@
+{
+    "dataset_id": "creighton-nova-scotia",
+    "file_pattern": "kern/*.krn",
+    "default_field_values": {
+        "has_music": true,
+        "has_lyrics": false,
+        "source_key": "creighton1932nova"
+    },
+    "override_field_values": {
+        "preview_url": "https://verovio.humdrum.org/?file=users/craig/songs/creighton/nova/{id}.krn",
+        "url": "https://github.com/craigsapp/creighton-nova-scotia/blob/master/{path}"
+    },
+    "meta_fields_conversion": {
+        "OTL": ["title", "title_eng"],
+        "ARE": "location",
+        "URL": "url",
+        "ENC1": "encoder",
+        "CNT": "culture",
+        "MRD": "collection_date",
+        "OCL": "collector",
+        "MPN": "performer",
+        "AGN": "genre",
+        "YEC": "copyright",
+        "PPG": "source_page_num",
+        "ONM": {
+            "type": "regex",
+            "pattern": "(\\d+)\\.",
+            "groups": ["source_song_num"]
+        }
+    }
+}
