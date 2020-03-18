@@ -12,7 +12,7 @@
         "source_url": "https://books.google.nl/books?id=Adw_AAAAYAAJ&pg=PA{source_page_num}"
     },
     "meta_fields_conversion": {
-        "OTL@ENG": "title_eng",
+        "OTL@ENG": "title",
         "MLC": "location",
         "URL": "url",
         "ENC": "encoder",

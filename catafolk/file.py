@@ -1,17 +1,17 @@
 import os
 import hashlib
 import re
+import xml.etree.ElementTree as ET
 
 # Map of extensions to file formats
-_EXTENSIONS = dict(krn='kern')
+_EXTENSIONS = dict(krn='kern', xml='xml')
 
-_SUPPORTED_FILE_FORMATS = ['kern']
-
+_SUPPORTED_FILE_FORMATS = ['kern', 'xml']
 
 _FIELDS = ['id', 'title', 'title_eng', 'location', 'latitude', 'longitude', 
            'culture', 
-           'collection_date', 'collector', 'performer'
-           'source', 'source_key',
+           'collection_date', 'collector', 'performer',
+           'source', 'source_key', 'source_author', 'source_title', 'source_publisher', 'source_address',
            'source_page_num', 'source_song_num', 'source_date', 'catalogue_number'
            'encoder',
            'encoding_date', 'copyright', 'license_abbr', 'version', 'meter',
@@ -33,7 +33,8 @@ def transform_string(string, how=None):
         return string
 
 def convert_meta_fields(metadata, conversion): 
-    out = {}
+    out = { field: metadata.get(field) for field in _FIELDS }
+
     for orig_field, converter in conversion.items():
         if orig_field not in metadata: 
             continue
@@ -231,17 +232,16 @@ class File(object):
         dict
             A dictionary with values for all fields.
         """
-        # Empty item with all fields
-        item = { field: None for field in _FIELDS}
-        
-        # Update with default values
-        item.update(default_field_values)
+        # Update with default values. Note this can add fields not in
+        # _FIELDS, so they can later be processed by the meta field conversion
+        # Such fields are removed later
+        metadata = {}
+        metadata.update(default_field_values)
+        metadata.update(self.metadata)
 
-        # Update with converted metadata
-        metadata = convert_meta_fields(self.metadata, meta_fields_conversion)
-        item.update(metadata)
-
-        # Set automatically computed fields
+        # Convert metafields. After this, item should only contain fields
+        # in _FIELDS (unless there's a faulty conversion in the options json file)
+        item = convert_meta_fields(metadata, meta_fields_conversion)
         item["id"] = self.id
         item["format"] = self.format
         item["path"] = self.relpath(root=data_dir)
@@ -252,6 +252,8 @@ class File(object):
             item[field] = value.format(**item)
 
         # Replace values according to the the meta_values_map
+        if 'source_song_num' not in item:
+            print(item)
         item = convert_meta_values(item, meta_values_conversion)
         
         # Finally apply individual corrections
@@ -259,7 +261,9 @@ class File(object):
             if re.match(pattern, self.id):
                 for field, value in corrections.items():
                     item[field] = value
-         
+
+        # Get rid of other fields
+        item = {k: item.get(k) for k in _FIELDS}
         return item
 
 class KernFile(File):
@@ -286,6 +290,22 @@ class KernFile(File):
                     metadata[key] = value
         return metadata
 
+class XMLFile(File):
+    format = 'xml'
+
+    def extract_metadata(self):
+        metadata = {}
+        root = ET.parse(self.path).getroot()
+        meta_containers = ['work', 'identification']
+        for container_tag in meta_containers:
+            containers = root.iter(container_tag)
+            if containers is not None:
+                for container in containers:
+                    for element in container.iter():
+                        if type(element.text) is str and element.text.strip() != '':
+                            metadata[element.tag] = element.text
+        return metadata
+
 def get_file(filepath, format='infer', **kwargs):
     """File factory function that returns a File instance with the right format"""
     if format == 'infer':
@@ -294,5 +314,7 @@ def get_file(filepath, format='infer', **kwargs):
     
     if format == 'kern':
         return KernFile(filepath, **kwargs)
+    elif format == 'xml':
+        return XMLFile(filepath, **kwargs)
     else:
         raise Exception('Unknown file format')

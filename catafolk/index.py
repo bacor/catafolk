@@ -15,6 +15,7 @@ if __name__ == '__main__':
     data_dir = os.path.join(root_dir, 'datasets')
 
     for dataset_id in list_datasets():
+        print(dataset_id)
         d = get_dataset(dataset_id, data_dir, index_dir)
         d.save_index()
         d.save_properties()
