@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{RXBc:function(e,t,n){"use strict";n.r(t);var a=n("q1tI"),i=n.n(a),o=n("Bl7J");t.default=function(e){return function(e){if(null==e)throw new TypeError("Cannot destructure undefined")}(e),i.a.createElement(o.a,null,i.a.createElement("h1",null,"Hi! I'm building a fake Gatsby site as part of a tutorial!"),i.a.createElement("p",null,"What do I like to do? Lots of course but definitely enjoy building websites."))}}}]);
+//# sourceMappingURL=component---src-pages-index-js-13f4e8b2d717aeff357c.js.map
