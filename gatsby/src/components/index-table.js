@@ -136,7 +136,7 @@ function IndexTableBody({getTableBodyProps, prepareRow, page}) {
 
 function IndexTable({headerGroups, getTableBodyProps, prepareRow, page, getTableProps}) {
   return (
-    <table className="table table-hover text-nowrap border-top-0 table-sm small table-responsive-md" 
+    <table className="table table-hover text-nowrap border-top-0 table-sm small table-responsive" 
       {...getTableProps()}>
       <IndexTableHeader headerGroups={headerGroups} className="sticky-top bg-white" key="index-header" /> 
       <IndexTableBody {...{getTableBodyProps, prepareRow, page }} />
