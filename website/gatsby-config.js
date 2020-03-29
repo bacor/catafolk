@@ -3,8 +3,8 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
-const path = require(`path`)
-const { typeNameFromDir, typeNameFromFile } = require("gatsby-transformer-csv")
+// const path = require(`path`)
+// const { typeNameFromDir, typeNameFromFile } = require("gatsby-transformer-csv")
 
 module.exports = {
   pathPrefix: "/catafolk",
@@ -38,7 +38,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `bibliography`,
-        path: `${__dirname}/../website/_bibliography`
+        path: `${__dirname}/../bibliography`
       }
     },
     {
@@ -47,20 +47,6 @@ module.exports = {
         name: `bibliography`,
         extensions: ['bib']
       }
-    },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `assets`,
-    //     path: `${__dirname}/src/assets/`
-    //   }
-    // },
-    // {
-    //   resolve: `gatsby-transformer-code`,
-    //   options: {
-    //     name: `assets`,
-    //     extensions: ['cls']
-    //   }
-    // }
+    }
   ]
 }
