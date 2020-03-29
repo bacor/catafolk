@@ -1,0 +1,34 @@
+{
+    "dataset_id": "essen-deutschl-boehme",
+    "file_pattern": "*.krn",
+    "file_encoding": "ISO-8859-1",
+    "default_field_values": {
+        "has_music": true,
+        "has_lyrics": false,
+        "source_key": "bohme1895volksthumliche"
+    },
+    "override_field_values": {
+        "preview_url": "https://verovio.humdrum.org/?file=essen/europa/deutschl/boehme/{path}",
+        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={path}&l=essen/europa/deutschl/boehme&format=kern"
+    },
+    "meta_fields_conversion": {
+        "OTL": {
+            "type": "transform",
+            "field": "title",
+            "transform": "capitalize"
+        },
+        "ARE": "location",
+        "YEM": "copyright",
+        "AMT": "metric_classification",
+        "EED": "encoder",
+        "EEV": "version",
+        "AGN": "genre",
+        "SCT": {
+            "type": "regex",
+            "pattern": "(B0+(\\w+))",
+            "groups": ["catalogue_num", "source_song_num"]
+        }
+    },
+    "meta_values_conversion": {
+    }
+}

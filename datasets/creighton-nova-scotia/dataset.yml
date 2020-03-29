@@ -1,0 +1,37 @@
+dataset_id: creighton-nova-scotia
+analyzed: true
+title: 
+dataset_url: https://github.com/craigsapp/creighton-nova-scotia
+urls:
+  - http://kern.humdrum.org/browse?l=folk/novascotia
+authors: 
+  - name: Helen Creighton
+    role: author
+  - name: Craig Stuart Sapp
+    url: https://github.com/craigsapp
+    role: music and bibliographic data
+  - name: Marcus Pearce
+    role: phrase markings and key designations
+  - name: Darell Conklin
+    role: phrase markings and key designations
+tags: [symbolic,phrases]
+formats: [kern]
+files: 152
+notes: 
+duration: 
+copyright:
+licence:
+  unknown: true
+  abbreviation: 
+  text: 
+  url: 
+version: Unknown
+description: >
+  Digital edition of Songs and Ballads from Nova Scotia, collected by Helen Creighton (1932) in the Humdrum file format. 
+issues:
+  - title: Multiple encoders
+    description: >
+      The file lists multiple encoders in the `ENC1`, `ENC2` etc fields. These are currently not properly extracted
+  - title: Ignoring number of verses
+    description: >
+      The meta field `verses` gives the number of verses. This is currently ignored.

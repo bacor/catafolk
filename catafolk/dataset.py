@@ -127,7 +127,8 @@ class Dataset(object):
                 default_field_values.update(dict(metadata.loc[id,:]))
             else:
                 default_field_values = self.default_field_values
-                
+            default_field_values['dataset_id'] = self.dataset_id
+            
             item = file.export(meta_fields_conversion=self.meta_fields_conversion,
                                meta_values_conversion=self.meta_values_conversion,
                                default_field_values=default_field_values,
@@ -165,15 +166,25 @@ class Dataset(object):
         with open(self.props_path, 'w') as handle:
             json.dump(props, handle, indent=4)
 
+    def export(self, path):
+        dataset = {}
+        dataset['dataset_id'] = self.dataset_id
+        dataset['num_files'] = len(self.index)
+        dataset['checksum'] = self.checksum()
+        dataset['songs'] = self.index.to_dict()
+        with open(path, 'w') as handle:
+            json.dump(dataset, handle)
+
 def list_datasets():
     return _DATASET_IDS
 
 def is_dataset(dataset_id):
     return dataset_id in _DATASET_IDS
 
-def load_dataset_options(dataset_id):
-    cur_dir = os.path.dirname(__file__)
-    options_fn = os.path.join(cur_dir, 'options', f'{dataset_id}.json')
+def load_dataset_options(dataset_id, datasets_dir, filename='config.json'):
+    # cur_dir = os.path.dirname(__file__)
+    # options_fn = os.path.join(cur_dir, 'options', f'{dataset_id}.json')
+    options_fn = os.path.join(datasets_dir, dataset_id, filename)
     if os.path.exists(options_fn):
         with open(options_fn, 'r') as handle:
             options = json.load(handle)
@@ -181,26 +192,28 @@ def load_dataset_options(dataset_id):
     else:
         raise FileNotFoundError(f'Options file for {dataset_id} could not be found')
 
-def get_dataset(dataset_id, data_dir, index_dir):
+def get_dataset(dataset_id, datasets_dir):
     if not is_dataset(dataset_id):
         raise ValueError('Invalid dataset id')
-    data_dir = os.path.join(data_dir, dataset_id)
-    index_path = os.path.join(index_dir, f'{dataset_id}-index.csv')
-    props_path = os.path.join(index_dir, f'{dataset_id}-properties.json')
-    options = load_dataset_options(dataset_id)
-    dataset = Dataset(data_dir, index_path, props_path, **options)
+    data_dir = os.path.join(datasets_dir, dataset_id, 'data')
+    index_path = os.path.join(datasets_dir, dataset_id, 'index.csv')
+    props_path = os.path.join(datasets_dir, dataset_id, 'properties.json')
+    
+    config_path = os.path.join(datasets_dir, dataset_id, 'config.json')
+    config = json.load(open(config_path, 'r'))
+    config['dataset_id'] = dataset_id
+    dataset = Dataset(data_dir, index_path, props_path, **config)
     return dataset
 
 if __name__ == '__main__':
     cur_dir = os.path.dirname(__file__)
     root_dir = os.path.abspath(os.path.join(cur_dir, os.path.pardir))
-    index_dir = os.path.join(root_dir, 'website', '_data')
-    data_dir = os.path.join(root_dir, 'datasets')
+    datasets_dir = os.path.join(root_dir, 'datasets')
 
-    # d = get_dataset('sagrillo-lorraine', data_dir, index_dir)
-    # d.save_index()
-    # d.save_properties()
+    d = get_dataset('essen-deutschl-erk', datasets_dir)
+    d.save_index()
+    d.save_properties()
 
-    d2 = get_dataset('natural-history-of-song', data_dir, index_dir)
-    d2.save_index()
-    d2.save_properties()
+    # d2 = get_dataset('natural-history-of-song', data_dir, index_dir)
+    # d2.save_index()
+    # d2.save_properties()

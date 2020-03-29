@@ -11,13 +11,12 @@ if __name__ == '__main__':
 
     cur_dir = os.path.dirname(__file__)
     root_dir = os.path.abspath(os.path.join(cur_dir, os.path.pardir))
-    index_dir = os.path.join(root_dir, 'website', '_data')
-    data_dir = os.path.join(root_dir, 'datasets')
+    datasets_dir = os.path.join(root_dir, 'datasets')
 
     for dataset_id in list_datasets():
         print(dataset_id)
-        d = get_dataset(dataset_id, data_dir, index_dir)
+        d = get_dataset(dataset_id, datasets_dir)
         d.save_index()
         d.save_properties()
-        
+    
     

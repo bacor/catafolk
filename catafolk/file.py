@@ -8,11 +8,12 @@ _EXTENSIONS = dict(krn='kern', xml='xml')
 
 _SUPPORTED_FILE_FORMATS = ['kern', 'xml']
 
-_FIELDS = ['id', 'title', 'title_eng', 'location', 'latitude', 'longitude', 
+_FIELDS = ['dataset_id', 
+           'id', 'title', 'title_eng', 'location', 'latitude', 'longitude', 
            'culture', 
            'collection_date', 'collector', 'performer',
            'source', 'source_key', 'source_author', 'source_title', 'source_publisher', 'source_address',
-           'source_page_num', 'source_song_num', 'source_date', 'catalogue_number'
+           'source_page_num', 'source_song_num', 'source_date', 'catalogue_number', 'source_url',
            'encoder',
            'encoding_date', 'copyright', 'license_abbr', 'version', 'meter',
            'metric_classification',

@@ -1,0 +1,46 @@
+dataset_id: natural-history-of-song
+analyzed: true
+title: The Natural History of Song Discography
+dataset_url: https://osf.io/5x3qv/
+contributors:
+    - name: Samuel Mehr
+    - name: Manvir Singh
+    - name: Dean Knox
+    - name: Christopher Lucas
+    - name: Nori Jacoby
+    - name: Timothy J. O'Donnell
+    - name: Luke Glowacki
+    - name: Max Krasnow
+    - name: Steven Pinker
+    - name: Daniel Pickens-Jones
+    - name: Daniel Ketter
+    - name: S. Atwood
+    - name: Alena Egner
+    - name: Erin J. Hopkins
+    - name: Rhea M. Howard 
+    - name: Joshua Hartshorne
+    - name: Mariela Jenning
+    - name: Jan Simson
+    - name: Constance Bainbridge 
+tags: [symbolic,transcriptions]
+formats: [xml,pdf,sibelius]
+files: 118
+notes: 
+duration: 
+copyright:
+licence:
+  name: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+  abbreviation: CC BY-NC-SA 4.0
+  url: https://creativecommons.org/licenses/by-nc-sa/4.0
+citation: natural-history-of-song
+last_updated: 2019-10-24 
+version: none
+description: >
+    "NHS Discography contains transcriptions and analyses of 118 field recordings from the 30 world regions covered in NHS Ethnography. [..] We selected recordings by reviewing published collections of world music, digitizing out-of-print recordings, and contacting anthropologists and ethnomusicologists to obtain unpublished field recordings. Each song was transcribed into music notation."
+issues: 
+    - title: Ignored metadata
+      description: >
+        This collection has an enormous amount of metadata, most of which is 
+        currently ignored.
+show_columns:
+    - location

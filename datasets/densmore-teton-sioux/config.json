@@ -1,0 +1,38 @@
+{
+    "dataset_id": "densmore-teton-sioux",
+    "file_pattern": "kern/*.krn",
+    "default_field_values": {
+        "has_music": true,
+        "has_lyrics": false,
+        "licence_abbrev": "CC BY-NC-SA 4.0"
+    },
+    "override_field_values": {
+        "source_key": "densmore1918teton",
+        "preview_url": "http://verovio.humdrum.org/?file=folk/sioux/{path}",
+        "source_url": "https://books.google.nl/books?id=Adw_AAAAYAAJ&pg=PA{source_page_num}"
+    },
+    "meta_fields_conversion": {
+        "OTL@ENG": "title",
+        "MLC": "location",
+        "URL": "url",
+        "ENC": "encoder",
+        "CNT": "culture",
+        "MRD": "collection_date",
+        "OCL": "collector",
+        "MPN@@SIO": "performer",
+        "AGN": "genre",
+        "YEC": "copyright",
+        "PPG": "source_page_num",
+        "ONM": "source_song_num",
+        "ARL": {
+            "type": "regex",
+            "pattern": "([\\d\\.-]+)\/([\\d\\.-]+)\\#",
+            "groups": ["latitude", "longitude"]
+        },
+        "catalog": {
+            "type": "regex",
+            "pattern": "Catalogue No\\. (\\d+)",
+            "groups": ["catalogue_num"]
+        }
+    }
+}

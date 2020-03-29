@@ -1,0 +1,31 @@
+{
+    "dataset_id": "essen-deutschl-altdeu1",
+    "file_pattern": "*.krn",
+    "file_encoding": "ISO-8859-1",
+    "default_field_values": {
+        "has_music": true,
+        "has_lyrics": false,
+        "source_key": "bohme1877altdeutsches"
+    },
+    "override_field_values": {
+        "preview_url": "https://verovio.humdrum.org/?file=essen/europa/deutschl/altdeu1/{path}",
+        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={path}&l=essen/europa/deutschl/altdeu1&format=kern"        
+    },
+    "meta_fields_conversion": {
+        "OTL": "title",
+        "ARE": "location",
+        "YEM": "copyright",
+        "AMT": "metric_classification",
+        "EED": "encoder",
+        "EEV": "version",
+        "AGN": "genre",
+        "SCT": {
+            "type": "regex",
+            "pattern": "(A0*(\\w+))",
+            "groups": ["catalogue_num", "source_song_num"],
+            "transform": "lowercase"
+        }
+    },
+    "meta_values_conversion": {
+    }
+}
