@@ -2,15 +2,6 @@
 data/
 *.zip
 
-# Jekyll
-_site/
-.sass-cache/
-.jekyll-cache
-.jekyll-metadata
-
-Gemfile
-Gemfile.lock
-
 # Python
 env
 .vscode
