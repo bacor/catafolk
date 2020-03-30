@@ -6,7 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import InputGroup from 'react-bootstrap/InputGroup';
 import {FaSort, FaSortUp, FaSortDown} from 'react-icons/fa';
-
+import {Prop, PropsList} from '../components/properties'
 
 function IndexPagination({ 
     gotoPage, 
@@ -80,6 +80,105 @@ function SortIcon({column}) {
   }
 }
 
+function Source({author, date, title, pageNum, songNum, publisher, address, url}) {
+  if(author) {
+    return (
+      <>
+        {author ? `${author} ` : `Unknown author ` }
+        {date ? `(${date}). ` : '(no date). '}
+        <em>{title ? `${title}. ` : 'Unknown title. '}</em>
+        {songNum && ` [${pageNum}] `}
+        {pageNum && `Page ${pageNum}. `}
+        {address && `${address}: `}
+        {publisher && `${publisher}.`}
+        {url && <a href={url}>url</a>}
+      </>
+    )
+  } else {
+    return <em className="text-muted">Unknown</em>
+  }
+}
+
+function Details({row}) {
+  // id
+  // format
+  // genre
+  // has_lyrics
+  // has_music
+  // path
+  // preview_url
+  // source_key
+  // title_eng
+  // title
+  // url
+  // version
+  const orig = row.original
+  const opts = {
+    defaultValue: <em className="text-muted">Unknown</em>,
+    inRow: false
+  }
+
+  const language = `${orig.language}${orig.language_iso ? ` (${orig.language_iso})` : '' }`;
+
+  return (
+    <div className="card-deck w-100">
+      <div className="card bg-light border-0">
+        <div className="card-body">
+          <h6 className="card-title">Collection</h6>
+          <PropsList asRow={false}>
+            <Prop title="Title" {...opts}>{orig.title}</Prop>
+            <Prop title="Performer" {...opts}>{orig.performer}</Prop>
+            <Prop title="Collector" {...opts}>{orig.collector}</Prop>
+            <Prop title="Collection date" {...opts}>{orig.collection_date}</Prop>
+            <Prop title="Culture" {...opts}>{orig.culture}</Prop>
+            <Prop title="Location" {...opts}>{orig.location}</Prop>
+            <Prop title="Latitude" {...opts}>{orig.latitude}</Prop>
+            <Prop title="Longitude" {...opts}>{orig.longitude}</Prop>
+          </PropsList>
+        </div>
+      </div>
+      <div className="card bg-light border-0">
+        <div className="card-body">
+          <h6 className="card-title">Musical properties</h6>
+          <PropsList asRow={false}>
+            <Prop title="Language" {...opts}>{language}</Prop>
+            <Prop title="Key" {...opts}>{orig.key}</Prop>
+            <Prop title="Modality" {...opts}>{orig.modality}</Prop>
+            <Prop title="Meter" {...opts}>{orig.meter}</Prop>
+            <Prop title="Metric" {...opts}>{orig.metric_classification}</Prop>
+            <Prop title="Ambitus" {...opts}>{orig.ambitus}</Prop>
+          </PropsList>
+        </div>
+      </div>
+      <div className="card bg-light border-0">
+        <div className="card-body">
+          <h6 className="card-title">Encoding</h6>
+          <PropsList asRow={false}>
+            <Prop title="Encoder" {...opts}>{row.original.encoder}</Prop>
+            <Prop title="Encoding date" {...opts}>{row.original.encoding_date}</Prop>
+            <Prop title="Source" {...opts}>
+              {orig.source ? orig.source : (
+                <Source 
+                  author={orig.source_author}
+                  title={orig.source_title}
+                  date={orig.source_date}
+                  pageNum={orig.source_page_num}
+                  songNum={orig.source_song_num} 
+                  publisher={orig.source_publisher} 
+                  url={orig.source_url} />)}
+            </Prop>
+            <Prop title="Catalogue number" {...opts}>{orig.catalogue_number}</Prop>
+            <Prop title="Copyright" {...opts}>{orig.copyright}</Prop>
+            <Prop title="Checksum" {...opts}>
+              <code className="text-muted">{orig.checksum}</code>
+            </Prop>
+          </PropsList>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function IndexTableHeader({ headerGroups, className }) {
   return (
     <thead className={className}>
@@ -113,20 +212,35 @@ function IndexTableHeader({ headerGroups, className }) {
   )
 }
 
-function IndexTableBody({getTableBodyProps, prepareRow, page}) {
+function IndexTableBody({getTableBodyProps, prepareRow, page, visibleColumns}) {
   return (
     <tbody {...getTableBodyProps()}>
       {
         page.map((row, i) => {
           prepareRow(row)
+          const rowProps = row.getRowProps()
+          if(row.isExpanded) rowProps.className = 'bg-dark text-light';
           return (
-            <tr {...row.getRowProps()}>
-              {
-                row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                ))
-              }
-            </tr>
+            <React.Fragment key={rowProps.key}>  
+              <tr {...rowProps}>
+                {
+                  row.cells.map(cell => (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  ))
+                }
+              </tr>
+              {/*
+                  If the row is in an expanded state, render a row with a
+                  column that fills the entire length of the table.
+                */}
+              {row.isExpanded ? (
+                <tr className="bg-light text-wrap">
+                  <td colSpan={visibleColumns.length}>
+                    <Details row={row} />
+                  </td>
+                </tr>
+              ) : null}
+            </React.Fragment>
           )
         })
       }
@@ -134,12 +248,12 @@ function IndexTableBody({getTableBodyProps, prepareRow, page}) {
   )
 }
 
-function IndexTable({headerGroups, getTableBodyProps, prepareRow, page, getTableProps}) {
+function IndexTable({headerGroups, getTableBodyProps, prepareRow, page, getTableProps, visibleColumns}) {
   return (
     <table className="table table-hover text-nowrap border-top-0 table-sm small table-responsive" 
       {...getTableProps()}>
       <IndexTableHeader headerGroups={headerGroups} className="sticky-top bg-white" key="index-header" /> 
-      <IndexTableBody {...{getTableBodyProps, prepareRow, page }} />
+      <IndexTableBody {...{getTableBodyProps, prepareRow, page, visibleColumns }} />
     </table>
   );
 }

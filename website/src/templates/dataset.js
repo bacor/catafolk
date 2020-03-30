@@ -21,6 +21,7 @@ import {
   OptionsCell,
   TruncatedCell,
   RowHeaderCell,
+  ExpanderCell,
   Index,
 } from "../components/index";
 
@@ -184,6 +185,14 @@ export default ({ data }) => {
   const indexColumns = React.useMemo(
     () => [
       {
+        // Make an expander cell
+        Header: () => null, // No header
+        id: 'expander', // It needs an ID
+        Cell: ExpanderCell,
+        Filter: false,
+        Sort: false,
+      },
+      {
         Header: 'ID',
         accessor: 'id',
         Cell: RowHeaderCell,
@@ -341,6 +350,7 @@ export const query = graphql`
         copyright
         culture
         encoding_date
+        encoder
         format
         genre
         has_lyrics

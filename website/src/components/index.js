@@ -5,6 +5,7 @@ import {
   useSortBy, 
   usePagination, 
   useFilters, 
+  useExpanded
 } from 'react-table';
 import matchSorter from 'match-sorter'
 
@@ -21,7 +22,9 @@ import {
   IoIosLink, 
   IoIosCode, 
   IoIosMusicalNotes,
-  IoMdSearch
+  IoMdSearch,
+  IoIosArrowForward,
+  IoIosArrowDown
 } from "react-icons/io";
 import {
   AiOutlineFullscreenExit, 
@@ -47,19 +50,20 @@ function ChecksumCell({ cell }) {
   );
 }
 
+function PillLink({ children, href, ...opts}) {
+  const hasHref = href !== undefined;
+  const options = _.defaults(opts, {
+    as: hasHref ? 'a' : 'span',
+    variant: hasHref ? 'secondary' : 'light',
+    href: hasHref ? href : null,
+    target: '_blank'
+  })
+  return <Badge pill {...options}>{children}</Badge>
+}
+
 function OptionsCell({ cell }) {
   const row = cell.row.original
 
-  function PillLink({ children, href, ...opts}) {
-    const hasHref = href !== undefined;
-    const options = _.defaults(opts, {
-      as: hasHref ? 'a' : 'span',
-      variant: hasHref ? 'secondary' : 'light',
-      href: hasHref ? href : null,
-      target: '_blank'
-    })
-    return <Badge pill {...options}>{children}</Badge>
-  }
   return (
     <>
       <PillLink className="mr-1" href={row.preview_url} title="Preview">
@@ -90,8 +94,18 @@ function TruncatedCell({ cell, maxLength, omission }) {
   }
 }
 
+function ExpanderCell({ row }){
+  const props = row.getToggleRowExpandedProps()
+  props.style.border = '1px solid';
+  return (
+    <PillLink className="bg-light" {...props}>
+      {row.isExpanded ? <IoIosArrowDown /> : <IoIosArrowForward />}
+    </PillLink>
+  );
+}
+
 function RowHeaderCell({ cell }) {
-  return <strong>{cell.value}</strong>
+  return <strong {...cell.row.getToggleRowExpandedProps()}>{cell.value}</strong>
 }
 
 function IndexOptions({ allColumns, ...opts }) {
@@ -193,6 +207,7 @@ function Index({ columns, data, showColumns, bibliography }) {
       data,
       defaultColumn,
       filterTypes,
+      state: { expanded: {} },
       initialState: { 
         pageIndex: 0, 
         hiddenColumns: hiddenColumns,
@@ -200,6 +215,7 @@ function Index({ columns, data, showColumns, bibliography }) {
     },
     useFilters,
     useSortBy,
+    useExpanded,
     usePagination,
   );
 
@@ -247,6 +263,7 @@ export {
   OptionsCell,
   TruncatedCell,
   RowHeaderCell,
+  ExpanderCell,
   DefaultColumnFilter,
   IndeterminateCheckbox,
   fuzzyTextFilterFn,
