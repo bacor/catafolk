@@ -33,20 +33,20 @@
         ],
 
         [
-            "regex_extract_groups", "file.EEV", "version", {
+            "extract_groups", "file.EEV", "version", {
                 "pattern": "Release ([\\d\\.]+)",
-                "extract_groups": [1]
+                "groups": [1]
             }
         ],
 
         ["join", "file.YOR", "source", {"sep": ", "}],
         {
-            "operation": "regex_extract_groups",
+            "operation": "extract_groups",
             "inputs": ["source"],
             "outputs": ["source_page_num", "source_song_num"],
             "params": {
                 "pattern": ".*Bulletin 93, page (\\d+), No\\. (\\d+)",
-                "extract_groups": [1, 2]
+                "groups": [1, 2]
             }
         }
     ]

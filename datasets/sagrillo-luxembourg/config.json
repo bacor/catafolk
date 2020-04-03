@@ -1,98 +1,116 @@
 {
     "dataset_id": "sagrillo-luxembourg",
     "file_pattern": "*/*.krn",
-    "file_encoding": "ISO-8859-1",
-    "default_field_values": {
-        "encoder": "Damien Sagrillo",
-        "has_music": true,
-        "has_lyrics": false
+    "file_options": {
+        "encoding": "ISO-8859-1"
     },
-    "override_field_values": {
-        "preview_url": "http://verovio.humdrum.org/?file=sagrillo/lux/{path}",
-        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={path}&l=users/sagrillo/lux&format=kern"
-    },
-    "meta_fields_conversion": {
-        "reg": "location",
-        "trd": "source_key",
-        "fkt": "genre",
-        "OTL": {
-            "type": "regex",
-            "pattern": "^([^\\(,]+(, (?!S.)(?!Nr)[^\\(,]+)*)((,? ?\\((.+)\\))|(, Nr\\. (\\d+)))?(,? S. ?(.+))?",
-            "groups": ["title", null, null, null, "source_song_num", null, "source_song_num", null, "source_page_num"],
-            "default": "title"
-        },
-        "mod": {
-            "type": "regex",
-            "pattern": "([^\\]\\?]+) ?\\??\\] +AMBITUS\\[(\\w+)",
-            "groups": ["modality", "ambitus"],
-            "default": "modality",
-            "transform": "lowercase"
-        },
-        "key": {
-            "type": "regex",
-            "pattern": "(\\w+) +(\\d+) +([\\w\\#]+) ([ \\w\/]+) ?\\] +ZZ\\[(\\d+)",
-            "groups": [null, null, "key", "meter", null],
-            "default": "key"
-        }
-    },
-    "meta_values_conversion": {
-        "source_key": {
-            "type": "regex",
-            "map": {
-                "D'Fraen um Kanddaaf an der aler Zeit, Luxemburg 1929": "ruden1934fraen",
-                "Singendes Volk, Esch-Alzette,? 1937,? posth.": "thill1937singendes",
-                "Die Bauernhochzeit in fr&uuml;heren Zeiten": "spedener1886bauernhochzeit",
-                "Die (L|l)uxemburger Volkslieder &auml;lterer Zeit, Luxemburg 1904 posth.": "delafontaine1094luxemburger",
-                "KINTZELE, Guillaume: An der Ucht, Bd. 1, Luxemburg 1926": "kintzele1926ucht1",
-                "KINTZELE, Guillaume: An der Ucht, Bd. 2, Luxemburg 1927": "kintzele1927ucht2",
-                "KINTZELE, Guillaume: An der Ucht, Bd. 3,? Luxemburg 1928": "kintzele1928ucht3",
-                "NEYENS, J.-P.: Jugendgr": "neyens1912jugendgrusse"
-            },
-            "default_null": true
-        },
-        "modality": {
-            "type": "regex",
-            "map": {
-                "dreitonskala ?": "tritonic",
-                "viertonskala": "tetratonic",
-                
-                "pentatonik$": "pentatonic",
-                "pentatonik dur": "pentatonic major",
-                "pentatonik moll ": "pentatonic minor",
-                "pentatonik halbtonl. gong": "pentatonic (halftone)",
-                
-                "sechstonskala ?$": "hexatonic",
-                "sechstonskala dur ": "hexatonic major",
-                "sechstonskala moll": "hexatonic minor",
-
-                "heptatonik $" : "heptatonic",
-                "heptatonik moll": "heptatonic minor",
-                "heptatonic major": "heptatonic major",
-                "heptatonik dur": "heptatonic major",
-                "heptatonic minor": "heptatonic minor",
-                "heptatonik +ionisch": "heptatonic ionian",
-                "heptatonik dorisch": "heptatonic dorian",
-                "heptatonik phrygisch": "heptatonic phrygian",
-                "heptatonik lydisch": "heptatonic lydian",
-                "heptatonik mixolydisch": "heptatonic mixolydian",
-                "heptatonik aeolisch": "heptatonic aeolean",
-                
-                "achttonskala $": "octatonic",
-                "achttonskala melodisch moll ohne 7": "octatonic w/o 7",
-                "achttonskala dur": "octatonic major",
-
-                "neuntonskala dur ?": "enneatonic major",
-                
-                "zehntonskala ?": "decatonic"   
+    "transformations": [
+        ["constant", "encoder", "Damien Sagrillo"],
+        ["constant", "has_music", true],
+        ["constant", "has_lyrics", false],
+        ["rename", "file.reg", "location"],
+        [["rename", "unescape_html"], "file.fkt", "genre"],
+        [
+            "format", "path", "preview_url", 
+            {"pattern": "http://verovio.humdrum.org/?file=sagrillo/lux/{}"}
+        ],
+        [
+            "format", "path", "url", 
+            {"pattern": "https://kern.humdrum.org/cgi-bin/ksdata?file={}&l=users/sagrillo/lux&format=kern"}
+        ],
+        {
+            "operation": "extract_groups",
+            "inputs": ["file.OTL"],
+            "outputs": ["title_html", "source_song_num", "source_song_num", "source_page_num"],
+            "params": {
+                "pattern": "^([^\\(,]+(, (?!S.)(?!Nr)[^\\(,]+)*)((,? ?\\((.+)\\))|(, Nr\\. (\\d+)))?(,? S. ?(.+))?",
+                "groups": [1, 5, 7, 9]
             }
         },
-        "meter": {
-            "type": "regex",
-            "map": {
-                "FREI": "free"
+        ["unescape_html", "title_html", "title"],
+        {
+            "operations": ["extract_groups", "lowercase"],
+            "inputs": ["file.mod"],
+            "outputs": ["modality_de", "ambitus"],
+            "params": [{
+                "pattern": "([^\\]\\?]+) ?\\??\\] +AMBITUS\\[(\\w+)",
+                "groups": [1,2]
+            }, {}]
+        },
+        {
+            "operation": "extract_groups",
+            "inputs": ["file.key"],
+            "outputs": ["key", "meter_de"],
+            "params": {
+                "pattern": "(\\w+) +(\\d+) +([\\w\\#]+) ([ \\w\/]+) ?\\] +ZZ\\[(\\d+)",
+                "groups": [3,4]
+            }
+        },
+        {
+            "operation": "map_values",
+            "inputs": ["meter_de"],
+            "outputs": ["meter"],
+            "params": {
+                "mapping": { "FREI": "free" },
+                "return_missing": true
+            }
+        },
+        {
+            "operation": "map_values",
+            "inputs": ["file.trd"],
+            "outputs": ["source_key"],
+            "params": {
+                "mapping": {
+                    "D'Fraen um Kanddaaf an der aler Zeit, Luxemburg 1929": "ruden1934fraen",
+                    "Singendes Volk, Esch-Alzette,? 1937,? posth.": "thill1937singendes",
+                    "Die Bauernhochzeit in fr&uuml;heren Zeiten": "spedener1886bauernhochzeit",
+                    "Die (L|l)uxemburger Volkslieder &auml;lterer Zeit, Luxemburg 1904 posth.": "delafontaine1094luxemburger",
+                    "KINTZELE, Guillaume: An der Ucht, Bd. 1, Luxemburg 1926": "kintzele1926ucht1",
+                    "KINTZELE, Guillaume: An der Ucht, Bd. 2, Luxemburg 1927": "kintzele1927ucht2",
+                    "KINTZELE, Guillaume: An der Ucht, Bd. 3,? Luxemburg 1928": "kintzele1928ucht3",
+                    "NEYENS, J.-P.: Jugendgr": "neyens1912jugendgrusse"
+                }
+            }
+        },
+        {
+            "operation": "map_values",
+            "inputs": ["modality_de"],
+            "outputs": ["modality"],
+            "params": {
+                "mapping": {
+                    "dreitonskala ?$": "tritonic",
+                    "viertonskala$": "tetratonic",
+                    "pentatonik ?$": "pentatonic",
+                    "pentatonik dur$": "pentatonic major",
+                    "pentatonik moll $": "pentatonic minor",
+                    "pentatonik halbtonl\\. .+": "pentatonic (halftone)",
+                    "sechstonskala ?$": "hexatonic",
+                    "sechstonskala dur ": "hexatonic minor",
+                    "sechstonskala moll": "hexatonic minor",
+                    "heptatonik $" : "heptatonic",
+                    "heptatonik moll": "heptatonic minor",
+                    "heptatonic major": "heptatonic major",
+                    "heptatonik dur": "heptatonic major",
+                    "heptatonic minor": "heptatonic minor",
+                    "heptatonik +ionisch": "heptatonic ionian",
+                    "heptatonik dorisch": "heptatonic dorian",
+                    "heptatonik phrygisch": "heptatonic phrygian",
+                    "heptatonik lydisch": "heptatonic lydian",
+                    "heptatonik mixolydisch": "heptatonic mixolydian",
+                    "heptatonik aeolisch": "heptatonic aeolean",
+                    "achttonskala $": "octatonic",
+                    "achttonskala melodisch moll ohne 7": "octatonic w/o 7",
+                    "achttonskala melodisch moll ohne 6": "octatonic minor w/o 6",
+                    "achttonskala melodisch moll ohne 6b": "octatonic minor w/o 6b",
+                    "achttonskala dur": "octatonic major",
+                    "neuntonskala ?$": "enneatonic",
+                    "neuntonskala dur ?": "enneatonic major",
+                    "neuntonskala moll ?": "enneatonic minor",
+                    "zehntonskala $": "decatonic"
+                }
             }
         }
-    },
+    ],
     "corrections": {
         "l0001": {
             "title": "Schlof Kennchen, schlof",

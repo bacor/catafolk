@@ -1,38 +1,50 @@
 {
     "dataset_id": "densmore-teton-sioux",
     "file_pattern": "kern/*.krn",
-    "default_field_values": {
-        "has_music": true,
-        "has_lyrics": false,
-        "licence_abbrev": "CC BY-NC-SA 4.0"
-    },
-    "override_field_values": {
-        "source_key": "densmore1918teton",
-        "preview_url": "http://verovio.humdrum.org/?file=folk/sioux/{path}",
-        "source_url": "https://books.google.nl/books?id=Adw_AAAAYAAJ&pg=PA{source_page_num}"
-    },
-    "meta_fields_conversion": {
-        "OTL@ENG": "title",
-        "MLC": "location",
-        "URL": "url",
-        "ENC": "encoder",
-        "CNT": "culture",
-        "MRD": "collection_date",
-        "OCL": "collector",
-        "MPN@@SIO": "performer",
-        "AGN": "genre",
-        "YEC": "copyright",
-        "PPG": "source_page_num",
-        "ONM": "source_song_num",
-        "ARL": {
-            "type": "regex",
-            "pattern": "([\\d\\.-]+)\/([\\d\\.-]+)\\#",
-            "groups": ["latitude", "longitude"]
+    "transformations": [
+        ["constant", "source_key", "densmore1918teton"],
+        ["constant", "has_music", true],
+        ["constant", "has_lyrics", false],
+        ["constant", "licence_abbrev", "CC BY-NC-SA 4.0"],
+
+        ["rename", "file.OTL@ENG", "title"],
+        ["rename", "file.MLC", "location"],
+        ["rename", "file.URL", "url"],
+        ["rename", "file.ENC", "encoder"],
+        ["rename", "file.CNT", "culture"],
+        ["rename", "file.MRD", "collection_date"],
+        ["rename", "file.OCL", "collector"],
+        ["rename", "file.MPN@@SIO", "performer"],
+        ["rename", "file.AGN", "genre"],
+        ["rename", "file.YEC", "copyright"],
+        ["rename", "file.PPG", "source_page_num"],
+        ["rename", "file.ONM", "source_song_num"],
+
+        [
+            "format", "path", "preview_url", 
+            {"pattern": "http://verovio.humdrum.org/?file=folk/sioux/{}"}
+        ],
+        [
+            "format", "source_page_num", "source_url", 
+            {"pattern": "https://books.google.nl/books?id=Adw_AAAAYAAJ&pg=PA{}"}
+        ],
+        {
+            "operation": "extract_groups",
+            "inputs": ["file.ARL"],
+            "outputs": ["latitude", "longitude"],
+            "params": {
+                "pattern": "([\\d\\.-]+)\/([\\d\\.-]+)\\#",
+                "groups": [1, 2]
+            }
         },
-        "catalog": {
-            "type": "regex",
-            "pattern": "Catalogue No\\. (\\d+)",
-            "groups": ["catalogue_num"]
+        {
+            "operation": "extract_groups",
+            "inputs": ["file.catalog"],
+            "outputs": ["catalogue_number"],
+            "params": {
+                "pattern": "Catalogue No\\. (\\d+)",
+                "groups": [1]
+            }
         }
-    }
+    ]
 }

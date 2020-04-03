@@ -121,6 +121,8 @@ class Index():
 
     def make(self):
         data = self.collect()
+        logging.info(f'Collected {len(data.columns)} columns:')
+        logging.info(list(data.columns))
         transformed_data = self.transform(data)
         self.update(transformed_data)
         self.save()

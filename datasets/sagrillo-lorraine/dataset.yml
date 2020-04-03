@@ -18,3 +18,7 @@ version: none
 description: >
     A collection of 326 folk songs from the Lorraine, first published by Louis Pick
     between 1926 and 1939, and later digitized by Damien Sagrillo.
+issues:
+  - title: Page numbers missing
+    description: >
+      In a previous version these were extracted properly; now they're not anymore...

@@ -1,26 +1,28 @@
 {
     "dataset_id": "essen-china-han",
     "file_pattern": "*.krn",
-    "file_encoding": "ISO-8859-1",
-    "default_field_values": {
-        "has_music": true,
-        "has_lyrics": false,
-        "culture": "Han"
+    "file_options": {
+        "encoding": "ISO-8859-1"
     },
-    "override_field_values": {
-        "preview_url": "https://verovio.humdrum.org/?file=essen/asia/china/han/{path}",
-        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={path}&l=essen/asia/china/han&format=kern"
-    },
-    "meta_fields_conversion": {
-        "OTL": "title",
-        "ARE": "location",
-        "YEM": "copyright",
-        "AMT": "metric_classification",
-        "EED": "encoder",
-        "EEV": "version",
-        "AGN": "genre",
-        "SCT": "catalogue_num"
-    },
-    "meta_values_conversion": {
-    }
+    "transformations": [
+        ["constant", "culture", "Han"],
+        ["constant", "has_music", true],
+        ["constant", "has_lyrics", false],
+        ["rename", "file.OTL", "title"],
+        ["rename", "file.ARE", "location"],
+        ["rename", "file.YEM", "copyright"],
+        ["rename", "file.AMT", "metric_classification"],
+        ["rename", "file.EED", "encoder"],
+        ["rename", "file.EEV", "version"],
+        ["rename", "file.AGN", "genre"],
+        ["rename", "file.SCT", "catalogue_num"],
+        [
+            "format", "path", "preview_url", 
+            {"pattern": "https://verovio.humdrum.org/?file=essen/asia/china/han/{}"}
+        ],
+        [
+            "format", "path", "url", 
+            {"pattern": "https://kern.humdrum.org/cgi-bin/ksdata?file={}&l=essen/asia/china/han&format=kern"}
+        ]
+    ]
 }

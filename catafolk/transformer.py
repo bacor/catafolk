@@ -158,7 +158,7 @@ def expand_shorthand(shorthand):
     # Dictionaries without 'operations' key are assumed to be valid
     # operation dictionaries and returned
     if type(shorthand) == dict and 'operations' not in shorthand:
-        return shorthand
+        return [shorthand]
 
     # Immediately return definitions of constants
     elif type(shorthand) == list and shorthand[0] == 'constant':
@@ -270,7 +270,7 @@ class Transformer():
                     self._nodes.append(str(node))
         return self._nodes
 
-    def add_operation(self, operation, inputs, outputs, params={}, name=None):
+    def add_operation(self, operation, inputs, outputs, params={}, name=None, **kwargs):
         if not type(inputs) == list:
             raise ValueError('`inputs` should be a list')
         if not type(outputs) == list:
@@ -333,11 +333,8 @@ class Transformer():
         """
         assert type(operations) == list
         for operation in operations:
-            if type(operation) == dict:
+            for operation in expand_shorthand(operation):
                 self.add_operation(**operation)
-            elif type(operation) == list:
-                for operation in expand_shorthand(operation):
-                    self.add_operation(**operation)
     
     def load(self, filepath):
         """Loads operations from a JSON file.

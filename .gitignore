@@ -1,6 +1,7 @@
 # Catafolk
 data/
 *.zip
+_todo/
 
 # Python
 env

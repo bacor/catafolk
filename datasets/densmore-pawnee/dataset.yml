@@ -21,4 +21,4 @@ issues:
   - title: Missing metadata
     description: >
       There are several metadata fields not included: the warnings
-      `RWG` for example should be added.
+      (`RWG`) for example should be added.

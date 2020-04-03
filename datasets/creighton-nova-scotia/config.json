@@ -28,12 +28,12 @@
         ],
 
         {
-            "operation": "regex_extract_groups",
+            "operation": "extract_groups",
             "inputs": ["file.ONM"],
             "outputs": ["source_song_num"],
             "params": {
                 "pattern": "(\\d+)\\.",
-                "extract_groups": [1]
+                "groups": [1]
             }
         }
     ]

@@ -44,4 +44,14 @@ class TestOperations(unittest.TestCase):
         out = extract_groups('foo-bar', pattern='(.+)\-(.+)', groups=[1,2])
         self.assertListEqual(out, ['foo', 'bar'])
 
+    def test_numeric_bins(self):
+        bins = [
+            {'min': 0, 'max': 10, 'value': 'foo'},
+            {'min': 10, 'max': 100, 'value': 'bar'}
+        ]
+        out = map_numeric_bins(2, bins=bins)
+        self.assertEqual(out, 'foo')
+        out = map_numeric_bins(20, bins=bins)
+        self.assertEqual(out, 'bar')
+
 

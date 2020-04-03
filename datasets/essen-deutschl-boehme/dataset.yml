@@ -26,3 +26,8 @@ issues:
     description: >
       There are no page numbers in the source files. We do have song numbers,
       which can be derived from the catalogue numbers. 
+  - title: Bibliographic references in comments?
+    description: >
+      There are some pointers to the sources in the comments,
+      that is, not as a reference record, but after `!!`;
+      usually below `!!!AGN:`. Can we extract these?

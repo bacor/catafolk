@@ -295,6 +295,8 @@ class KernFile(File):
                 if match:
                     key = match[1]
                     value = match[2]
+                    # Key `id` is reserved
+                    if key == 'id': key = '_id'
                     if key not in metadata:
                         metadata[key] = value
                     elif type(metadata[key]) == list:

@@ -16,7 +16,18 @@ if __name__ == '__main__':
         # 'bronson-child-ballads',
         # 'creighton-nova-scotia',
         # 'densmore-ojibway',
-        'densmore-pawnee'
+        # 'densmore-pawnee',
+        # 'densmore-teton-sioux',
+        # 'sagrillo-ireland',
+        # 'sagrillo-lorraine',
+        # 'sagrillo-scotland',
+        # 'sagrillo-luxembourg',
+        # 'essen-china-han',
+        # 'essen-china-natmin',
+        # 'essen-china-shanxi',
+        # 'essen-deutschl-erk'
+        # 'essen-deutschl-boehme',
+        'essen-deutschl-altdeu1'
     ]
     for dataset_id in datasets:
         print(dataset_id)
