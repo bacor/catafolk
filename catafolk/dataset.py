@@ -168,6 +168,10 @@ class Dataset(object):
             self.index.clear()
         self.index.make()
 
+    def plot_transformations(self):
+        path = join(self.dir, 'transformations.pdf')
+        self.transformer.plot(path)
+
     def checksum(self, refresh=False):
         if refresh:
             checksums = [file.checksum for file_id, file in self.files.items()]
