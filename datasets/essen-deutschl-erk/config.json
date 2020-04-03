@@ -16,7 +16,11 @@
             "field": "title",
             "transform": "capitalize"
         },
-        "ARE": "location",
+        "ARE": {
+            "type": "regex",
+            "pattern": "Europa, Mitteleuropa, (.+)",
+            "groups": ["location"]
+        },
         "YEM": "copyright",
         "AMT": "metric_classification",
         "EED": "encoder",

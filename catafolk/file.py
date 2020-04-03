@@ -119,18 +119,19 @@ def is_supported_format(format):
 class File(object):
     format = None
     
-    def __init__(self, filepath, encoding='utf-8'):
+    def __init__(self, filepath, locator=None, encoding='utf-8'):
         self.path = filepath
         if not os.path.exists(filepath):
             raise FileNotFoundError()
         self.encoding = encoding
         filename = os.path.basename(self.path)
         self.id = os.path.splitext(filename)[0]
+        self.locator = locator
 
         self._metadata = None
         self._checksum = None
 
-    def read_metadata(self):
+    def extract_metadata(self):
         raise NotImplemented()
 
     @property
@@ -253,9 +254,16 @@ class File(object):
             item[field] = value.format(**item)
 
         # Replace values according to the the meta_values_map
-        if 'source_song_num' not in item:
-            print(item)
+        # if 'source_song_num' not in item:
+        #     print(item)
         item = convert_meta_values(item, meta_values_conversion)
+
+        if (item['location'] is not None 
+            and item['longitude'] is None 
+            and item['latitude'] is None):
+            lat, long = self.locator.coordinates(item['location'])
+            item['longitude'] = long
+            item['latitude'] = lat
         
         # Finally apply individual corrections
         for pattern, corrections in corrections.items():
@@ -280,7 +288,6 @@ class KernFile(File):
         Returns:
             dict -- A dictionary of metadata.
         """
-        # TODO Duplicate keys are common in KERN files...
         metadata = {}
         with open(self.path, 'r', encoding=self.encoding) as handle:
             for line in handle:
@@ -288,7 +295,12 @@ class KernFile(File):
                 if match:
                     key = match[1]
                     value = match[2]
-                    metadata[key] = value
+                    if key not in metadata:
+                        metadata[key] = value
+                    elif type(metadata[key]) == list:
+                        metadata[key].append(value)
+                    else:
+                        metadata[key] = [metadata[key], value]
         return metadata
 
 class XMLFile(File):

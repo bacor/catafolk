@@ -1,31 +1,40 @@
 {
     "dataset_id": "creighton-nova-scotia",
     "file_pattern": "kern/*.krn",
-    "default_field_values": {
-        "has_music": true,
-        "has_lyrics": false,
-        "source_key": "creighton1932nova"
-    },
-    "override_field_values": {
-        "preview_url": "https://verovio.humdrum.org/?file=users/craig/songs/creighton/nova/{id}.krn",
-        "url": "https://github.com/craigsapp/creighton-nova-scotia/blob/master/{path}"
-    },
-    "meta_fields_conversion": {
-        "OTL": ["title", "title_eng"],
-        "ARE": "location",
-        "URL": "url",
-        "ENC1": "encoder",
-        "CNT": "culture",
-        "MRD": "collection_date",
-        "OCL": "collector",
-        "MPN": "performer",
-        "AGN": "genre",
-        "YEC": "copyright",
-        "PPG": "source_page_num",
-        "ONM": {
-            "type": "regex",
-            "pattern": "(\\d+)\\.",
-            "groups": ["source_song_num"]
+    "transformations": [
+        ["constant", "has_music", true],
+        ["constant", "has_lyrics", false],
+        ["constant", "source_key", "creighton1932nova"],
+
+        ["rename", "file.OTL", "title"],
+        ["rename", "file.ARE", "location"],
+        ["rename", "file.URL", "url"],
+        ["rename", "file.ENC1", "encoder"],
+        ["rename", "file.CNT", "culture"],
+        ["rename", "file.MRD", "collection_date"],
+        ["rename", "file.OCL", "collector"],
+        ["rename", "file.MPN", "performer"],
+        ["rename", "file.AGN", "genre"],
+        ["rename", "file.YEC", "copyright"],
+        ["rename", "file.PPG", "source_page_num"],
+
+        [
+            "format", "id", "preview_url", 
+            {"pattern": "https://verovio.humdrum.org/?file=users/craig/songs/creighton/nova/{}.krn"}
+        ],
+        [
+            "format", "path", "url", 
+            {"pattern": "https://github.com/craigsapp/creighton-nova-scotia/blob/master/{}"}
+        ],
+
+        {
+            "operation": "regex_extract_groups",
+            "inputs": ["file.ONM"],
+            "outputs": ["source_song_num"],
+            "params": {
+                "pattern": "(\\d+)\\.",
+                "extract_groups": [1]
+            }
         }
-    }
+    ]
 }

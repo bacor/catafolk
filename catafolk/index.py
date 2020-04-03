@@ -1,22 +1,124 @@
 import os
-# import argparse
-from dataset import get_dataset
-from dataset import list_datasets
+import pandas as pd
+import logging
 
-if __name__ == '__main__':
-    # TODO add command line args?
-    # parser = argparse.ArgumentParser(description='Index all datasets.')
-    # parser.add_argument('index_dir', type='str')
-    # parser.add_argument('data_dir', type='str')
+class Source():
+    def __init__(self, name, entries=None, id_field='id'):
+        self.name = name
+        self.id_field = id_field
+        if entries:
+            self.entries = list(entries)
 
-    cur_dir = os.path.dirname(__file__)
-    root_dir = os.path.abspath(os.path.join(cur_dir, os.path.pardir))
-    datasets_dir = os.path.join(root_dir, 'datasets')
+    def collect(self, fields=[]):
+        df = pd.DataFrame(self.entries)
+        df.set_index(self.id_field, inplace=True)
+        df.index.name = 'id'
+        return df
 
-    for dataset_id in list_datasets():
-        print(dataset_id)
-        d = get_dataset(dataset_id, datasets_dir)
-        d.save_index()
-        d.save_properties()
+class CSVSource(Source):
+    def __init__(self, name, path, id_field, **kwargs):
+        self.path = path
+        self.df = pd.read_csv(path, index_col=id_field, **kwargs)
+        self.df.index.name = 'id'
+        super().__init__(name, id_field=id_field)
+
+    def collect(self, fields=[]):
+        return self.df
+
+class Index():
+    def __init__(self, path, fields=[], transformer=None):
+        self.path = path
+        self.transformer = transformer
+        self.fields = fields
+        if 'id' not in fields:
+            self.fields = ['id'] + fields
+
+        self._sources = {}
+        self._data = None
+
+    @property
+    def sources(self):
+        if len(self._sources) == 0:
+            raise Exception('No sources have been registered')
+        else:
+            return self._sources
     
+    @property
+    def has_file(self):
+        return os.path.exists(self.path)
+
+    @property
+    def data(self):
+        if self._data is None:
+            if self.has_file:
+                self.load()
+            else:
+                self.initialize()
+        return self._data
+
+    def register_sources(self, *sources):
+        for source in sources:
+            assert isinstance(source, Source)
+            self._sources[source.name] = source
+
+    def initialize(self):
+        self._data = pd.DataFrame([], columns=self.fields)
+        self._data.set_index('id', inplace=True)
     
+    def load(self):
+        if os.path.exists(self.path):
+            self._data = pd.read_csv(self.path, index_col='id')
+        else:
+            raise FileNotFoundError('Index file does not exist. Update the index.') 
+
+    def save(self):
+        self.data.to_csv(self.path, index=True)
+    
+    def update(self, df, **kwargs):
+        columns = [col for col in df.columns if col in self.fields]
+        subset = df[columns]
+
+        updates = subset.index.intersection(self.data.index)
+        self.data.update(subset.loc[updates, :])
+
+        new_entries = subset.index.difference(self.data.index)
+        self._data = self.data.append(subset.loc[new_entries,:])
+
+    def collect(self, fields=None):
+        dataframes = []
+        columns = []
+        for name, source in self.sources.items():
+            source_df = source.collect(fields=fields)
+            if name != '':
+                columns.extend([f'{name}.{col}' for col in source_df.columns])
+            else:
+                columns.extend(source_df.columns)
+            dataframes.append(source_df)
+        df = pd.concat(dataframes, axis=1, join='outer')
+        df.columns = columns
+        df.index.name = 'id'
+        return df
+
+    def transform(self, df):
+        if self.transformer is None:
+            logging.warn('This index has no transformer; returning dataframe')
+            return df
+
+        transformed_entries = []
+        for entry_id, row in df.iterrows():
+            entry = row.to_dict()
+            entry['id'] = entry_id
+            transformed = self.transformer(entry, outputs_only=False)
+            transformed['id'] = entry_id
+            transformed_entries.append(transformed)
+        transformed_df = pd.DataFrame(transformed_entries).set_index('id')
+        return transformed_df
+
+    def make(self):
+        data = self.collect()
+        transformed_data = self.transform(data)
+        self.update(transformed_data)
+        self.save()
+        
+    
+

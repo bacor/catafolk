@@ -17,3 +17,8 @@ licence_abbr: unknown
 version: 1.0
 description: >
   A collection of 86 Pawnee folk songs collected by Frances Densmore and digitized by David Huron.
+issues:
+  - title: Missing metadata
+    description: >
+      There are several metadata fields not included: the warnings
+      `RWG` for example should be added.

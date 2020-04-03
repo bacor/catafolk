@@ -1,34 +1,46 @@
 {
     "dataset_id": "bronson-child-ballads",
     "file_pattern": "*.krn",
-    "default_field_values": {
-        "has_music": true,
-        "has_lyrics": false,
-        "source_key": "bronson1959child"
-    },
-    "override_field_values": {
-        "preview_url": "https://verovio.humdrum.org/?file=osu/monophony/british/{id}.krn",
-        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={id}.krn&l=osu/monophony/british&format=kern"
-    },
-    "meta_fields_conversion": {
-        "ARE": "location",
-        "URL": "url",
-        "ENC": "encoder",
-        "CNT": "culture",
-        "MRD": "collection_date",
-        "OCL": "collector",
-        "MPN": "performer",
-        "AGN": "genre",
-        "YEC": "copyright",
-        "PPG": {
-            "type": "regex",
-            "pattern": "p\\. (\\d+)",
-            "groups": ["source_page_num"]
+    "transformations": [
+        ["constant", "has_music", true],
+        ["constant", "has_lyrics", false],
+        ["constant", "source_key", "bronson1959child"],
+
+        ["rename", "file.ARE", "location"],
+        ["rename", "file.ENC", "encoder"],
+        ["rename", "file.CNT", "culture"],
+        ["rename", "file.MRD", "collection_date"],
+        ["rename", "file.OCL", "collector"],
+        ["rename", "file.MPN", "performer"],
+        ["rename", "file.AGN", "genre"],
+        ["rename", "file.YEC", "copyright"],
+
+        [
+            "format", "id", "preview_url", 
+            {"pattern": "https://verovio.humdrum.org/?file=osu/monophony/british/{}.krn"}
+        ],
+        [
+            "format", "id", "url", 
+            {"pattern": "https://kern.humdrum.org/cgi-bin/ksdata?file={}.krn&l=osu/monophony/british&format=kern"}
+        ],
+
+        {
+            "operation": "regex_extract_groups", 
+            "inputs": ["file.PPG"],
+            "outputs": ["source_page_num"],
+            "params": {
+                "pattern": "p\\. (\\d+)",
+                "extract_groups": [1]
+            }
         },
-        "ONM": {
-            "type": "regex",
-            "pattern": "((Child Ballad No\\. (\\d+), .+))",
-            "groups": ["title", "title_eng", "source_song_num"]
+        {
+            "operation": "regex_extract_groups",
+            "inputs": ["file.ONM"],
+            "outputs": ["title", "title_eng", "source_song_num"],
+            "params": {
+                "pattern": "((Child Ballad No\\. (\\d+), .+))",
+                "extract_groups": [1, 2, 3]
+            }
         }
-    }
+    ]
 }

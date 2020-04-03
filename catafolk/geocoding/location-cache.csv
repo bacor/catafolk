@@ -1,0 +1,503 @@
+location,latitude,longitude,altitude
+Boehmen,51.128251,10.636371225900305,0.0
+"Boehmen, Riesengebirge",,,
+Deutschland,51.0834196,10.4234469,0.0
+"Deutschland, Altmark",52.6867305,11.540151790389473,0.0
+"Deutschland, Altmark, Mieste",52.6867305,11.540151790389473,0.0
+"Deutschland, Baden",52.9996895,9.0801053,0.0
+"Deutschland, Baden, Merzhausen",47.9648327,7.8254423,0.0
+"Deutschland, Baden; Elsass; Schleswig; Hessen",,,
+"Deutschland, Barmen",51.2716035,7.200344900000001,0.0
+"Deutschland, Bayern",48.9467562,11.4038717,0.0
+"Deutschland, Bayern, Bayreuth",49.9427202,11.5763079,0.0
+"Deutschland, Bayern, Franken",50.08992410000001,11.9227419,0.0
+"Deutschland, Bayern, Landshut",48.536217,12.1516551,0.0
+"Deutschland, Bayern, Muenchen",48.1371079,11.575382199999998,0.0
+"Deutschland, Bayern, Regensburg",49.0195333,12.0974869,0.0
+"Deutschland, Bayern, Schwaben",48.15313125,10.471291006038461,0.0
+"Deutschland, Bayern; Wuerttemberg; Thueringen",,,
+"Deutschland, Bergisches Land",51.038747799999996,7.3410933946700965,0.0
+"Deutschland, Bergisches Land, Barmen",,,
+"Deutschland, Bergisches Land, Barmen; Elberfeld",,,
+"Deutschland, Bergisches Land, Homberg",,,
+"Deutschland, Bergisches Land, Langenberg",,,
+"Deutschland, Bergisches Land, Mettmann",51.1799561,6.960649075543975,0.0
+"Deutschland, Bergisches Land; Kleve",,,
+"Deutschland, Bergstrasse",53.5557979,10.0420061,0.0
+"Deutschland, Bergstrasse, Alsbach",50.46415020000001,7.6618575,0.0
+"Deutschland, Berlin",52.5170365,13.388859900000002,0.0
+"Deutschland, Boehmen",51.128251,10.636371225900305,0.0
+"Deutschland, Bonn",50.735851,7.10066,0.0
+"Deutschland, Bonn; Koblenz",50.7405892,7.0939047,0.0
+"Deutschland, Brandenburg",52.84554920000001,13.2461296,0.0
+"Deutschland, Brandenburg, Alt - Litzgoericke",,,
+"Deutschland, Brandenburg, Gransee",53.0072783,13.1588685,0.0
+"Deutschland, Brandenburg, Oderbruch; Coethen",,,
+"Deutschland, Brandenburg, Trebbin",52.215036100000006,13.2140282,0.0
+"Deutschland, Brandenburg, Wilsnack; Granzow",,,
+"Deutschland, Brandenburg; Sachsen",52.5061044,14.4770283,0.0
+"Deutschland, Brandenburg; Schlesien",53.10321345,12.890798526492555,0.0
+"Deutschland, Brandenburg; Schlesien; Sachsen",,,
+"Deutschland, Brandenburg; Thueringen",52.5092821,13.583752477449956,0.0
+"Deutschland, Brandenburg; Westfalen",51.6247808,13.7118413,0.0
+"Deutschland, Braunschweig",52.26465770000001,10.5236066,0.0
+"Deutschland, Brauschweig",,,
+"Deutschland, Breslau",50.3145692,11.9352963,0.0
+"Deutschland, Bueckeburg",52.2611037,9.0488959,0.0
+"Deutschland, Charlottenburg",52.515747,13.3096834,0.0
+"Deutschland, Coburg",50.258112,10.964463,0.0
+"Deutschland, Coethen",52.793057,13.9355243,0.0
+"Deutschland, Danzig",54.073817500000004,10.773737909476699,0.0
+"Deutschland, Danzig, Neuhof",,,
+"Deutschland, Darmstadt, Dreieichenhain",,,
+"Deutschland, Dillenburg, Eibach",50.738088,8.3170348,0.0
+"Deutschland, Dillkreis",50.7179092,8.3030769,0.0
+"Deutschland, Ditmarsch",,,
+"Deutschland, Eifel, Ingenbruch",,,
+"Deutschland, Erfurt",50.9777974,11.0287364,0.0
+"Deutschland, Erfurt, Stotternheim",51.0560722,11.0427557,0.0
+"Deutschland, France, Elsass",48.5874494,7.762028007324586,0.0
+"Deutschland, Franken",54.3014601,13.110356845535133,0.0
+"Deutschland, Franken, Hildburghausen",,,
+"Deutschland, Franken, Koenigshofen im Grabfelde",,,
+"Deutschland, Franken, Wonfort",,,
+"Deutschland, Franken, Wuerzburg",,,
+"Deutschland, Franken; Niederrhein; Odenwald",,,
+"Deutschland, Frankfurt a.M.",50.1106444,8.682091699999999,0.0
+"Deutschland, Frankfurt a.d. Oder, Neubrueck",,,
+"Deutschland, Frankfurt a.d. Oder, Seelow",,,
+"Deutschland, Frankfurt, Odenthal",,,
+"Deutschland, Friesack, Viegnitz",,,
+"Deutschland, Friesland",53.46799300000001,8.0221914,0.0
+"Deutschland, Geinsheim am Rhein",49.3044324,8.2555602,0.0
+"Deutschland, Glogau, Liegnitz",,,
+"Deutschland, Goettingen",51.5327604,9.9352051,0.0
+"Deutschland, Gotha",50.9462725,10.6945265,0.0
+"Deutschland, Grafsch. Ruppin, Gransen",,,
+"Deutschland, Gransee, Roennebeck",53.0066846,13.032569162081122,0.0
+"Deutschland, Gross - Gerau",49.9194456,8.4852426,0.0
+"Deutschland, Halberstadt",51.8953514,11.0520563,0.0
+"Deutschland, Halle",51.4825041,11.970545199999998,0.0
+"Deutschland, Halle, Loebejuen",51.6367961,11.9011036,0.0
+"Deutschland, Halle; Eisleben",,,
+"Deutschland, Hannover",52.3744779,9.738553199999998,0.0
+"Deutschland, Harz, Ilsenburg",51.83885205,10.6432251418119,0.0
+"Deutschland, Heidelberg",49.40935820000001,8.694724,0.0
+"Deutschland, Helgoland",54.18004525,7.8853621011806965,0.0
+"Deutschland, Hessen",50.61185370000001,9.1909725,0.0
+"Deutschland, Hessen ?, Odenwald ?",49.60621635,9.04404309244449,0.0
+"Deutschland, Hessen, Battenberg, Nennertehausen",,,
+"Deutschland, Hessen, Bergstrasse; Odenwald",49.60621635,9.04404309244449,0.0
+"Deutschland, Hessen, Darmstadt",49.872775,8.651177,0.0
+"Deutschland, Hessen, Darmstadt,",49.872775,8.651177,0.0
+"Deutschland, Hessen, Darmstadt, Brauerschwend",,,
+"Deutschland, Hessen, Darmstadt, Dreieichenhain",,,
+"Deutschland, Hessen, Darmstadt, Dreieichenstein",,,
+"Deutschland, Hessen, Darmstadt, Jugenheim",49.7566619,8.6352553,0.0
+"Deutschland, Hessen, Darmstadt, Offenthal",49.9806942,8.744795300000002,0.0
+"Deutschland, Hessen, Darmstadt;",49.872775,8.651177,0.0
+"Deutschland, Hessen, Darmstadt; Baden",,,
+"Deutschland, Hessen, Darmstadt; Lahn - Kreis;",,,
+"Deutschland, Hessen, Darmstadt; Taunus",50.14291420000001,8.502925900000001,0.0
+"Deutschland, Hessen, Dill - Kreis",50.63871725,8.32682985762712,0.0
+"Deutschland, Hessen, Dill - Kreis; Wetzlar",50.5525346,8.5074406,0.0
+"Deutschland, Hessen, Dillenburg; Wetterau",,,
+"Deutschland, Hessen, Dillkreis, Ober- Lahnkreis",,,
+"Deutschland, Hessen, Dillkreis; Lahnkreis",,,
+"Deutschland, Hessen, Dillkreis; Westerwald;",,,
+"Deutschland, Hessen, Eisenroth a.d. Lahn",,,
+"Deutschland, Hessen, Frankfurt",50.1106444,8.682091699999999,0.0
+"Deutschland, Hessen, Frankfurt a.M.",50.1106444,8.682091699999999,0.0
+"Deutschland, Hessen, Frankfurt a.M.; Giessen",,,
+"Deutschland, Hessen, Frankfurt, Dreieichenhain",,,
+"Deutschland, Hessen, Frankfurt; Oberhessen",,,
+"Deutschland, Hessen, Giessen",50.5862066,8.6742306,0.0
+"Deutschland, Hessen, Giessen, Neiskirchen",,,
+"Deutschland, Hessen, Giessen, Rabenau",50.6679249,8.8906618,0.0
+"Deutschland, Hessen, Giessen; Marburg",,,
+"Deutschland, Hessen, Hanau",50.1335542,8.9168179,0.0
+"Deutschland, Hessen, Hanau, Hattengesaess",,,
+"Deutschland, Hessen, Hennethal, Homburg",,,
+"Deutschland, Hessen, Hennethal; Westfalen ?",,,
+"Deutschland, Hessen, Kassel",51.3154546,9.492409599999998,0.0
+"Deutschland, Hessen, Kassel, Schwalmgrund",,,
+"Deutschland, Hessen, Kreis Limburg, Heringen",,,
+"Deutschland, Hessen, Kreis Wetzlar",50.5525346,8.5074406,0.0
+"Deutschland, Hessen, Kreis Wetzlar, Burgsolms",,,
+"Deutschland, Hessen, Kreis Wetzlar; Marburg",,,
+"Deutschland, Hessen, Kreis Wetzlar; Taunus",50.5361477,8.497420300000002,0.0
+"Deutschland, Hessen, Lahn - Gegend",,,
+"Deutschland, Hessen, Lahn - Kreis",50.63871725,8.32682985762712,0.0
+"Deutschland, Hessen, Lahn - Kreis, Dill - Kreis",50.56593,8.5162755,0.0
+"Deutschland, Hessen, Lahn - Kreis; Wetterau;",50.7893061,8.2040308,0.0
+"Deutschland, Hessen, Lahn - Tal",50.6899044,8.5165917,0.0
+"Deutschland, Hessen, Lahn; Wetterau; Elsass",,,
+"Deutschland, Hessen, Lahngegend; Odenwald",,,
+"Deutschland, Hessen, Lahnkreis; Dillkreis",,,
+"Deutschland, Hessen, Lahntal; Limburg;",,,
+"Deutschland, Hessen, Limburg, Nauheim",50.3452965,8.1365254,0.0
+"Deutschland, Hessen, Limburg; Wetterau",,,
+"Deutschland, Hessen, Marburg",50.81173270000001,8.775774199999999,0.0
+"Deutschland, Hessen, Marburg, Eschwege",,,
+"Deutschland, Hessen, Marburg, Ziegenhain,",,,
+"Deutschland, Hessen, Marburg; Lahn - Tal;",,,
+"Deutschland, Hessen, Nassau",50.3010269,8.5138873,0.0
+"Deutschland, Hessen, Nassau, Dill - Kreis",,,
+"Deutschland, Hessen, Nassau, Hennethal",,,
+"Deutschland, Hessen, Nassau, Witzenhausen",,,
+"Deutschland, Hessen, Nassau; Elsass",,,
+"Deutschland, Hessen, Nassau; Oberhessen;",,,
+"Deutschland, Hessen, Nassau; Rheinland",,,
+"Deutschland, Hessen, Ober- Lahn- und Dillkreis",,,
+"Deutschland, Hessen, Oberhessen; Limburg",,,
+"Deutschland, Hessen, Oberhessen; Nassau",,,
+"Deutschland, Hessen, Oberhessen; Wetterau",,,
+"Deutschland, Hessen, Odenwald",49.60621635,9.04404309244449,0.0
+"Deutschland, Hessen, Odenwald, Alsbach",,,
+"Deutschland, Hessen, Odenwald, Gross Biberau",,,
+"Deutschland, Hessen, Odenwald, Lindenfels",,,
+"Deutschland, Hessen, Odenwald, Messel",,,
+"Deutschland, Hessen, Odenwald, Neunkirchen",,,
+"Deutschland, Hessen, Odenwald, Spachbruecken",,,
+"Deutschland, Hessen, Odenwald; Bergisches Land",,,
+"Deutschland, Hessen, Odenwald; Bergstrasse",49.7191151,8.8700179,0.0
+"Deutschland, Hessen, Odenwald; Elsass",,,
+"Deutschland, Hessen, Odenwald; Nassau",,,
+"Deutschland, Hessen, Odenwald; Taunus",49.6698974,9.005235,0.0
+"Deutschland, Hessen, Odenwald; Wetterau",,,
+"Deutschland, Hessen, Oppenheim; Lerchheim",,,
+"Deutschland, Hessen, Schlesien",51.1940117,10.0255882,0.0
+"Deutschland, Hessen, Schwalbach, Hennethal",,,
+"Deutschland, Hessen, Schwalmthal",,,
+"Deutschland, Hessen, Taunus",50.26870575,8.14404402355883,0.0
+"Deutschland, Hessen, Taunus, Arnoldshain",50.26419620000001,8.4517157,0.0
+"Deutschland, Hessen, Taunus, Niederreifenberg",,,
+"Deutschland, Hessen, Taunus, Wuerges",,,
+"Deutschland, Hessen, Taunus; Lahntal; Odenwald",,,
+"Deutschland, Hessen, Unter - Lahn- u. Dillkreis",,,
+"Deutschland, Hessen, Unter - Taunus - Kreis",,,
+"Deutschland, Hessen, Unter - Taunus, Lahnkreis",,,
+"Deutschland, Hessen, Unter - Taunus; Dillkreis",,,
+"Deutschland, Hessen, Unter Lahnkreis, Dillkreis",,,
+"Deutschland, Hessen, Unter- Lahn- u. Dillkreis",,,
+"Deutschland, Hessen, Westfalen",51.2578846,9.4469855,0.0
+"Deutschland, Hessen, Wetterau",50.3556283,8.6947136,0.0
+"Deutschland, Hessen, Wetterau, Bettenhausen",,,
+"Deutschland, Hessen, Wetterau, Eberstadt",,,
+"Deutschland, Hessen, Wetterau, Gambach",,,
+"Deutschland, Hessen, Wetterau, Langsdorf",,,
+"Deutschland, Hessen, Wetterau, Muschenheim",,,
+"Deutschland, Hessen, Wetterau; Dill - Kreis",,,
+"Deutschland, Hessen, Wetterau; Odenwald",,,
+"Deutschland, Hessen, Wetterau; Rheinland",,,
+"Deutschland, Hessen, Wetterau; Taunus",50.360161100000006,8.840448,0.0
+"Deutschland, Hessen, Wetterau; Taunus, Wuerges",,,
+"Deutschland, Hessen, Wetzlar, Dutenhofen",50.56436779999999,8.5982542,0.0
+"Deutschland, Hessen, Wetzlar, Gellertshausen",,,
+"Deutschland, Hessen, Wetzlar, Ober - Lahnkreis",,,
+"Deutschland, Hessen, Wetzlar, Schwalbach",,,
+"Deutschland, Hessen, Wetzlar; Dill - Kreis",50.56593,8.5162755,0.0
+"Deutschland, Hessen, Wetzlar; Unter - Taunus",,,
+"Deutschland, Hessen, Ziegenhain, Schoenau",,,
+"Deutschland, Hessen; Frankfurt a.M.; Oberhessen",,,
+"Deutschland, Hessen; Ober - Lahnkreis",,,
+"Deutschland, Hessen; Ober - Lahnkreis; Limburg",,,
+"Deutschland, Hessen; Rheinland",50.08707490000001,8.5921633,0.0
+"Deutschland, Hessen; Westerwald",50.6771511,8.284772,0.0
+"Deutschland, Hessen; Westfalen; Franken",,,
+"Deutschland, Hesssen, Dillkreis, Schwalbach",,,
+"Deutschland, Hildburghausen",50.4266785,10.7296992,0.0
+"Deutschland, Hohen - Saathen a.d. Oder",,,
+"Deutschland, Hohen - Saten, Oderberg",,,
+"Deutschland, Jena",50.9281717,11.5879359,0.0
+"Deutschland, Kaiserslautern, Westrich",49.4022141,7.5729142,0.0
+"Deutschland, Kassel",51.3154546,9.492409599999998,0.0
+"Deutschland, Kassel, Witzenhausen, Alberode",,,
+"Deutschland, Koeln ?",50.938361,6.959974000000001,0.0
+"Deutschland, Kreis Hofgeismar",,,
+"Deutschland, Kreis Limburg; Kreis Wetzlar",,,
+"Deutschland, Kreis Limburg; Unter - Lahnkreis",,,
+"Deutschland, Kreis Usingen",,,
+"Deutschland, Kreis Wetzlar",50.5525346,8.5074406,0.0
+"Deutschland, Kreis Wetzlar, Burgsolms",,,
+"Deutschland, Kreis Wetzlar; Dillkreis",,,
+"Deutschland, Kreis Wetzlar; Neuwied",,,
+"Deutschland, Kuhlaendchen",,,
+"Deutschland, Lahn - Gebiet",,,
+"Deutschland, Lahn - Gegend",,,
+"Deutschland, Lahn - Gegend, Kreis Limburg",,,
+"Deutschland, Lahn - Tal",50.3202579,7.6325852,0.0
+"Deutschland, Lahngegend",,,
+"Deutschland, Lahngegend; Taunus",,,
+"Deutschland, Lahngegend; Westfalen",,,
+"Deutschland, Liegnitz",52.3996365,13.040742959690846,0.0
+"Deutschland, Limburg, Nauheim",50.3452965,8.1365254,0.0
+"Deutschland, Limburg; Unter - Lahnkreis",,,
+"Deutschland, Magdeburg",52.1315889,11.6399609,0.0
+"Deutschland, Magdeburg, Genthin",52.435965,12.123555,0.0
+"Deutschland, Magdeburg, Leitzkau",,,
+"Deutschland, Marburg",50.81173270000001,8.775774199999999,0.0
+"Deutschland, Mark",51.00419960000001,7.8256115999999984,0.0
+"Deutschland, Mark, Luckenwalde; Jueterbogk",,,
+"Deutschland, Mark, Nauen, Vietzin",,,
+"Deutschland, Mecklenburg",53.7445632,11.796350309941268,0.0
+"Deutschland, Meiningerland, Vachdorf",,,
+"Deutschland, Mittel - Franken",48.8265489,8.8703413,0.0
+"Deutschland, Mittel - Franken, Ziegelanger",,,
+"Deutschland, Mittelmark, Gransee",,,
+"Deutschland, Mosel - Gegend",,,
+"Deutschland, Mosel, Veldenz; Gornhausen",,,
+"Deutschland, Muensterland",51.7311814,7.984631699999999,0.0
+"Deutschland, Nassau, Dillkreis; Wetterau",,,
+"Deutschland, Nassau, Kreis Wetzlar; Dillkreis",,,
+"Deutschland, Nauen, Buschow",,,
+"Deutschland, Neisse, Walldorf",51.95138970000001,14.7181815,0.0
+"Deutschland, Neumark, Lippehne",,,
+"Deutschland, Neustadt - Eberswalde, Coethen",,,
+"Deutschland, Neustadt a.d. Dosse",52.8550517,12.440522,0.0
+"Deutschland, Nieder - Bayern, Mittel - Franken",,,
+"Deutschland, Nieder - Rhein ?",50.7800748,7.1822380355604745,0.0
+"Deutschland, Niederdeutsch",,,
+"Deutschland, Niederlausitz",51.84989255,14.288126779104815,0.0
+"Deutschland, Niederlausitz, Guben",,,
+"Deutschland, Niederlausitz, Luebbenau",,,
+"Deutschland, Niederreifenberg",50.2410255,8.423176699999999,0.0
+"Deutschland, Niederrhein",51.1934185,6.692645,0.0
+"Deutschland, Niederrhein ?",51.1934185,6.692645,0.0
+"Deutschland, Niederrhein, Lobberich",51.2868488,6.2810419,0.0
+"Deutschland, Niederrhein, Meurs",51.40191935,6.610618977130827,0.0
+"Deutschland, Niederrhein, Meurs, Neukirchen",51.4515796,6.5936027,0.0
+"Deutschland, Niederrhein, Niederkruechten",,,
+"Deutschland, Niederrhein, Wesel",51.62805615,6.607879716183777,0.0
+"Deutschland, Niederrhein; Bergisches Land",,,
+"Deutschland, Niederrhein; Elsass",,,
+"Deutschland, Niederrhein; Siebengebirge",,,
+"Deutschland, Niederrhein; Westfalen",51.1934185,6.692645,0.0
+"Deutschland, Niederrhein; Westfalen;",51.1934185,6.692645,0.0
+"Deutschland, Nord - Friesland",53.33290585,8.482577355691532,0.0
+"Deutschland, Norddeutschland",51.4697322,6.5673564,0.0
+"Deutschland, Norddeutschland, Ditmarschen",,,
+"Deutschland, Nordsee, Budjadinger - Land",,,
+"Deutschland, Ober - Bayern",,,
+"Deutschland, Ober - Hessen",52.0190684,10.781308795084774,0.0
+"Deutschland, Ober - Hessen, Giessen",,,
+"Deutschland, Ober - Hessen, Nassau",,,
+"Deutschland, Ober - Hessen, Wiesenbreidenbach",,,
+"Deutschland, Ober - Hessen; Nassau",,,
+"Deutschland, Ober - Hessen; Nassau; Elsass",,,
+"Deutschland, Ober - Hessen; Wetterau",50.3556283,8.6947136,0.0
+"Deutschland, Ober - Lahnkreis, Altenkirchen",,,
+"Deutschland, Ober - Lahnkreis, Dillkreis",,,
+"Deutschland, Ober - Lahnkreis, Niedertiefenbach",,,
+"Deutschland, Ober - Lahnkreis; Dillkreis",,,
+"Deutschland, Ober - Lahnkreis; Limburg",,,
+"Deutschland, Ober - Rhein",49.9731166,8.8331046,0.0
+"Deutschland, Ober - Westerwald; Unter - Taunus",,,
+"Deutschland, Ober- Bergisches Land, Gunnersbach",,,
+"Deutschland, Oberlahnkreis; Kreis Wetzlar",,,
+"Deutschland, Oberlahnkreis; Westerwald",,,
+"Deutschland, Oberrhein; France, Elsass",,,
+"Deutschland, Odenwald",49.60621635,9.04404309244449,0.0
+"Deutschland, Odenwald, Neunkirchen",49.3886578,9.0080906,0.0
+"Deutschland, Odenwald, Spachbruecken",,,
+"Deutschland, Odenwald; Bergstrasse",49.5376592,9.5018337,0.0
+"Deutschland, Odenwald; Limburg, Nauheim",,,
+"Deutschland, Oderberg, Hohen - Saathen",,,
+"Deutschland, Oderberg, Hohen Saathen",,,
+"Deutschland, Oderbruch",51.77285925,10.565671689917252,0.0
+"Deutschland, Oderbruch, Gross - Neuendorf",,,
+"Deutschland, Oesterreich",48.4114852,12.879332000000002,0.0
+"Deutschland, Oldenburg",53.13897530000001,8.214601700000001,0.0
+"Deutschland, Ost - Friesland",53.374657299999996,7.607470007393393,0.0
+"Deutschland, Ost - Preussen, Ermland",,,
+"Deutschland, Paderborn",51.71895955,8.764869778177559,0.0
+"Deutschland, Pommern",50.1699365,7.274099499999997,0.0
+"Deutschland, Pommern, Alt - Storken",,,
+"Deutschland, Pommern, Anclam",,,
+"Deutschland, Pommern, Fiddichow, Brusenfelde",,,
+"Deutschland, Pommern, Tantow, Rosow",,,
+"Deutschland, Pommern, Tantow, Rossow",,,
+"Deutschland, Potsdam, Toeplitz",52.43352755,12.912996336852665,0.0
+"Deutschland, Regensburg",49.0195333,12.0974869,0.0
+"Deutschland, Rheingau, Lorchgau; Hessen,",,,
+"Deutschland, Rheingau, Niederwald; Lahn - Tal",,,
+"Deutschland, Rheinland",50.7702908,6.2295504,0.0
+"Deutschland, Rheinland, Bonn",50.4292854,7.4838947,0.0
+"Deutschland, Rheinland, Bonn, Kessenich",,,
+"Deutschland, Rheinland, Bonn; Hessen, Odenwald",,,
+"Deutschland, Rheinland, Duesseldorf",,,
+"Deutschland, Rheinland, Koeln",50.7702908,6.2295504,0.0
+"Deutschland, Rheinland, Neuwied, Wollendorf",50.45143770000001,7.4254677,0.0
+"Deutschland, Rheinland, Siebengebirge",50.68841345,7.242792172675885,0.0
+"Deutschland, Rheinland, Siebengebirge; Hessen;",,,
+"Deutschland, Rheinland; Hessen",50.1963761,7.9020303,0.0
+"Deutschland, Rheinland; Hessen; Sachsen",,,
+"Deutschland, Rheinland; Mosel",50.3680206,7.5809854,0.0
+"Deutschland, Rheinland; Unter - Taunus",,,
+"Deutschland, Rheinpfalz",48.1565094,11.5757743,0.0
+"Deutschland, Rheinpfalz, Kaiserslautern,",,,
+"Deutschland, Rheinpfalz, Mussbach a.d. Hardt",,,
+"Deutschland, Rheinpfalz, Westrich",,,
+"Deutschland, Rheinprovinz; Unter - Taunus",,,
+"Deutschland, Ruhla",50.891491,10.3731603,0.0
+"Deutschland, Ruhr - Gegend; Mosel - Gegend",,,
+"Deutschland, Sachsen",50.92957979999999,13.4585052,0.0
+"Deutschland, Sachsen, Dresden",51.0493286,13.7381437,0.0
+"Deutschland, Sachsen, Halle",51.4825041,11.970545199999998,0.0
+"Deutschland, Sachsen, Leipzig; Dresden",51.3519638,12.431901992408587,0.0
+"Deutschland, Sachsen, Schlesien",51.2884561,14.8361439,0.0
+"Deutschland, Sachsen; Franken; Rheinpfalz",,,
+"Deutschland, Sachsen; Preussen",52.13608105,11.650775219224341,0.0
+"Deutschland, Sachsen; Thueringen",50.7347376,12.483069,0.0
+"Deutschland, Schlesien",53.20453910000001,11.2401781,0.0
+"Deutschland, Schlesien ?, Jaegerndorf",,,
+"Deutschland, Schlesien, Bresalau; Gotha",,,
+"Deutschland, Schlesien, Breslau",,,
+"Deutschland, Schlesien, Breslau, Luebben",,,
+"Deutschland, Schlesien, Breslau; Hainau",,,
+"Deutschland, Schlesien, Breslau; Liegnitz",,,
+"Deutschland, Schlesien, Bunzlau; Hainau",,,
+"Deutschland, Schlesien, Fraustadt",,,
+"Deutschland, Schlesien, Glatz",,,
+"Deutschland, Schlesien, Glogau",,,
+"Deutschland, Schlesien, Hainau",,,
+"Deutschland, Schlesien, Hainau; Fraustadt",,,
+"Deutschland, Schlesien, Hainau; Liegnitz",,,
+"Deutschland, Schlesien, Joachimstal",,,
+"Deutschland, Schlesien, Kreis Neisse",,,
+"Deutschland, Schlesien, Liegnitz",,,
+"Deutschland, Schlesien, Neisse",,,
+"Deutschland, Schlesien, Neisse, Waltdorf",,,
+"Deutschland, Schlesien, Neisse, Waltorf",,,
+"Deutschland, Schlesien, Niederlausitz",,,
+"Deutschland, Schlesien, Schnurgast",,,
+"Deutschland, Schlesien, Schoenau",,,
+"Deutschland, Schlesien; Brandenburg",,,
+"Deutschland, Schlesien; Brandenburg; Hessen",,,
+"Deutschland, Schlesien; Brandenburg; Sachsen",,,
+"Deutschland, Schlesien; Franken; Baden; Hessen",,,
+"Deutschland, Schlesien; Maehren",,,
+"Deutschland, Schlesien; Schweiz; Elsass",,,
+"Deutschland, Schlesien; Thueringen",,,
+"Deutschland, Schlesien; Thueringen; Berlin",,,
+"Deutschland, Schleswig",54.51851,9.5653284,0.0
+"Deutschland, Schleswig - Holstein",54.1853998,9.8220089,0.0
+"Deutschland, Schleswig - Holstein, Achtrup",54.7913561,9.0270266,0.0
+"Deutschland, Schleswig - Holstein, Westkueste",54.1946308,9.122438907042447,0.0
+"Deutschland, Schleswig - Holstein; Nassau",,,
+"Deutschland, Schleswig Holstein; Hannover",54.68373325,8.512357394106031,0.0
+"Deutschland, Schleswig, Nord - Friesland",,,
+"Deutschland, Schleswig, West - Kueste",,,
+"Deutschland, Schleswig, Westkueste; Hessen",,,
+"Deutschland, Schoenbeck a.d. Elbe",,,
+"Deutschland, Schoenebeck a.d. Elbe",,,
+"Deutschland, Schwaben",48.15313125,10.471291006038461,0.0
+"Deutschland, Schwaben,",48.15313125,10.471291006038461,0.0
+"Deutschland, Schwaben, Remstal",,,
+"Deutschland, Schwaben, Tuttlingen",,,
+"Deutschland, Schwaben, Ulm",48.39826685,10.013710816209347,0.0
+"Deutschland, Schwaben; Brandenburg, Oranienburg",,,
+"Deutschland, Schwaben; Rheinland",,,
+"Deutschland, Schwaben; Schweiz",,,
+"Deutschland, Schwarzwald; Rheinland, Koeln",49.9688827,8.2838251,0.0
+"Deutschland, Schwedt a.d. Oder",,,
+"Deutschland, Schweinfurt",50.0499945,10.233302,0.0
+"Deutschland, Schweiz",51.3368088,7.6895689181931,0.0
+"Deutschland, Siebengebirge",50.67552225,7.220990263792565,0.0
+"Deutschland, Siegen",50.8749804,8.0227233,0.0
+"Deutschland, Sued - Schwarzwald",50.07937570000001,8.654425199999999,0.0
+"Deutschland, Sueddeutschland",48.72209665,9.121726353261868,0.0
+"Deutschland, Sueddeutschland ?",48.72209665,9.121726353261868,0.0
+"Deutschland, Sueddeutschland; Schlesien;",,,
+"Deutschland, Sundgau",50.05052070000001,8.1908142,0.0
+"Deutschland, Taunus, Niederreifenberg",,,
+"Deutschland, Taunus, Wuerges",,,
+"Deutschland, Taunus; Elsass",,,
+"Deutschland, Taunus; Rheinland",50.1586649,8.5160414,0.0
+"Deutschland, Thueringen",50.73331629999999,11.0747905,0.0
+"Deutschland, Thueringen, Franken",50.9680152,11.4502537,0.0
+"Deutschland, Thueringen, Thueringer Wald",50.747264200000004,10.656694224106593,0.0
+"Deutschland, Thueringen; Sachsen",51.2876443,11.1685943,0.0
+"Deutschland, Thueringen; Schlesien",,,
+"Deutschland, Thueringen; Schwaben; Schlesien",,,
+"Deutschland, Trebbin",52.215036100000006,13.2140282,0.0
+"Deutschland, Trier",49.7596208,6.6441878,0.0
+"Deutschland, Trier, Kluesserath",49.84239210000001,6.8471255000000015,0.0
+"Deutschland, Uckermark",53.24526305,13.914861290058914,0.0
+"Deutschland, Uckermark, Angermuende",53.017276,13.9981503,0.0
+"Deutschland, Uckermark, Gramzow",53.1996922,13.9607915,0.0
+"Deutschland, Uckermark, Granzow",,,
+"Deutschland, Uckermark, Grenzow",,,
+"Deutschland, Uckermark, Prenzlau",53.3167,13.866575,0.0
+"Deutschland, Unter - Franken",52.208716,9.0739985,0.0
+"Deutschland, Unter - Taunus, Hennethal",,,
+"Deutschland, Unter - Taunus, Niederreifenberg",,,
+"Deutschland, Unter - Taunus, Wuerges",,,
+"Deutschland, Unter - Westerwald, Woelferlingen",,,
+"Deutschland, Vogelsberg, Rabenau",,,
+"Deutschland, Vogtland",50.54198905,12.028503867279465,0.0
+"Deutschland, Vormark, Perleberg, Klein Welle",,,
+"Deutschland, Weissenfels",51.1999793,11.9667857,0.0
+"Deutschland, West - Holstein, Ditmarschen",,,
+"Deutschland, West -; Mitteldeutschland",50.9795959,11.028035296493218,0.0
+"Deutschland, Westerwald",50.55719865,7.785129302203658,0.0
+"Deutschland, Westerwald; Hessen, Dillkreis",,,
+"Deutschland, Westerwald; Lahnkreis; Dillkreis",,,
+"Deutschland, Westerwald; Limburg",50.67602,7.392424,0.0
+"Deutschland, Westfalen",51.94318870000001,7.6108087,0.0
+"Deutschland, Westfalen, Bayern ?",51.6413398,8.5037825,0.0
+"Deutschland, Westfalen, Bielefeld",52.0191005,8.531007,0.0
+"Deutschland, Westfalen, Eichsfeld",51.4758395,7.488074,0.0
+"Deutschland, Westfalen, Herfurt; Hessen",,,
+"Deutschland, Westfalen, Kreis Iserlohn",51.3746778,7.6999713,0.0
+"Deutschland, Westfalen, Muenster",51.9625101,7.6251879,0.0
+"Deutschland, Westfalen, Muenster; Hildesheim",,,
+"Deutschland, Westfalen, Paderborn",51.71895955,8.764869778177559,0.0
+"Deutschland, Westfalen, Soest",51.5725501,8.1061259,0.0
+"Deutschland, Westfalen, Wittgenstein",50.9175238,8.137557211996047,0.0
+"Deutschland, Westfalen; Rheinland; Nassau",50.7790704,6.2281681,0.0
+"Deutschland, Wetterau",50.3556283,8.6947136,0.0
+"Deutschland, Wetterau, Butzbach",,,
+"Deutschland, Wetterau; Lahnkreis; Dillkreis",,,
+"Deutschland, Wetzlar, Philippstein",,,
+"Deutschland, Wilsnack",52.9556782,11.9448627,0.0
+"Deutschland, Wuerttemberg",48.7820489,9.2687566,0.0
+"Deutschland, Wuerttemberg, Stuttgart",48.7784485,9.1800132,0.0
+"Deutschland, Wuettemberg, Stuttgart; Mannheim",,,
+"Deutschland, Zerbst",51.9640308,12.0857291,0.0
+Deutschland; Boehmen,51.128251,10.636371225900305,0.0
+"Deutschland; Fankreich, Elsass",,,
+"Deutschland; France, Elsass",48.5874494,7.762028007324586,0.0
+"Deutschland; France, Elsass, Bischweiler",,,
+"Deutschland; France, Elsass, Ergenau",,,
+"Deutschland; France, Elsass, Lembach",,,
+"Deutschland; France, Elsass, Schweighausen",,,
+"Deutschland; France, Elsass, Weissenburg",,,
+"Deutschland; France, Elsass, Willer",,,
+"Deutschland; France, Elsass; Schweiz",,,
+"Deutschland; France, Weissenburg,",,,
+Deutschland; Oesterreich - Schlesien,,,
+"Deutschland; Oesterreich, Boehmen",,,
+"Deutschland; Rossiya, Litauen",,,
+"Deutschland; Rumaenien, Siebenbuergen",,,
+"Deutschland; Rumaenien, Siebenbuergen, Muhlbach",,,
+Deutschland; Schweiz ?,51.3368088,7.6895689181931,0.0
+"Fankreich, Elsass",,,
+"France, Elsass",48.24917645,7.407469951855497,0.0
+"France, Elsass, Bischweiler",48.7682281,7.8597466,0.0
+"France, Elsass, Ergenau",,,
+"France, Elsass, Lembach",49.0036278,7.789956399999999,0.0
+"France, Elsass, Schweighausen",47.753451399999996,7.1621662,0.0
+"France, Elsass, Weissenburg",49.0365935,7.9445109,0.0
+"France, Elsass, Willer",47.5859269,7.3211049,0.0
+"France, Elsass; Schweiz",48.9953625,7.9486051999999985,0.0
+"France, Weissenburg,",49.0365935,7.9445109,0.0
+Niederlande,52.500169799999995,5.7480820999999995,0.0
+Oesterreich - Schlesien,48.1441104,16.0935775,0.0
+"Oesterreich, Boehmen",48.7562514,16.4989041,0.0
+"Rossiya, Litauen",,,
+"Rumaenien, Siebenbuergen",46.7692686,23.5865425,0.0
+"Rumaenien, Siebenbuergen, Muhlbach",,,
+"Rumaenien, Siebenbuergen, Noesen",,,
+Schweiz ?,46.7985624,8.231973599999998,0.0
+Unter - Oesterreich,47.23152260000001,11.2820547,0.0

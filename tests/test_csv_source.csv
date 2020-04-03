@@ -1,0 +1,11 @@
+item_id,col1,col2
+item0,A,foo
+item1,B,foo
+item3,D,foo
+item4,E,foo
+item2,C,foo
+item5,F,foo
+item6,G,
+item7,,foo
+item8,,
+item9,J,foo
