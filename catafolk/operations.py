@@ -147,22 +147,55 @@ def constant(*args, value=None):
     values = [value] * len(args)
     return return_args(values)
 
-def regex_extract_groups(*args, pattern=None, extract_groups=None):
-    matches = re.match(pattern, args[0])
+def extract_groups(string, pattern=None, groups=None):
+    """Extract parts of a string using a regular expression:
+    it returns the groups of the regular expression
+    
+    Examples
+    --------
+
+    ```python 
+    >>> extract_groups('foo-bar', pattern='(.+)\-(.+)')
+    ['foo-bar', 'foo', 'bar']
+    ```
+
+    ```python 
+    >>> extract_groups('foo-bar', pattern='(.+)\-(.+)', groups=[1,2])
+    ['foo', 'bar']
+    ```
+
+    Parameters
+    ----------
+    string : str
+        The input string from which the groups are extracted
+    pattern : str
+        The regular expression, by default None
+    groups : [type], optional
+        A list of indices (!) of groups to return. Note that group 0
+        is the entire input string, so group 1 is the first group 
+        specified by the regex. Defaults to returning all groups.
+    
+    Returns
+    -------
+    list
+        A list of extracted groups (strings), or a string if only
+        one group has to be returned
+    """
+    matches = re.match(pattern, string)
     if matches:
-        if extract_groups is None: 
-            extract_groups = range(len(matches.regs))
+        if groups is None: 
+            groups = range(len(matches.regs))
         outputs = []
-        for group_num in extract_groups:
+        for group_num in groups:
             if matches[group_num] is not None:
                 outputs.append(matches[group_num])
         return return_args(outputs)
-    elif extract_groups is not None:
-        outputs = [None for _ in range(len(extract_groups))]
+    elif groups is not None:
+        outputs = [None for _ in range(len(groups))]
         return return_args(outputs)
     else:
         raise Exception('Regex did not match, cannot determine how many groups to return.\
-            Provide the `extract_groups` argument should resolve this.')
+            Provide the `groups` argument should resolve this.')
 
 def map_values(*args, mapping={}, regex=True):
     """Map input values to other values according to a dictionary mapping.

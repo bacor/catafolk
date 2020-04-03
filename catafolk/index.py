@@ -74,6 +74,11 @@ class Index():
     def save(self):
         self.data.to_csv(self.path, index=True)
     
+    def clear(self):
+        if self.has_file:
+            os.remove(self.path)
+        self._data = None
+
     def update(self, df, **kwargs):
         columns = [col for col in df.columns if col in self.fields]
         subset = df[columns]

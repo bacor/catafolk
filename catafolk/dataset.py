@@ -163,7 +163,9 @@ class Dataset(object):
             item.update(file.metadata)
             yield item
 
-    def make(self):
+    def make(self, clear=True):
+        if clear:
+            self.index.clear()
         self.index.make()
 
     def checksum(self, refresh=False):

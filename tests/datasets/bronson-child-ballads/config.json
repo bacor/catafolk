@@ -1,36 +1,6 @@
 {
     "dataset_id": "bronson-child-ballads",
     "file_pattern": "*.krn",
-    "default_field_values": {
-        "has_music": true,
-        "has_lyrics": false,
-        "source_key": "bronson1959child"
-    },
-    "override_field_values": {
-        "preview_url": "https://verovio.humdrum.org/?file=osu/monophony/british/{id}.krn",
-        "url": "https://kern.humdrum.org/cgi-bin/ksdata?file={id}.krn&l=osu/monophony/british&format=kern"
-    },
-    "meta_fields_conversion": {
-        "ARE": "location",
-        "URL": "url",
-        "ENC": "encoder",
-        "CNT": "culture",
-        "MRD": "collection_date",
-        "OCL": "collector",
-        "MPN": "performer",
-        "AGN": "genre",
-        "YEC": "copyright",
-        "PPG": {
-            "type": "regex",
-            "pattern": "p\\. (\\d+)",
-            "groups": ["source_page_num"]
-        },
-        "ONM": {
-            "type": "regex",
-            "pattern": "((Child Ballad No\\. (\\d+), .+))",
-            "groups": ["title", "title_eng", "source_song_num"]
-        }
-    },
     "transformations": [
         ["constant", "has_music", true],
         ["constant", "has_lyrics", false],
@@ -55,21 +25,21 @@
         ],
 
         {
-            "operation": "regex_extract_groups", 
+            "operation": "extract_groups", 
             "inputs": ["PPG"],
             "outputs": ["source_page_num"],
             "params": {
                 "pattern": "p\\. (\\d+)",
-                "extract_groups": [1]
+                "groups": [1]
             }
         },
         {
-            "operation": "regex_extract_groups",
+            "operation": "extract_groups",
             "inputs": ["ONM"],
             "outputs": ["title", "title_eng", "source_song_num"],
             "params": {
                 "pattern": "((Child Ballad No\\. (\\d+), .+))",
-                "extract_groups": [1, 2, 3]
+                "groups": [1, 2, 3]
             }
         }
     ]

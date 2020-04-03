@@ -37,30 +37,30 @@ class TestTransformers(unittest.TestCase):
         out = T({'input': 'HELLO'})
         self.assertDictEqual(out, {'output': 'hello'})
 
-    def test_regex_extract_groups_all(self):
+    def test_extract_groups_all(self):
         T = Transformer()
-        T.add_operation(regex_extract_groups, 
+        T.add_operation(extract_groups, 
             inputs=['input'], 
             outputs=['group0','group1', 'group2'],
             params=dict(pattern='(.+)\-(.+)'))
         out = T({'input': 'foo-bar'})
         self.assertDictEqual(out, {'group0': 'foo-bar', 'group1': 'foo', 'group2': 'bar'})
 
-    def test_regex_extract_groups(self):
+    def test_extract_groups(self):
         T = Transformer()
-        T.add_operation(regex_extract_groups, 
+        T.add_operation(extract_groups, 
             inputs=['input'], 
             outputs=['group1', 'group2'],
-            params=dict(pattern='(.+)\-(.+)', extract_groups=[1,2]))
+            params=dict(pattern='(.+)\-(.+)', groups=[1,2]))
         out = T({'input': 'foo-bar'})
         self.assertDictEqual(out, {'group1': 'foo', 'group2': 'bar'})
 
-    def test_regex_extract_groups_fails(self):
+    def test_extract_groups_fails(self):
         T = Transformer()
-        T.add_operation(regex_extract_groups, 
+        T.add_operation(extract_groups, 
             inputs=['input'], 
             outputs=['group1', 'group2'],
-            params=dict(pattern='(.+)\-(.+)', extract_groups=[1,2]))
+            params=dict(pattern='(.+)\-(.+)', groups=[1,2]))
         out = T({'input': 'foobar'})
         self.assertDictEqual(out, {'group1': None, 'group2': None})
 
@@ -77,17 +77,14 @@ class TestTransformers(unittest.TestCase):
         out = T({'input1': 'foo', 'input2': 'bar'})
         self.assertDictEqual(out, {'output': 'foo-bar'})
 
-    # def test_empty_input(self):
-    #     T = Transformer([
-    #         ['set_value', [], 'test', {'value': 2}]
-    #     ])
-    #     out = T()
-    #     print(out)
-
-    # def test_constant(self):
-    #     T = Transformer([
-    #         ['constant', ]
-    #     ])
+    def test_map_values(self):
+        values_map = { '(a|b)c': 'Hello', '[^ab]+c': 'world'}
+        op = ['map_values', 'input', 'output', {'mapping': values_map} ]
+        T = Transformer([op])
+        out = T({'input': 'ac'})
+        self.assertDictEqual(out, {'output': 'Hello'})
+        out = T({'input': 'AA123c'})
+        self.assertDictEqual(out, {'output': 'world'})
 
 
 class TestTransformerBuilding(unittest.TestCase):
