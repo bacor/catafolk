@@ -86,7 +86,6 @@ class TestTransformers(unittest.TestCase):
         out = T({'input': 'AA123c'})
         self.assertDictEqual(out, {'output': 'world'})
 
-
 class TestTransformerBuilding(unittest.TestCase):
     """Test if the methods for building Transformers work appropriately"""
     def test_init(self):
@@ -241,6 +240,30 @@ class TestShorthands(unittest.TestCase):
         }
         self.assertDictEqual(operations[0], target)
 
+    def test_dictionary_chain(self):
+        shorthand = {
+            'operations': ['split', 'lower'],
+            'inputs': ['input1'],
+            'outputs': ['output1', 'output2'],
+            'params': [{'sep': '-'}, {}]
+        }
+        out = expand_shorthand(shorthand)
+
+        target1 = {
+            'operation': 'split',
+            'inputs': ['input1'],
+            'outputs': ['output1_0_split', 'output2_0_split'],
+            'params': {'sep': '-'}
+        }
+        self.assertDictEqual(out[0], target1)
+
+        target2 = {
+            'operation': 'lower',
+            'inputs': ['output1_0_split', 'output2_0_split'],
+            'outputs': ['output1', 'output2'],
+            'params': {}
+        }
+        self.assertDictEqual(out[1], target2)
 
 if __name__ == '__main__':
     unittest.main()    

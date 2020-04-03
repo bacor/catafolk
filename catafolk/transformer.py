@@ -49,7 +49,7 @@ def expand_shorthand(shorthand):
     actual functions; but both are supported.
 
     The following examples illustrate how the shorthand format can be 
-    further simplified.
+    further simplified. 
 
     ### Single inputs/outputs
 
@@ -113,6 +113,21 @@ def expand_shorthand(shorthand):
     Note that intermediate outputs are always named
     `{output_name}_{operation_index}_{operation_name}.
 
+    You can also define chains using a variant of the dictionary form, 
+    containing the key `operations` (plural) rather than `operation`.
+    This often improves readability. Note that all other fields must be 
+    lists, like in the normal dictionary output form.
+    The previous example now looks like this:
+
+    ```python
+    >>> shorthand = {
+    ...     'operations': ['split', 'lower'],
+    ...     'inputs': ['input1'],
+    ...     'outputs': ['output1', 'output2'],
+    ...     'params': [{'sep': '-'}, {}]
+    ... }
+    ```
+
     ### Constants
 
     You can insert constants in the computation graph using the `constant`
@@ -131,7 +146,7 @@ def expand_shorthand(shorthand):
     
     Parameters
     ----------
-    shorthand : list
+    shorthand : list or dict
         A shorthand description of a transformation
     
     Returns
@@ -140,10 +155,13 @@ def expand_shorthand(shorthand):
         A list of dictionaries with keys `operation`, `inputs`, `outputs` 
         and `params`.
     """
-    assert type(shorthand) == list
+    # Dictionaries without 'operations' key are assumed to be valid
+    # operation dictionaries and returned
+    if type(shorthand) == dict and 'operations' not in shorthand:
+        return shorthand
 
-    # Immediately return when defining a constant
-    if len(shorthand) == 3 and shorthand[0] == 'constant':
+    # Immediately return definitions of constants
+    elif type(shorthand) == list and shorthand[0] == 'constant':
         return [{
             'operation': 'constant',
             'inputs': [],
@@ -151,27 +169,38 @@ def expand_shorthand(shorthand):
             'params': { 'value': shorthand[2]}
         }]
 
-    # Turn single arguments into argument lists
-    for i in range(len(shorthand)):
-        if type(shorthand[i]) != list:
-            shorthand[i] = [shorthand[i]]
+    # Else a simple list shorthand
+    elif type(shorthand) == list:
+        # Turn single arguments into argument lists
+        for i in range(len(shorthand)):
+            if type(shorthand[i]) != list:
+                shorthand[i] = [shorthand[i]]
 
-    # Add empty parameters for every transformation
-    if len(shorthand) == 3:
-        empty_params = [{}] * len(shorthand[0])
-        shorthand.append(empty_params)
+        # Add empty parameters for every transformation
+        if len(shorthand) == 3:
+            empty_params = [{}] * len(shorthand[0])
+            shorthand.append(empty_params)
 
-    # Validate and expand the shorthand 
-    assert len(shorthand) == 4
-    assert type(shorthand[0]) == list
-    assert type(shorthand[1]) == list
-    assert type(shorthand[1][0]) == str
-    assert type(shorthand[2]) == list
-    assert type(shorthand[2][0]) == str
-    assert type(shorthand[3]) == list
-    assert type(shorthand[3][0]) == dict
-    operation_names, chain_inputs, chain_outputs, params = shorthand
+        # Validate and expand the shorthand 
+        assert len(shorthand) == 4
+        assert type(shorthand[0]) == list
+        assert type(shorthand[1]) == list
+        assert type(shorthand[1][0]) == str
+        assert type(shorthand[2]) == list
+        assert type(shorthand[2][0]) == str
+        assert type(shorthand[3]) == list
+        assert type(shorthand[3][0]) == dict
+        operation_names, chain_inputs, chain_outputs, params = shorthand
+        shorthand = {
+            'operations': operation_names,
+            'inputs': chain_inputs,
+            'outputs': chain_outputs,
+            'params': params
+        }
 
+    # From now onwards also works for dictionaries
+    assert 'operations' in shorthand
+    
     # Build the chain of nodes. If multiple operations are passed
     # this means we have to generate unique ids for intermediate nodes,
     # that are neither inputs nor outputs. The unique ids are based
@@ -179,16 +208,16 @@ def expand_shorthand(shorthand):
     #   {output_name}_{operation_index}_{operation_name}
     # The output size is assumed to stay constant after the first
     # operation the chain
-    chain = [chain_inputs]
-    for i, op_name in enumerate(operation_names[:-1]):
-        intermediates = [f'{out}_{i}_{op_name}' for out in chain_outputs]
+    chain = [shorthand['inputs']]
+    for i, op_name in enumerate(shorthand['operations'][:-1]):
+        intermediates = [f'{out}_{i}_{op_name}' for out in shorthand['outputs']]
         chain.append(intermediates)
-    chain.append(chain_outputs)
+    chain.append(shorthand['outputs'])
 
     # Build dictionaries describing each of the operations in the chain
     operations_dicts = []
     for op, inputs, outputs, param in zip(
-        operation_names, chain[:-1], chain[1:], params):
+        shorthand['operations'], chain[:-1], chain[1:], shorthand['params']):
         op_dict = {
             'operation': op,
             'inputs': inputs,
