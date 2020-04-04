@@ -27,7 +27,7 @@ def get_test_sources():
     source1 = Source('test', entries=entries)
 
     path = os.path.join(CUR_DIR, 'test_csv_source.csv')
-    source2 = CSVSource('csv', path, 'item_id')
+    source2 = CSVSource('csv', path, id_field='item_id')
 
     return source1, source2
 
@@ -37,17 +37,33 @@ class TestSource(unittest.TestCase):
         source = Source('test', entries=entries)
         df = source.collect()
         self.assertEqual(len(df), 10)
+        self.assertEqual(len(df.columns), 1)
         self.assertTrue((df['foo'] == 'bar').all())
     
     def test_csv_source(self):
         path = os.path.join(CUR_DIR, 'test_csv_source.csv')
-        source = CSVSource('csv', path, 'item_id')
+        source = CSVSource('csv', path, id_field='item_id')
         df = source.collect()
         self.assertEqual(df.index.name, 'id')
         self.assertEqual(len(df), 10)
-        self.assertEqual(df.columns[0], 'col1')
-        self.assertEqual(df.columns[1], 'col2')
+        self.assertEqual(df.columns[0], 'item_id')
+        self.assertEqual(df.columns[1], 'col1')
+        self.assertEqual(df.columns[2], 'col2')
 
+    def test_id_transformer(self):
+        entries = [ {'item_id': i, 'foo': 'bar'} for i in range(10)]
+        transformations = [
+            ['format', 'item_id', 'id', {'pattern': 'item-{:0>3}'}]
+        ]
+        source = Source('test', entries=entries, id_field='item_id',
+            id_transformations=transformations)
+        df = source.collect()
+        self.assertEqual(df.index[0], 'item-000')
+        self.assertEqual(df.index[1], 'item-001')
+        self.assertEqual(df.index[2], 'item-002')
+        self.assertEqual(len(df), 10)
+        self.assertEqual(len(df.columns), 2)
+        self.assertEqual(df.loc['item-000', 'foo'], 'bar')
 
 class TestIndex(unittest.TestCase):
 
@@ -76,7 +92,7 @@ class TestIndex(unittest.TestCase):
         
         df = index.collect()
         columns = list(df.columns)
-        self.assertListEqual(columns, ['test.foo', 'csv.col1', 'csv.col2'])
+        self.assertListEqual(columns, ['test.foo', 'csv.item_id', 'csv.col1', 'csv.col2'])
         self.assertEqual(len(df), 10)
 
     def test_transform(self):
@@ -90,7 +106,7 @@ class TestIndex(unittest.TestCase):
         df = index.collect()
         transformed = index.transform(df)
         self.assertEqual(len(transformed), 10)
-        self.assertEqual(len(transformed.columns), 5)
+        self.assertEqual(len(transformed.columns), 6)
         self.assertEqual(transformed.loc['item0','joined'], 'A-foo')
         self.assertEqual(transformed.loc['item6','joined'], 'G')
         self.assertEqual(transformed.loc['item7','joined'], 'foo')

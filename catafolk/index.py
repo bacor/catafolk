@@ -1,29 +1,82 @@
 import os
 import pandas as pd
 import logging
+from catafolk.transformer import Transformer
 
 class Source():
-    def __init__(self, name, entries=None, id_field='id'):
+    def __init__(self, name, entries=None, id_field='id',
+        id_transformations=[]):
+        """A data source collecting data into a dataframe.
+
+        Correcting different ids
+        ------------------------
+        Sometimes different source use different ids. You can 
+        correct this using an id transformation. The following turns
+        an integer `song_no` into an id of the form `ID004`:
+    
+        ```python
+        id_transformations = [
+            ["format", "song_no", "id", {"pattern": "ID{:0>3}"}]
+        ]
+        ```
+        
+        Parameters
+        ----------
+        name : string
+            A unique name for the data source
+        entries : iterable, optional
+            An optional iterable of entries, which can be turned
+            into a DataFrame. By default None
+        id_field : str, optional
+            The name of the id field, by default 'id'
+        id_transformations : list, optional
+            A list of transformation (shorthands) to transform
+            the `id_field` values into the `id` exported by the source.
+            By default []
+        """
         self.name = name
         self.id_field = id_field
+        self.id_transformer = None
+        if len(id_transformations) > 0:
+            self.id_transformer = Transformer(id_transformations)
         if entries:
             self.entries = list(entries)
 
-    def collect(self, fields=[]):
+    def collect(self):
+        """Return a DataFrame with all data from the source.
+
+        The dataframe is indexed by a `id` column whose value
+        can be computed from another field using a transformation.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The data from the source
+        """
         df = pd.DataFrame(self.entries)
-        df.set_index(self.id_field, inplace=True)
-        df.index.name = 'id'
+
+        # Set up the right id, transorming the id_field if needed.
+        if self.id_transformer is None:
+            if self.id_field != 'id':
+                df['id'] = df[self.id_field]
+        else:
+            ids = []
+            for _, row in df.iterrows():
+                raw_id = row[self.id_field]
+                inputs = row.to_dict()
+                outputs = self.id_transformer(inputs)
+                if not 'id' in outputs:
+                    raise Exception('ID transformation failed: no `id` in output.')
+                ids.append(outputs['id'])
+            df['id'] = ids
+
+        df.set_index('id', inplace=True) 
         return df
 
 class CSVSource(Source):
-    def __init__(self, name, path, id_field, **kwargs):
-        self.path = path
-        self.df = pd.read_csv(path, index_col=id_field, **kwargs)
-        self.df.index.name = 'id'
-        super().__init__(name, id_field=id_field)
-
-    def collect(self, fields=[]):
-        return self.df
+    def __init__(self, name, path, **kwargs):
+        super().__init__(name, **kwargs)
+        self.entries = pd.read_csv(path)
 
 class Index():
     def __init__(self, path, fields=[], transformer=None):
@@ -93,7 +146,7 @@ class Index():
         dataframes = []
         columns = []
         for name, source in self.sources.items():
-            source_df = source.collect(fields=fields)
+            source_df = source.collect()
             if name != '':
                 columns.extend([f'{name}.{col}' for col in source_df.columns])
             else:

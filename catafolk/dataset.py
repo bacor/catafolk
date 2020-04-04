@@ -143,6 +143,16 @@ class Dataset(object):
 
         file_source = Source('file', entries=self._metadata_source_entries())
         self.index.register_sources(file_source)
+
+        # Register other sources
+        if "sources" in self.options:
+            for name, options in self.options['sources'].items():
+                if options['type'] == 'csv':
+                    path = join(self.data_dir, options['path'])
+                    kwargs = dict(id_transformations=options.get('id_transformations', []),
+                                  id_field=options.get('id_field'))
+                    source = CSVSource(name, path, **kwargs)
+                    self.index.register_sources(source)
         
         #TODO register others from config file?
     
