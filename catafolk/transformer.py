@@ -1,3 +1,34 @@
+"""The idea behind Catafolk is to leave the original datasets
+untouched, but only analyse their contents and extract all sorts
+of metadata in a standardized form. In practice, the metadata of 
+interest may be hidden in semistructered entries (e.g. the 
+page number in a reference entry), and requires the use of complex
+regular expressions. All the operations required to map the original
+source files to meta-data entries, are specified in a computation
+graph. 
+
+This is what the :py:class:Transformer class is for: to build, 
+and apply, the computation graph. You can use any function as a
+operation in the computation graph, but we have provided a set of
+useful ones in :py:module:operations. 
+
+>>> transformer = Transformer()
+>>> transformer.add_operation('rename', inputs=['foo'], outputs=['bar'])
+>>> transformer.add_operation('join', inputs=['bar', 'suffix'], outputs=['output_lower'])
+>>> transformer.add_operation('uppercase', inputs=['output_lower'], outputs=['output'])
+>>> transformer({'foo': 'Hello', 'suffix': ' world' })
+{'output': 'HELLO WORLD'}
+
+We have also made a special shorthand notation which allows us to
+specify all transformations in a JSON file. Here is an example:
+
+>>> shorthand = [['split', 'lowercase'], 'input', ['output1', 'output2'], [{'sep':'-'}, {}]]
+>>> transformer = Transformer([shorthand])
+>>> transformer({'input': 'HELLO-WORLD'})
+{'output1': 'hello', 'output2': 'world'}
+
+For details of the shorthand notation, see :py:function:expand_shorthand.
+"""
 # -*- coding: utf-8 -*-
 # -------------------------------------------------------------------
 # Author: Bas Cornelissen
@@ -15,35 +46,22 @@ def expand_shorthand(shorthand):
     described by dictionaries containing the `operation`, a list of `inputs`,
     a list of `outputs`, and finally some optional `params`.
     
-    Operation shorthands are of the following general form:
+    Operation shorthands are of the following general form::
 
-    ```python
-    shorthand = [list_of_functions, list_of_inputs, list_of_outputs, list_of_params]
-    ```
+        shorthand = [list_of_functions, list_of_inputs, list_of_outputs, list_of_params]
     
     Importantly, the first element is a *list* of function, which allows you 
     specify a chain of operations. The conversion takes care of generating
     names for the intermediate nodes. For example:
     
-    ```
     >>> shorthand = [['split', 'uppercase'], 'my_input', ['part1', 'part2'], [{'sep':'-'}, {}]]
-    >>> expand_shorthand(shorthand)
-    [
-        {
-            "operation": "split",
-            "inputs": ["my_input"],
-            # Automatically named intermediate outputs
-            "outputs": ["part1_1_split", "part2_1_split"] 
-            "params": {"sep": "-"}
-        },
-        {
-            "operation": "lowercase",
-            "inputs": ["part1_1_split", "part2_1_split"],
-            "outputs" ["part1", "part2"],
-            "params": {}
-        }
-    ]
-    ```
+    >>> operations = expand_shorthand(shorthand)
+    >>> len(operations)
+    2
+    >>> operations[0]
+    {'operation': 'split', 'inputs': ['my_input'], 'outputs': ['part1_0_split', 'part2_0_split'], 'params': {'sep': '-'}}
+    >>> operations[1]
+    {'operation': 'uppercase', 'inputs': ['part1_0_split', 'part2_0_split'], 'outputs': ['part1', 'part2'], 'params': {}}
 
     Note that in this example, we provided function *names* (strings), rather than 
     actual functions; but both are supported.
@@ -51,67 +69,42 @@ def expand_shorthand(shorthand):
     The following examples illustrate how the shorthand format can be 
     further simplified. 
 
-    ### Single inputs/outputs
-
+    **Single inputs/outputs.**
     If you pass an element rather than a list, it is converted in a list 
     with one item:
 
-    ```
     >>> shorthand = ['lowercase', 'my_input', 'my_output']
     >>> expand_shorthand(shorthand)
-    [{
-        'operation': 'lowercase',
-        'inputs': ['my_input'],
-        'outputs': ['my_output'],
-        'params': {}
-    }]
-    ```
+    [{'operation': 'lowercase', 'inputs': ['my_input'], 'outputs': ['my_output'], 'params': {}}]
+    
+    **Multiple inputs/outputs.**
+    You can also specify operations with multiple inputs or outputs:
 
-    ### Multiple inputs/outputs
-
-    ```
     >>> shorthand = ['lower', ['input1', 'input2'], ['output1', 'output2']]
     >>> expand_shorthand(shorthand)
-    [{
-        'operation': 'lower',
-        'inputs': ['input1', 'input2']
-        'outputs': ['output1', 'output2'],
-        'params': {}
-    }]
-    ```
+    [{'operation': 'lower', 'inputs': ['input1', 'input2'], 'outputs': ['output1', 'output2'], 'params': {}}]
 
-    ### Chaining operations
-
+    **Chaining operations.**
     You can specify a chain of operations by passing a list of operations
     as the first element to the shorthand. The conversion automatically
     creates names for the outputs of intermediate operations, but it cannot
-    infer the number of outputs. Instead, *it assumes that the number of 
-    outputs does not change after the firs operation*. 
-
+    infer the number of outputs. Instead, `it assumes that the number of 
+    outputs does not change after the first operation`. 
     To pass parameters to the operations, add a list containing a parameter 
     dictionary for every operation:
 
-    ```
-    >>> shorthand = [['split', 'lower'], 'input1', ['output1', 'output2'], [{'sep': '-'}, {}]
-    >>> expand_shorthand(shorthand)
-    [
-        {
-            'operation': 'split',
-            'inputs': ['input1'],
-            'outputs': ['output1_1_split', 'output2_1_split'],
-            'params': {'sep': '-'}
-        },
-        {
-            'operation': 'lower',
-            'inputs': ['output1_1_split', 'output2_1_split'],
-            'outputs': ['output1', 'output2'],
-            'params': {}
-        }
-    ]
-    ```
+    >>> shorthand = [['split', 'lower'], 'input1', ['output1', 'output2'], [{'sep': '-'}, {}]]
+    >>> operations = expand_shorthand(shorthand)
+    >>> len(operations)
+    2
+    >>> operations[0]
+    {'operation': 'split', 'inputs': ['input1'], 'outputs': ['output1_0_split', 'output2_0_split'], 'params': {'sep': '-'}}
+    >>> operations[1]
+    {'operation': 'lower', 'inputs': ['output1_0_split', 'output2_0_split'], 'outputs': ['output1', 'output2'], 'params': {}}
 
-    Note that intermediate outputs are always named
-    `{output_name}_{operation_index}_{operation_name}.
+    Note that intermediate outputs are always named as follows::
+
+        {output_name}_{operation_index}_{operation_name}
 
     You can also define chains using a variant of the dictionary form, 
     containing the key `operations` (plural) rather than `operation`.
@@ -119,30 +112,20 @@ def expand_shorthand(shorthand):
     lists, like in the normal dictionary output form.
     The previous example now looks like this:
 
-    ```python
     >>> shorthand = {
     ...     'operations': ['split', 'lower'],
     ...     'inputs': ['input1'],
     ...     'outputs': ['output1', 'output2'],
     ...     'params': [{'sep': '-'}, {}]
     ... }
-    ```
 
-    ### Constants
-
+    **Constants**
     You can insert constants in the computation graph using the `constant`
     operation, which has a special shorthand:
 
-    ```
     >>> shorthand = ['constant', 'my_constant', 10]
     >>> expand_shorthand(shorthand)
-    [{
-        "operation": "constant",
-        "inputs": [],
-        "outputs": ["my_constant"],
-        "params": {"value": 10}
-    }]
-    ```
+    [{'operation': 'constant', 'inputs': [], 'outputs': ['my_constant'], 'params': {'value': 10}}]
     
     Parameters
     ----------
@@ -300,29 +283,25 @@ class Transformer():
 
         Operations are defined by (1) a function, the names of (2) the input and 
         (3) output variables, and (4) some optional parameters (see also the 
-        method `add_operation`):
+        method `add_operation`)::
 
-        ```python
-        my_operation = {
-            "function": my_func,  # or "my_func"
-            "inputs": ["input1", "input2"],
-            "outputs: ["output1", "output2"],
-            "params": {"param1": "value1"}
-        }
-        ```
+            my_operation = {
+                "function": my_func,  # or "my_func"
+                "inputs": ["input1", "input2"],
+                "outputs": ["output1", "output2"],
+                "params": {"param1": "value1"}
+            }
         
         In many cases this dictionary representation is unnecessary lengthy and one
         can use a shorthand format instead. The shorthand also allows you to chain
         several operations. The following example splits a string `my_input` on 
         a dash, and transform both of the two parts to uppercase:
 
-        ```python
         >>> my_op = [['split', 'uppercase'], 'my_input', ['part1', 'part2'], [{'sep':'-'}, {}]]
-        >>> T = Transformation()
+        >>> T = Transformer()
         >>> T.add([my_op])
         >>> T({"my_input": "foo-bar"})
-        {"part1": "FOO", "part2": "BAR"}
-        ```
+        {'part1': 'FOO', 'part2': 'BAR'}
 
         For details on the shorthand format, refer to `expand_shorthand`.
         
@@ -436,28 +415,5 @@ class Transformer():
             g.write_svg(filename)
  
 if __name__ == '__main__':
-    with open('datasets/bronson-child-ballads/config.json', 'r') as h:
-        config = json.load(h)
-    
-    T = Transformer(config['transformations'])
-    print(T)
-    # T.load('../datasets/bron')
-#     # T.add(concatenate, inputs=['a', 'b'], outputs=['c'], sep='-')
-#     # T.add(split, inputs=['c'], outputs=['part1', 'part2'], sep='-')
-#     # T.add(rename, inputs=['part2',], outputs=['Whooo',])
-#     T.add()
-#     out = T.apply({'a': 'hallo', 'b': 'aap'})
-#     print(out)
-
-#     # graph = compose(name="graph")(
-#     #     operation(name="concat", needs=["a", "b"], provides="d", params=dict(sep='-'))(concatenate),
-#     #     operation(name="split", needs="d", provides=["X", "Y"], params=dict(sep='-'))(split)
-    # )
-
-    # Run the graph and request all of the outputs.
-    # out = graph({'a': 'hallo', 'b': 'aap'})
-    # print(out)
-    # concatenate = Concatenate(separator='-')
-    # lower = Lowercase()
-
-    
+    import doctest
+    doctest.testmod()

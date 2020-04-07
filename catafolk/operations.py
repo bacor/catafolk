@@ -1,8 +1,25 @@
+"""This module collects all operations that can be used in a
+transformation using the Transformer class.
+
+Most operations accept multiple inputs. The output size will always
+match the input size. So if you pass just a single argument, you
+will get a single output, and not a list with one item:
+
+>>> lowercase('THIS', 'IS', 'A', 'TEST')
+['this', 'is', 'a', 'test']
+>>> lowercase('THIS IS A TEST')
+'this is a test'
+"""
+#
 import re
 import html
 from pandas import isnull
 
-def return_args(args):
+def _return(args):
+    """Returns a single value if a single argument was passed,
+    and a list of values if multiple arguments were passed.
+    This function is used to ensure that the number of inputs
+    matches the number of outputs"""
     if len(args) == 1:
         return args[0]
     else:
@@ -15,7 +32,7 @@ def join(*args, sep=''):
     Parameters
     ----------
     sep : str, optional
-        The separator placed between the arguments, by default ''
+        The separator placed between the arguments, by default ``''``
     
     Returns
     -------
@@ -24,7 +41,7 @@ def join(*args, sep=''):
     """
     if type(args[0]) == list:
         outputs = [join(*arg, sep=sep) for arg in args]
-        return return_args(outputs)
+        return _return(outputs)
     else:
         joined = sep.join(str(arg) for arg in args if not isnull(arg))
     return joined
@@ -48,7 +65,6 @@ def split(*args, sep=None):
     return args[0].split(sep)
 
 def pick(*args, index=0):
-    """Returns one argument from a list of arguments"""
     return args[index]
 
 def first(*args):
@@ -59,7 +75,7 @@ def last(*args):
     """Returns the last argument"""
     if type(args[0]) == list:
         outputs = [arg[-1] for arg in args]
-        return return_args(outputs)
+        return _return(outputs)
     else:
         return args[-1]
 
@@ -71,33 +87,66 @@ def lowercase(*args):
             outputs.append(arg.lower())
         else:
             outputs.append(arg)
-    return return_args(outputs)
+    return _return(outputs)
 
 def uppercase(*args):
-    """Transform all arguments to uppercase"""
+    """Transform all arguments to uppercase
+
+    >>> uppercase('this is a test')
+    'THIS IS A TEST'
+    >>> uppercase('this is', 'another test')
+    ['THIS IS', 'ANOTHER TEST']
+    
+    Returns
+    -------
+    [type]
+        [description]
+    """
     uppercased = [arg.upper() for arg in args]
-    return return_args(uppercased)
+    return _return(uppercased)
 
 def titlecase(*args):
-    """Transform all arguments to titlecase"""
+    """Transform all arguments to titlecase
+
+    >>> titlecase('this is a test')
+    'This Is A Test'
+    >>> titlecase('This is', 'another test')
+    ['This Is', 'Another Test']
+    
+    Returns
+    -------
+    string(s)
+        The titlecased input strings
+    """
     outputs = [arg.title() for arg in args]
-    return return_args(outputs)
+    return _return(outputs)
 
 def rename(*args):
-    """Passes the arguments, allowing you to rename them"""
-    return return_args(args)
+    """Passes the arguments allowing you to rename them.
+
+    >>> rename('foo')
+    'foo'
+    >>> rename(1, 2, 3)
+    (1, 2, 3)
+    
+    Returns
+    -------
+    mixed
+        Whatever you pass as arguments is returned
+    """
+    return _return(args)
 
 def to_int(*args):
     integers = [int(arg) for arg in args]
-    return return_args(integers)
+    return _return(integers)
 
 def to_float(*args):
     floats = args([float(arg) for arg in args])
-    return return_args(floats)
+    return _return(floats)
 
 def to_string(*args):
     strings = [str(arg) for arg in args]
-    return return_args(strings)
+    return _return(strings)
 
 def default(*args, values=[]):
     output = []
@@ -106,7 +155,7 @@ def default(*args, values=[]):
             output.append(default_value)
         else:
             output.append(arg)
-    return return_args(output)
+    return _return(output)
 
 def format(*args, pattern=None):
     """Format a string using positional placeholders.
@@ -115,18 +164,15 @@ def format(*args, pattern=None):
     provide a `pattern` keyword, which will then be formatted using
     the input arguments:
 
-    ```python
+    
     >>> format("hello", pattern="{} world")
-    hello world
-    ```
+    'hello world'
 
     Second, if the `pattern` is omitted, the first argument is used
     as pattern, and the other arguments are used for formatting:
 
-    ```python
     >>> format('{} world', 'hello')
-    hello world
-    ```
+    'hello world'
     
     Parameters
     ----------
@@ -146,22 +192,49 @@ def format(*args, pattern=None):
     else:
         raise Exception('Either provide a pattern or multiple inputs')
 
-def set_value(*args, value=None):
-    values = [value] * len(args)
-    return return_args(values)
-
 def constant(*args, value=None):
+    """Returns a constant value. This allows you to introduce constant
+    or default values into the computation graph. The function returns 
+    as many values as you provide input argument. The inputs are otherwise
+    ignored.
+
+    >>> constant('_', value=4)
+    4
+    >>> constant('_', '_', '_', value='foo')
+    ['foo', 'foo', 'foo']
+    
+    Parameters
+    ----------
+    value : mixed, optional
+        The value of the constant, by default None
+    
+    Returns
+    -------
+    mixed
+        The value, or a list of values
+    """
     values = [value] * len(args)
-    return return_args(values)
+    return _return(values)
 
 def unescape_html(*args):
+    """Unescape an html string: replace html special characters
+    by utf-8 characters.
+
+    >>> unescape_html('f&ouml;&ograve; bar')
+    'föò bar'
+    
+    Returns
+    -------
+    string(s)
+        Unescaped html string
+    """
     outputs = []
     for arg in args:
         try:
             outputs.append(html.unescape(arg))
         except TypeError:
             outputs.append(arg)
-    return return_args(outputs)
+    return _return(outputs)
     
 
 def extract_groups(string, pattern=None, groups=None):
@@ -171,15 +244,11 @@ def extract_groups(string, pattern=None, groups=None):
     Examples
     --------
 
-    ```python 
     >>> extract_groups('foo-bar', pattern='(.+)\-(.+)')
     ['foo-bar', 'foo', 'bar']
-    ```
 
-    ```python 
     >>> extract_groups('foo-bar', pattern='(.+)\-(.+)', groups=[1,2])
     ['foo', 'bar']
-    ```
 
     Parameters
     ----------
@@ -206,10 +275,10 @@ def extract_groups(string, pattern=None, groups=None):
         for group_num in groups:
             if matches[group_num] is not None:
                 outputs.append(matches[group_num])
-        return return_args(outputs)
+        return _return(outputs)
     elif groups is not None:
         outputs = [None for _ in range(len(groups))]
-        return return_args(outputs)
+        return _return(outputs)
     else:
         raise Exception('Regex did not match, cannot determine how many groups to return.\
             Provide the `groups` argument should resolve this.')
@@ -220,6 +289,15 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
     dictionary using a regular expression. If so, the value is replaced
     by the value in the mapping dictionary. When there is no match,
     the input string is returned if `return_missing` is True; else `None`.
+
+    >>> map_values('foo', 'bar', 'fop', mapping={'fo.': 'FOO!'})
+    ['FOO!', None, 'FOO!']
+
+    >>> map_values('foo', 'bar', 'fop', mapping={'fo.': 'FOO!'}, return_missing=True)
+    ['FOO!', 'bar', 'FOO!']
+
+    >>> map_values('foo', 'bar', 'fo.', mapping={'fo.': 'FOO!'}, regex=False)
+    [None, None, 'FOO!']
     
     Parameters
     ----------
@@ -245,7 +323,7 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
             outputs = [mapping.get(arg, arg) for arg in args]
         else:
             outputs = [mapping.get(arg, None) for arg in args]
-        return return_args(outputs)
+        return _return(outputs)
     else:
         outputs = []
         for orig_value in args:
@@ -260,7 +338,7 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
             if not found_match:
                 default = orig_value if return_missing else None
                 outputs.append(default)
-        return return_args(outputs)
+        return _return(outputs)
 
 
 def map_numeric_bins(*args, bins=[], default=None):
@@ -268,16 +346,14 @@ def map_numeric_bins(*args, bins=[], default=None):
     Bins are dictionaries with a `min`, `max` (exclusive)
     and `value` attribute. For example:
 
-    ```python
     >>> bins = [
     ...    {'min': 0, 'max': 10, 'value': 'foo'},
     ...    {'min': 10, 'max': 100, 'value': 'bar'}
     ... ]
     >>> map_numeric_bins(2, bins=bins)
-    foo
+    'foo'
     >>> map_numeric_bins(20, bins=bins)
-    bar
-    ```
+    'bar'
     
     Parameters
     ----------
@@ -306,4 +382,8 @@ def map_numeric_bins(*args, bins=[], default=None):
                 outputs.append(default) 
         except:
             outputs.append(default)
-    return return_args(outputs)
+    return _return(outputs)
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
