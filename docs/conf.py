@@ -23,6 +23,8 @@ author = 'Bas Cornelissen'
 # The full version, including alpha/beta/rc tags
 release = '0'
 
+# Specify the masterdoc so readthedocs can find it
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
