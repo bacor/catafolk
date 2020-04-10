@@ -11,6 +11,7 @@ Welcome to Catafolk's documentation!
    :caption: Contents:
 
    content/dataset.rst
+   content/file.rst
    content/index.rst
    content/transformer.rst
    content/operations.rst
