@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# -------------------------------------------------------------------
+# Author: Bas Cornelissen
+# Copyright © 2020 Bas Cornelissen
+# -------------------------------------------------------------------
 """This module collects all operations that can be used in a
 transformation using the Transformer class.
 
@@ -10,7 +15,6 @@ will get a single output, and not a list with one item:
 >>> lowercase('THIS IS A TEST')
 'this is a test'
 """
-#
 import re
 import html
 from pandas import isnull
@@ -409,6 +413,22 @@ def replace(*args, old: str = None, new: str = None):
     return _return(outputs)
 
 def add(*args, value=None):
+    """Add something to each of the arguments
+
+    >>> add(1, value=2)
+    3
+    >>> add(1, 2, value=2)
+    [3, 4]
+    >>> add('a', value='b')
+    'ab'
+    >>> add([1], value=[2])
+    [1, 2]
+    
+    Parameters
+    ----------
+    value : mixed, optional
+        Anything that can be added in Python
+    """
     outputs = [arg + value for arg in args]
     return _return(outputs)
 
