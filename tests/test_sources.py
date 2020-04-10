@@ -34,7 +34,7 @@ class TestSource(unittest.TestCase):
     def test_id_transformer(self):
         entries = [ {'item_id': i, 'foo': 'bar'} for i in range(10)]
         transformations = [
-            ['format', 'item_id', 'id', {'pattern': 'item-{:0>3}'}]
+            ['format', 'item_id', 'new_id', {'pattern': 'item-{:0>3}'}]
         ]
         id_transformer = Transformer(transformations)
         source = Source(entries, name='test', 
