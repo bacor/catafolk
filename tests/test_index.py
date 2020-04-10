@@ -9,6 +9,7 @@ import pandas as pd
 from catafolk.index import Index
 from catafolk.index import Source
 from catafolk.index import CSVSource
+from catafolk.index import FileSource
 from catafolk.transformer import Transformer
 
 CUR_DIR = os.path.dirname(__file__)
@@ -64,6 +65,12 @@ class TestSource(unittest.TestCase):
         self.assertEqual(len(df), 10)
         self.assertEqual(len(df.columns), 2)
         self.assertEqual(df.loc['item-000', 'foo'], 'bar')
+
+    def test_file_source(self):
+        data_dir = os.path.join(TEST_DATASETS_DIR, 'bronson-child-ballads', 'data')
+        source = FileSource('file', data_dir, '*.krn')
+        print(source)
+
 
 class TestIndex(unittest.TestCase):
 
