@@ -15,6 +15,7 @@ Welcome to Catafolk's documentation!
    content/index.rst
    content/transformer.rst
    content/operations.rst
+   content/utils.rst
 
 
 Indices and tables
