@@ -1,0 +1,15 @@
+dataset_id: densmore-acoma
+analyzed: true
+title: Densmore Acoma
+dataset_url: 
+authors: 
+    - name: Frances Densmore
+      role: author
+tags: [symbolic]
+formats: [kern] 
+copyright: 
+licence_abbr: unknown
+version: 1.0
+issues:
+  - title: Who encoded these files?
+    description: Presumably Shanahan & Shanahan; have to check.

@@ -1,7 +1,16 @@
 {
     "dataset_id": "densmore-ojibway",
-    "file_pattern": "*.krn",
+    "sources": {
+        "file": {
+            "type": "file",
+            "file_pattern": "data/*.krn"
+        }
+    },
     "transformations": [
+        ["rename", "file.cf_checksum", "checksum"],
+        ["rename", "file.cf_path", "path"],
+        ["rename", "file.cf_format", "format"],
+        ["constant", "dataset_id", "densmore-ojibway"],
         ["constant", "encoding_date", "1998"],
         ["constant", "encoder", "Paul von Hippel"],
         ["constant", "has_music", true],

@@ -1,7 +1,16 @@
 {
     "dataset_id": "densmore-teton-sioux",
-    "file_pattern": "kern/*.krn",
+    "sources": {
+        "file": {
+            "type": "file",
+            "file_pattern": "data/kern/*.krn"
+        }
+    },
     "transformations": [
+        ["rename", "file.cf_checksum", "checksum"],
+        ["rename", "file.cf_path", "path"],
+        ["rename", "file.cf_format", "format"],
+        ["constant", "dataset_id", "densmore-teton-sioux"],
         ["constant", "source_key", "densmore1918teton"],
         ["constant", "has_music", true],
         ["constant", "has_lyrics", false],

@@ -1,16 +1,18 @@
 {
     "dataset_id": "natural-history-of-song",
-    "file_pattern": "Transcriptions/xml_raw/*.xml", 
     "sources": {
+        "file": {
+            "type": "file",
+            "file_pattern": "data/Transcriptions/xml_raw/*.xml"
+        },
         "meta": {
             "type": "csv",
-            "path": "Datasets/NHSDiscography_Metadata.csv",
+            "path": "data/Datasets/NHSDiscography_Metadata.csv",
             "id_field": "song"
         },
         "transcription_features": {
             "type": "csv",
-            "path": "Datasets/NHSDiscography_TranscriptionFeatures.csv",
-            "id_field": "song",
+            "path": "data/Datasets/NHSDiscography_TranscriptionFeatures.csv",
             "id_transformations": [
                 [["to_int", "format"], "song", "id", [{}, {"pattern": "NHSDiscography-{:0>3}"}]]
             ]
@@ -34,6 +36,10 @@
         }
     },
     "transformations": [
+        ["rename", "file.cf_checksum", "checksum"],
+        ["rename", "file.cf_path", "path"],
+        ["rename", "file.cf_format", "format"],
+        ["constant", "dataset_id", "natural-history-of-song"],
         ["rename", "meta.type", "genre"],
         ["rename", "meta.culture", "culture"],
         ["rename", "meta.location_modern", "location"],

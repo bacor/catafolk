@@ -1,0 +1,72 @@
+{
+    "dataset_id": "densmore-acona",
+    "sources": {
+        "file": {
+            "type": "file",
+            "file_pattern": "data/*.krn",
+            "id_transformations": [
+                {
+                    "operation": "extract_groups",
+                    "inputs": ["OTL"],
+                    "outputs": ["source_song_num"],
+                    "params": {
+                        "pattern": "No_(\\d+)",
+                        "groups": [1]
+                    }
+                },
+                ["format", "source_song_num", "new_id", {"pattern": "acoma{:0>2}"}]
+            ]
+        },
+        "additional_metadata": {
+            "type": "csv",
+            "path": "additional_metadata.csv",
+            "id_field": "id"
+        }
+    },
+    "transformations": [
+        ["rename", "file.cf_checksum", "checksum"],
+        ["rename", "file.cf_path", "path"],
+        ["rename", "file.cf_format", "format"],
+        ["constant", "dataset_id", "densmore-acoma"],
+        ["constant", "has_music", true],
+        ["constant", "has_lyrics", false],
+        ["constant", "source_key", ""],
+        ["constant", "encoder", "Daniel Shanahan and Eva Shanahan"],
+
+        ["rename", "additional_metadata.song_num", "source_song_num"],
+        ["rename", "additional_metadata.page_number", "source_page_num"],
+        ["rename", "additional_metadata.catalogue_num", "catalogue_num"],
+
+        ["rename", "file.SOCIAL_FUNCTION", "genre"],
+        ["rename", "file.REG", "location"],
+        
+        {
+            "operations": ["to_int", "add", "format"],
+            "inputs": ["source_page_num"],
+            "outputs": ["source_url"],
+            "params": [
+                {},
+                {"value": 12},
+                {"pattern": "https://babel.hathitrust.org/cgi/pt?id=mdp.39015024865878&view=1up&seq={}"}
+            ]
+        },
+        [
+            "format", "path", "preview_url", 
+            {"pattern": "https://verovio.humdrum.org/?file=osu/densmore/pawnee/{}"}
+        ],
+        [
+            "format", "path", "url", 
+            {"pattern": "https://kern.humdrum.org/cgi-bin/ksdata?location=osu/densmore/pawnee&file={}&format=kern"}
+        ],
+        {
+            "operation": "extract_groups",
+            "inputs": ["file.OTL"],
+            "outputs": ["source_song_num", "title_underscore"],
+            "params": {
+                "pattern": "No_(\\d+)_([^\\.]+).krn",
+                "groups": [1, 2]
+            }
+        },
+        ["replace", "title_underscore", "title", {"old": "_", "new": " "}]
+    ]
+}

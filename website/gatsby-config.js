@@ -15,14 +15,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `datasets`,
+        name: `index`,
         path: `${__dirname}/../datasets/`,
-        ignore: ['**/data/*', '**/config.json']
+        ignore: ['**/data/*', '**/config.json', '**/additional-metadata.csv']
       }
     },
     {
       resolve: `gatsby-transformer-csv`,
       options: {
+        name: 'index',
         typeName: 'Song'
       }
     },

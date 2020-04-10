@@ -66,10 +66,10 @@ class Dataset(object):
         'index_fn': 'index.csv',
         # A list of all accepted fields
         'index_fields': _FIELDS,
-        # Options passed to file instances
-        'file_options': {
-            'encoding': 'utf-8'
-        }
+        # # Options passed to file instances
+        # 'file_options': {
+        #     'encoding': 'utf-8'
+        # }
     }
 
     def __init__(self, dataset_id, options={}):
@@ -160,6 +160,8 @@ class Dataset(object):
                 if options['type'] == 'file':
                     kwargs['data_dir'] = self.dir
                     kwargs['file_pattern'] = options.get('file_pattern')
+                    if 'file_options' in options:
+                        kwargs['file_options'] = options['file_options']
                     source = FileSource(**kwargs)
                     self.index.register_sources(source)
 

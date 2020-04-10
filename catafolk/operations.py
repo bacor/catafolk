@@ -408,6 +408,10 @@ def replace(*args, old: str = None, new: str = None):
     outputs = [arg.replace(old, new) for arg in args]
     return _return(outputs)
 
+def add(*args, value=None):
+    outputs = [arg + value for arg in args]
+    return _return(outputs)
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()

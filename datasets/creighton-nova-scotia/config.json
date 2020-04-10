@@ -1,7 +1,16 @@
 {
     "dataset_id": "creighton-nova-scotia",
-    "file_pattern": "kern/*.krn",
+    "sources": {
+        "file": {
+            "type": "file",
+            "file_pattern": "data/kern/*.krn"
+        }
+    },
     "transformations": [
+        ["rename", "file.cf_checksum", "checksum"],
+        ["rename", "file.cf_path", "path"],
+        ["rename", "file.cf_format", "format"],
+        ["constant", "dataset_id", "creighton-nova-scotia"],  
         ["constant", "has_music", true],
         ["constant", "has_lyrics", false],
         ["constant", "source_key", "creighton1932nova"],

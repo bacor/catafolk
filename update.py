@@ -10,17 +10,19 @@ if __name__ == '__main__':
         # 'densmore-ojibway',
         # 'densmore-pawnee',
         # 'densmore-teton-sioux',
-        # 'sagrillo-ireland',
-        # 'sagrillo-lorraine',
-        # 'sagrillo-scotland',
-        # 'sagrillo-luxembourg',
         # 'essen-china-han',
         # 'essen-china-natmin',
         # 'essen-china-shanxi',
-        # 'essen-deutschl-erk',
+        # 'essen-china-xinhua',
+        # 'essen-deutschl-altdeu1',
         # 'essen-deutschl-boehme',
-        # 'essen-deutschl-altdeu1'
-        'natural-history-of-song'
+        # 'essen-deutschl-erk',
+        # 'natural-history-of-song',
+        # 'sagrillo-ireland',
+        # 'sagrillo-lorraine',
+        # 'sagrillo-luxembourg',
+        # 'sagrillo-scotland',
+        'densmore-acoma'
     ]
     for dataset_id in datasets:
         print(dataset_id)

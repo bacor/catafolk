@@ -47,12 +47,12 @@ transform an existing ID field. For this you can use an ID
 transformation. This is a function (or callable) that computes an
 ID for an entry based on all the fields of that entry. So it takes
 a dictionary describing the entry and outputs a dictionary with 
-(at least) an ``id`` field. For example,
+(at least) an ``new_id`` field. For example,
 
 >>> entries = [{'foo': 'entry1', 'value': 10}, {'foo': 'entry2', 'value': 20}]
->>> transformer = lambda entry: dict(id=entry['foo'].replace('entry', ''))
+>>> transformer = lambda entry: dict(new_id=entry['foo'].replace('entry', ''))
 >>> transformer({'foo': 'entry1'})
-{'id': '1'}
+{'new_id': '1'}
 >>> source = Source(entries, name='mysource', id_transformer=transformer)
 >>> source.data.index.to_list()
 ['1', '2']
@@ -90,7 +90,7 @@ class BaseSource:
     id_transformer : callable, optional
         A callable that takes a dictionary with all data for an 
         entry as input, and returns a dictionary with (at least)
-        an ``id`` field. This is used as the id for that entry.
+        an ``new_id`` field. This is used as the id for that entry.
     internal_fields_prefix : str, optional
         The prefix used for all fields added by the source class.
         By default ``'cf_'``.
@@ -161,10 +161,10 @@ class BaseSource:
             for _, row in df.iterrows():
                 inputs = row.to_dict()
                 outputs = self.id_transformer(inputs)
-                if not 'id' in outputs:
+                if not 'new_id' in outputs:
                     msg = 'ID transformation failed: no `id` in output.'
                     raise ValueError(msg)
-                index.append(outputs['id'])
+                index.append(outputs['new_id'])
         elif self.id_field not in df.columns:
             msg = f'ID field {self.id_field} does not exist'
             raise ValueError(msg)
