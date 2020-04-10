@@ -10,18 +10,27 @@ import warnings
 import logging
 
 from .file import get_file
-from .file import is_supported_format
-from .file import _FIELDS
 from .geocoding import Locator
 from .index import Index
-from .index import Source
-from .index import CSVSource
+from .source import *
 from .transformer import Transformer
 
 CUR_DIR = os.path.dirname(__file__)
 ROOT_DIR = os.path.abspath(join(CUR_DIR, os.path.pardir))
 DATASETS_DIR = join(ROOT_DIR, 'datasets')
 
+_FIELDS = ['dataset_id', 
+           'id', 'title', 'title_eng', 'location', 'latitude', 'longitude', 
+           'culture', 
+           'collection_date', 'collector', 'performer',
+           'source', 'source_key', 'source_author', 'source_title', 'source_publisher', 'source_address',
+           'source_page_num', 'source_song_num', 'source_date', 'catalogue_number', 'source_url',
+           'encoder',
+           'encoding_date', 'copyright', 'license_abbr', 'version', 'meter',
+           'metric_classification',
+           'modality', 'key', 'ambitus', 'has_lyrics', 'has_music', 
+           'genre', 'language', 'language_iso', 
+           'url', 'preview_url', 'path', 'format', 'checksum']
 
 # List of all included datasets
 _DATASET_IDS = [
@@ -106,9 +115,9 @@ class Dataset(object):
             pattern = join(self.data_dir, self.options['file_pattern'])
             for path in glob.glob(pattern):
                 file = get_file(path, **self.options['file_options'])
-                if file.id in self._files:
-                    raise ValueError(f'Duplicate file id: {file.id} ({path})')
-                self._files[file.id] = file
+                if file.name in self._files:
+                    raise ValueError(f'Duplicate file id: {file.name} ({path})')
+                self._files[file.name] = file
         if len(self._files) == 0:
             warnings.warn('No files were found!')
         return self._files
@@ -138,10 +147,10 @@ class Dataset(object):
                            transformer=self.transformer,
                            fields=self.options['index_fields'])
         
-        default_source = Source('', entries=self._default_source_entries())
+        default_source = IterableSource(self._default_source_entries(), name='')
         self.index.register_sources(default_source)
 
-        file_source = Source('file', entries=self._metadata_source_entries())
+        file_source = IterableSource(self._metadata_source_entries(), name='file')
         self.index.register_sources(file_source)
 
         # Register other sources
@@ -149,12 +158,11 @@ class Dataset(object):
             for name, options in self.options['sources'].items():
                 if options['type'] == 'csv':
                     path = join(self.data_dir, options['path'])
-                    kwargs = dict(id_transformations=options.get('id_transformations', []),
+                    kwargs = dict(name=name,
+                                  id_transformations=options.get('id_transformations', []),
                                   id_field=options.get('id_field'))
-                    source = CSVSource(name, path, **kwargs)
+                    source = CSVSource(path, **kwargs)
                     self.index.register_sources(source)
-        
-        #TODO register others from config file?
     
     def _default_source_entries(self):
         for entry_id, file in self.files.items():

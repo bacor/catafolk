@@ -7,9 +7,7 @@ import unittest
 import os
 import pandas as pd
 from catafolk.index import Index
-from catafolk.index import Source
-from catafolk.index import CSVSource
-from catafolk.index import FileSource
+from catafolk.source import *
 from catafolk.transformer import Transformer
 
 CUR_DIR = os.path.dirname(__file__)
@@ -25,52 +23,12 @@ def remove_test_index():
 
 def get_test_sources():
     entries = [ {'id': f'item{i}', 'foo': 'bar'} for i in range(5)]
-    source1 = Source('test', entries=entries)
+    source1 = IterableSource(name='test', entries=entries)
 
     path = os.path.join(CUR_DIR, 'test_csv_source.csv')
-    source2 = CSVSource('csv', path, id_field='item_id')
+    source2 = CSVSource(path, name='csv', id_field='item_id')
 
     return source1, source2
-
-class TestSource(unittest.TestCase):
-    def test_source(self):
-        entries = [ {'id': i, 'foo': 'bar'} for i in range(10)]
-        source = Source('test', entries=entries)
-        df = source.collect()
-        self.assertEqual(len(df), 10)
-        self.assertEqual(len(df.columns), 1)
-        self.assertTrue((df['foo'] == 'bar').all())
-    
-    def test_csv_source(self):
-        path = os.path.join(CUR_DIR, 'test_csv_source.csv')
-        source = CSVSource('csv', path, id_field='item_id')
-        df = source.collect()
-        self.assertEqual(df.index.name, 'id')
-        self.assertEqual(len(df), 10)
-        self.assertEqual(df.columns[0], 'item_id')
-        self.assertEqual(df.columns[1], 'col1')
-        self.assertEqual(df.columns[2], 'col2')
-
-    def test_id_transformer(self):
-        entries = [ {'item_id': i, 'foo': 'bar'} for i in range(10)]
-        transformations = [
-            ['format', 'item_id', 'id', {'pattern': 'item-{:0>3}'}]
-        ]
-        source = Source('test', entries=entries, id_field='item_id',
-            id_transformations=transformations)
-        df = source.collect()
-        self.assertEqual(df.index[0], 'item-000')
-        self.assertEqual(df.index[1], 'item-001')
-        self.assertEqual(df.index[2], 'item-002')
-        self.assertEqual(len(df), 10)
-        self.assertEqual(len(df.columns), 2)
-        self.assertEqual(df.loc['item-000', 'foo'], 'bar')
-
-    def test_file_source(self):
-        data_dir = os.path.join(TEST_DATASETS_DIR, 'bronson-child-ballads', 'data')
-        source = FileSource('file', data_dir, '*.krn')
-        print(source)
-
 
 class TestIndex(unittest.TestCase):
 
@@ -154,7 +112,7 @@ class TestIndex(unittest.TestCase):
 
         new_index = Index(TEST_INDEX_PATH, fields=['test.foo', 'csv.col1', 'source3.bla'])
         entries = [ {'id': f'item{i}', 'bla': i+2} for i in range(5, 15)]
-        source3 = Source('source3', entries=entries)
+        source3 = IterableSource(entries, name='source3')
         new_index.register_sources(source1, source2, source3)
         df = new_index.collect()
         new_index.update(df)

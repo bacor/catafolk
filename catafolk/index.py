@@ -1,114 +1,13 @@
+# -*- coding: utf-8 -*-
+# -------------------------------------------------------------------
+# Author: Bas Cornelissen
+# Copyright © 2020 Bas Cornelissen
+# -------------------------------------------------------------------
 import os
 import pandas as pd
 import logging
-import glob
-from catafolk.transformer import Transformer
-from .file import get_file
 
-class Source():
-    def __init__(self, name, entries=None, id_field='id',
-        id_transformations=[]):
-        """A data source collecting data into a dataframe.
-
-        Correcting different ids
-        ------------------------
-        Sometimes different source use different ids. You can 
-        correct this using an id transformation. The following turns
-        an integer `song_no` into an id of the form `ID004`:
-    
-        ```python
-        id_transformations = [
-            ["format", "song_no", "id", {"pattern": "ID{:0>3}"}]
-        ]
-        ```
-        
-        Parameters
-        ----------
-        name : string
-            A unique name for the data source
-        entries : iterable, optional
-            An optional iterable of entries, which can be turned
-            into a DataFrame. By default None
-        id_field : str, optional
-            The name of the id field, by default 'id'
-        id_transformations : list, optional
-            A list of transformation (shorthands) to transform
-            the `id_field` values into the `id` exported by the source.
-            By default []
-        """
-        self.name = name
-        self.id_field = id_field
-        self.id_transformer = None
-        self._data = None
-        if len(id_transformations) > 0:
-            self.id_transformer = Transformer(id_transformations)
-        if entries:
-            self._data = pd.DataFrame(list(entries))
-
-    @property
-    def data(self):
-        return self._data
-
-    def collect(self):
-        """Return a DataFrame with all data from the source.
-
-        The dataframe is indexed by a `id` column whose value
-        can be computed from another field using a transformation.
-        
-        Returns
-        -------
-        pd.DataFrame
-            The data from the source
-        """
-        df = self.data.copy()
-
-        # Set up the right id, transorming the id_field if needed.
-        if self.id_transformer is None:
-            if self.id_field != 'id':
-                df['id'] = df[self.id_field]
-        else:
-            ids = []
-            for _, row in df.iterrows():
-                raw_id = row[self.id_field]
-                inputs = row.to_dict()
-                outputs = self.id_transformer(inputs)
-                if not 'id' in outputs:
-                    raise Exception('ID transformation failed: no `id` in output.')
-                ids.append(outputs['id'])
-            df['id'] = ids
-
-        df.set_index('id', inplace=True) 
-        return df
-
-class CSVSource(Source):
-    def __init__(self, name, path, **kwargs):
-        super().__init__(name, **kwargs)
-        self._data = pd.read_csv(path)
-
-class FileSource(Source):
-
-    def __init__(self, name, data_dir, glob_pattern, options={}, **kwargs):
-        super().__init__(name, **kwargs)
-        self.data_dir = data_dir
-        self.filepaths = glob.glob(os.path.join(data_dir, glob_pattern))
-        self.options = options
-        self._files = {}
-
-    @property
-    def data(self):
-        if self._data is None:
-            entries = []
-            for path in self.filepaths:
-                file = get_file(path, **self.options)
-                self._files[path] = file
-                entry = file.metadata
-                entry['cf_path'] = file.relpath(self.data_dir)
-                entry['cf_checksum'] = file.checksum
-                entry['cf_format'] = file.format
-                entries.append(file.metadata)
-            self._data = pd.DataFrame(entries)
-        return self._data
-
+from .source import *
 
 class Index():
     def __init__(self, path, fields=[], transformer=None):
