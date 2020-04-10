@@ -13,6 +13,7 @@ Welcome to Catafolk's documentation!
    content/dataset.rst
    content/file.rst
    content/index.rst
+   content/source.rst
    content/transformer.rst
    content/operations.rst
    content/utils.rst

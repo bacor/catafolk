@@ -16,7 +16,6 @@ class Index():
         self.fields = fields
         if 'id' not in fields:
             self.fields = ['id'] + fields
-
         self._sources = {}
         self._data = None
 
@@ -42,7 +41,7 @@ class Index():
 
     def register_sources(self, *sources):
         for source in sources:
-            assert isinstance(source, Source)
+            assert isinstance(source, BaseSource)
             self._sources[source.name] = source
 
     def initialize(self):
@@ -77,12 +76,11 @@ class Index():
         dataframes = []
         columns = []
         for name, source in self.sources.items():
-            source_df = source.collect()
             if name != '':
-                columns.extend([f'{name}.{col}' for col in source_df.columns])
+                columns.extend([f'{name}.{col}' for col in source.data.columns])
             else:
-                columns.extend(source_df.columns)
-            dataframes.append(source_df)
+                columns.extend(source.data.columns)
+            dataframes.append(source.data)
         df = pd.concat(dataframes, axis=1, join='outer')
         df.columns = columns
         df.index.name = 'id'

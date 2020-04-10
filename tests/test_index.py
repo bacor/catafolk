@@ -23,7 +23,7 @@ def remove_test_index():
 
 def get_test_sources():
     entries = [ {'id': f'item{i}', 'foo': 'bar'} for i in range(5)]
-    source1 = IterableSource(name='test', entries=entries)
+    source1 = Source(entries, name='test')
 
     path = os.path.join(CUR_DIR, 'test_csv_source.csv')
     source2 = CSVSource(path, name='csv', id_field='item_id')
@@ -57,7 +57,8 @@ class TestIndex(unittest.TestCase):
         
         df = index.collect()
         columns = list(df.columns)
-        self.assertListEqual(columns, ['test.foo', 'csv.item_id', 'csv.col1', 'csv.col2'])
+        columns = ['test.id', 'test.foo', 'csv.item_id', 'csv.col1', 'csv.col2']
+        self.assertListEqual(list(df.columns), columns)
         self.assertEqual(len(df), 10)
 
     def test_transform(self):
@@ -71,7 +72,7 @@ class TestIndex(unittest.TestCase):
         df = index.collect()
         transformed = index.transform(df)
         self.assertEqual(len(transformed), 10)
-        self.assertEqual(len(transformed.columns), 6)
+        self.assertEqual(len(transformed.columns), 7)
         self.assertEqual(transformed.loc['item0','joined'], 'A-foo')
         self.assertEqual(transformed.loc['item6','joined'], 'G')
         self.assertEqual(transformed.loc['item7','joined'], 'foo')
@@ -112,7 +113,7 @@ class TestIndex(unittest.TestCase):
 
         new_index = Index(TEST_INDEX_PATH, fields=['test.foo', 'csv.col1', 'source3.bla'])
         entries = [ {'id': f'item{i}', 'bla': i+2} for i in range(5, 15)]
-        source3 = IterableSource(entries, name='source3')
+        source3 = Source(entries, name='source3')
         new_index.register_sources(source1, source2, source3)
         df = new_index.collect()
         new_index.update(df)

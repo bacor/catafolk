@@ -232,7 +232,7 @@ class FileSource(BaseSource):
     ----------
     data_dir : str
         The data directory path
-    glob_pattern : str
+    file_pattern : str
         The glob pattern relative to the ``data_dir``
     file_options : dict, optional
         Options passed to :func:`catafolk.file.get_file`.
@@ -241,7 +241,7 @@ class FileSource(BaseSource):
     **kwargs
         Optional keyword arguments passed to :class:`BaseSource`.
     """
-    def __init__(self, data_dir, glob_pattern, file_options={},
+    def __init__(self, data_dir, file_pattern, file_options={},
         use_filename_as_id=True, **kwargs):
         super().__init__(**kwargs)
 
@@ -250,7 +250,7 @@ class FileSource(BaseSource):
             self.id_field = f'{self.internal_fields_prefix}name'
 
         # Set up file structure
-        self.filepaths = glob.glob(os.path.join(data_dir, glob_pattern))
+        self.filepaths = glob.glob(os.path.join(data_dir, file_pattern))
         if len(self.filepaths) == 0: 
             warnings.warn('No files were found')
         self._files = {}

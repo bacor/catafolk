@@ -49,7 +49,7 @@ class TestSource(unittest.TestCase):
 
     def test_file_source_missing_id(self):
         data_dir = os.path.join(TEST_DATASETS_DIR, 'bronson-child-ballads', 'data')
-        source = FileSource(data_dir, '*.krn', name='file', id_field='id')
+        source = FileSource(data_dir, '*.krn', name='file', use_filename_as_id=False)
         with self.assertRaises(ValueError):
             source.data
 

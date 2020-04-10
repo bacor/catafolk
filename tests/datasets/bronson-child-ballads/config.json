@@ -1,19 +1,28 @@
 {
     "dataset_id": "bronson-child-ballads",
-    "file_pattern": "*.krn",
+    "sources": {
+        "file": {
+            "type": "file",
+            "file_pattern": "data/*.krn"
+        }
+    },
     "transformations": [
+        ["rename", "file.cf_checksum", "checksum"],
+        ["rename", "file.cf_path", "path"],
+        ["rename", "file.cf_format", "format"],
+
         ["constant", "has_music", true],
         ["constant", "has_lyrics", false],
         ["constant", "source_key", "bronson1959child"],
 
-        ["rename", "ARE", "location"],
-        ["rename", "ENC", "encoder"],
-        ["rename", "CNT", "culture"],
-        ["rename", "MRD", "collection_date"],
-        ["rename", "OCL", "collector"],
-        ["rename", "MPN", "performer"],
-        ["rename", "AGN", "genre"],
-        ["rename", "YEC", "copyright"],
+        ["rename", "file.ARE", "location"],
+        ["rename", "file.ENC", "encoder"],
+        ["rename", "file.CNT", "culture"],
+        ["rename", "file.MRD", "collection_date"],
+        ["rename", "file.OCL", "collector"],
+        ["rename", "file.MPN", "performer"],
+        ["rename", "file.AGN", "genre"],
+        ["rename", "file.YEC", "copyright"],
 
         [
             "format", "id", "preview_url", 
@@ -26,7 +35,7 @@
 
         {
             "operation": "extract_groups", 
-            "inputs": ["PPG"],
+            "inputs": ["file.PPG"],
             "outputs": ["source_page_num"],
             "params": {
                 "pattern": "p\\. (\\d+)",
@@ -35,7 +44,7 @@
         },
         {
             "operation": "extract_groups",
-            "inputs": ["ONM"],
+            "inputs": ["file.ONM"],
             "outputs": ["title", "title_eng", "source_song_num"],
             "params": {
                 "pattern": "((Child Ballad No\\. (\\d+), .+))",

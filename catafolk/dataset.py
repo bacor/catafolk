@@ -59,7 +59,7 @@ class Dataset(object):
         # The root dataset directory
         'dir': join(DATASETS_DIR, '{dataset_id}'),
         # The directory with the actual files; defaults to the subdir 'data'
-        'data_dir': join('{dataset_dir}', 'data'),
+        # 'data_dir': join('{dataset_dir}', 'data'),
         # Json file with all configuration params
         'config_fn': 'config.json',
         # The CSV file where all metadata is indexed
@@ -89,12 +89,11 @@ class Dataset(object):
         # Now load the remaining options from the config file and validate
         self.options.update(self.load_config())
         self.options.update(options)
-        self.validate_options()
 
         # Set up other files and directories
-        self.data_dir = self.options['data_dir'].format(dataset_dir=self.dir)
-        if not exists(self.data_dir):
-            raise Exception(f'No data directory found: {self.data_dir}')
+        # self.data_dir = self.options['data_dir'].format(dataset_dir=self.dir)
+        # if not exists(self.data_dir):
+        #     raise Exception(f'No data directory found: {self.data_dir}')
 
         # Set up transformer
         self.transformer = None
@@ -102,31 +101,31 @@ class Dataset(object):
             self.transformer = Transformer(self.options['transformations'])
 
         # Dynamic properties
-        self._files = {}
-        self._metadata_tables = {}
-        self._ids = None
+        # self._files = {}
+        # self._metadata_tables = {}
+        # self._ids = None
 
         # Set up indexer
         self.setup_index()
 
-    @property
-    def files(self):
-        if len(self._files) == 0:
-            pattern = join(self.data_dir, self.options['file_pattern'])
-            for path in glob.glob(pattern):
-                file = get_file(path, **self.options['file_options'])
-                if file.name in self._files:
-                    raise ValueError(f'Duplicate file id: {file.name} ({path})')
-                self._files[file.name] = file
-        if len(self._files) == 0:
-            warnings.warn('No files were found!')
-        return self._files
+    # @property
+    # def files(self):
+    #     if len(self._files) == 0:
+    #         pattern = join(self.data_dir, self.options['file_pattern'])
+    #         for path in glob.glob(pattern):
+    #             file = get_file(path, **self.options['file_options'])
+    #             if file.name in self._files:
+    #                 raise ValueError(f'Duplicate file id: {file.name} ({path})')
+    #             self._files[file.name] = file
+    #     if len(self._files) == 0:
+    #         warnings.warn('No files were found!')
+    #     return self._files
 
-    @property 
-    def ids(self):
-        if self._ids is None:
-            self._ids = sorted(list(self.files.keys()))
-        return self._ids
+    # @property 
+    # def ids(self):
+    #     if self._ids is None:
+    #         self._ids = sorted(list(self.files.keys()))
+    #     return self._ids
     
     def load_config(self):
         if not exists(self.config_path):
@@ -137,49 +136,55 @@ class Dataset(object):
             logging.info(f'Configuration file loaded: {self.config_path}')
             return config
 
-    def validate_options(self):
-        if 'file_pattern' not in self.options:
-            raise ValueError('No `file_pattern` option was specified')
-
     def setup_index(self):
         self.index_path = join(self.dir, self.options['index_fn'])
         self.index = Index(self.index_path, 
                            transformer=self.transformer,
                            fields=self.options['index_fields'])
         
-        default_source = IterableSource(self._default_source_entries(), name='')
-        self.index.register_sources(default_source)
+        # default_source = Source(self._default_source_entries(), name='')
+        # self.index.register_sources(default_source)
 
-        file_source = IterableSource(self._metadata_source_entries(), name='file')
-        self.index.register_sources(file_source)
+        # file_source = Source(self._metadata_source_entries(), name='file')
+        # self.index.register_sources(file_source)
 
         # Register other sources
         if "sources" in self.options:
             for name, options in self.options['sources'].items():
-                if options['type'] == 'csv':
-                    path = join(self.data_dir, options['path'])
-                    kwargs = dict(name=name,
-                                  id_transformations=options.get('id_transformations', []),
-                                  id_field=options.get('id_field'))
+                kwargs = dict(name=name)
+                
+                if 'id_transformations' in options:
+                    transformer = Transformer(options['id_transformations'])
+                    kwargs['id_transformer'] = transformer                    
+
+                if options['type'] == 'file':
+                    kwargs['data_dir'] = self.dir
+                    kwargs['file_pattern'] = options.get('file_pattern')
+                    source = FileSource(**kwargs)
+                    self.index.register_sources(source)
+
+                elif options['type'] == 'csv':
+                    kwargs['id_field'] = options.get('id_field')
+                    path = join(self.dir, options['path'])
                     source = CSVSource(path, **kwargs)
                     self.index.register_sources(source)
     
-    def _default_source_entries(self):
-        for entry_id, file in self.files.items():
-            item = {
-                'id': entry_id,
-                'dataset_id': self.dataset_id,
-                'format': file.format,
-                'path': file.relpath(root=self.data_dir),
-                'checksum': file.checksum,
-            }
-            yield item
+    # def _default_source_entries(self):
+    #     for entry_id, file in self.files.items():
+    #         item = {
+    #             'id': entry_id,
+    #             'dataset_id': self.dataset_id,
+    #             'format': file.format,
+    #             'path': file.relpath(root=self.data_dir),
+    #             'checksum': file.checksum,
+    #         }
+    #         yield item
 
-    def _metadata_source_entries(self):
-        for entry_id, file in self.files.items():
-            item = dict(id=entry_id)
-            item.update(file.metadata)
-            yield item
+    # def _metadata_source_entries(self):
+    #     for entry_id, file in self.files.items():
+    #         item = dict(id=entry_id)
+    #         item.update(file.metadata)
+    #         yield item
 
     def make(self, clear=True):
         if clear:

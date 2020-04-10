@@ -14,7 +14,7 @@ determines the file format based on the extension.
 >>> data_dir = 'tests/datasets/bronson-child-ballads/data'
 >>> file = get_file(f'{data_dir}/child01.krn')
 >>> file
-<catafolk.File name=child01 format=kern>
+<KernFile name=child01 format=kern>
 >>> file.metadata.keys()
 dict_keys(['ONM', 'PPG', 'AMT', 'YOR', 'OVM', 'PPE', 'PSR', 'PSP', 'PSD', 'ENC', 'EMD', 'EEV'])
 >>> file.metadata['ONM']
@@ -66,6 +66,8 @@ class File:
 
     format = None
     """The file format, e.g. ``'kern'`` or ``'xml'``"""
+
+    #TODO document properties
     
     def __init__(self, filepath, encoding='utf-8'):
         self.path = filepath
@@ -78,7 +80,7 @@ class File:
         self.reset()
 
     def __repr__(self):
-        return f'<catafolk.File name={self.name} format={self.format}>'
+        return f'<{self.__class__.__name__} name={self.name} format={self.format}>'
     
     @property
     def metadata(self):
@@ -95,7 +97,12 @@ class File:
 
     @property
     def checksum(self):
-        """An md5 checksum of the file"""
+        """An md5 checksum of the file.
+        
+        >>> file = get_file('tests/datasets/bronson-child-ballads/data/child01.krn')
+        >>> file.checksum
+        '350fc2b9839d7d7669d83f77efdc03c2'
+        """
         if self._checksum is None:
             self._checksum = file_checksum(self.path)
         return self._checksum
