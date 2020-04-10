@@ -236,7 +236,6 @@ def unescape_html(*args):
             outputs.append(arg)
     return _return(outputs)
     
-
 def extract_groups(string, pattern=None, groups=None):
     """Extract parts of a string using a regular expression:
     it returns the groups of the regular expression
@@ -340,7 +339,6 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
                 outputs.append(default)
         return _return(outputs)
 
-
 def map_numeric_bins(*args, bins=[], default=None):
     """Map numbers to values corresponding to certain bins.
     Bins are dictionaries with a `min`, `max` (exclusive)
@@ -382,6 +380,32 @@ def map_numeric_bins(*args, bins=[], default=None):
                 outputs.append(default) 
         except:
             outputs.append(default)
+    return _return(outputs)
+
+def replace(*args, old: str = None, new: str = None):
+    """Replace a substring by another substring
+
+    >>> replace('foobar', old='oo', new='ood')
+    'foodbar'
+
+    >>> replace('foobar', 'broom', old='oo', new='ood')
+    ['foodbar', 'broodm']
+    
+    Parameters
+    ----------
+    old : str
+        The substring to search for, by default None
+    new : str
+        The substring to replace it with, by default None
+    
+    Returns
+    -------
+    str
+        The string with replacements
+    """
+    if old is None or new is None:
+        raise ValueError('Please specify the old and new value')
+    outputs = [arg.replace(old, new) for arg in args]
     return _return(outputs)
 
 if __name__ == '__main__':
