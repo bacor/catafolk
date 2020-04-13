@@ -77,6 +77,12 @@ export default ({ bibliography, ...options }) => {
       const raw = rawEntries[entry.id]
       const elements = []
        
+      if('catafolk-hathitrust' in raw.properties) {
+        const href = raw.properties['catafolk-hathitrust']
+        const btn = `<a class="badge badge-pill badge-light d-inline" href="${href}" target="_blank">Hathi Trust</a>`
+        elements.push(btn)
+      }
+      
       if('catafolk-googlebooks' in raw.properties) {
         const href = raw.properties['catafolk-googlebooks']
         const btn = `<a class="badge badge-pill badge-light d-inline" href="${href}" target="_blank">Google</a>`
