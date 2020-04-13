@@ -169,12 +169,11 @@ function Sources({ bibliography }) {
 
 export default ({ data }) => {
   const dataset = data.metadata
-  dataset.github_directory = '#'
+  
+  dataset.github_directory = `${data.site.siteMetadata.github}/tree/master/datasets/${dataset.dataset_id}`
   dataset.raw_index_url = '#'
   dataset.index = data.index
   dataset.readme = data.readme
-
-  // console.log('asdfasdf', data)
 
   // Generate citation keys for all items
   const bibtex = data.sources.content
@@ -408,5 +407,10 @@ export const query = graphql`
     }
     sources: rawCode(name: {eq: "sources"}) {
       content
+    }
+    site {
+      siteMetadata {
+        github
+      }
     }
   }`

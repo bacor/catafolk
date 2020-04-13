@@ -10,6 +10,8 @@ module.exports = {
   pathPrefix: "/catafolk",
   siteMetadata: {
     title: `Catafolk`,
+    github: `https://github.com/bacor/catafolk`,
+    website: `https://bacor.github.io/catafolk`,
   },
   plugins: [
     {
