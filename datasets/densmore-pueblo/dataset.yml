@@ -1,7 +1,7 @@
 dataset_id: densmore-pueblo
 analyzed: true
-title: Pueblo Music
-dataset_url: 
+title: Densmore Pueblo Music
+dataset_url: https://github.com/shanahdt/densmore/tree/master/Densmore/acoma
 authors: 
   - name: Frances Densmore
     role: author
@@ -12,14 +12,16 @@ authors:
 contributors:
   - name: Bas Cornelissen
     role: additional metadata
+    url: https://bascornelissen.nl
 tags: [symbolic]
 formats: [kern] 
-copyright: 
+songs: 82
 licence_abbr: unknown
-version: 1.0
+description: >
+  A collection of 82 folksongs from several Pueblo peoples: Acoma, Isleta, Cochiti and Zuni.
+  The songs were mostly collected by Frances Densmore between 1928 and 1940 and published 
+  in her 1957 *Pueblo Music*. Digital encoding by Daniel and Eva Shanahan.
 issues:
-  - title: Who encoded these files?
-    description: Presumably Shanahan & Shanahan; have to check. And when?
   - title: Copyright?
     description: There is no copyright/license.
   - title: Ignored meta fields
@@ -28,3 +30,5 @@ issues:
       `LANG` (mostly value `'Tone'`, probably indicating it is a tone language). `REG` (we use
       the location information from `additional-metadata.csv`), and `SUPERFUNCTION` (the genre
       or `'tribename'`)
+show_columns:
+  - location

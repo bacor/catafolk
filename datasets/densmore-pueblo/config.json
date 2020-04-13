@@ -32,6 +32,8 @@
         ["constant", "has_lyrics", false],
         ["constant", "source_key", "densmore1957pueblo"],
         ["constant", "encoder", "Daniel Shanahan and Eva Shanahan"],
+        ["constant", "encoding_date", "<2014"],
+        ["constant", "copyright", "Copyright 2014 Daniel and Eva Shanahan"],
 
         ["rename", "additional_metadata.song_num", "source_song_num"],
         ["rename", "additional_metadata.page_number", "source_page_num"],
@@ -56,12 +58,8 @@
             ]
         },
         [
-            "format", "path", "preview_url", 
-            {"pattern": "https://verovio.humdrum.org/?file=osu/densmore/pawnee/{}"}
-        ],
-        [
-            "format", "path", "url", 
-            {"pattern": "https://kern.humdrum.org/cgi-bin/ksdata?location=osu/densmore/pawnee&file={}&format=kern"}
+            "format", "file.cf_name", "url", 
+            {"pattern": "https://github.com/shanahdt/densmore/raw/master/Densmore/acoma/{}.krn"}
         ],
         {
             "operation": "extract_groups",
