@@ -160,7 +160,7 @@ class KernFile(File):
         metadata = {}
         with open(self.path, 'r', encoding=self.encoding) as handle:
             for line in handle:
-                match = re.match(r'^\!{3}([^:]+): (.+)', line)
+                match = re.match(r'^\!{3}([^:]+):[ \t]*(.+)', line)
                 if match:
                     key = match[1]
                     value = match[2]
