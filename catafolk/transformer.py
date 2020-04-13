@@ -20,14 +20,32 @@ useful ones in :py:module:operations.
 {'output': 'HELLO WORLD'}
 
 We have also made a special shorthand notation which allows us to
-specify all transformations in a JSON file. Here is an example:
+specify all transformations in a YAML or JSON file. Here is an 
+example:
 
 >>> shorthand = [['split', 'lowercase'], 'input', ['output1', 'output2'], [{'sep':'-'}, {}]]
 >>> transformer = Transformer([shorthand])
 >>> transformer({'input': 'HELLO-WORLD'})
 {'output1': 'hello', 'output2': 'world'}
 
-For details of the shorthand notation, see :py:function:expand_shorthand.
+For details of the shorthand notation, see :py:func:`expand_shorthand`.
+In a JSON file this would look as follows::
+
+    {
+      'transformations': [
+        [['split', 'lowercase'], 'input', ['output1', 'output2'], [{'sep':'-'}, {}]]
+      ]
+    }
+
+Or in a YAML file, two variants::
+
+    transformations:
+      - [[split, lowercase], input, [output1, output2], [{sep: -}, {}]]
+      - - [split, lowercase]
+        - input
+        - [output1, output2]
+        - [{sep: -}, {}] 
+
 """
 # -*- coding: utf-8 -*-
 # -------------------------------------------------------------------
@@ -127,6 +145,33 @@ def expand_shorthand(shorthand):
     >>> expand_shorthand(shorthand)
     [{'operation': 'constant', 'inputs': [], 'outputs': ['my_constant'], 'params': {'value': 10}}]
     
+    **YAML: simple dictionaries for single operations**
+    There is a final variant which allows a neat YAML syntax::
+
+        transformations:
+          - lowercase: [my_input, my_output, {}]
+          - split: [my_input, [output1, output2], {sep: '-'}]
+          - split:
+              inputs: [my_input]
+              outputs: [output1, output2]
+              params: {sep: '-'}
+    
+    Here you specify a transformation as a dictionary with one
+    element, whose key is the operation. Its values can be
+    a list or a dictionary. This is extended by adding the operation
+    (as the first list, or under `operation`) and processed
+    as usual. For example:
+    
+    >>> shorthand = {'lowercase': ['my_input', 'my_output', {}]}
+    >>> expand_shorthand(shorthand)
+    [{'operation': 'lowercase', 'inputs': ['my_input'], 'outputs': ['my_output'], 'params': {}}]
+
+    Or even a nested dictionary:
+
+    >>> shorthand = {'lowercase': {'inputs': ['my_input'], 'outputs': ['my_output'], 'params': {}}}
+    >>> expand_shorthand(shorthand)
+    [{'inputs': ['my_input'], 'outputs': ['my_output'], 'params': {}, 'operation': 'lowercase'}]
+
     Parameters
     ----------
     shorthand : list or dict
@@ -138,6 +183,15 @@ def expand_shorthand(shorthand):
         A list of dictionaries with keys `operation`, `inputs`, `outputs` 
         and `params`.
     """
+    # Dictionary shorthand, mostly for nicer YAML syntax
+    if type(shorthand) == dict and len(shorthand) == 1:
+        operation = list(shorthand.keys())[0]
+        if type(shorthand[operation]) == list:
+            shorthand = [operation] + shorthand[operation]
+        else:
+            shorthand = shorthand[operation]
+            shorthand['operation'] = operation
+    
     # Dictionaries without 'operations' key are assumed to be valid
     # operation dictionaries and returned
     if type(shorthand) == dict and 'operations' not in shorthand:

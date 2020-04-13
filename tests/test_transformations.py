@@ -265,5 +265,17 @@ class TestShorthands(unittest.TestCase):
         }
         self.assertDictEqual(out[1], target2)
 
+    def test_shorthand_dict_list(self):
+        shorthand = {'operation': ['A', 'B', { 'param1': 'val1' }]}
+        T = expand_shorthand(shorthand)
+        self.assertEqual(len(T), 1)
+        target = {
+            'operation': 'operation',
+            'inputs': ['A'],
+            'outputs': ['B'],
+            'params': {'param1': 'val1'}
+        }
+        self.assertDictEqual(T[0], target)
+
 if __name__ == '__main__':
     unittest.main()    

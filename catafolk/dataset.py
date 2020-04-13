@@ -2,7 +2,8 @@ import os
 from os.path import join
 from os.path import exists
 import glob
-import json 
+import json
+import yaml 
 import pandas as pd
 import hashlib
 import re
@@ -58,8 +59,10 @@ class Dataset(object):
     _default_options = {
         # The root dataset directory
         'dir': join(DATASETS_DIR, '{dataset_id}'),
-        # Json file with all configuration params
-        'config_fn': 'config.json',
+        # File with all configuration params
+        'json_config_fn': 'config.json', # deprecated
+        'config_fn': 'dataset.yml',
+        'config_fields': ['transformations', 'sources'],
         # The CSV file where all metadata is indexed
         'index_fn': 'index.csv',
         # A list of all accepted fields
@@ -78,7 +81,6 @@ class Dataset(object):
         self.dir = self.options['dir'].format(dataset_id=dataset_id)
         if not exists(self.dir):
             raise Exception(f'Dataset directory does not exist: {self.dir}')
-        self.config_path = join(self.dir, self.options['config_fn'])
         
         # Now load the remaining options from the config file and validate
         self.options.update(self._load_config())
@@ -92,13 +94,27 @@ class Dataset(object):
         self._setup_index()
 
     def _load_config(self):
-        if not exists(self.config_path):
-            logging.warn(f'No configuration file found: {self.config_path}.')
-            return {}
+        self.config_path = join(self.dir, self.options['config_fn'])
+        self.json_config_path = join(self.dir, self.options['json_config_fn'])
+        config = {}
+
+        if exists(self.json_config_path):
+            logging.warn('JSON configurations are deprecated')
+            config = json.load(open(self.json_config_path, 'r'))
+            logging.info(f'JSON Configuration file loaded: {self.config_path}')
+
+        elif exists(self.config_path):
+            with open(self.config_path, 'r') as stream:
+                raw_config = yaml.safe_load(stream)
+            for key, value in raw_config.items():
+                if key in self.options['config_fields']:
+                    config[key] = value
+            logging.info(f'YAML Configuration file loaded: {self.config_path}')
+
         else:
-            config = json.load(open(self.config_path, 'r'))
-            logging.info(f'Configuration file loaded: {self.config_path}')
-            return config
+            logging.warn(f'No configuration file found: {self.config_path}.')
+        
+        return config
 
     def _setup_index(self):
         self.index_path = join(self.dir, self.options['index_fn'])
@@ -107,8 +123,8 @@ class Dataset(object):
                            fields=self.options['index_fields'])
 
         if "sources" in self.options:
-            for name, options in self.options['sources'].items():
-                kwargs = dict(name=name)
+            for options in self.options['sources']:
+                kwargs = dict(name=options['name'])
                 
                 if 'id_transformations' in options:
                     transformer = Transformer(options['id_transformations'])

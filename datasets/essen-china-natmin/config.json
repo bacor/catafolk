@@ -1,14 +1,13 @@
 {
     "dataset_id": "essen-china-natmin",
-    "sources": {
-        "file": {
-            "type": "file",
-            "file_pattern": "data/*.krn",
-            "file_options": {
-                "encoding": "ISO-8859-1"
-            }
+    "sources": [{
+        "name": "file",
+        "type": "file",
+        "file_pattern": "data/*.krn",
+        "file_options": {
+            "encoding": "ISO-8859-1"
         }
-    },
+    }],
     "transformations": [
         ["rename", "file.cf_checksum", "checksum"],
         ["rename", "file.cf_path", "path"],

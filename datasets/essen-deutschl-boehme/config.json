@@ -1,11 +1,10 @@
 {
     "dataset_id": "essen-deutschl-boehme",
-    "sources": {
-        "file": {
-            "type": "file",
-            "file_pattern": "data/*.krn"
-        }
-    },
+    "sources": [{
+        "name": "file",
+        "type": "file",
+        "file_pattern": "data/*.krn"
+    }],
     "transformations": [
         ["rename", "file.cf_checksum", "checksum"],
         ["rename", "file.cf_path", "path"],

@@ -1,23 +1,26 @@
 {
     "dataset_id": "natural-history-of-song",
-    "sources": {
-        "file": {
+    "sources": [
+        {
+            "name": "file",
             "type": "file",
             "file_pattern": "data/Transcriptions/xml_raw/*.xml"
         },
-        "meta": {
+        {
+            "name": "meta",
             "type": "csv",
             "path": "data/Datasets/NHSDiscography_Metadata.csv",
             "id_field": "song"
         },
-        "transcription_features": {
+        {
+            "name": "transcription_features",
             "type": "csv",
             "path": "data/Datasets/NHSDiscography_TranscriptionFeatures.csv",
             "id_transformations": [
-                [["to_int", "format"], "song", "id", [{}, {"pattern": "NHSDiscography-{:0>3}"}]]
+                [["to_int", "format"], "song", "new_id", [{}, {"pattern": "NHSDiscography-{:0>3}"}]]
             ]
         }
-    },
+    ],
     "meta_fields_conversion": {
         "NHSDiscography_Metadata_citation": {
             "type": "regex",
