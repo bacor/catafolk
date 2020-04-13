@@ -51,7 +51,7 @@ function ChecksumCell({ cell }) {
 }
 
 function PillLink({ children, href, ...opts}) {
-  const hasHref = href !== undefined;
+  const hasHref = (href !== undefined) & (href !== '')
   const options = _.defaults(opts, {
     as: hasHref ? 'a' : 'span',
     variant: hasHref ? 'secondary' : 'light',
