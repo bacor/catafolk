@@ -104,28 +104,8 @@ function Technicalities({ dataset }) {
 }
 
 const Readme = ({ dataset }) => {
-  let hasReadme = 'readme' in dataset;
+  let hasReadme = dataset.readme !== null
   if(hasReadme) hasReadme = dataset.readme.file.wordCount.words > 0;
-  console.log(dataset.readme)
-  // const defaultContent = (
-  //   <Card.Body>
-  //     <Card.Title>Contribute!</Card.Title>
-  //     <p>
-  //       This dataset has no readme yet, describing how to download or use the dataset. <br/> 
-  //       Are you familiar with this dataset? 
-  //       Please consider <a className="text-dark">contributing</a>.
-  //     </p>
-  //     <Button variant="light" href={`${dataset.github_directory}/README.md`}>Edit me on GitHub!</Button>
-  //   </Card.Body>
-  // );
-  // return (
-  //   <div className="row mt-5">
-  //     <Card bg="secondary" text="light" className="w-100 text-center">
-  //       <Card.Header>Read me</Card.Header>
-  //       {hasReadme ? <Card.Body>{dataset.readme.file.html}</Card.Body> : defaultContent}
-  //       </Card>
-  //     </div>
-  // );
 
   if(hasReadme) {
     return (
@@ -355,6 +335,8 @@ export const query = graphql`
       }
       contributors {
         name
+        role
+        url
       }
       copyright
       licence {
