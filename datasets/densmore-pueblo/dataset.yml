@@ -1,10 +1,17 @@
-dataset_id: densmore-acoma
+dataset_id: densmore-pueblo
 analyzed: true
-title: Densmore Acoma
+title: Pueblo Music
 dataset_url: 
 authors: 
-    - name: Frances Densmore
-      role: author
+  - name: Frances Densmore
+    role: author
+  - name: Daniel Shanahan
+    role: encoder
+  - name: Eva Shanahan
+    role: encoder
+contributors:
+  - name: Bas Cornelissen
+    role: additional metadata
 tags: [symbolic]
 formats: [kern] 
 copyright: 
@@ -12,4 +19,12 @@ licence_abbr: unknown
 version: 1.0
 issues:
   - title: Who encoded these files?
-    description: Presumably Shanahan & Shanahan; have to check.
+    description: Presumably Shanahan & Shanahan; have to check. And when?
+  - title: Copyright?
+    description: There is no copyright/license.
+  - title: Ignored meta fields
+    description: >
+      The following fields are currently ignored: `LING_GROUP` (the language family, it seems)
+      `LANG` (mostly value `'Tone'`, probably indicating it is a tone language). `REG` (we use
+      the location information from `additional-metadata.csv`), and `SUPERFUNCTION` (the genre
+      or `'tribename'`)

@@ -1,5 +1,5 @@
 {
-    "dataset_id": "densmore-acona",
+    "dataset_id": "densmore-pueblo",
     "sources": {
         "file": {
             "type": "file",
@@ -14,12 +14,12 @@
                         "groups": [1]
                     }
                 },
-                ["format", "source_song_num", "new_id", {"pattern": "acoma{:0>2}"}]
+                ["format", "source_song_num", "new_id", {"pattern": "pueblo{:0>2}"}]
             ]
         },
         "additional_metadata": {
             "type": "csv",
-            "path": "additional_metadata.csv",
+            "path": "additional-metadata.csv",
             "id_field": "id"
         }
     },
@@ -27,19 +27,24 @@
         ["rename", "file.cf_checksum", "checksum"],
         ["rename", "file.cf_path", "path"],
         ["rename", "file.cf_format", "format"],
-        ["constant", "dataset_id", "densmore-acoma"],
+        ["constant", "dataset_id", "densmore-pueblo"],
         ["constant", "has_music", true],
         ["constant", "has_lyrics", false],
-        ["constant", "source_key", ""],
+        ["constant", "source_key", "densmore1957pueblo"],
         ["constant", "encoder", "Daniel Shanahan and Eva Shanahan"],
 
         ["rename", "additional_metadata.song_num", "source_song_num"],
         ["rename", "additional_metadata.page_number", "source_page_num"],
-        ["rename", "additional_metadata.catalogue_num", "catalogue_num"],
+        ["rename", "additional_metadata.catalogue_num", "catalogue_number"],
+        ["rename", "additional_metadata.performer", "performer"],
+        ["rename", "additional_metadata.collector", "collector"],
+        ["rename", "additional_metadata.collection_date", "collection_date"],
+        ["rename", "additional_metadata.culture", "culture"],
+        ["rename", "additional_metadata.location", "location"],
+        ["rename", "additional_metadata.latitude", "latitude"],
+        ["rename", "additional_metadata.longitude", "longitude"],
+        ["rename", "additional_metadata.genre", "genre"],
 
-        ["rename", "file.SOCIAL_FUNCTION", "genre"],
-        ["rename", "file.REG", "location"],
-        
         {
             "operations": ["to_int", "add", "format"],
             "inputs": ["source_page_num"],
