@@ -36,7 +36,7 @@ citation: natural-history-of-song
 last_updated: 2019-10-24 
 version: none
 description: >
-    "NHS Discography contains transcriptions and analyses of 118 field recordings from the 30 world regions covered in NHS Ethnography. [..] We selected recordings by reviewing published collections of world music, digitizing out-of-print recordings, and contacting anthropologists and ethnomusicologists to obtain unpublished field recordings. Each song was transcribed into music notation."
+    NHS Discography contains transcriptions and analyses of 118 field recordings from the 30 world regions covered in NHS Ethnography. [..] We selected recordings by reviewing published collections of world music, digitizing out-of-print recordings, and contacting anthropologists and ethnomusicologists to obtain unpublished field recordings. Each song was transcribed into music notation.
 issues: 
     - title: Ignored metadata
       description: >
@@ -44,3 +44,67 @@ issues:
         currently ignored.
 show_columns:
     - location
+
+#————————————————————————————————————————————————————————————————————
+
+sources:
+  - name: file
+    type: file
+    file_pattern: data/Transcriptions/xml_raw/*.xml
+  - name: meta
+    type: csv
+    path: data/Datasets/NHSDiscography_Metadata.csv
+    id_field: song
+  - name: transcription_features
+    type: csv
+    path: data/Datasets/NHSDiscography_TranscriptionFeatures.csv
+    id_transformations:
+      - operations: [to_int, format]
+        inputs: [song]
+        outputs: [new_id]
+        params:
+          - {}
+          - pattern: NHSDiscography-{:0>3}
+
+transformations:
+  # Default Catafolk fields
+  - rename: [file.cf_checksum, checksum]
+  - rename: [file.cf_path, path]
+  - rename: [file.cf_format, format]
+
+  # Constants
+  - constant: [dataset_id, natural-history-of-song]
+  - constant: [has_music, true]
+  - constant: [has_lyrics, false]
+
+  - rename: [meta.type, genre]
+  - rename: [meta.culture, culture]
+  - rename: [meta.location_modern, location]
+  - rename: [meta.latitude, latitude]
+  - rename: [meta.longitude, longitude]
+  - rename: [meta.year, collection_date]
+  - rename: [meta.permalink, source_url]
+  - rename: [transcription_features.range, ambitus]
+
+  - extract_groups:
+      inputs: [meta.citation]
+      outputs:
+        - source
+        - title
+        - source_song_num
+        - source_title
+        - source_address
+        - source_publisher
+        - source_date
+      params:
+        pattern: "\"+([^\"]+)\"+( +\\[([^\\]]+)\\])?\\.? ([^\\.]+)\\.( ([^:]+): ([^\\(]+)\\(([^\\)]+)\\))?"
+        groups: [0, 1, 3, 4, 6, 7, 8]
+
+corrections:
+  NHSDiscography-094:
+    title: "Angi: Love song to a married woman"
+    source_song_num: Disc 1, Side B, Track 10
+    source_title: On The Demonstration Collection of E.M. von Hornbostel and the Berlin Phonogramm-Archiv [LP]
+    source_address: New York
+    source_publisher: Folkways Records
+    source_date: 1963
