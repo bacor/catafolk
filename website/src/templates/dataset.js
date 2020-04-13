@@ -106,25 +106,52 @@ function Technicalities({ dataset }) {
 const Readme = ({ dataset }) => {
   let hasReadme = 'readme' in dataset;
   if(hasReadme) hasReadme = dataset.readme.file.wordCount.words > 0;
-  const defaultContent = (
-    <Card.Body>
-      <Card.Title>Contribute!</Card.Title>
-      <p>
-        This dataset has no readme yet, describing how to download or use the dataset. <br/> 
-        Are you familiar with this dataset? 
-        Please consider <a className="text-dark">contributing</a>.
-      </p>
-      <Button variant="light" href={`${dataset.github_directory}/README.md`}>Edit me on GitHub!</Button>
-    </Card.Body>
-  );
-  return (
-    <div className="row mt-5">
-      <Card bg="secondary" text="light" className="w-100 text-center">
+  console.log(dataset.readme)
+  // const defaultContent = (
+  //   <Card.Body>
+  //     <Card.Title>Contribute!</Card.Title>
+  //     <p>
+  //       This dataset has no readme yet, describing how to download or use the dataset. <br/> 
+  //       Are you familiar with this dataset? 
+  //       Please consider <a className="text-dark">contributing</a>.
+  //     </p>
+  //     <Button variant="light" href={`${dataset.github_directory}/README.md`}>Edit me on GitHub!</Button>
+  //   </Card.Body>
+  // );
+  // return (
+  //   <div className="row mt-5">
+  //     <Card bg="secondary" text="light" className="w-100 text-center">
+  //       <Card.Header>Read me</Card.Header>
+  //       {hasReadme ? <Card.Body>{dataset.readme.file.html}</Card.Body> : defaultContent}
+  //       </Card>
+  //     </div>
+  // );
+
+  if(hasReadme) {
+    return (
+      <Card className="w-100">
         <Card.Header>Read me</Card.Header>
-        {hasReadme ? <Card.Body>{dataset.readme.html}</Card.Body> : defaultContent}
-        </Card>
-      </div>
-  );
+        <Card.Body>  
+          <Markdown source={dataset.readme.file.rawMarkdownBody} />
+        </Card.Body>
+      </Card>
+    )
+  } else {
+    return (
+      <Card bg="secondary" text="light" className="w-100 text-center">
+        <Card.Header>No readme yet...</Card.Header>
+        <Card.Body>
+          <Card.Title>Contribute!</Card.Title>
+          <p>
+            This dataset has no readme yet, describing how to download or use the dataset. <br/> 
+            Are you familiar with this dataset? 
+            Please consider <a className="text-dark">contributing</a>.
+          </p>
+          <Button variant="light" href={`${dataset.github_directory}/README.md`}>Edit me on GitHub!</Button>
+        </Card.Body>
+      </Card>
+    );
+  }
 }
 
 function Issue({ issue }) {
@@ -165,6 +192,9 @@ export default ({ data }) => {
   dataset.github_directory = '#'
   dataset.raw_index_url = '#'
   dataset.index = data.index
+  dataset.readme = data.readme
+
+  // console.log('asdfasdf', data)
 
   // Generate citation keys for all items
   const bibtex = data.sources.content
@@ -282,10 +312,8 @@ export default ({ data }) => {
             <Technicalities dataset={dataset} />
           </CardDeck>
         </Row>
-        <Row>
-          <Col>
-            <Readme dataset={dataset} />
-          </Col>
+        <Row className="mt-5">
+          <Readme dataset={dataset} />
         </Row>
       </Container>
       
@@ -390,7 +418,7 @@ export const query = graphql`
     }
     readme: file(relativeDirectory: {eq: $dataset_id}, name: {eq: "README"}) {
       file: childMarkdownRemark{
-        html
+        rawMarkdownBody
         wordCount {
           words
         }
