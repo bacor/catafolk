@@ -71,6 +71,7 @@ import glob
 import logging
 import warnings
 import pandas as pd
+import re
 
 from .transformer import Transformer
 from .file import get_file
@@ -211,12 +212,13 @@ class CSVSource(BaseSource):
         The path to the csv file
     """
 
-    def __init__(self, path, **kwargs):
+    def __init__(self, path, options={}, **kwargs):
         super().__init__(**kwargs)
         self.path = path
+        self.options = options
 
     def _collect(self):
-        return pd.read_csv(self.path)
+        return pd.read_csv(self.path, **self.options)
 
 class FileSource(BaseSource):
     """Loads data from a collection of files, specified
@@ -234,6 +236,8 @@ class FileSource(BaseSource):
         The data directory path
     file_pattern : str
         The glob pattern relative to the ``data_dir``
+    exclude : list
+        A list of filename regex patterns to ignore
     file_options : dict, optional
         Options passed to :func:`catafolk.file.get_file`.
     use_filename_as_id : bool, optional
@@ -241,8 +245,8 @@ class FileSource(BaseSource):
     **kwargs
         Optional keyword arguments passed to :class:`BaseSource`.
     """
-    def __init__(self, data_dir, file_pattern, file_options={},
-        use_filename_as_id=True, **kwargs):
+    def __init__(self, data_dir, file_pattern, exclude=[],
+        file_options={}, use_filename_as_id=True, **kwargs):
         super().__init__(**kwargs)
 
         # Change id field if using the filename as id
@@ -250,7 +254,18 @@ class FileSource(BaseSource):
             self.id_field = f'{self.internal_fields_prefix}name'
 
         # Set up file structure
-        self.filepaths = glob.glob(os.path.join(data_dir, file_pattern))
+        # TODO Test the exclude parameter. Can this be simplified?
+        paths = glob.glob(os.path.join(data_dir, file_pattern))
+        if len(exclude) == 0:
+            self.filepaths = paths
+        else:
+            self.filepaths = []
+            for path in paths:
+                for pattern in exclude:
+                    fn = os.path.basename(path)
+                    if re.match(pattern, fn) is None:
+                        self.filepaths.append(path)
+
         if len(self.filepaths) == 0: 
             warnings.warn('No files were found')
         self._files = {}
