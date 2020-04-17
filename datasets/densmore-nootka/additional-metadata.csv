@@ -1,0 +1,132 @@
+id,song_num,page_num,catalogue_num,performer,performer_gender,culture,tonality,bpm_voice,bpm_drum,bpm,instrument_use,percussion_use,instrumentation
+nootka001,1,54,1377,James Guy,male,Makah,irregular,88,,88,TRUE,TRUE,voice|drum
+nootka002,2,56,1378,James Guy,male,Makah,irregular,132,,132,TRUE,TRUE,voice|drum
+nootka003,3,59,1379,James Guy,male,Makah,,54,,54,TRUE,TRUE,voice|drum
+nootka004,4,60,1352,Young Doctor,male,Makah,,58,,58,FALSE,FALSE,voice
+nootka005,5,65,1380,James Guy,male,Makah,irregular,66,,66,FALSE,FALSE,voice
+nootka006,6,65,1381,James Guy,male,Makah,irregular,76,,76,FALSE,FALSE,voice
+nootka007,7,66,1382,James Guy,male,Makah,irregular,54,,54,FALSE,FALSE,voice
+nootka008,8,68,1427,Wilson Parker,male,Makah,,80,,80,FALSE,FALSE,voice
+nootka009,9,70,1425,Wilson Parker,male,Makah,,76,,76,TRUE,TRUE,voice|drum
+nootka010,10,71,1426,Wilson Parker,male,Makah,,76,,76,TRUE,TRUE,voice|drum
+nootka011,11,73,1323,Young Doctor,male,Makah,,60,,60,TRUE,TRUE,voice|drum
+nootka012,12,74,1322,Young Doctor,male,Makah,,54,,54,TRUE,TRUE,voice|drum
+nootka013,13,75,1504,Young Doctor,male,Quinaelt,,120,84,mixed,TRUE,TRUE,voice|drum
+nootka014,14,76,1324,Young Doctor,male,Makah,,72,84,mixed,TRUE,TRUE,voice|drum
+nootka015,15,77,1325,Young Doctor,male,Makah,,66,66,66,TRUE,TRUE,voice|drum
+nootka016,16,78,1326,Young Doctor,male,Makah,,63,63,63,TRUE,TRUE,voice|drum
+nootka017,17,79,1320,Young Doctor,male,Makah,,69,,69,TRUE,TRUE,voice|drum
+nootka018,18,80,1321,Young Doctor,male,Makah,,80,80,80,TRUE,TRUE,voice|drum
+nootka019,19,81,1399,Mrs. Helen Irving,female,Makah,,56,56,56,TRUE,TRUE,voice|drum
+nootka020,20,82,1319,Young Doctor,male,Makah,,76,,76,FALSE,FALSE,voice
+nootka021,21,83,1298,Young Doctor,male,Makah,,84,,84,FALSE,FALSE,voice
+nootka022,22,84,1318,Young Doctor,male,Makah,,63,63,63,TRUE,TRUE,voice|drum
+nootka023,23,85,1327,Young Doctor,male,Makah,,84,,84,FALSE,FALSE,voice
+nootka024,24,86,1303,Young Doctor,male,Makah,,84,,84,FALSE,FALSE,voice
+nootka025,25,87,1315,Young Doctor,male,Makah,,66,,66,FALSE,FALSE,voice
+nootka026,26,88,1316,Young Doctor,male,Makah,,72,,72,FALSE,FALSE,voice
+nootka027,27,89,1317,Young Doctor,male,Makah,,60,,60,FALSE,FALSE,voice
+nootka028,28,90,1334,Young Doctor,male,Makah,,66,,66,TRUE,TRUE,voice|drum
+nootka029,29,91,1335,Young Doctor,male,Makah,,76,,76,TRUE,TRUE,voice|drum
+nootka030,30,92,1336,Young Doctor,male,Makah,,69,,69,FALSE,FALSE,voice
+nootka031,31,93,1337,Young Doctor,male,Makah,,96,,96,FALSE,FALSE,voice
+nootka032,32,94,1338,Young Doctor,male,Makah,irregular,60,,60,FALSE,FALSE,voice
+nootka033,33,95,1351,Young Doctor,male,Makah,irregular,36,,36,FALSE,FALSE,voice
+nootka034,34,97,1420,Philip Ladder,,Makah,,84,,84,TRUE,TRUE,voice|drum
+nootka035,35,98,1421,Philip Ladder,,Makah,irregular,96,,96,TRUE,TRUE,voice|drum
+nootka036,36,99,1422,Philip Ladder,,Makah,irregular,138,138,138,TRUE,TRUE,voice|drum
+nootka037,37,100,1423,Philip Ladder,,Makah,irregular,96,,96,TRUE,TRUE,voice|drum
+nootka038,38,101,1424,Philip Ladder,,Makah,irregular,66,,66,TRUE,TRUE,voice|drum
+nootka039,39,104,1384,James Guy,male,Makah,irregular,96,,96,FALSE,FALSE,voice
+nootka040,40,105,1385,James Guy,male,Makah,irregular,80,,80,FALSE,FALSE,voice
+nootka041,41,107,1501,Young Doctor,male,Vancouver Island,irregular,76,,76,FALSE,FALSE,voice
+nootka042,42,108,1502,James Guy,male,Vancouver Island,,72,,72,FALSE,FALSE,voice
+nootka043,43,113,1442,Mrs. Sarah Guy,female,Clayoquot,,104,,104,FALSE,FALSE,voice
+nootka044,44,114,1432,Mrs. Sarah Guy,female,Clayoquot,,69,,69,FALSE,FALSE,voice
+nootka045,45,115,1433,Mrs. Sarah Guy,female,Clayoquot,,80,,80,FALSE,FALSE,voice
+nootka046,46,116,1434,Mrs. Sarah Guy,female,Clayoquot,,42,,42,FALSE,FALSE,voice
+nootka047,47,117,1435,Mrs. Sarah Guy,female,Clayoquot,,60,,60,FALSE,FALSE,voice
+nootka048,48,118,1419,Charles Swan,male,Makah,,120,120,120,TRUE,TRUE,voice|drum
+nootka049,49,119,1416,Charles Swan,male,Makah,,92,92,92,TRUE,TRUE,voice|drum
+nootka050,50,121,1395,Mrs. Helen Irving,female,Makah,,108,112,mixed,TRUE,TRUE,voice|drum
+nootka051,51,123,1397,Mrs. Helen Irving,female,Makah,,80,,80,TRUE,TRUE,voice|drum
+nootka052,52,124,1398,Mrs. Helen Irving,female,Makah,,80,80,80,TRUE,TRUE,voice|drum
+nootka053,53,125,1403,Mrs. Helen Irving,female,Makah,,72,72,72,TRUE,TRUE,voice|drum
+nootka054,54,125,1339,Young Doctor,male,Makah,,92,,92,FALSE,FALSE,voice
+nootka055,55,126,1396,Mrs. Helen Irving,female,Makah,irregular,66,66,66,TRUE,TRUE,voice|drum
+nootka056,56,132,1499,Charles Swan,male,Vancouver Island,irregular,104,104,104,TRUE,TRUE,voice|drum
+nootka057,57,133,1413,Charles Swan,male,Makah,,88,88,88,TRUE,TRUE,voice|drum
+nootka058,58,134,1414,Charles Swan,male,Makah,,50,50,50,TRUE,TRUE,voice|drum
+nootka059,59,135,1415,Charles Swan,male,Makah,,54,54,54,TRUE,TRUE,voice|drum
+nootka060,60,138,1497,Charles Swan,male,Vancouver Island,,76,76,76,TRUE,TRUE,voice|drum
+nootka061,61,139,1418,Charles Swan,male,Makah,,92,92,92,TRUE,TRUE,voice|drum
+nootka062,62,140,1498,Charles Swan,male,Vancouver Island,,76,76,76,TRUE,TRUE,voice|drum
+nootka063,63,142,1417,Charles Swan,male,Makah,,63,,63,TRUE,TRUE,voice|drum
+nootka064,64,143,1496,Charles Swan,male,Vancouver Island,,88,,88,FALSE,FALSE,voice
+nootka065,65,145,1500,Edwin Hayte,male,Vancouver Island,,116,,116,FALSE,FALSE,voice
+nootka066,66,146,1503,Edwin Hayte,male,Nootka,,60,60,60,TRUE,TRUE,voice|drum
+nootka067,67,148,1409,Mrs. Helen Irving,female,Makah,,84,84,84,TRUE,TRUE,voice|drum
+nootka068,68,150,1477,Mrs. Annie Long Tom,female,Clayoquot,,88,,88,FALSE,FALSE,voice
+nootka069,69,151,1505,Mrs. Wilson Parker,female,Yakima,,80,,80,FALSE,FALSE,voice
+nootka070,70,152,1364,Mrs. Wilson Parker,female,Makah,,104,,104,FALSE,FALSE,voice
+nootka071,71,153,1386,James Guy,male,Makah,,112,132,mixed,TRUE,TRUE,voice|drum
+nootka072,72,154,1387,James Guy,male,Makah,,66,66,66,TRUE,TRUE,voice|drum
+nootka073,73,155,1375,Mrs. Wilson Parker,female,Makah,,80,,80,FALSE,FALSE,voice
+nootka074,74,156,1376,Mrs. Wilson Parker,female,Makah,,63,63,63,TRUE,TRUE,voice|drum
+nootka075,75,157,1459,Mrs. Sarah Guy,female,Clayoquot,,100,,100,FALSE,FALSE,voice
+nootka076,76,158,1460,Mrs. Sarah Guy,female,Clayoquot,,72,,72,FALSE,FALSE,voice
+nootka077,77,159,1408,Mrs. Helen Irving,female,Makah,,72,72,72,TRUE,TRUE,voice|drum
+nootka078,78,160,1412,Charles Swan,male,Makah,,104,138,mixed,TRUE,TRUE,voice|drum
+nootka079,79,161,1308,Young Doctor,male,Makah,,69,,69,FALSE,FALSE,voice
+nootka080,80,162,1307,Young Doctor,male,Makah,,66,,66,FALSE,FALSE,voice
+nootka081,81,163,1310,Young Doctor,male,Makah,,80,,80,FALSE,FALSE,voice
+nootka082,82,164,1311,Young Doctor,male,Makah,,80,,80,FALSE,FALSE,voice
+nootka083,83,167,1436,Mrs. Sarah Guy,female,Clayoquot,,76,,76,FALSE,FALSE,voice
+nootka084,84,168,1429,Chester Wandahart,male,Makah,,88,72,mixed,TRUE,TRUE,voice|drum
+nootka085,85,169,1471,Mrs. Annie Long Tom,female,Clayoquot,,52,,52,FALSE,FALSE,voice
+nootka086,86,169,1472,Mrs. Annie Long Tom,female,Clayoquot,,66,,66,FALSE,FALSE,voice
+nootka087,87,170,1473,Mrs. Annie Long Tom,female,Clayoquot,,76,,76,FALSE,FALSE,voice
+nootka088,88,171,1474,Mrs. Annie Long Tom,female,Clayoquot,,80,,80,FALSE,FALSE,voice
+nootka089,89,172,1466,Mrs. Annie Long Tom,female,Clayoquot,,65,56,mixed,TRUE,TRUE,voice|drum
+nootka090,90,173,1343,Young Doctor,male,Makah,,100,,100,FALSE,FALSE,voice
+nootka091,91,174,1344,Young Doctor,male,Makah,,92,,92,FALSE,FALSE,voice
+nootka092,92,175,1347,Young Doctor,male,Makah,,84,,84,FALSE,FALSE,voice
+nootka093,93,176,1305,Young Doctor,male,Makah,,93,,93,FALSE,FALSE,voice
+nootka094,94,177,1428,Chester Wandahart,male,Makah,,96,96,96,TRUE,TRUE,voice|drum
+nootka095,95,178,1306,Young Doctor,male,Makah,,60,,60,FALSE,FALSE,voice
+nootka096,96,179,1304,Young Doctor,male,Makah,,86,86,86,TRUE,TRUE,voice|drum
+nootka097,97,180,1476,Mrs. Annie Long Tom,female,Clayoquot,,63,,63,FALSE,FALSE,voice
+nootka098,98,185,1407,Mrs. Helen Irving,female,Makah,irregular,69,126,mixed,TRUE,TRUE,voice|drum
+nootka099,99,186,1314,Young Doctor,male,Makah,,50,,50,FALSE,FALSE,voice
+nootka100,100,187,1431,James Guy,male,Makah,irregular,92,,92,FALSE,FALSE,voice
+nootka101,101,188,1313,Young Doctor,male,Makah,,60,,60,FALSE,FALSE,voice
+nootka102,102,189,1312,Young Doctor,male,Makah,,84,84,84,TRUE,TRUE,voice|drum
+nootka103,103,190,1350,Young Doctor,male,Makah,,72,,72,FALSE,FALSE,voice
+nootka104,104,191,1388,James Guy,male,Makah,irregular,96,,96,FALSE,FALSE,voice
+nootka105,105,192,1389,James Guy,male,Makah,,92,,92,FALSE,FALSE,voice
+nootka106,106,193,1443,Mrs. Sarah Guy,female,Clayoquot,irregular,88,,88,FALSE,FALSE,voice
+nootka107,107,193,1444,Mrs. Sarah Guy,female,Clayoquot,irregular,144,,144,FALSE,FALSE,voice
+nootka108,108,194,1445,Mrs. Sarah Guy,female,Clayoquot,,96,,96,FALSE,FALSE,voice
+nootka109,109,196,1300,Young Doctor,male,Makah,,72,,72,FALSE,FALSE,voice
+nootka110,110,198,1301,Young Doctor,male,Makah,,72,,72,FALSE,FALSE,voice
+nootka111,111,199,1302,Young Doctor,male,Makah,,66,,66,FALSE,FALSE,voice
+nootka112,112,200,1392,James Guy,male,Makah,,69,,69,FALSE,FALSE,voice
+nootka113,113,201,1393,James Guy,male,Makah,,84,,84,FALSE,FALSE,voice
+nootka114,114,203,1394,James Guy,male,Makah,,76,,76,FALSE,FALSE,voice
+nootka115,115,217,1464,Mrs. Annie Long Tom,female,Clayoquot,,52,,52,FALSE,FALSE,voice
+nootka116,116,218,1405,Mrs. Helen Irving,female,Makah,,96,96,96,TRUE,TRUE,voice|drum
+nootka117,117,219,1470,Mrs. Annie Long Tom,female,Clayoquot,,42,,42,FALSE,FALSE,voice
+nootka118,118,220,1462,Mrs. Annie Long Tom,female,Clayoquot,,69,,69,FALSE,FALSE,voice
+nootka119,119,221,1353,Mrs. Wilson Parker,female,Makah,irregular,66,,66,FALSE,FALSE,voice
+nootka120,120,222,1356,Mrs. Wilson Parker,female,Makah,,63,,63,FALSE,FALSE,voice
+nootka121,121,223,1404,Mrs. Helen Irving,female,Makah,,76,,76,FALSE,FALSE,voice
+nootka122,122,224,1406,Mrs. Helen Irving,female,Makah,,69,69,69,TRUE,TRUE,voice|drum
+nootka123,123,225,1463,Mrs. Annie Long Tom,female,Clayoquot,,52,,52,FALSE,FALSE,voice
+nootka124,124,226,1349,Young Doctor,male,Makah,irregular,69,,69,FALSE,FALSE,voice
+nootka125,125,227,1469,Mrs. Annie Long Tom,female,Clayoquot,,56,,56,FALSE,FALSE,voice
+nootka126,126,227,1354,Mrs. Wilson Parker,female,Makah,irregular,96,,96,FALSE,FALSE,voice
+nootka127,127,228,1374,Mrs. Wilson Parker,female,Makah,,96,,96,FALSE,FALSE,voice
+nootka128,128,229,1355,Mrs. Wilson Parker,female,Makah,,60,,60,FALSE,FALSE,voice
+nootka129,129,239,1369,Mrs. Wilson Parker,female,Makah,,76,,76,FALSE,FALSE,voice
+nootka131,131,231,1371,Mrs. Wilson Parker,female,Makah,irregular,54,,54,FALSE,FALSE,voice
+nootka204,204,335,1491,Mrs. Gilbert Holden,female,Quileute,,84,132,mixed,TRUE,TRUE,voice|drum

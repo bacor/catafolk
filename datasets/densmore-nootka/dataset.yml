@@ -1,0 +1,122 @@
+dataset_id: densmore-nootka
+title: Nuu-chah-nulth music
+dataset_url: https://github.com/shanahdt/densmore/tree/master/Densmore/nootka
+authors: 
+  - name: Frances Densmore
+    role: author
+  - name: Daniel Shanahan
+    role: encoder
+    url: https://music.osu.edu/people/shanahan.37
+  - name: Eva Shanahan
+    role: encoder
+contributors:
+  - name: Bas Cornelissen
+    role: additional metadata
+    url: https://bascornelissen.nl
+tags: [symbolic]
+formats: [kern] 
+songs: 
+licence_abbr: unknown
+description: >
+  A collection of folksongs from several peoples.
+  The songs were collected by Frances Densmore in 1923 and 1926 and published 
+  in her 1949 *Nootka and Quileute Music*. Digital encoding by Daniel and Eva Shanahan.
+issues:
+  - title: Copyright?
+    description: There is no copyright/license.
+  - title: Ignored meta fields
+    description: >
+      The following fields are currently ignored: `LING_GROUP` (the language family, it seems)
+      `LANG` (mostly value `'Tone'`, probably indicating it is a tone language). `REG` (we use
+      the location information from `additional-metadata.csv`), and `SUPERFUNCTION` (the genre
+      or `'tribename'`)
+  - title: songs missing
+    description: >
+      Not all songs seem to have been encoded: Densmore lists 210 songs, of which 133 have
+      been encoded.
+show_columns:
+  - location
+
+sources:
+  - name: file
+    type: file
+    file_pattern: data/*.krn
+    exclude: ['No_49_Wand_Dance_Song_-_with_2nd_rendition_drums.krn']
+    id_transformations:
+    - operation: extract_groups
+      inputs: [OTL]
+      outputs: [source_song_num]
+      params:
+        pattern: No_+(\d+)
+        groups: [1]
+    - [format, source_song_num, new_id, {pattern: "nootka{:0>3}"}]
+  - name: meta
+    type: csv
+    path: additional-metadata.csv
+    id_field: id
+    
+transformations:
+
+  # Default Catafolk fields
+  - rename: [file.cf_checksum, file_checksum]
+  - rename: [file.cf_path, file_path]
+  - rename: [file.cf_format, file_format]
+
+  # # Constants
+  - constant: [dataset_id, densmore-nootka]
+  - constant: [publication_key, densmore1939nootka]
+  - constant: [encoders, Daniel Shanahan and Eva Shanahan]
+  - constant: [encoding_date, "2014"]
+  - constant: [copyright, Copyright 2014 Daniel and Eva Shanahan]
+
+  # # Flags
+  - constant: [file_has_music, true]
+  - constant: [file_has_lyrics, false]
+  - constant: [file_has_license, false]
+  
+  # See foreword
+  - constant: [collection_date_earliest, 1923]
+  - constant: [collection_date_latest, 1926]
+  - constant: [collectors, 'Frances Densmore']
+
+  # # Additional metadata
+  - rename: [meta.song_num, song_num]
+  - rename: [meta.page_num, page_num]
+  - rename: [meta.catalogue_num, catalogue_num]
+  - rename: [meta.performer, performers]
+  - rename: [meta.culture, culture]
+  - rename: [meta.tonality, tonality]
+  - rename: [meta.bpm, bpm]
+  - rename: [meta.instrument_use, instrument_use]
+  - rename: [meta.percussion_use, percussion_use]
+  - rename: [meta.instrumentation, instrumentation]
+  
+  # # Preview links from Hathi Trust (page number + offset of 12 pages)
+  - operations: [to_int, add, format]
+    inputs: [page_num]
+    outputs: [publication_preview_url]
+    params:
+      - {}
+      - value: 42
+      - pattern: https://babel.hathitrust.org/cgi/pt?id=mdp.39015025347033&seq={}
+  
+  # Link to Kern file on GitHub
+  # - format: 
+  #   - file.cf_name
+  #   - url
+  #   - pattern: https://github.com/shanahdt/densmore/raw/master/Densmore/acoma/{}.krn
+  
+  # Extract title and song number from the file title
+  # No__7_A_Whale_Returns.krn
+  - operation: extract_groups
+    inputs: [file.OTL]
+    outputs: [source_song_num, title_underscore]
+    params:
+      pattern: No_+(\d+)_([^\.]+).krn
+      groups: [1, 2]
+      
+  # Remove underscores from title
+  - replace:
+    - title_underscore
+    - title
+    - { old: _, new: " "}
