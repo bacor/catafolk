@@ -9,6 +9,8 @@ import logging
 
 from .source import *
 
+# TODO test for duplicate keys and raise error if this 
+
 class Index():
     def __init__(self, path, fields=[], transformer=None):
         self.path = path

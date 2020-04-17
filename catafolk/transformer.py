@@ -52,6 +52,10 @@ Or in a YAML file, two variants::
 # Author: Bas Cornelissen
 # Copyright © 2020 Bas Cornelissen
 # License: 
+#
+# TODO perhaps check that transformations 
+# do not any non-supported fields?
+#
 import re
 import json
 from graphkit import operation as create_operation
