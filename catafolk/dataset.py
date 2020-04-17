@@ -135,11 +135,15 @@ class Dataset(object):
                     kwargs['file_pattern'] = options.get('file_pattern')
                     if 'file_options' in options:
                         kwargs['file_options'] = options['file_options']
+                    if 'exclude' in options:
+                        kwargs['exclude'] = options['exclude']
                     source = FileSource(**kwargs)
                     self.index.register_sources(source)
 
                 elif options['type'] == 'csv':
                     kwargs['id_field'] = options.get('id_field')
+                    if 'options' in options:
+                        kwargs['options'] = options['options']
                     path = join(self.dir, options['path'])
                     source = CSVSource(path, **kwargs)
                     self.index.register_sources(source)
