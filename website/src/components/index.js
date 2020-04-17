@@ -33,6 +33,9 @@ import {
 
 import { IndexTable, IndexPagination } from "../components/index-table";
 
+// TODO the index element is essentially a fancy table; perhaps 
+// make it a standalone thing?
+
 // Cells
 
 function ChecksumCell({ cell }) {

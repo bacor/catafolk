@@ -350,7 +350,7 @@ export const query = graphql`
         description
       }
     }
-    index: allSong(filter: {dataset_id: {eq: $dataset_id}}) {
+    index: allIndexCsv(filter: {dataset_id: {eq: $dataset_id}}) {
       songs: nodes {
         id
         checksum

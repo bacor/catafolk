@@ -27,6 +27,7 @@ export default ({ children, pageName }) => {
             <Nav className="ml-auto">
               <Link to="/datasets/" className="nav-link" activeClassName="active">Datasets</Link>
               <Link to="/sources/" className="nav-link" activeClassName="active">Sources</Link>
+              <Link to="/about/" className="nav-link" activeClassName="active">About</Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -57,7 +58,7 @@ export default ({ children, pageName }) => {
                   <Link to="/datasets/" className="nav-link d-inline-block pl-0 pl-md-3">Datasets</Link>
                 </li>
                 <li className="nav-item d-inline d-md-block">
-                  <Link to="/contributing/" className="nav-link d-inline-block pl-0 pl-md-3">Contributing</Link>
+                  <Link to="/about/" className="nav-link d-inline-block pl-0 pl-md-3">About</Link>
                 </li>
                 <li className="nav-item d-inline d-md-block">
                   <Link to="/sources/" className="nav-link d-inline-block pl-0 pl-md-3">Sources</Link>

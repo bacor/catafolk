@@ -19,16 +19,18 @@ module.exports = {
       options: {
         name: `index`,
         path: `${__dirname}/../datasets/`,
+        // You can use anymatch https://github.com/micromatch/anymatch
         ignore: ['**/data/*', '**/config.json', '**/additional-metadata.csv']
       }
     },
-    {
-      resolve: `gatsby-transformer-csv`,
-      options: {
-        name: 'index',
-        typeName: 'Song'
-      }
-    },
+    `gatsby-transformer-csv`,
+    // {
+    //   resolve: `gatsby-transformer-csv`,
+    //   options: {
+    //     name: 'index',
+    //     typeName: 'Song'
+    //   }
+    // },
     {
       resolve: 'gatsby-transformer-yaml',
       options: {
@@ -36,7 +38,6 @@ module.exports = {
       }
     },
     'gatsby-transformer-remark',
-
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -49,6 +50,15 @@ module.exports = {
       options: {
         name: `bibliography`,
         extensions: ['bib']
+      }
+    },
+    // Load schema
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `schema`,
+        path: `${__dirname}/../catafolk/`,
+        ignore: [`${__dirname}/../catafolk/!(schema.csv)`]
       }
     }
   ]
