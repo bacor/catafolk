@@ -1,0 +1,59 @@
+field,group,description,required,dtype,comments
+publication_key,publication,bibtex key of the publication,no,string,"If a publication_key is known, the publication_title, publication_authors, publication_date, publication_type can be left empty."
+publication_title,publication,publication from which the song was encoded,no,string,
+publication_authors,publication,authors of the original publication,no,string-list,
+publication_date,publication,date of publication,no,date,"Usually this is just the year of publication, but see `collection_date` for details of the date format. "
+page_num,publication,page number in the publication,no,int,
+song_num,publication,song number in the publication,no,int/string,
+publication_type,publication,type of publication,no,string,"The type of source: 'book', or 'CD', etc."
+publication_preview_url,publication,link to a preview of the source,no,url,"This is typically a link to a scan of the book, ideally even the right page number."
+catalogue_num,publication,catalogue number,no,string,
+genre,piece,the genre of the piece,no,string,
+instrumentation,piece,"the instrumentation of ",no,string,
+tune_family_id,piece,a tune family id,no,int/string,"If tune families are annotated, their ids are used. Alternatively, many folksong books contain multiple variants of the same melody, usually numbered as 1a, 1b, 1c, etc. These are considered tune families."
+ambitus,music,the ambitus of the song,no,int,
+meter,music,"the meter of the song, e.g. 2/4",no,string,
+metric_classification,music,"metric classification (duple, triple, etc)",no,string,
+scales,music,scales used in the piece,no,string,
+tonality,music,musical tonality of the piece,no,string,"Tonality in the broad sense of the tonal center. For Western pieces, this is the key."
+title,lyrics,title of the song in the original language,no,string,
+title_english,lyrics,English translation of the title,no,string,This can be left empty if the original title is in English
+language,lyrics,the language of the lyrics,no,string,
+language_glottolog,lyrics,Gottolog id of the language,no,string,
+lyrics,lyrics,lyrics of the song,no,string,The full lyrics of the song
+location,location,location of the song,no,string,"This is roughly the place where the song originated. Most of the time, the place of collection is used as a proxy. However, it could be that a song was recorded elsewhere, and in that case the, say, birthplace of the performer might be used as the location instead."
+latitude,location,geographic latitude coordinate of the location,no,float,
+longitude,location,geographic longitude coordinate of the location,no,float,
+other_fields,general,a json string with any other metadata,no,JSON,
+description,general,a description or analysis of the song,no,string,
+comments,general,"comments, mostly by the encoder",no,string,
+warnings,general,"warnings, e.g. about encoder assumptions",no,string,Warnings are comments so important that anyone working with the data should be aware of them.
+is_geocoded,flags,whether the coordinates were automatically determined,no,boolean,This is required whenever location information is present.
+voice_use,flags,whether the piece uses the voice,no,boolean,
+instrument_use,flags,whether the piece uses (non-vocal) instruments,no,boolean,
+percussion_use,flags,whether the piece uses percussive instruments,no,boolean,Can only be true if instrument_use is true
+file_url,file,url to an online version of the file,no,url,
+file_preview_url,file,an url to an online preview,no,url,
+encoders,encoding,name of person who digitized the song,no,string-list,
+encoding_date,encoding,date at which the song was digitized,no,date,
+contributors,encoding,names of contributors,no,string-list,"These are usually people who contribute to a file after it has been encoded, by e.g. providing further metadata, converting the file, etc."
+copyright,encoding,copyright of the file,no,string,
+license_id,encoding,identifier of the license,no,string,"These are standard abbreviations for common licences, like CC-BY-SA 4.0; see licences.yml"
+version,encoding,version of the song,no,string,
+culture,culture,culture or nationality of the original performer,no,string,
+culture_dplace_id,culture,D-Place identifier of the culture/society,no,string,
+culture_hraf_id,culture,HRAF identifier of the culture,no,string,
+collectors,collection,names of the collectors,no,string-list,
+collection_date,collection,date when the song was collected,no,date,"Date in a ISO8601-like format: 2020-02-16. However, often the month and day will be unknown, so these are also acceptable: `1824` for somewhere in 1824 and `1957-02` for somewhere in February 1957. Note that you cannot specify the day, unless you have specified the month and similarly, a month requires a year."
+collection_date_earliest,collection,earliest date of collection,no,date,"When the collection date is uncertain, this field specifies a a *lower* bound on the collection date. See the `date` field for details on the format"
+collection_date_latest,collection,latest date of collection,no,date,"When the collection date is uncertain, this field specifies a an *upper* bound on the collection date. See the `date` field for details on the format"
+performers,collection,names of the performers,no,string-list,
+performer_gender,collection,gender of the performer,no,string,
+id,general,unique identifier of the entry,yes,string,"If the dataset uses some form of id, for example in the filename, this is generally used. Otherwise an appropriate id is generated, usually something like`pueblo04`"
+file_has_lyrics,flags,whether the file contains the lyrics,no,boolean,"Note that this concerns the file, not the piece itself. "
+file_has_music,flags,whether the file contains notes,no,boolean,
+file_has_licence,flags,whether the file has a licences,no,boolean,
+file_path,file,path to the file relative to the dataset directory,no,string,
+file_format,file,the file format,no,string,
+file_checksum,file,a md5 checksum of the file,no,hex,
+bpm,piece,the tempo of the piece in bpm (if applicable),,,"Usually a number, but can be `mixed` if there are multiple tempos used simultaneously, or `free` if there is a free tempo with no clear pulse."
