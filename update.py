@@ -22,7 +22,9 @@ if __name__ == '__main__':
         # 'sagrillo-lorraine',
         # 'sagrillo-luxembourg',
         # 'sagrillo-scotland',
-        'densmore-acoma'
+        'densmore-pueblo',
+        'densmore-nootka',
+        'finnish-folk-tunes'
     ]
     for dataset_id in datasets:
         print(dataset_id)
