@@ -1,0 +1,118 @@
+dataset_id: finnish-folk-tunes
+title: Digital Archive of Finnish Folk Tunes
+dataset_url: http://esavelmat.jyu.fi/index_en.html
+authors: 
+  - name: Tuomas Eerola
+    role: encoder
+  - name: Petri Toiviainen
+    role: encoder
+tags: [symbolic]
+formats: [MIDI (MatLab)] 
+files: 8613
+licence_abbr: unknown
+description: >
+  A large collection of over 8000 Finnish folk tunes collected mostly in the 19th century
+  and published in the series *Finnish Folk Tunes (Suomen Kansan Sävelmiä)* edited by
+  Ilmari Krohn. The songs were encoded by Tuomas Eerola and petri Toivainen.
+show_columns:
+  - collector
+  - location
+  - meter
+  - key
+
+issues:
+  - title: More metadata available?
+    description: >
+      looking at the online [preview](http://esavelmat.jyu.fi/savelma.php?numero=kt1_0153&uil=en)
+      of some of the songs, it seems there is more metadata available: the title, 
+      a precise location broken down in parish/village/province/county, the lyrics,
+      booknotes and comments. Perhaps contact the authors for this?
+  - title: Source translations
+    description: >
+      BC: my Finish is ehm... rusty. Hopefully I found the right translations of the
+      publication titles in the bibliography.
+  - title: Cadence field
+    description: >
+      We are currently ignoring the `cadence` field. This also seems to contain different types
+      of data. In the KT subcollection you find tempo indications such as `Andantino`, `Andante`; 
+      in the HS subcollection things like `Arkkivirsi`, `Siionin vk: 129`, etc. In LS, what seems 
+      like cadence types like `AIVb4, A IV a 2` etc.
+      
+
+sources:
+  - name: data
+    type: csv
+    path: data/finfolktunes_data_corrected.txt
+    id_field: filename
+    options:
+      sep: "\t"
+      encoding: ISO-8859-1
+      # Rename the columns, because the name 'key' appears twice...
+      header: 0
+      names: 
+        - number 
+        - collection
+        - filename
+        - type
+        - cadence
+        - page
+        - transcriber
+        - year
+        - key
+        - time-signature
+        - location
+    
+transformations:
+
+  # Constants
+  - constant: [dataset_id, finnish-folk-tunes]
+  - constant: [encoders, Tuomas Eerola and Petri Toivainen]
+  - constant: [file_format, 'MIDI']
+  - constant: [encoding_date, 2004]
+  - constant: [copyright, copyright © Tuomas Eerola & Petri Toiviainen]
+
+  # Flags
+  - constant: [file_has_music, true]
+  - constant: [file_has_lyrics, false]
+  - constant: [file_has_license, false]
+
+#   # # Additional metadata
+  - rename: [data.page, source_page_num]
+  - rename: [data.transcriber, collector]
+  - rename: [data.type, genre]
+  - rename: [data.year, collection_date]
+  - rename: [data.key, key]
+  - rename: [data.time-signature, meter]
+  - rename: [data.location, location]
+
+  # Link to preview on FFT website
+  - format: 
+    - data.filename
+    - preview_url
+    - pattern: http://esavelmat.jyu.fi/savelma.php?numero={}&uil=en
+  
+  # Extract song number from the filename. Hopefully this make sense...
+  # See https://regex101.com/r/CcHp3w/1
+  - operation: extract_groups
+    inputs: [data.filename]
+    outputs: [source_song_num]
+    params:
+      pattern: \w+_0*(\w+)
+      groups: [1]
+      
+  # Map collection keys to citation keys
+  - operation: map_values
+    inputs: [data.collection]
+    outputs: [source_key]
+    params:
+      mapping:
+        HS1: krohn1898HS1
+        LS1: krohn1904LS1
+        LS2: krohn1908LS2
+        LS3: krohn1932LS3
+        LS4: krohn1933LS4
+        KT1: krohn1893KT1
+        RS1: launis1910RS1
+        RS2: launis1930RS2
+        KJS: vaisanen1928KJS
+        Kantelesävelmiä: vaisanen1928KJS
