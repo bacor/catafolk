@@ -1,9 +1,10 @@
 import React from "react"
 
 function Name({url, children}) {
+  const hasUrl = (url !== undefined) & (url !== null)
   return (
     <>
-    {url === undefined
+    {hasUrl
       ? <a href={url}>{children}</a>
       : <span>{children}</span> 
     }
@@ -12,10 +13,11 @@ function Name({url, children}) {
 }
 
 function Person({ name, url, role, ...options}) {
+  const hasRole = (role !== undefined) & (role !== null)
   return (
     <span {...options}>
       <Name url={url}>{name}</Name>
-      { role !== undefined ? <span className="text-muted"> ({role})</span> : null }
+      { hasRole ? <span className="text-muted"> ({role})</span> : null }
     </span>
   )
 }
