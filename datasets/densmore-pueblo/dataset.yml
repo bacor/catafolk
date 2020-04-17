@@ -6,6 +6,7 @@ authors:
     role: author
   - name: Daniel Shanahan
     role: encoder
+    url: https://music.osu.edu/people/shanahan.37
   - name: Eva Shanahan
     role: encoder
 contributors:
@@ -56,7 +57,7 @@ transformations:
   - rename: [file.cf_path, path]
   - rename: [file.cf_format, format]
 
-  # Some constants
+  # Constants
   - constant: [dataset_id, densmore-pueblo]
   - constant: [has_music, true]
   - constant: [has_lyrics, false]
@@ -67,7 +68,7 @@ transformations:
 
   # Additional metadata
   - rename: [additional_metadata.song_num, source_song_num]
-  - rename: [additional_metadata.page_number, source_page_num]
+  - rename: [additional_metadata.page_num, source_page_num]
   - rename: [additional_metadata.catalogue_num, cataologue_number]
   - rename: [additional_metadata.performer, performer]
   - rename: [additional_metadata.collector, collector]

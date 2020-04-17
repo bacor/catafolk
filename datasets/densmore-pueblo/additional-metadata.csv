@@ -1,4 +1,4 @@
-id,song_num,page_number,catalogue_num,performer,collector,collection_date,culture,location,longitude,latitude,genre
+id,song_num,page_num,catalogue_num,performer,collector,collection_date,culture,location,longitude,latitude,genre
 pueblo01,1,5,1888,Philip Sanches,Anthony Wilding and M. W. Stirling,1928,Acoma,"Acoma Pueblo, New Mexico, U.S.A.",-107.581944,34.896389,
 pueblo02,2,6,1889,Philip Sanches,Anthony Wilding and M. W. Stirling,1928,Acoma,"Acoma Pueblo, New Mexico, U.S.A.",-107.581944,34.896389,
 pueblo03,3,6,1890,Philip Sanches,Anthony Wilding and M. W. Stirling,1928,Acoma,"Acoma Pueblo, New Mexico, U.S.A.",-107.581944,34.896389,
