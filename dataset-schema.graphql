@@ -1,0 +1,43 @@
+type dataset implements Node @dontInfer {
+    dataset_id: String!
+    status: String
+    title: String
+    description: String
+    url: String
+    authors: [Person]
+    contributors: [Person]
+    tags: [String]
+    formats: [String]
+    num_entries: Int
+    license: License
+    copyright: String
+    credits: String
+    citation_keys: [String]
+    publication_keys: [String]
+    show_columns: [String]
+    hide_columns: [String]
+    version: String
+    issues: [Issue]
+    # Ignore Catafolk options
+    # sources: JSON
+    # transformations: JSON
+}
+
+type Person {
+    name: String
+    role: String
+    url: String
+}
+
+type Issue {
+    title: String
+    description: String
+}
+
+type License {
+    unknown: Boolean
+    abbreviation: String
+    name: String
+    text: String
+    url: String
+}
