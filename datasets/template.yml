@@ -1,0 +1,188 @@
+# —————————————————————————————————————————————————————————————————
+# Dataset details
+# —————————————————————————————————————————————————————————————————
+
+# Unique id of the dataset
+dataset_id: 
+
+# Publication status (draft/beta/alpha/published)
+status:
+
+# Title of the dataset
+title: 
+
+# A URL to the datasets webpage
+url: 
+
+# A full text description
+description: 
+
+# Authors and contributors
+authors: 
+  - name: 
+    role: 
+    url:
+contributors:
+  - name: 
+    role: 
+    url: 
+
+# List of tags
+tags: []
+formats: [] 
+num_entries: 82
+
+# The license, provide the name, and possibly even full text. 
+# If the license is unknown, make sure license.unknown = true
+license: 
+  # unknown: true
+  name: 
+  abbreviation:
+  url:
+  text:
+
+# Copyright message for the dataset
+copyright:
+
+# How to give credits when using the dataset (text message)
+credits:
+
+# Citation keys for the original publications and the dataset.
+# Typically, the former are older folk song books, and the latter
+# more recent papers
+publication_citation_keys: []
+dataset_citation_keys: []
+
+# Date on which the dataset which is analyzed by catafolk was 
+# downloaded
+dataset_retrieval_date: 2020-04-18
+
+# The version of the dataset. If the dataset has no version, 
+# plese ensure version = unknown
+version: 
+
+# Columns to show/hide on the catafolk website. This overrides 
+# default options
+show_columns: []
+hide_columns: []
+
+# Possible issues with the dataset. These are shown on the webpage,
+# so people using the dataset are aware of them.
+issues:
+  - title: 
+    description: 
+  
+# —————————————————————————————————————————————————————————————————
+# Catafolk options
+# —————————————————————————————————————————————————————————————————
+
+sources:
+  - name: file
+    type: file
+    file_pattern: data/*.krn
+    # id_transformations: []
+  - name: meta
+    type: csv
+    path: additional-metadata.csv
+    id_field: id
+    
+transformations:
+  
+  # General 
+  # —————————————————————————————————————————————————————————————————
+  #- constant: [dataset_id, ]
+  # genre
+  # other_fields
+  # comments
+  # warnings
+  # description
+  
+
+  # File 
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.cf_path, file_path]
+  - rename: [file.cf_format, file_format]
+  - rename: [file.cf_checksum, file_checksum]
+  #- constant: [file_has_music, true]
+  #- constant: [file_has_lyrics, false]
+  # file_url
+  # file_preview_url
+
+
+  # Collection 
+  # —————————————————————————————————————————————————————————————————
+  # collectors
+  # collection_date 
+  # collection_date_earliest
+  # collection_date_latest
+
+
+  # Culture
+  # —————————————————————————————————————————————————————————————————
+  # culture
+  # culture_dplace_id
+  # culture_hraf_id
+
+
+  # Encoding
+  # —————————————————————————————————————————————————————————————————
+  # encoders
+  # encoding_date
+  # copyright
+  # contributors
+  # license_id
+  # version
+
+
+  # Location
+  # —————————————————————————————————————————————————————————————————
+  # location
+  # latitude
+  # longitude
+  #- constant: [auto_geocoded, false]
+
+  # Lyrics
+  # —————————————————————————————————————————————————————————————————
+  # title
+  # title_translation
+  # language
+  # language_glottolog
+  # lyrics
+
+
+  # Music
+  # —————————————————————————————————————————————————————————————————
+  # tonality
+  # scale
+  # ambitus
+  # tempo
+  # meter
+  # metric_classification
+  # tune_family_id
+
+
+  # Performance
+  # —————————————————————————————————————————————————————————————————
+  # performers
+  # performer_genders
+  # instrumentation
+  # instrument_use
+  # percussion_use
+  # voice_use
+  
+  
+  # Publication
+  # —————————————————————————————————————————————————————————————————
+  # publication_key
+  # publication_song_num
+  # publication_page_num
+  # publication_preview_url
+  # catalogue_number
+  # publication_type
+  # publication_authors
+  # publication_date
+
+  
+  # Mixed
+  # —————————————————————————————————————————————————————————————————
+  
