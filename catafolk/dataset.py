@@ -20,18 +20,15 @@ CUR_DIR = os.path.dirname(__file__)
 ROOT_DIR = os.path.abspath(join(CUR_DIR, os.path.pardir))
 DATASETS_DIR = join(ROOT_DIR, 'datasets')
 
-_FIELDS = ['dataset_id', 
-           'id', 'title', 'title_eng', 'location', 'latitude', 'longitude', 
-           'culture', 
-           'collection_date', 'collector', 'performer',
-           'source', 'source_key', 'source_author', 'source_title', 'source_publisher', 'source_address',
-           'source_page_num', 'source_song_num', 'source_date', 'catalogue_number', 'source_url',
-           'encoder',
-           'encoding_date', 'copyright', 'license_abbr', 'version', 'meter',
-           'metric_classification',
-           'modality', 'key', 'ambitus', 'has_lyrics', 'has_music', 
-           'genre', 'language', 'language_iso', 
-           'url', 'preview_url', 'path', 'format', 'checksum']
+# Load fields from the schema file
+schema_path = os.path.join(ROOT_DIR, 'index-schema.csv')
+if os.path.exists(schema_path):
+    schema = pd.read_csv(schema_path)
+    schema.sort_values('order', ascending=True, inplace=True)
+    _FIELDS = schema['field'].tolist()
+else:
+    warnings.warn(f'Schema file does not exist: {schema_path}')
+    _FIELDS = ['id', 'dataset_id']
 
 # List of all included datasets
 _DATASET_IDS = [

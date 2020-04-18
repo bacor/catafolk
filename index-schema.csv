@@ -1,59 +1,59 @@
-field,group,description,required,dtype,graphql_type,details
-collectors,collection,names of the collectors,no,string-list,String,
-collection_date,collection,date when the song was collected,no,date,String,"Date in a ISO8601-like format: 2020-02-16. However, often the month and day will be unknown, so these are also acceptable: `1824` for somewhere in 1824 and `1957-02` for somewhere in February 1957. Note that you cannot specify the day, unless you have specified the month and similarly, a month requires a year."
-collection_date_earliest,collection,earliest date of collection,no,date,String,"When the collection date is uncertain, this field specifies a a *lower* bound on the collection date. See the `date` field for details on the format"
-collection_date_latest,collection,latest date of collection,no,date,String,"When the collection date is uncertain, this field specifies a an *upper* bound on the collection date. See the `date` field for details on the format"
-culture,culture,culture or nationality of the original performer,no,string,String,
-culture_dplace_id,culture,D-Place identifier of the culture/society,no,string,String,
-culture_hraf_id,culture,HRAF identifier of the culture,no,string,String,
-encoders,encoding,name of person who digitized the song,no,string-list,String,
-encoding_date,encoding,date at which the song was digitized,no,date,String,
-contributors,encoding,names of contributors,no,string-list,String,"These are usually people who contribute to a file after it has been encoded, by e.g. providing further metadata, converting the file, etc."
-copyright,encoding,copyright of the file,no,string,String,
-license_id,encoding,identifier of the license,no,string,String,"These are standard abbreviations for common licences, like CC-BY-SA 4.0; see licences.yml"
-version,encoding,version of the song,no,string,String,
-file_url,file,url to an online version of the file,no,url,String,
-file_preview_url,file,an url to an online preview,no,url,String,
-file_has_lyrics,file,whether the file contains the lyrics,no,boolean,Boolean,"Note that this concerns the file, not the piece itself."
-file_has_music,file,whether the file contains notes,no,boolean,Boolean,
-file_has_licence,file,whether the file has a licences,no,boolean,Boolean,
-file_path,file,path to the file relative to the dataset directory,no,string,String,
-file_format,file,the file format,no,string,String,
-file_checksum,file,a md5 checksum of the file,no,hex,String,
-genre,general,the genre of the piece,no,string,String,The genres used are specific to a dataset.
-other_fields,general,a JSON string with any other metadata,no,JSON,JSON,
-description,general,a description or analysis of the song,no,string,String,
-comments,general,"comments, mostly by the encoder",no,string,String,
-warnings,general,"warnings, e.g. about encoder assumptions",no,string,String,Warnings are comments so important that anyone working with the data should be aware of them.
-id,general,unique identifier of the entry,yes,string,String,"If the dataset uses some form of id, for example in the filename, this is generally used. Otherwise an appropriate id is generated, usually something like`pueblo04`"
-location,location,location of the song,no,string,String,"This is roughly the place where the song originated. Most of the time, the place of collection is used as a proxy. However, it could be that a song was recorded elsewhere, and in that case the, say, birthplace of the performer might be used as the location instead."
-latitude,location,geographic latitude coordinate of the location,no,float,Float,
-longitude,location,geographic longitude coordinate of the location,no,float,Float,
-auto_geocoded,location,whether the coordinates were automatically determined,no,boolean,Boolean,This is required whenever location information is present.
-title,lyrics,title of the song,no,string,String,
-title_translation,lyrics,translation of the title,no,string,String,"This is used if two versions of the title are given: in the original language, and a translation. The translation will typically be English."
-language,lyrics,the language of the lyrics,no,string,String,"If no lyrics are given, the language of the performer can be used."
-language_glottolog,lyrics,Gottolog id of the language,no,string,String,
-lyrics,lyrics,lyrics of the song,no,string,String,The full lyrics of the song
-tune_family_id,music,a tune family id,no,int/string,String,"If tune families are annotated, their ids are used. Alternatively, many folksong books contain multiple variants of the same melody, usually numbered as 1a, 1b, 1c, etc. These are considered tune families."
-ambitus,music,the ambitus of the song,no,int,Int,
-meter,music,"the meter of the song, e.g. 2/4",no,string,String,
-metric_classification,music,"metric classification (duple, triple, etc)",no,string,String,
-scale,music,scale used in the piece,no,string,String,
-tonality,music,tonality of the piece,no,string,String,"Tonality in the broad sense. For Western pieces, this is usually the key."
-tempo,music,the tempo of the piece,no,string/int,String,The tempo of the song can be specified by a string (e.g. largo) or an integer representing the number of beats per second.
-instrumentation,performance,the instrumentation,no,string-list,String,
-voice_use,performance,whether the piece uses the voice,no,boolean,Boolean,
-instrument_use,performance,whether the piece uses (non-vocal) instruments,no,boolean,Boolean,
-percussion_use,performance,whether the piece uses percussive instruments,no,boolean,Boolean,Can only be true if instrument_use is true
-performers,performance,names of the performers,no,string-list,String,
-performer_gender,performance,gender of the performer,no,string,String,
-publication_key,publication,bibtex key of the publication,no,string,String,"If a publication_key is known, the publication_title, publication_authors, publication_date, publication_type can be left empty."
-publication_title,publication,publication from which the song was encoded,no,string,String,
-publication_authors,publication,authors of the original publication,no,string-list,String,
-publication_date,publication,date of publication,no,date,String,"Usually this is just the year of publication, but see `collection_date` for details of the date format."
-page_num,publication,page number in the publication,no,int,Int,
-song_num,publication,song number in the publication,no,int/string,String,
-publication_type,publication,type of publication,no,string,String,"The type of source: 'book', or 'CD', etc."
-publication_preview_url,publication,link to a preview of the source,no,url,String,"This is typically a link to a scan of the book, ideally even the right page number."
-catalogue_num,publication,catalogue number,no,string,String,
+field,order,group,description,required,dtype,graphql_type,details
+id,0,general,unique identifier of the entry,yes,string,String,"If the dataset uses some form of id, for example in the filename, this is generally used. Otherwise an appropriate id is generated, usually something like`pueblo04`"
+title,1,lyrics,title of the song,no,string,String,
+title_translation,2,lyrics,translation of the title,no,string,String,"This is used if two versions of the title are given: in the original language, and a translation. The translation will typically be English."
+location,100,location,location of the song,no,string,String,"This is roughly the place where the song originated. Most of the time, the place of collection is used as a proxy. However, it could be that a song was recorded elsewhere, and in that case the, say, birthplace of the performer might be used as the location instead."
+latitude,101,location,geographic latitude coordinate of the location,no,float,Float,
+longitude,102,location,geographic longitude coordinate of the location,no,float,Float,
+auto_geocoded,103,location,whether the coordinates were automatically determined,no,boolean,Boolean,This is required whenever location information is present.
+language,104,lyrics,the language of the lyrics,no,string,String,"If no lyrics are given, the language of the performer can be used."
+language_glottolog,105,lyrics,Gottolog id of the language,no,string,String,
+culture,120,culture,culture or nationality of the original performer,no,string,String,
+culture_dplace_id,120,culture,D-Place identifier of the culture/society,no,string,String,
+culture_hraf_id,121,culture,HRAF identifier of the culture,no,string,String,
+genre,130,general,the genre of the piece,no,string,String,The genres used are specific to a dataset.
+performers,150,performance,names of the performers,no,string-list,String,
+performer_gender,151,performance,gender of the performer,no,string,String,
+instrumentation,152,performance,the instrumentation,no,string-list,String,
+instrument_use,160,performance,whether the piece uses (non-vocal) instruments,no,boolean,Boolean,
+percussion_use,161,performance,whether the piece uses percussive instruments,no,boolean,Boolean,Can only be true if instrument_use is true
+voice_use,162,performance,whether the piece uses the voice,no,boolean,Boolean,
+tonality,180,music,tonality of the piece,no,string,String,"Tonality in the broad sense. For Western pieces, this is usually the key."
+scale,181,music,scale used in the piece,no,string,String,
+ambitus,182,music,the ambitus of the song,no,int,Int,
+tempo,190,music,the tempo of the piece,no,string/int,String,The tempo of the song can be specified by a string (e.g. largo) or an integer representing the number of beats per second.
+meter,191,music,"the meter of the song, e.g. 2/4",no,string,String,
+metric_classification,192,music,"metric classification (duple, triple, etc)",no,string,String,
+collectors,200,collection,names of the collectors,no,string-list,String,
+collection_date,201,collection,date when the song was collected,no,date,String,"Date in a ISO8601-like format: 2020-02-16. However, often the month and day will be unknown, so these are also acceptable: `1824` for somewhere in 1824 and `1957-02` for somewhere in February 1957. Note that you cannot specify the day, unless you have specified the month and similarly, a month requires a year."
+collection_date_earliest,202,collection,earliest date of collection,no,date,String,"When the collection date is uncertain, this field specifies a a *lower* bound on the collection date. See the `date` field for details on the format"
+collection_date_latest,203,collection,latest date of collection,no,date,String,"When the collection date is uncertain, this field specifies a an *upper* bound on the collection date. See the `date` field for details on the format"
+publication_key,500,publication,bibtex key of the publication,no,string,String,"If a publication_key is known, the publication_title, publication_authors, publication_date, publication_type can be left empty."
+publication_type,501,publication,type of publication,no,string,String,"The type of source: 'book', or 'CD', etc."
+publication_title,502,publication,publication from which the song was encoded,no,string,String,
+publication_authors,503,publication,authors of the original publication,no,string-list,String,
+publication_date,504,publication,date of publication,no,date,String,"Usually this is just the year of publication, but see `collection_date` for details of the date format."
+page_num,505,publication,page number in the publication,no,int,Int,
+song_num,506,publication,song number in the publication,no,int/string,String,
+tune_family_id,507,music,a tune family id,no,int/string,String,"If tune families are annotated, their ids are used. Alternatively, many folksong books contain multiple variants of the same melody, usually numbered as 1a, 1b, 1c, etc. These are considered tune families."
+catalogue_num,508,publication,catalogue number,no,string,String,
+publication_preview_url,509,publication,link to a preview of the source,no,url,String,"This is typically a link to a scan of the book, ideally even the right page number."
+encoders,600,encoding,name of person who digitized the song,no,string-list,String,
+encoding_date,610,encoding,date at which the song was digitized,no,date,String,
+contributors,620,encoding,names of contributors,no,string-list,String,"These are usually people who contribute to a file after it has been encoded, by e.g. providing further metadata, converting the file, etc."
+copyright,630,encoding,copyright of the file,no,string,String,
+license_id,640,encoding,identifier of the license,no,string,String,"These are standard abbreviations for common licences, like CC-BY-SA 4.0; see licences.yml"
+file_path,1000,file,path to the file relative to the dataset directory,no,string,String,
+file_format,1001,file,the file format,no,string,String,
+version,1002,encoding,version of the song,no,string,String,
+file_checksum,1003,file,a md5 checksum of the file,no,hex,String,
+file_url,1004,file,url to an online version of the file,no,url,String,
+file_preview_url,1005,file,an url to an online preview,no,url,String,
+file_has_lyrics,1020,file,whether the file contains the lyrics,no,boolean,Boolean,"Note that this concerns the file, not the piece itself."
+file_has_music,1021,file,whether the file contains notes,no,boolean,Boolean,
+file_has_licence,1022,file,whether the file has a licences,no,boolean,Boolean,
+other_fields,2000,general,a JSON string with any other metadata,no,JSON,JSON,
+comments,2010,general,"comments, mostly by the encoder",no,string,String,
+warnings,2020,general,"warnings, e.g. about encoder assumptions",no,string,String,Warnings are comments so important that anyone working with the data should be aware of them.
+description,2030,general,a description or analysis of the song,no,string,String,
+lyrics,2040,lyrics,lyrics of the song,no,string,String,The full lyrics of the song
