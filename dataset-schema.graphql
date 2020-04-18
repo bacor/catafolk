@@ -22,6 +22,9 @@ type dataset implements Node @dontInfer {
     # Ignore Catafolk options
     # sources: JSON
     # transformations: JSON
+
+    # Required for the website to work properly
+    fields: DatasetFields
 }
 
 type Person {
@@ -41,4 +44,8 @@ type License {
     name: String
     text: String
     url: String
+}
+
+type DatasetFields {
+    slug: String
 }
