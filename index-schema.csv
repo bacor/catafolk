@@ -33,8 +33,8 @@ publication_type,501,publication,type of publication,no,string,String,"The type 
 publication_title,502,publication,publication from which the song was encoded,no,string,String,
 publication_authors,503,publication,authors of the original publication,no,string-list,String,
 publication_date,504,publication,date of publication,no,date,String,"Usually this is just the year of publication, but see `collection_date` for details of the date format."
-page_num,505,publication,page number in the publication,no,int,Int,
-song_num,506,publication,song number in the publication,no,int/string,String,
+publication_page_num,505,publication,page number in the publication,no,int,Int,
+publication_song_num,506,publication,song number in the publication,no,int/string,String,
 tune_family_id,507,music,a tune family id,no,int/string,String,"If tune families are annotated, their ids are used. Alternatively, many folksong books contain multiple variants of the same melody, usually numbered as 1a, 1b, 1c, etc. These are considered tune families."
 catalogue_num,508,publication,catalogue number,no,string,String,
 publication_preview_url,509,publication,link to a preview of the source,no,url,String,"This is typically a link to a scan of the book, ideally even the right page number."
