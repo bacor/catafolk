@@ -167,7 +167,7 @@ function Details({row}) {
                   publisher={orig.source_publisher} 
                   url={orig.source_url} />)}
             </Prop>
-            <Prop title="Catalogue number" {...opts}>{orig.catalogue_number}</Prop>
+            <Prop title="Catalogue number" {...opts}>{orig.catalogue_num}</Prop>
             <Prop title="Copyright" {...opts}>{orig.copyright}</Prop>
             <Prop title="Checksum" {...opts}>
               <code className="text-muted">{orig.checksum}</code>
