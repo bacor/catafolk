@@ -1,5 +1,12 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const fs = require('fs');
+const _ = require('lodash');
+const parse = require('csv-parse/lib/sync');
+const { createFilePath } = require(`gatsby-source-filesystem`);
+
+// Options
+const indexSchemaFn = `${__dirname}/../index-schema.csv`;
+const datasetSchemaFn = `${__dirname}/../dataset-schema.graphql`;
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
@@ -45,4 +52,26 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+}
+
+
+exports.createSchemaCustomization = ({ actions, schema }) => {
+  const { createTypes } = actions
+  // Load schema from file schema.graphql
+  const datasetSchema = fs.readFileSync(datasetSchemaFn, {encoding: 'utf-8'})
+  createTypes(datasetSchema)
+
+  // Load index sch
+  const indexSchemaCSV = fs.readFileSync(indexSchemaFn, {encoding: 'utf-8'})
+  const indexSchema = parse(indexSchemaCSV, { columns: true })
+  const fields = _.fromPairs(indexSchema.map(entry => [entry.field, entry.graphql_type]))
+  const typeDefs = [
+    schema.buildObjectType({
+      name: "IndexCsv",
+      fields: fields,
+      interfaces: ["Node"],
+      extensions: { infer: false }
+    }),
+  ]
+  createTypes(typeDefs)
 }

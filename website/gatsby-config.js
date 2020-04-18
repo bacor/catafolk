@@ -24,7 +24,7 @@ const excludedDatasets = [
   'sagrillo-lorraine',
   'sagrillo-luxembourg',
   'sagrillo-scotland',
-  // 'densmore-pueblo',
+  'densmore-pueblo',
   'densmore-nootka',
   // 'finnish-folk-tunes'
 ];
