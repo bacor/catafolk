@@ -1,7 +1,8 @@
 field,order,group,description,required,dtype,graphql_type,details
 id,0,general,unique identifier of the entry,yes,string,String,"If the dataset uses some form of id, for example in the filename, this is generally used. Otherwise an appropriate id is generated, usually something like`pueblo04`"
-title,1,lyrics,title of the song,no,string,String,
-title_translation,2,lyrics,translation of the title,no,string,String,"This is used if two versions of the title are given: in the original language, and a translation. The translation will typically be English."
+dataset_id,1,general,id of the dataset,yes,string,String,""
+title,2,lyrics,title of the song,no,string,String,
+title_translation,3,lyrics,translation of the title,no,string,String,"This is used if two versions of the title are given: in the original language, and a translation. The translation will typically be English."
 location,100,location,location of the song,no,string,String,"This is roughly the place where the song originated. Most of the time, the place of collection is used as a proxy. However, it could be that a song was recorded elsewhere, and in that case the, say, birthplace of the performer might be used as the location instead."
 latitude,101,location,geographic latitude coordinate of the location,no,float,Float,
 longitude,102,location,geographic longitude coordinate of the location,no,float,Float,
