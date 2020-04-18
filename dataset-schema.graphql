@@ -12,11 +12,12 @@ type dataset implements Node @dontInfer {
     license: License
     copyright: String
     credits: String
-    citation_keys: [String]
-    publication_keys: [String]
+    dataset_citation_keys: [String]
+    publication_citation_keys: [String]
     show_columns: [String]
     hide_columns: [String]
     version: String
+    dataset_retrieval_date: Date
     issues: [Issue]
     # Ignore Catafolk options
     # sources: JSON
