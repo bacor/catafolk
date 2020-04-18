@@ -30,27 +30,6 @@ else:
     warnings.warn(f'Schema file does not exist: {schema_path}')
     _FIELDS = ['id', 'dataset_id']
 
-# List of all included datasets
-_DATASET_IDS = [
-    'densmore-teton-sioux',
-    'densmore-pawnee',
-    'densmore-ojibway',
-    'sagrillo-ireland',
-    'sagrillo-scotland',
-    'sagrillo-lorraine',
-    'sagrillo-luxembourg',
-    'essen-china-han',
-    'essen-china-natmin',
-    'essen-china-shanxi',
-    'essen-china-xinhua',
-    'essen-deutschl-boehme',
-    'essen-deutschl-erk',
-    'essen-deutschl-altdeu1',
-    'creighton-nova-scotia',
-    'bronson-child-ballads',
-    'natural-history-of-song'
-]
-
 class Dataset(object):
 
     _default_options = {
@@ -162,9 +141,3 @@ class Dataset(object):
         hash_md5 = hashlib.md5()
         hash_md5.update(''.join(checksums).encode('utf-8'))
         return hash_md5.hexdigest()
-
-def list_datasets():
-    return _DATASET_IDS
-
-def is_dataset(dataset_id):
-    return dataset_id in _DATASET_IDS
