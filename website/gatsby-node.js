@@ -3,7 +3,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === `Dataset`) {
+  if (node.internal.type === 'dataset') {
     const slug = `datasets/${node.dataset_id}/`
     createNodeField({node, name: 'slug', value: slug})
   } 
