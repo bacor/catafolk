@@ -1,85 +1,213 @@
+# —————————————————————————————————————————————————————————————————
+# Dataset details
+# —————————————————————————————————————————————————————————————————
+
+# Unique id of the dataset
 dataset_id: creighton-nova-scotia
-analyzed: true
-title: 
-dataset_url: https://github.com/craigsapp/creighton-nova-scotia
-urls:
-  - http://kern.humdrum.org/browse?l=folk/novascotia
+
+# Publication status (draft/beta/alpha/published)
+status: beta
+
+# Title of the dataset
+title: Creightons Songs and Ballads from Nova Scotia
+
+# A URL to the datasets webpage
+url: https://github.com/craigsapp/creighton-nova-scotia
+
+# A full text description
+description: >
+  Digital edition of Songs and Ballads from Nova Scotia, collected 
+  by Helen Creighton (1932). The ditigal edition was prepared by
+  Craig Stuart Sapp in the Humdrum file format. 
+
+# Authors and contributors
 authors: 
   - name: Helen Creighton
     role: author
   - name: Craig Stuart Sapp
     url: https://github.com/craigsapp
     role: music and bibliographic data
+contributors:
   - name: Marcus Pearce
     role: phrase markings and key designations
   - name: Darell Conklin
     role: phrase markings and key designations
-tags: [symbolic,phrases]
-formats: [kern]
-files: 152
-notes: 
-duration: 
-copyright:
-licence:
+
+# List of tags
+tags: [symbolic, phrases]
+formats: [kern] 
+num_entries: 152
+
+# The license, provide the name, and possibly even full text. 
+# If the license is unknown, make sure license.unknown = true
+license: 
   unknown: true
-  abbreviation: 
-  text: 
-  url: 
-version: Unknown
-description: >
-  Digital edition of Songs and Ballads from Nova Scotia, collected by Helen Creighton (1932) in the Humdrum file format. 
+
+# Copyright message for the dataset
+copyright:
+
+# How to give credits when using the dataset (text message)
+credits:
+
+# Citation keys for the original publications and the dataset.
+# Typically, the former are older folk song books, and the latter
+# more recent papers
+publication_citation_keys: []
+dataset_citation_keys: []
+
+# Date on which the dataset which is analyzed by catafolk was 
+# downloaded
+dataset_retrieval_date: 2020-04-18
+
+# The version of the dataset. If the dataset has no version, 
+# plese ensure version = unknown
+version: unknown
+
+# Columns to show/hide on the catafolk website. This overrides 
+# default options
+show_columns: []
+hide_columns: []
+
+# Possible issues with the dataset. These are shown on the webpage,
+# so people using the dataset are aware of them.
 issues:
-  - title: Multiple encoders
-    description: >
-      The file lists multiple encoders in the `ENC1`, `ENC2` etc fields. These are currently not properly extracted
   - title: Ignoring number of verses
     description: >
       The meta field `verses` gives the number of verses. This is currently ignored.
+  - title: Dates in humdrum format
+    description: >
+      Dates are currently in the humdrum format. These should perhaps
+      be converted to a more standard formate?
+  - title: Geocoding
+    description: >
+      Add coordinates
 
-#————————————————————————————————————————————————————————————————————
+  
+# —————————————————————————————————————————————————————————————————
+# Catafolk options
+# —————————————————————————————————————————————————————————————————
 
 sources:
   - name: file
     type: file
     file_pattern: data/kern/*.krn
-
+    
 transformations:
-  # Default Catafolk fields
-  - rename: [file.cf_checksum, checksum]
-  - rename: [file.cf_path, path]
-  - rename: [file.cf_format, format]
-
-  # Constants
+  
+  # General 
+  # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, creighton-nova-scotia]
-  - constant: [has_music, true]
-  - constant: [has_lyrics, false]
-
-  - rename: [file.OTL, title]
-  - rename: [file.ARE, location]
-  - rename: [file.URL, url]
-  - rename: [file.ENC1, encoder]
-  - rename: [file.CNT, culture]
-  - rename: [file.MRD, collection_date]
-  - rename: [file.OCL, collector]
-  - rename: [file.MPN, performer]
   - rename: [file.AGN, genre]
-  - rename: [file.YEC, copyright]
-  - rename: [file.PPG, source_page_num]
+  # other_fields
+  # comments
+  # warnings
+  # description
+  
 
+  # File 
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.cf_path, file_path]
+  - rename: [file.cf_format, file_format]
+  - rename: [file.cf_checksum, file_checksum]
+  - constant: [file_has_music, true]
+  - constant: [file_has_lyrics, false]
+  - constant: [file_has_license, false]
   - format:
     - id 
-    - preview_url
+    - file_preview_url
     - pattern: https://verovio.humdrum.org/?file=users/craig/songs/creighton/nova/{}.krn
-
   - format:
     - id
-    - url
+    - file_url
     - pattern: https://github.com/craigsapp/creighton-nova-scotia/blob/master/kern/{}.krn
   
+
+  # Collection 
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.OCL, collectors]
+  - rename: [file.MRD, collection_date]
+  # collection_date_earliest
+  # collection_date_latest
+
+
+  # Culture
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.CNT, culture]
+  # culture_dplace_id
+  # culture_hraf_id
+
+
+  # Encoding
+  # —————————————————————————————————————————————————————————————————
+  # encoders
+  # - rename: ['']
+  - operations: ['strip', 'join']
+    inputs: [file.ENC1, file.ENC2, file.ENC3]
+    outputs: ['encoders']
+    params: [{}, {sep: '|'}]
+  - rename: [file.END, encoding_date]
+  - rename: [file.YEC, copyright]
+  # contributors
+  # license_id
+  - rename: [file.EEV, version]
+
+
+  # Location
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.ARE, location]
+  # latitude
+  # longitude
+  #- constant: [auto_geocoded, false]
+
+  # Lyrics
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.OTL, title]
+  # title_translation
+  # language
+  # language_glottolog
+  # lyrics
+
+
+  # Music
+  # —————————————————————————————————————————————————————————————————
+  # tonality
+  # scale
+  # ambitus
+  # tempo
+  # meter
+  # metric_classification
+  # tune_family_id
+
+
+  # Performance
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.MPN, performers]
+  - constant: [voice_use, true]
+  # performer_genders
+  # instrumentation
+  # instrument_use
+  # percussion_use
+  # voice_use
+  
+  
+  # Publication
+  # —————————————————————————————————————————————————————————————————
+  - constant: [publication_key, creighton1932nova]
+  - rename: [file.PPG, publication_page_num]
+  # publication_preview_url
+  # catalogue_number
+  # publication_type
+  # publication_authors
+  # publication_date
   - extract_groups:
       inputs: [file.ONM]
-      outputs: [source_song_num]
+      outputs: [publication_song_num]
       params:
         pattern: (\d+)\.
         groups: [1]
+    
+
+  
+  # Mixed
+  # —————————————————————————————————————————————————————————————————
   
