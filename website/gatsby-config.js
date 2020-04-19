@@ -8,7 +8,7 @@ const path = require(`path`)
 
 const excludedDatasets = [
   'bronson-child-ballads',
-  'creighton-nova-scotia',
+  // 'creighton-nova-scotia',
   'densmore-ojibway',
   'densmore-pawnee',
   'densmore-teton-sioux',
@@ -24,9 +24,9 @@ const excludedDatasets = [
   'sagrillo-lorraine',
   'sagrillo-luxembourg',
   'sagrillo-scotland',
-  'densmore-pueblo',
-  'densmore-nootka',
-  // 'finnish-folk-tunes'
+  // 'densmore-pueblo',
+  // 'densmore-nootka',
+  'finnish-folk-tunes'
 ];
 
 // Filenames that should be included
@@ -54,6 +54,7 @@ module.exports = {
         ignore: [
           '**/data/*', 
           '**/*.zip',
+          '**/template.yml',
           
           // Ignore all files that are not in allowedDatasetFiles
           string => {
@@ -72,8 +73,8 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `schema`,
-        path: `${__dirname}/../catafolk/`,
-        ignore: [`${__dirname}/../catafolk/!(schema.csv)`]
+        path: `${__dirname}/../`,
+        ignore: [`${__dirname}/../!(index-schema.csv)`]
       }
     },
     // Load all bibtex files 

@@ -14,7 +14,7 @@ culture_dplace_id,120,culture,D-Place identifier of the culture/society,no,strin
 culture_hraf_id,121,culture,HRAF identifier of the culture,no,string,
 genre,130,general,the genre of the piece,no,string,The genres used are specific to a dataset.
 performers,150,performance,names of the performers,no,string-list,
-performer_gender,151,performance,gender of the performer,no,string,
+performer_genders,151,performance,gender of the performers,no,string-list,Should have the same length as performers.
 instrumentation,152,performance,the instrumentation,no,string-list,
 instrument_use,160,performance,whether the piece uses (non-vocal) instruments,no,boolean,
 percussion_use,161,performance,whether the piece uses percussive instruments,no,boolean,Can only be true if instrument_use is true

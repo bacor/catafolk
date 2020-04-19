@@ -1,6 +1,11 @@
 dataset_id: finnish-folk-tunes
+status: beta
 title: Digital Archive of Finnish Folk Tunes
-dataset_url: http://esavelmat.jyu.fi/index_en.html
+url: http://esavelmat.jyu.fi/index_en.html
+description: >
+  A large collection of over 8000 Finnish folk tunes collected mostly in the 19th century
+  and published in the series *Finnish Folk Tunes (Suomen Kansan Sävelmiä)* edited by
+  Ilmari Krohn. The songs were encoded by Tuomas Eerola and petri Toivainen.
 authors: 
   - name: Tuomas Eerola
     role: encoder
@@ -8,12 +13,21 @@ authors:
     role: encoder
 tags: [symbolic]
 formats: [MIDI (MatLab)] 
-files: 8613
-licence_abbr: unknown
-description: >
-  A large collection of over 8000 Finnish folk tunes collected mostly in the 19th century
-  and published in the series *Finnish Folk Tunes (Suomen Kansan Sävelmiä)* edited by
-  Ilmari Krohn. The songs were encoded by Tuomas Eerola and petri Toivainen.
+num_entries: 8613
+license:
+  unknown: True
+publication_citation_keys: 
+  - krohn1898HS1
+  - krohn1904LS1
+  - krohn1908LS2
+  - krohn1932LS3
+  - krohn1933LS4
+  - krohn1893KT1
+  - launis1910RS1
+  - launis1930RS2
+  - vaisanen1928KJS
+dataset_citation_keys: [eerola2004]
+dataset_retrieval_date: 2020-04-18
 show_columns:
   - collector
   - location
@@ -38,7 +52,6 @@ issues:
       in the HS subcollection things like `Arkkivirsi`, `Siionin vk: 129`, etc. In LS, what seems 
       like cadence types like `AIVb4, A IV a 2` etc.
       
-
 sources:
   - name: data
     type: csv
@@ -76,7 +89,7 @@ transformations:
   - constant: [file_has_lyrics, false]
   - constant: [file_has_license, false]
 
-#   # # Additional metadata
+  # # Additional metadata
   - rename: [data.page, source_page_num]
   - rename: [data.transcriber, collector]
   - rename: [data.type, genre]

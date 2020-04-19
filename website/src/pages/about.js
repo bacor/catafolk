@@ -42,7 +42,7 @@ export default ({ data }) => {
     ],
     []
   );
-  const indexData = React.useMemo(() => data.allSchemaCsv.nodes)
+  const indexData = React.useMemo(() => data.fields.nodes)
   
   return   (
     <Layout pageName="datasets">
@@ -72,7 +72,7 @@ export default ({ data }) => {
 }
 
 export const query = graphql`{
-  allSchemaCsv {
+  fields: allIndexSchemaCsv {
     nodes {
       details
       description

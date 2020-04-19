@@ -129,7 +129,19 @@ function Details({row}) {
             <Prop title="Title" {...opts}>{orig.title}</Prop>
             <Prop title="Performer" {...opts}>{orig.performer}</Prop>
             <Prop title="Collector" {...opts}>{orig.collector}</Prop>
-            <Prop title="Collection date" {...opts}>{orig.collection_date}</Prop>
+            <Prop title="Collection date" {...opts}>
+              {
+              orig.collection_date 
+                ? orig.collection_date
+                : orig.collection_date_earliest
+                  ? orig.collection_date_latest
+                    ? `${orig.collection_date_earliest}–${orig.collection_date_earliest}`
+                    : `after ${orig.collection_date_earliest}`
+                  : orig.collection_date_latest 
+                    ? `before ${orig.collection_date_latest}`
+                    : null
+              }
+            </Prop>
             <Prop title="Culture" {...opts}>{orig.culture}</Prop>
             <Prop title="Location" {...opts}>{orig.location}</Prop>
             <Prop title="Latitude" {...opts}>{orig.latitude}</Prop>

@@ -64,7 +64,65 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
   // Load index sch
   const indexSchemaCSV = fs.readFileSync(indexSchemaFn, {encoding: 'utf-8'})
   const indexSchema = parse(indexSchemaCSV, { columns: true })
-  const fields = _.fromPairs(indexSchema.map(entry => [entry.field, entry.graphql_type]))
+  
+  // Use custom types from the schema
+  // TODO perhaps it is better to use custom extensions?
+  // https://www.gatsbyjs.org/docs/schema-customization/#creating-custom-extensions
+  // https://github.com/gatsbyjs/gatsby/issues/16174
+  const fields = {}
+  indexSchema.forEach(entry => {
+    const fieldName = entry.field
+    const fieldType = entry.dtype
+    const fieldSpec = {}
+
+    if(fieldType === 'boolean') {
+      fieldSpec.type = 'Boolean'
+      fieldSpec.resolve = source => {
+        const value = source[fieldName]
+        return value !== '' ? value === 'True' : null
+      }
+
+    } else if(fieldType == 'int') {
+      fieldSpec.type = 'Int'
+      fieldSpec.resolve = source => {
+        const value = source[fieldName]
+        return value === '' ? null : parseInt(value)
+      }
+
+    } else if(fieldType == 'string-list') {
+      fieldSpec.type = '[String]'
+      fieldSpec.resolve = source => {
+        const value = source[fieldName]
+        return value === '' ? [] : value.split('|');
+      }
+
+    } else if(fieldType === 'float') {
+      fieldSpec.type = 'Float'
+      fieldSpec.resolve = source => {
+        const value = source[fieldName]
+        return value === '' ? null : parseFloat(value)
+      }
+
+    // } else if(fieldType === 'date') {
+    // TODO
+
+    // } else if(fieldType === 'JSON') {
+    // TODO
+    
+    // Default: String
+    } else {
+      fieldSpec.type = 'String'
+      fieldSpec.resolve = source => {
+        const value = source[fieldName]
+        return value === '' ? null : value
+      }
+    }
+
+    fields[fieldName] = fieldSpec
+  });
+  // console.log(fields)
+  
+
   const typeDefs = [
     schema.buildObjectType({
       name: "IndexCsv",

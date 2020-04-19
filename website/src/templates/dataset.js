@@ -175,6 +175,8 @@ export default ({ data }) => {
   dataset.index = data.index
   dataset.readme = data.readme
 
+  console.log(data)
+
   // Generate citation keys for all items
   const bibtex = data.sources.content
   const bibliography = new Cite(bibtex)
@@ -322,10 +324,11 @@ export const query = graphql`
     metadata: dataset(dataset_id: {eq: $dataset_id}) {
       title
       dataset_id
-      dataset_url
+      status
+      url
       tags
       description
-      files
+      num_entries
       formats
       authors {
         name
@@ -338,9 +341,10 @@ export const query = graphql`
         url
       }
       copyright
-      licence {
+      license {
         unknown
         name
+        text
         abbreviation
         url
       }
@@ -353,49 +357,65 @@ export const query = graphql`
     index: allIndexCsv(filter: {dataset_id: {eq: $dataset_id}}) {
       songs: nodes {
         id
-        checksum
-        collection_date
-        collector
-        copyright
-        culture
-        encoding_date
-        encoder
-        format
-        genre
-        has_lyrics
-        has_music
-        ambitus
-        catalogue_number
-        encoder
-        key
-        language
-        language_iso
+        title
+        title_translation
         location
         latitude
-        license_abbr
         longitude
+        auto_geocoded
+        language
+        language_glottolog
+        culture
+        culture_dplace_id
+        culture_hraf_id
+        genre
+        performer: performers
+        performer_genders
+        instrumentation
+        instrument_use
+        percussion_use
+        voice_use
+        key: tonality
+        modality: scale
+        ambitus
+        tempo
         meter
         metric_classification
-        modality
-        path
-        performer
-        preview_url
-        source
-        source_author
-        source_address
-        source_key
-        source_date
-        source_page_num
-        source_publisher
-        source_song_num
-        source_title
-        source_url
-        title_eng
-        title
-        url
+        collector: collectors
+        collection_date
+        collection_date_earliest
+        collection_date_latest
+        source_key: publication_key
+        publication_type
+        publication_title
+        publication_authors
+        publication_date
+        source_page_num: publication_page_num
+        source_song_num: publication_song_num
+        tune_family_id
+        catalogue_num
+        preview_url: publication_preview_url
+        encoder: encoders
+        encoding_date
+        contributors
+        copyright
+        license_id
+        path: file_path
+        file_format
         version
+        checksum: file_checksum
+        file_url
+        file_preview_url
+        file_has_lyrics
+        file_has_music
+        file_has_licence
+        other_fields
+        comments
+        warnings
+        description
+        lyrics
       }
-      source_keys: distinct(field: source_key)
+      source_keys: distinct(field: publication_key)
     }
     readme: file(relativeDirectory: {eq: $dataset_id}, name: {eq: "README"}) {
       file: childMarkdownRemark{

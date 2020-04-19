@@ -51,6 +51,7 @@ export default ({ data }) => {
 
 export const query = graphql`{
   allDataset(filter: {dataset_id: {in: [
+    "finnish-folk-tunes",
     "essen-deutschl-erk",
     "densmore-teton-sioux",
     "densmore-ojibway",

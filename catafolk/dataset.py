@@ -30,6 +30,9 @@ else:
     warnings.warn(f'Schema file does not exist: {schema_path}')
     _FIELDS = ['id', 'dataset_id']
 
+# TODO also move dataset options to a schema. Automatically check if
+# the dataset yml file is complete/valid
+
 class Dataset(object):
 
     _default_options = {

@@ -30,7 +30,7 @@ contributors:
 # List of tags
 tags: []
 formats: [] 
-num_entries: 82
+num_entries: 
 
 # The license, provide the name, and possibly even full text. 
 # If the license is unknown, make sure license.unknown = true
@@ -105,6 +105,7 @@ transformations:
   - rename: [file.cf_checksum, file_checksum]
   #- constant: [file_has_music, true]
   #- constant: [file_has_lyrics, false]
+  #- constant: [file_has_license, false]
   # file_url
   # file_preview_url
 

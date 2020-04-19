@@ -72,7 +72,7 @@ export const query = graphql`
       edges {
         node {
           dataset_id
-          files
+          num_entries
           description
           fields {
             slug
