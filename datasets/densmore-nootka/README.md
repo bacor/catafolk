@@ -15,6 +15,8 @@ Catafolk notes
 - Song 49 appears twice in the dataset, with two different drum parts. 
     Only the first version is included, so `No_49_Wand_Dance_Song_-_with_2nd_rendition_drums.krn` is
     ignored.
+- All songs have the same location (Neah Bay, Washington), since 
+Densmore reports that she collected all songs there (p. V).
 
 
 Notes on additional metadata
