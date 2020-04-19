@@ -81,6 +81,9 @@ issues:
   - title: Geocoding
     description: >
       Add coordinates
+  - title: Links missing
+    description: >
+      Links to previews are missing.
 
   
 # —————————————————————————————————————————————————————————————————
