@@ -432,6 +432,11 @@ def add(*args, value=None):
     outputs = [arg + value for arg in args]
     return _return(outputs)
 
+
+def strip(*args):
+    outputs = [arg.strip() for arg in args]
+    return _return(outputs)
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
