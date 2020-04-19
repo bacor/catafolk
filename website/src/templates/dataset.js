@@ -394,7 +394,7 @@ export const query = graphql`
         source_song_num: publication_song_num
         tune_family_id
         catalogue_num
-        preview_url: publication_preview_url
+        source_url: publication_preview_url
         encoder: encoders
         encoding_date
         contributors
@@ -404,10 +404,10 @@ export const query = graphql`
         file_format
         version
         checksum: file_checksum
-        file_url
-        file_preview_url
-        file_has_lyrics
-        file_has_music
+        url: file_url
+        preview_url: file_preview_url
+        has_lyrics: file_has_lyrics
+        has_music: file_has_music
         file_has_licence
         other_fields
         comments
