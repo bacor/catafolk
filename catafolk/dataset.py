@@ -21,7 +21,7 @@ ROOT_DIR = os.path.abspath(join(CUR_DIR, os.path.pardir))
 DATASETS_DIR = join(ROOT_DIR, 'datasets')
 
 # Load fields from the schema file
-schema_path = os.path.join(ROOT_DIR, 'index-schema.csv')
+schema_path = os.path.join(ROOT_DIR, 'schemas', 'index-schema.csv')
 if os.path.exists(schema_path):
     schema = pd.read_csv(schema_path)
     schema.sort_values('order', ascending=True, inplace=True)

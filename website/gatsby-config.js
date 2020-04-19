@@ -73,8 +73,8 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `schema`,
-        path: `${__dirname}/../`,
-        ignore: [`${__dirname}/../!(index-schema.csv)`]
+        path: `${__dirname}/../schemas`,
+        ignore: [`${__dirname}/../schemas/!(index-schema.csv)`]
       }
     },
     // Load all bibtex files 
@@ -83,6 +83,13 @@ module.exports = {
       options: {
         name: `bibliography`,
         path: `${__dirname}/../bibliography`
+      }
+    },
+    {
+      resolve: `gatsby-transformer-code`,
+      options: {
+        name: `bibliography`,
+        extensions: ['bib']
       }
     },
     `gatsby-transformer-csv`,
@@ -103,13 +110,6 @@ module.exports = {
       }
     },
     'gatsby-transformer-remark',
-    {
-      resolve: `gatsby-transformer-code`,
-      options: {
-        name: `bibliography`,
-        extensions: ['bib']
-      }
-    },
     
   ]
 }

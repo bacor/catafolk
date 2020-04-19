@@ -5,8 +5,8 @@ const parse = require('csv-parse/lib/sync');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 // Options
-const indexSchemaFn = `${__dirname}/../index-schema.csv`;
-const datasetSchemaFn = `${__dirname}/../dataset-schema.graphql`;
+const indexSchemaFn = `${__dirname}/../schemas/index-schema.csv`;
+const datasetSchemaFn = `${__dirname}/../schemas/dataset-schema.graphql`;
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
