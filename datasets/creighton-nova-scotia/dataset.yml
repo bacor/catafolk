@@ -128,7 +128,13 @@ transformations:
   # Collection 
   # —————————————————————————————————————————————————————————————————
   - rename: [file.OCL, collectors]
-  - rename: [file.MRD, collection_date]
+  # - rename: [file.MRD, collection_date]
+  - operation: extract_groups
+    inputs: [file.MRD]
+    outputs: [collection_date_earliest, collection_date_latest]
+    params:
+      pattern: (\d+)///-(\d+)///
+      groups: [1,2]
   # collection_date_earliest
   # collection_date_latest
 
@@ -158,9 +164,9 @@ transformations:
   # Location
   # —————————————————————————————————————————————————————————————————
   - rename: [file.ARE, location]
-  # latitude
-  # longitude
-  #- constant: [auto_geocoded, false]
+  - constant: [latitude, 45]
+  - constant: [longitude, -63]
+  - constant: [auto_geocoded, false]
 
   # Lyrics
   # —————————————————————————————————————————————————————————————————
