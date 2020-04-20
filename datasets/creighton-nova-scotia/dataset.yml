@@ -6,7 +6,7 @@
 dataset_id: creighton-nova-scotia
 
 # Publication status (draft/beta/alpha/published)
-status: beta
+status: alpha
 
 # Title of the dataset
 title: Creightons Songs and Ballads from Nova Scotia
@@ -71,19 +71,15 @@ hide_columns: []
 # Possible issues with the dataset. These are shown on the webpage,
 # so people using the dataset are aware of them.
 issues:
-  - title: Ignoring number of verses
+  - title: Language correct?
     description: >
-      The meta field `verses` gives the number of verses. This is currently ignored.
-  - title: Dates in humdrum format
+      Added language English (Atlantic Provinces English). Is this 
+      indeed correct?
+  - title: Reference record AMD?
     description: >
-      Dates are currently in the humdrum format. These should perhaps
-      be converted to a more standard formate?
-  - title: Geocoding
-    description: >
-      Add coordinates
-  - title: Links missing
-    description: >
-      Links to previews are missing.
+      Some files have a reference record `AMD`. Not sure what this is,
+      but the values indicate its either the scale or modality. Is
+      this correct?
 
   
 # —————————————————————————————————————————————————————————————————
@@ -101,7 +97,12 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, creighton-nova-scotia]
   - rename: [file.AGN, genre]
-  # other_fields
+  - to_json_object: 
+      inputs: [file.verses, file.VTS]
+      outputs: [other_fields]
+      params: 
+        keys: [verses, VTS]
+  - rename: [file.ONB, comments]
   # comments
   # warnings
   # description
@@ -128,16 +129,14 @@ transformations:
   # Collection 
   # —————————————————————————————————————————————————————————————————
   - rename: [file.OCL, collectors]
-  # - rename: [file.MRD, collection_date]
   - operation: extract_groups
     inputs: [file.MRD]
     outputs: [collection_date_earliest, collection_date_latest]
     params:
       pattern: (\d+)///-(\d+)///
       groups: [1,2]
-  # collection_date_earliest
-  # collection_date_latest
-
+  # collection date: see above
+  
 
   # Culture
   # —————————————————————————————————————————————————————————————————
@@ -148,17 +147,15 @@ transformations:
 
   # Encoding
   # —————————————————————————————————————————————————————————————————
-  # encoders
-  # - rename: ['']
   - operations: ['strip', 'join']
     inputs: [file.ENC1, file.ENC2, file.ENC3]
     outputs: ['encoders']
     params: [{}, {sep: '|'}]
   - rename: [file.END, encoding_date]
   - rename: [file.YEC, copyright]
+  - rename: [file.EEV, version]
   # contributors
   # license_id
-  - rename: [file.EEV, version]
 
 
   # Location
@@ -171,14 +168,15 @@ transformations:
   # Lyrics
   # —————————————————————————————————————————————————————————————————
   - rename: [file.OTL, title]
+  - constant: [language, 'English']
+  - constant: [language_glottolog, atla1283]
   # title_translation
-  # language
-  # language_glottolog
   # lyrics
 
 
   # Music
   # —————————————————————————————————————————————————————————————————
+  - rename: [file.AMD, 'scale']
   # tonality
   # scale
   # ambitus
@@ -190,13 +188,12 @@ transformations:
 
   # Performance
   # —————————————————————————————————————————————————————————————————
-  - rename: [file.MPN, performers]
+  - replace: [file.MPN, performers, {old: ' and ', new: '|'}]
   - constant: [voice_use, true]
   # performer_genders
   # instrumentation
   # instrument_use
   # percussion_use
-  # voice_use
   
   
   # Publication
@@ -205,9 +202,10 @@ transformations:
   - rename: [file.PPG, publication_page_num]
   # publication_preview_url
   # catalogue_number
-  # publication_type
-  # publication_authors
-  # publication_date
+  - constant: [publication_type, book]
+  - constant: [publication_title, Songs and Ballads from Nova Scotia]
+  - constant: [publication_authors, Helen Creighton]
+  - constant: [publication_date, 1932]
   - extract_groups:
       inputs: [file.ONM]
       outputs: [publication_song_num]
