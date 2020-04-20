@@ -71,7 +71,10 @@ def split(*args, sep=None):
         outputs = [split(*arg, sep=sep) for arg in args]
         return _return(outputs)
     assert len(args) == 1, "expects a single input"
-    return args[0].split(sep)
+    try:
+        return args[0].split(sep)
+    except:
+        return args[0]
 
 def pick(*args, index=0):
     return args[index]
@@ -480,7 +483,12 @@ def strip(*args):
     if type(args[0]) == list:
         outputs = [strip(*arg) for arg in args]
         return _return(outputs)
-    outputs = [arg.strip() for arg in args]
+    outputs = []
+    for arg in args:
+        try:
+            outputs.append(arg.strip())
+        except:
+            outputs.append(arg)
     return _return(outputs)
 
 def to_json_object(*values, keys=[]):
@@ -545,7 +553,7 @@ def to_string_list(*args, replace_sep_by='/', sep="|"):
 def drop_none(*args):
     if type(args[0]) == list:
         return _return([drop_none(*arg) for arg in args])
-    outputs = [arg for arg in args if arg is not None]
+    outputs = [arg for arg in args if arg is not None and not isnull(arg)]
     if len(outputs) == 0:
         return None
     return _return(outputs)
