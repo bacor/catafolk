@@ -147,7 +147,7 @@ transformations:
   # title
   # title_translation
   # language
-  # language_glottolog
+  # glottolog_id
   # lyrics
 
 
@@ -180,6 +180,7 @@ transformations:
   # publication_preview_url
   # catalogue_number
   # publication_type
+  # publication_title
   # publication_authors
   # publication_date
 
