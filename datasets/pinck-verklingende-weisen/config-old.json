@@ -9,25 +9,25 @@
         }
     }],
     "transformations": [
-        ["rename", "file.cf_checksum", "checksum"],
-        ["rename", "file.cf_path", "path"],
-        ["rename", "file.cf_format", "format"],
-        ["constant", "dataset_id", "sagrillo-lorraine"],
-        ["constant", "encoder", "Damien Sagrillo"],
-        ["constant", "has_music", true],
-        ["constant", "has_lyrics", false],
+        // ["rename", "file.cf_checksum", "checksum"],
+        // ["rename", "file.cf_path", "path"],
+        // ["rename", "file.cf_format", "format"],
+        // ["constant", "dataset_id", "sagrillo-lorraine"],
+        // ["constant", "encoder", "Damien Sagrillo"],
+        // ["constant", "has_music", true],
+        // ["constant", "has_lyrics", false],
 
-        ["rename", "file.reg", "location"],
-        ["rename", "file.fkt", "genre"],
+        // ["rename", "file.reg", "location"],
+        // ["rename", "file.fkt", "genre"],
 
-        [
-            "format", "path", "preview_url", 
-            {"pattern": "http://verovio.humdrum.org/?file=sagrillo/lorraine/{}"}
-        ],
-        [
-            "format", "path", "url", 
-            {"pattern": "https://kern.humdrum.org/cgi-bin/ksdata?file={}&l=users/sagrillo/lorraine&format=kern"}
-        ],
+        // [
+        //     "format", "path", "preview_url", 
+        //     {"pattern": "http://verovio.humdrum.org/?file=sagrillo/lorraine/{}"}
+        // ],
+        // [
+        //     "format", "path", "url", 
+        //     {"pattern": "https://kern.humdrum.org/cgi-bin/ksdata?file={}&l=users/sagrillo/lorraine&format=kern"}
+        // ],
         {
             "operation": "map_values",
             "inputs": ["file.trd"],
