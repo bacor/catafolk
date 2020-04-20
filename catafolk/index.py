@@ -95,11 +95,14 @@ class Index():
 
         transformed_entries = []
         for entry_id, row in df.iterrows():
-            entry = row.to_dict()
-            entry['id'] = entry_id
-            transformed = self.transformer(entry, outputs_only=False)
-            transformed['id'] = entry_id
-            transformed_entries.append(transformed)
+            try:
+                entry = row.to_dict()
+                entry['id'] = entry_id
+                transformed = self.transformer(entry, outputs_only=False)
+                transformed['id'] = entry_id
+                transformed_entries.append(transformed)
+            except Exception as e:
+                print(f'Transforming {entry_id} failed: {e}')
         transformed_df = pd.DataFrame(transformed_entries).set_index('id')
         return transformed_df
 
