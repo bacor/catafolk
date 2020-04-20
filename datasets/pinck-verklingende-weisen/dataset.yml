@@ -133,7 +133,7 @@ transformations:
           Tod: death
           Liebe(slied)?: love
           Krieg(slied)?: war
-          historisches Lied: historical
+          historisches?( Lied)?: historical
           Abschied: farewell
           Verrat: betrayel
           Betrug: deceit
@@ -154,7 +154,7 @@ transformations:
           "^Treue?(ver)?": loyalty
           Suche nach Bräutigam: courtship
           Suizid: suicide
-          Tanzlied: dance
+          Tanz.?(lied)?: dance
           Gnade: mercy
           Freude: peace
           Eifersucht: jealousy
@@ -175,12 +175,28 @@ transformations:
           ^Trink: drinking
           Strafe: punishment
           Heimkehr: return
+          Rüchkehr: return
           Nachtwächterlied: night watch
           Raub: robbery
           Rätsel: riddle
           ^Schlaf: sleeping
-          Sehnsucht: nostalgia
+          Sehnsucht: melancholy # kind of...
+          Wehmut: melancholy
+          melancholisch: melancholy
           .*Werbung: marriage proposal
+          Vaterland: homeland
+          Heimat: homeland
+          Scherz.?(lied)?: joke
+          Bedauern: regret
+          ^Kinderlied: children's song
+          ".?(e|E)rzählendes? Lied.?": story
+          Brautsuche: courtship
+          Spiel.?(lied)?: game
+          Spiel- und Trinklied: drinking
+          Abzähllied: counting
+          geschichtliches: historical
+          Ständchenlieder: serenade
+          ^Fenstergang: serenade
       - {}
       - {}
       - {}

@@ -87,7 +87,119 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, sagrillo-luxembourg]
-  - [[rename, unescape_html], file.fkt, genres]
+  # - [[rename, unescape_html], file.fkt, genres]
+  - operations: 
+      - unescape_html
+      - replace
+      - replace
+      - replace
+      - split
+      - strip
+      - map_values
+      - drop_none
+      - unique
+      - to_string_list
+    inputs: [file.fkt]
+    outputs: [genres]
+    params:
+      - {}
+      - old: "(yyy|\\?\\?\\??),? ?"
+        new: ""
+      - old: "\\?"
+        new: ""
+      - old: "/"
+        new: ","
+      - sep: ','
+      - {}
+      - return_missing: false
+        mapping:
+          "(g|G)eistliches?( Lied)?": religious
+          "reli.?gi.s(es)?( Lied)?": religious
+          Legende: legend
+          # Neujahrslied: ''
+          Ballade: ballad
+          Brautlied: wedding
+          Hochzeit: wedding
+          Reue: repentance
+          Schuld: guilt
+          Brautwerbung: courtship
+          Soldat(en)?(lied)?: soldier's song
+          Standesunterschied: class difference
+          Mord: murder
+          uneheliches Kind: bastard
+          Ehe: marriage
+          Tod: death
+          Liebe(slied)?: love
+          Krieg(slied)?: war
+          historisches?( Lied)?: historical
+          .*Abschied: farewell
+          Verrat: betrayel
+          Betrug: deceit
+          Täuschung: deceit
+          Verführung: seduction
+          Vergewaltigung: rape
+          verbotene Liebe: forbidden love
+          Habgier: greed
+          Beischlaf: lovemaking
+          Klage(lied)?: lament
+          Magie: magic
+          Unfall: accident
+          Gefangenschaft: imprisonment
+          Berfreiung: freedom
+          Untreue: infidelity
+          Trennung: separation
+          Krankheit: disease
+          "^Treue?(ver)?": loyalty
+          Suche nach Bräutigam: courtship
+          Suizid: suicide
+          Tanz.?(lied)?: dance
+          Gnade: mercy
+          Freude: peace
+          Eifersucht: jealousy
+          Beruf(slied)?: work
+          "^Arbeit": work
+          Kummer: grief
+          Trauer: grief
+          Jagd?(lied)?: hunt
+          jagen: hunt
+          ^Jäger: hunt
+          ^Spott(lied)?: mockery
+          Schwangerschaft: pregnancy
+          Heirat: marriage
+          Ehre: honor
+          Nächstenliebe: charity
+          Wiegenlied: lullaby
+          Walzer: walz
+          ^Trink: drinking
+          Strafe: punishment
+          Heimkehr: return
+          Rüchkehr: return
+          Nachtwächterlied: night watch
+          Raub: robbery
+          Rätsel: riddle
+          ^Schlaf: sleeping
+          Sehnsucht: melancholy # kind of...
+          Wehmut: melancholy
+          melancholisch: melancholy
+          .*Werbung: marriage proposal
+          Vaterland: homeland
+          Heimat: homeland
+          Scherz.?(lied)?: joke
+          Bedauern: regret
+          ^Kinderlied: children's song
+          ".?(e|E)rzählendes? Lied.?": story
+          Brautsuche: courtship
+          Spiel.?(lied)?: game
+          Spiel- und Trinklied: drinking
+          Abzähllied: counting
+          geschichtliches: historical
+          Ständchenlieder: serenade
+          ^Fenstergang.?: serenade
+          Verlobung: engagement
+      - {}
+      - {}
+      - {}
+  
   - to_json_object:
       inputs: 
         - file.minrhy
