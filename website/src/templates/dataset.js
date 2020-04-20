@@ -175,8 +175,6 @@ export default ({ data }) => {
   dataset.index = data.index
   dataset.readme = data.readme
 
-  console.log(data)
-
   // Generate citation keys for all items
   const bibtex = data.sources.content
   const bibliography = new Cite(bibtex)
@@ -239,7 +237,7 @@ export default ({ data }) => {
           if(!row.source_key) return null;
           const citation = citations[row.source_key]
           const pageNum = row.source_page_num
-          return `${citation.slice(1, -1)}${ pageNum && `, p. ${pageNum}`}`
+          return `${citation.slice(1, -1)}${ pageNum ? `, p. ${pageNum}` : ''}`
         },
         Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={25} />
       },
