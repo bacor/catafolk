@@ -109,7 +109,6 @@ module.exports = {
         typeName: ({ node }) => node.name
       }
     },
-    'gatsby-transformer-remark',
-    
+    'gatsby-transformer-remark'
   ]
 }
