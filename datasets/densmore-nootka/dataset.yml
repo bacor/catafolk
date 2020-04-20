@@ -9,7 +9,7 @@ dataset_id: densmore-nootka
 status: alpha
 
 # Title of the dataset
-title: Densmore Nootka and Quileute music
+title: Densmore's Nootka and Quileute music
 
 # A URL to the datasets webpage
 url: https://github.com/shanahdt/densmore/tree/master/Densmore/nootka
