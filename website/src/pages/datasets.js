@@ -14,7 +14,7 @@ const DatasetRow = ({ dataset }) => {
       {dataset.title || _.startCase(dataset.dataset_id)}
     </th>
     <td><Markdown source={dataset.description} /></td>
-    <td>{dataset.files}</td>
+    <td>{dataset.num_entries}</td>
     <td>
       <Link to={`/${dataset.fields.slug}`} className="btn btn-outline-secondary btn-sm">
         {dataset.dataset_id}  <IoIosArrowForward />
@@ -71,6 +71,7 @@ export const query = graphql`
     allDataset {
       edges {
         node {
+          title
           dataset_id
           num_entries
           description
