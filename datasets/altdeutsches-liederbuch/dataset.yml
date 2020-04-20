@@ -230,7 +230,8 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - extract_groups:
       inputs: [file.SCT]
-      outputs: [catalogue_num, publication_song_num, tune_family_id]
+      outputs: [catalogue_num, song_num, tune_family_id]
       params:
         pattern: "A0*((\\d+)(\\w+)?)"
         groups: [0, 1, 2]
+  - lowercase: [song_num, publication_song_num]
