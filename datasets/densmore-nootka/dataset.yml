@@ -7,7 +7,7 @@ dataset_id: densmore-nootka
 group_ids: [densmore]
 
 # Publication status (draft/beta/alpha/published)
-status: alpha
+status: beta
 
 # Title of the dataset
 title: Densmore's Nootka and Quileute music

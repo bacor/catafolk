@@ -9,7 +9,7 @@ dataset_id: deutscher-liederhort
 group_ids: [essen]
 
 # Publication status (draft/beta/alpha/published)
-status: beta
+status: alpha
 
 # Title of the dataset
 title: Deutscher Liederhort
