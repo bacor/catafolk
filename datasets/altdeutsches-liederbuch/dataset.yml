@@ -30,7 +30,7 @@ authors:
     role: encoding
 
 # List of tags
-tags: [symbolic,phrases]
+tags: [symbolic, phrases, genres]
 formats: [kern] 
 num_entries: 309
 
@@ -69,15 +69,21 @@ hide_columns: []
 issues:
   - title: Missing page numbers
     description: >
-      There are no page numbers in the source files. We do have song numbers,
-      which can be derived from the catalogue numbers.
+      There are no page numbers in the source files. We do have 
+      song numbers, which can be derived from the catalogue numbers.
   - title: Cannot find scans
     description: >
-      I can't find any scans of the book to verify the song numbering...
+      I can't find any scans of the book to verify the song 
+      numbering...
   - title: Ignoring useful comments
     description: >
-      We now ignore useful comments besides the metadata. For example, in `deut3790`,
-      we find the comment "Neuere Melodie, noch 1850 am Niederrhein gehoert."
+      We now ignore useful comments besides the metadata. For 
+      example, in `deut3790`, we find the comment "Neuere Melodie, 
+      noch 1850 am Niederrhein gehoert."
+  - title: Genres correct?
+    description: >
+      Are the genrese correct? Them seem to be pretty much the 
+      same most the time...?
   
 # —————————————————————————————————————————————————————————————————
 # Catafolk options
@@ -93,9 +99,29 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, altdeutsches-liederbuch]
-  - rename: [file.AGN, genres]
   - join: [file._comments, comments_1, {sep: "|"}]
   - join: [[comments_1, file.ONB], comments, {sep: '|'}]
+  - operations:
+      - split
+      - strip
+      - map_values
+      - to_string_list
+    inputs: [file.AGN]
+    outputs: [genres]
+    params:
+      - sep: ','
+      -
+      - return_missing: false,
+        mapping:
+          Ballade: ballad
+          Lied: song
+          Romanze: romance
+          religioeses Lied: religious
+          Jaegerlied: hunt
+          Kinderlied: children's song
+          Kriegslied: war
+          Trinklied: drinking
+      -
   # other_fields
   # comments
   # warnings

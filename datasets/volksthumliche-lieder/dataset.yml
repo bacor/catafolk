@@ -117,7 +117,7 @@ transformations:
     params:
       - sep: ','
       -
-      - return_missing: true,
+      - return_missing: false,
         mapping:
           Ballade: ballad
           Lied: song
