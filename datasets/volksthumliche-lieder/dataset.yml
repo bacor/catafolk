@@ -186,7 +186,7 @@ transformations:
   # Performance
   # —————————————————————————————————————————————————————————————————
   - constant: [voice_use, true]
-  - rename: [file.AIN, instrumentation]
+  - replace: [file.AIN, instrumentation, {old: vox, new: voice}]
   # performers
   # performer_genders
   # instrument_use

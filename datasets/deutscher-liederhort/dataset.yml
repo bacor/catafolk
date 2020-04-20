@@ -190,6 +190,7 @@ transformations:
   # Music
   # —————————————————————————————————————————————————————————————————
   - rename: [file.AMT, metric_classification]
+  - replace: [file.AIN, instrumentation, {old: vox, new: voice}]
   # tonality
   # scale
   # ambitus

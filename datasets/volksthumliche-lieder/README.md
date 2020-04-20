@@ -1,2 +1,2 @@
-This is the subcollection `deutschl/altdeu` of the Essen folksong 
+This is the subcollection `deutschl/boehme` of the Essen folksong 
 collection.
