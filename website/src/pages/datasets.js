@@ -7,12 +7,31 @@ import { IoIosArrowForward } from "react-icons/io";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import Badge from 'react-bootstrap/Badge';
+
+function StatusBadge({ value, ...props }) {
+  const colors = {
+    alpha: 'success',
+    beta: 'info',
+    draft: 'secondary'
+  }
+  let color;
+  if(value in colors) {
+    color = colors[value]
+  } else {
+    color = 'muted'
+  }
+  return <Badge pill variant={color} {...props}>{value}</Badge>
+}
 
 const DatasetRow = ({ dataset }) => {
+  console.log(dataset)
   return (<tr>
     <th scope="row">
       {dataset.title || _.startCase(dataset.dataset_id)}
     </th>
+    <td><StatusBadge value={dataset.status} /></td>
+    <td>{dataset.group_ids ? dataset.group_ids.join(', ') : ''}</td>
     <td><Markdown source={dataset.description} /></td>
     <td>{dataset.num_entries}</td>
     <td>
@@ -45,6 +64,8 @@ export default ({ data }) => {
               <thead>
                   <tr>
                   <th scope="col">Title</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Groups</th>
                   <th scope="col" className="w-50">Description</th>
                   <th scope="col">Songs</th>
                   <th scope="col">ID</th>
@@ -72,7 +93,9 @@ export const query = graphql`
       edges {
         node {
           title
+          status
           dataset_id
+          group_ids
           num_entries
           description
           fields {

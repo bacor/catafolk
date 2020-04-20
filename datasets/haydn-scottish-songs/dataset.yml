@@ -4,6 +4,7 @@
 
 # Unique id of the dataset
 dataset_id: haydn-scottish-songs
+group_ids: [sagrillo]
 
 # Publication status (draft/beta/alpha/published)
 status: beta

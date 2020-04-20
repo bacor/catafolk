@@ -4,6 +4,7 @@
 
 # Unique id of the dataset
 dataset_id: densmore-pueblo
+group_ids: [densmore]
 
 # Publication status (draft/beta/alpha/published)
 status: alpha

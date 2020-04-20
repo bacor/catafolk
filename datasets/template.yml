@@ -5,6 +5,9 @@
 # Unique id of the dataset
 dataset_id: 
 
+# List of groups dataset belongs (see groups.yml) Optional.
+# group_ids: []
+
 # Publication status (draft/beta/alpha/published)
 status:
 

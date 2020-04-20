@@ -35,6 +35,7 @@ allowedDatasetFiles = [
   'dataset.yml',
   'README.md',
   'readme.md',
+  'groups.yml'
 ]
 
 module.exports = {

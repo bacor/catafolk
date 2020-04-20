@@ -1,5 +1,6 @@
 type dataset implements Node @dontInfer {
     dataset_id: String!
+    group_ids: [String]
     status: String
     title: String
     description: String
