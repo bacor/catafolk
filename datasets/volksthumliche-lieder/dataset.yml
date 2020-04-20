@@ -101,7 +101,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, volksthumliche-lieder]
-  - rename: [file.AGN, genre]
+  - rename: [file.AGN, genres]
   - join: [file._comments, comments_1, {sep: "|"}]
   - join: [[comments_1, file.ONB], comments, {sep: '|'}]
   # other_fields

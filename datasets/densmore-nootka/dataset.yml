@@ -120,7 +120,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, densmore-nootka]
-  - rename: [file.SOCIAL_FUNCTION, genre]
+  - rename: [file.SOCIAL_FUNCTION, genres]
   - to_json_object:
       inputs: [file.LANG, file.LING_GROUP, file.SUPERFUNCTION]
       outputs: [other_fields]

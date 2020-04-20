@@ -104,7 +104,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, densmore-pueblo]
-  - rename: [meta.genre, genre]
+  - rename: [meta.genre, genres]
   - to_json_object:
       inputs: [file.LANG, file.LING_GROUP, file.SUPERFUNCTION]
       outputs: [other_fields]

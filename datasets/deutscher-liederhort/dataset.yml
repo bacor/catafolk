@@ -111,7 +111,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, deutscher-liederhort]
-  - rename: [file.AGN, genre]
+  - rename: [file.AGN, genres]
   - rename: [file.ONB, comments]
   # other_fields
   # warnings

@@ -376,7 +376,7 @@ export const query = graphql`
         culture
         culture_dplace_id
         culture_hraf_id
-        genre
+        genre: genres
         performer: performers
         performer_genders
         instrumentation

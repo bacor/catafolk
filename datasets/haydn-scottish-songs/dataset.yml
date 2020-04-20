@@ -92,7 +92,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, haydn-scottish-songs]
-  - rename: [file.fkt, genre]
+  - rename: [file.fkt, genres]
   - to_json_object:
       inputs: [file.minrhy, file.cut, file.key, file.bem, file.fog]
       outputs: [other_fields]

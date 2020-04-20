@@ -99,7 +99,7 @@ transformations:
       - map_values
       - to_string_list
     inputs: [file.fkt]
-    outputs: [genre]
+    outputs: [genres]
     params:
       - {}
       - old: "(yyy|\\?\\?\\?),? ?"

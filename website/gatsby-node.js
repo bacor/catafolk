@@ -93,7 +93,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       fieldSpec.type = '[String]'
       fieldSpec.resolve = source => {
         const value = source[fieldName]
-        return value === '' ? [] : value.split('|');
+        return (value === '' || value == undefined) ? [] : value.split('|');
       }
 
     } else if(fieldType === 'float') {

@@ -121,7 +121,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, natural-history-of-song]
-  - rename: [meta.type, genre]
+  - rename: [meta.type, genres]
   # other_fields
   # comments
   # warnings

@@ -96,7 +96,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, creighton-nova-scotia]
-  - rename: [file.AGN, genre]
+  - rename: [file.AGN, genres]
   - to_json_object: 
       inputs: [file.verses, file.VTS]
       outputs: [other_fields]

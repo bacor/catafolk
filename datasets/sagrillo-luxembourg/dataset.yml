@@ -87,7 +87,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, sagrillo-luxembourg]
-  - [[rename, unescape_html], file.fkt, genre]
+  - [[rename, unescape_html], file.fkt, genres]
   - to_json_object:
       inputs: 
         - file.minrhy

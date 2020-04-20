@@ -93,7 +93,7 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, altdeutsches-liederbuch]
-  - rename: [file.AGN, genre]
+  - rename: [file.AGN, genres]
   - join: [file._comments, comments_1, {sep: "|"}]
   - join: [[comments_1, file.ONB], comments, {sep: '|'}]
   # other_fields
