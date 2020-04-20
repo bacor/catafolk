@@ -18,6 +18,8 @@ will get a single output, and not a list with one item:
 import re
 import html
 from pandas import isnull
+import logging
+import json
 
 def _return(args):
     """Returns a single value if a single argument was passed,
@@ -409,7 +411,13 @@ def replace(*args, old: str = None, new: str = None):
     """
     if old is None or new is None:
         raise ValueError('Please specify the old and new value')
-    outputs = [arg.replace(old, new) for arg in args]
+    outputs = []
+    for arg in args: 
+        if type(arg) == str:
+            outputs.append(arg.replace(old, new))
+        else:
+            logging.info(f'Cannot replace on type {type(arg)}, skipping.')
+            outputs.append(arg)
     return _return(outputs)
 
 def add(*args, value=None):
@@ -434,8 +442,42 @@ def add(*args, value=None):
 
 
 def strip(*args):
+    """Remove whitespace from all input strings
+
+    >>> strip(' a ', '  b   ', 'c')
+    ['a', 'b', 'c']
+    
+    Returns
+    -------
+    str
+        (List of) strings
+    """
     outputs = [arg.strip() for arg in args]
     return _return(outputs)
+
+def to_json_object(*values, keys=[]):
+    """Create a JSON object from values and keys.
+
+    >>> to_json_object('foo1', 'foo2', keys=['bar1', 'bar2'])
+    '{"bar1": "foo1", "bar2": "foo2"}'
+    
+    Parameters
+    ----------
+    *values : str
+        One or multiple values
+    keys : list, optional
+        The keys to use. The number of keys has to match the number
+        of values, by default []
+    
+    Returns
+    -------
+    str
+        A JSON string
+    """
+    if not len(values) == len(keys):
+        raise ValueError('Number of keys should match the number of values')
+    obj = {k: v for k, v in zip(keys, values)}
+    return json.dumps(obj)
 
 if __name__ == '__main__':
     import doctest
