@@ -67,6 +67,9 @@ def split(*args, sep=None):
     list
         A list of parts
     """
+    if type(args[0]) == list:
+        outputs = [split(*arg, sep=sep) for arg in args]
+        return _return(outputs)
     assert len(args) == 1, "expects a single input"
     return args[0].split(sep)
 
@@ -278,8 +281,8 @@ def extract_groups(string, pattern=None, groups=None):
             groups = range(len(matches.regs))
         outputs = []
         for group_num in groups:
-            if matches[group_num] is not None:
-                outputs.append(matches[group_num])
+            # if matches[group_num] is not None:
+            outputs.append(matches[group_num])
         return _return(outputs)
     elif groups is not None:
         outputs = [None for _ in range(len(groups))]
@@ -303,6 +306,9 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
 
     >>> map_values('foo', 'bar', 'fo.', mapping={'fo.': 'FOO!'}, regex=False)
     [None, None, 'FOO!']
+
+    >>> map_values(['foo', 'bar'], ['fop'], mapping={'fo.': 'FOO!'})
+    [['FOO!', None], 'FOO!']
     
     Parameters
     ----------
@@ -323,6 +329,10 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
         The list of new values, or just the new value if only a 
         single argument is passed
     """
+    if type(args[0]) == list:
+        outputs = [map_values(*arg, mapping=mapping, regex=regex, 
+                    return_missing=return_missing) for arg in args]
+        return _return(outputs)
     if not regex:
         if return_missing:
             outputs = [mapping.get(arg, arg) for arg in args]
@@ -388,7 +398,7 @@ def map_numeric_bins(*args, bins=[], default=None):
             outputs.append(default)
     return _return(outputs)
 
-def replace(*args, old: str = None, new: str = None):
+def replace(*args, old: str = None, new: str = None, regex=True):
     """Replace a substring by another substring
 
     >>> replace('foobar', old='oo', new='ood')
@@ -396,6 +406,12 @@ def replace(*args, old: str = None, new: str = None):
 
     >>> replace('foobar', 'broom', old='oo', new='ood')
     ['foodbar', 'broodm']
+
+    >>> replace('foobar', 'broom', old='o|a', new='X')
+    ['fXXbXr', 'brXXm']
+
+    >>> replace(['foobar', 'broom'], ['foo'], old='o|a', new='X')
+    [['fXXbXr', 'brXXm'], 'fXX']
     
     Parameters
     ----------
@@ -411,10 +427,19 @@ def replace(*args, old: str = None, new: str = None):
     """
     if old is None or new is None:
         raise ValueError('Please specify the old and new value')
+    if type(args[0]) == list:
+        outputs = [replace(*arg, old=old, new=new, regex=regex)
+                for arg in args]
+        return _return(outputs)
+
     outputs = []
     for arg in args: 
         if type(arg) == str:
-            outputs.append(arg.replace(old, new))
+            if regex:
+                output = re.sub(old, new, arg)
+            else:
+                output = arg.replace(old, new)
+            outputs.append(output)
         else:
             logging.info(f'Cannot replace on type {type(arg)}, skipping.')
             outputs.append(arg)
@@ -440,7 +465,6 @@ def add(*args, value=None):
     outputs = [arg + value for arg in args]
     return _return(outputs)
 
-
 def strip(*args):
     """Remove whitespace from all input strings
 
@@ -452,6 +476,9 @@ def strip(*args):
     str
         (List of) strings
     """
+    if type(args[0]) == list:
+        outputs = [strip(*arg) for arg in args]
+        return _return(outputs)
     outputs = [arg.strip() for arg in args]
     return _return(outputs)
 
@@ -478,6 +505,40 @@ def to_json_object(*values, keys=[]):
         raise ValueError('Number of keys should match the number of values')
     obj = {k: v for k, v in zip(keys, values)}
     return json.dumps(obj)
+
+def to_string_list(*args, replace_sep_by='/', sep="|"):
+    """Turn a list of arguments into a string-list
+
+    >>> to_string_list('a', 'b', 'c')
+    'a|b|c'
+
+    >>> to_string_list('a|b', 'c', 'd')
+    'a/b|c|d'
+
+    >>> to_string_list(['a', 'b', 'c'], ['d', 'e', 'f'])
+    ['a|b|c', 'd|e|f']
+    
+    Parameters
+    ----------
+    replace_sep_by : str, optional
+        What to replace the separator with if it occurs
+        in any of the strings before joining the items, 
+        by default '/'
+    sep : str, optional
+        The separator, by default "|"
+    
+    Returns
+    -------
+    string
+        the string list
+    """
+    if type(args[0]) == list:
+        outputs = [to_string_list(*arg, sep=sep, replace_sep_by=replace_sep_by) 
+                   for arg in args]
+        return _return(outputs)
+
+    items = [arg.replace(sep, replace_sep_by) for arg in args]
+    return sep.join(items)
 
 if __name__ == '__main__':
     import doctest
