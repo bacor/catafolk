@@ -183,7 +183,13 @@ export default ({ data }) => {
 
   const citations = {}
   sourceKeys.forEach(key => {
-    const citation = bibliography.format('citation', {entry: key})
+    let citation
+    try {
+      citation = bibliography.format('citation', {entry: key})
+    } catch (e) {
+      console.warn(`An error occured while formatting citation ${key}`, e)
+      citation = key
+    }
     citations[key] = citation
   })
   const cited = bibliography.data.filter(entry => entry.id in citations)
@@ -228,7 +234,7 @@ export default ({ data }) => {
       {
         Header: 'Title',
         accessor: 'title',
-        Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={40} />,
+        Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={80} />,
       },
       {
         Header: 'Source',
@@ -237,7 +243,11 @@ export default ({ data }) => {
           if(!row.source_key) return null;
           const citation = citations[row.source_key]
           const pageNum = row.source_page_num
-          return `${citation.slice(1, -1)}${ pageNum ? `, p. ${pageNum}` : ''}`
+          if(citation) {
+            return `${citation.slice(1, -1)}${ pageNum ? `, p. ${pageNum}` : ''}`
+          } else {
+            return `${row.source_key}${ pageNum ? `, p. ${pageNum}` : ''}`
+          }
         },
         Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={25} />
       },
