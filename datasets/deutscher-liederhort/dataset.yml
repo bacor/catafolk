@@ -14,7 +14,7 @@ status: beta
 # Title of the dataset
 title: Deutscher Liederhort
 
-# A URL to the datasets webpage
+# A URL to the dataset's webpage
 url: https://kern.humdrum.org/cgi-bin/browse?l=essen/europa/deutschl/erk
 
 # A full text description
@@ -165,15 +165,15 @@ transformations:
   # Location
   # —————————————————————————————————————————————————————————————————
   - replace: 
-      - file.ARE
-      - location_1
-      - old: "Europa, Mitteleuropa, Deutschland; "
-        new: ""
+    - file.ARE
+    - location_1
+    - old: "Europa, Mitteleuropa, Deutschland; "
+      new: ""
   - replace: 
-      - location_1
-      - location
-      - old: "Europa, Mitteleuropa, Deutschland, "
-        new: ""
+    - location_1
+    - location
+    - old: "Europa, Mitteleuropa, Deutschland, "
+      new: ""
   # latitude
   # longitude
   #- constant: [auto_geocoded, false]
@@ -181,9 +181,9 @@ transformations:
   # Lyrics
   # —————————————————————————————————————————————————————————————————
   - titlecase: [file.OTL, title]
-  # title_translation
   - constant: [language, German]
   - constant: [glottolog_id, stan1295]
+  # title_translation
   # lyrics
 
 
