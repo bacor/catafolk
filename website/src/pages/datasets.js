@@ -11,8 +11,8 @@ import Badge from 'react-bootstrap/Badge';
 
 function StatusBadge({ value, ...props }) {
   const colors = {
-    alpha: 'success',
-    beta: 'info',
+    beta: 'success',
+    alpha: 'info',
     draft: 'secondary'
   }
   let color;
