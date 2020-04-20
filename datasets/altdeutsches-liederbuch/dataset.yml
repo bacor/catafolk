@@ -1,0 +1,210 @@
+# —————————————————————————————————————————————————————————————————
+# Dataset details
+# —————————————————————————————————————————————————————————————————
+
+# Unique id of the dataset
+dataset_id: altdeutsches-liederbuch
+
+# List of groups dataset belongs (see groups.yml) Optional.
+group_ids: [essen]
+
+# Publication status (draft/beta/alpha/published)
+status: draft
+
+# Title of the dataset
+title: Altdeutsches Liederbuch
+
+# A URL to the dataset's webpage
+url: https://kern.humdrum.org/cgi-bin/browse?l=essen/europa/deutschl/altdeu1
+
+# A full text description
+description: >
+  A collection of 309 folk songs collected by Franz Magnus Böhme and 
+  later digitized by Helmut Schaffrath.
+
+# Authors and contributors
+authors: 
+  - name: Franz Magnus Böhme
+    role: editor
+  - name: Helmuth Schaffrath
+    role: encoding
+
+# List of tags
+tags: [symbolic,phrases]
+formats: [kern] 
+num_entries: 309
+
+# The license, provide the name, and possibly even full text. 
+# If the license is unknown, make sure license.unknown = true
+license: 
+  unknown: true
+  
+# Copyright message for the dataset
+copyright: Copyright 1995, estate of Helmut Schaffrath.
+
+# How to give credits when using the dataset (text message)
+credits:
+
+# Citation keys for the original publications and the dataset.
+# Typically, the former are older folk song books, and the latter
+# more recent papers
+publication_citation_keys: [boehme1877altdeutsches]
+dataset_citation_keys: [schaffrath1995]
+
+# Date on which the dataset which is analyzed by catafolk was 
+# downloaded
+dataset_retrieval_date: 2020-04-01
+
+# The version of the dataset. If the dataset has no version, 
+# plese ensure version = unknown
+version: 1.0
+
+# Columns to show/hide on the catafolk website. This overrides 
+# default options
+show_columns: []
+hide_columns: []
+
+# Possible issues with the dataset. These are shown on the webpage,
+# so people using the dataset are aware of them.
+issues:
+  - title: Missing page numbers
+    description: >
+      There are no page numbers in the source files. We do have song numbers,
+      which can be derived from the catalogue numbers.
+  - title: Cannot find scans
+    description: >
+      I can't find any scans of the book to verify the song numbering...
+  - title: Ignoring useful comments
+    description: >
+      We now ignore useful comments besides the metadata. For example, in `deut3790`,
+      we find the comment "Neuere Melodie, noch 1850 am Niederrhein gehoert."
+  
+# —————————————————————————————————————————————————————————————————
+# Catafolk options
+# —————————————————————————————————————————————————————————————————
+
+sources:
+  - name: file
+    type: file
+    file_pattern: data/*.krn
+    
+transformations:
+  
+  # General 
+  # —————————————————————————————————————————————————————————————————
+  - constant: [dataset_id, altdeutsches-liederbuch]
+  - rename: [file.AGN, genre]
+  - join: [file._comments, comments_1, {sep: "|"}]
+  - join: [[comments_1, file.ONB], comments, {sep: '|'}]
+  # other_fields
+  # comments
+  # warnings
+  # description
+  
+
+  # File 
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.cf_path, file_path]
+  - rename: [file.cf_format, file_format]
+  - rename: [file.cf_checksum, file_checksum]
+  - constant: [file_has_music, true]
+  - constant: [file_has_lyrics, false]
+  - constant: [file_has_license, false]
+  - format:
+    - id
+    - file_preview_url
+    - {pattern: "https://verovio.humdrum.org/?file=essen/europa/deutschl/altdeu1/{}.krn"}
+  - format:
+    - id
+    - file_url
+    - {pattern: "https://kern.humdrum.org/cgi-bin/ksdata?file={}.krn&l=essen/europa/deutschl/altdeu1&format=kern"}
+  
+
+  # Collection 
+  # —————————————————————————————————————————————————————————————————
+  # collectors
+  # collection_date 
+  # collection_date_earliest
+  # collection_date_latest
+
+
+  # Culture
+  # —————————————————————————————————————————————————————————————————
+  # culture
+  # culture_dplace_id
+  # culture_hraf_id
+
+
+  # Encoding
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.EED, encoders]
+  - rename: [file.YEM, copyright]
+  - rename: [file.EEV, version]
+  # encoding_date
+  # contributors
+  # license_id
+
+
+  # Location
+  # —————————————————————————————————————————————————————————————————
+  - replace: 
+    - file.ARE
+    - location
+    - old: "Europa, Mitteleuropa, Deutschland"
+      new: "Germany"
+  # latitude
+  # longitude
+  #- constant: [auto_geocoded, false]
+
+  # Lyrics
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.OTL, title]
+  - constant: [language, German]
+  - constant: [glottolog_id, stan1295]
+  # title_translation
+  # lyrics
+
+
+  # Music
+  # —————————————————————————————————————————————————————————————————
+  - rename: [file.AMT, metric_classification]
+  # tonality
+  # scale
+  # ambitus
+  # tempo
+  # meter
+  # tune_family_id
+
+
+  # Performance
+  # —————————————————————————————————————————————————————————————————
+  - replace: [file.AIN, instrumentation, {old: vox, new: voice}]
+  - constant: [voice_use, true]
+  # performers
+  # performer_genders
+  # instrumentation
+  # instrument_use
+  # percussion_use
+  
+  
+  # Publication
+  # —————————————————————————————————————————————————————————————————
+  - constant: [publication_key, boehme1877altdeutsches]
+  # publication_song_num
+  # publication_page_num
+  # publication_preview_url
+  # catalogue_number
+  # publication_type
+  # publication_title
+  # publication_authors
+  # publication_date
+
+  
+  # Mixed
+  # —————————————————————————————————————————————————————————————————
+  - extract_groups:
+      inputs: [file.SCT]
+      outputs: [catalogue_num, publication_song_num, tune_family_id]
+      params:
+        pattern: "A0*((\\d+)(\\w+)?)"
+        groups: [0, 1, 2]
