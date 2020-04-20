@@ -99,6 +99,19 @@ function Source({author, date, title, pageNum, songNum, publisher, address, url}
   }
 }
 
+function Language({ language, glottolog_id }) {
+  if(glottolog_id) {
+    return (
+      <a href={`https://glottolog.org/resource/languoid/id/${glottolog_id}`}
+        target="_blank">
+        {language} ({glottolog_id})
+      </a>
+    );
+  } else {
+    return language
+  }
+}
+
 function Details({row}) {
   // id
   // format
@@ -153,7 +166,9 @@ function Details({row}) {
         <div className="card-body">
           <h6 className="card-title">Musical properties</h6>
           <PropsList asRow={false}>
-            <Prop title="Language" {...opts}>{language}</Prop>
+            <Prop title="Language" {...opts}>
+              <Language language={orig.language} glottolog_id={orig.language_glottolog} />
+            </Prop>
             <Prop title="Key" {...opts}>{orig.key}</Prop>
             <Prop title="Modality" {...opts}>{orig.modality}</Prop>
             <Prop title="Meter" {...opts}>{orig.meter}</Prop>
