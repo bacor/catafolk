@@ -333,6 +333,7 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
         outputs = [map_values(*arg, mapping=mapping, regex=regex, 
                     return_missing=return_missing) for arg in args]
         return _return(outputs)
+        
     if not regex:
         if return_missing:
             outputs = [mapping.get(arg, arg) for arg in args]
@@ -536,9 +537,31 @@ def to_string_list(*args, replace_sep_by='/', sep="|"):
         outputs = [to_string_list(*arg, sep=sep, replace_sep_by=replace_sep_by) 
                    for arg in args]
         return _return(outputs)
-
-    items = [arg.replace(sep, replace_sep_by) for arg in args]
+    if len(args) == 1 and args[0] is None:
+        return None
+    items = [str(arg).replace(sep, replace_sep_by) for arg in args]
     return sep.join(items)
+
+def drop_none(*args):
+    if type(args[0]) == list:
+        return _return([drop_none(*arg) for arg in args])
+    outputs = [arg for arg in args if arg is not None]
+    if len(outputs) == 0:
+        return None
+    return _return(outputs)
+
+def unique(*args):
+    """Return only the unique arguments
+    
+    >>> unique(1, 2, 3, 1)
+    [1, 2, 3]
+
+    >>> unique([1, 2, 1], [2, 2])
+    [[1, 2], 2]
+    """
+    if type(args[0]) == list:
+        return _return([unique(*arg) for arg in args])
+    return _return(list(set(args)))
 
 if __name__ == '__main__':
     import doctest
