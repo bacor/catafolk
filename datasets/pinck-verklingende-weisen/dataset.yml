@@ -9,7 +9,7 @@ dataset_id: pinck-verklingende-weisen
 group_ids: [sagrillo]
 
 # Publication status (draft/beta/alpha/published)
-status: draft
+status: alpha
 
 # Title of the dataset
 title: Pinck's Verklingende Weisen

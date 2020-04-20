@@ -3,7 +3,7 @@
 # —————————————————————————————————————————————————————————————————
 
 # Unique id of the dataset
-dataset_id: volksthumliche-lieder
+dataset_id: boehme-volksthumliche-lieder
 
 # List of groups dataset belongs (see groups.yml) Optional.
 group_ids: [essen]
@@ -104,7 +104,7 @@ transformations:
   
   # General 
   # —————————————————————————————————————————————————————————————————
-  - constant: [dataset_id, volksthumliche-lieder]
+  - constant: [dataset_id, boehme-volksthumliche-lieder]
   - join: [file._comments, comments_1, {sep: "|"}]
   - join: [[comments_1, file.ONB], comments, {sep: '|'}]
   - operations:

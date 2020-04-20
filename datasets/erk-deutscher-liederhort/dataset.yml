@@ -3,7 +3,7 @@
 # —————————————————————————————————————————————————————————————————
 
 # Unique id of the dataset
-dataset_id: deutscher-liederhort
+dataset_id: erk-deutscher-liederhort
 
 # List of groups dataset belongs (see groups.yml) Optional.
 group_ids: [essen]
@@ -110,7 +110,7 @@ transformations:
   
   # General 
   # —————————————————————————————————————————————————————————————————
-  - constant: [dataset_id, deutscher-liederhort]
+  - constant: [dataset_id, erk-deutscher-liederhort]
   - rename: [file.ONB, comments]
   - operations: 
       - replace

@@ -3,13 +3,13 @@
 # —————————————————————————————————————————————————————————————————
 
 # Unique id of the dataset
-dataset_id: altdeutsches-liederbuch
+dataset_id: boehme-altdeutsches-liederbuch
 
 # List of groups dataset belongs (see groups.yml) Optional.
 group_ids: [essen]
 
 # Publication status (draft/beta/alpha/published)
-status: draft
+status: alpha
 
 # Title of the dataset
 title: Altdeutsches Liederbuch
@@ -98,7 +98,7 @@ transformations:
   
   # General 
   # —————————————————————————————————————————————————————————————————
-  - constant: [dataset_id, altdeutsches-liederbuch]
+  - constant: [dataset_id, boehme-altdeutsches-liederbuch]
   - join: [file._comments, comments_1, {sep: "|"}]
   - join: [[comments_1, file.ONB], comments, {sep: '|'}]
   - operations:
