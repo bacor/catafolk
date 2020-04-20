@@ -34,7 +34,7 @@ authors:
     role: digitization
 
 # List of tags
-tags: [symbolic, phrases]
+tags: [symbolic, phrases, genres]
 formats: [kern] 
 num_entries: 1701
 
@@ -111,8 +111,151 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, deutscher-liederhort]
-  - rename: [file.AGN, genres]
   - rename: [file.ONB, comments]
+  - operations: 
+      - replace
+      - replace
+      - split
+      - strip
+      - map_values
+      - to_string_list
+    inputs: [file.AGN]
+    outputs: [genres]
+    params:
+      - old: ' ?- ?'
+        new: ''
+      - old: ' ?\?'
+        new: ''
+      - sep: ','
+      -
+      - return_missing: false
+        mapping:
+          erzaehlendes VolksLied: story
+          Sage: legend
+          Legende: legend
+          Maerchen: fairy tale
+          ZauberLied: magic
+          Ballade: ballad
+          Ritter.*: knight
+          geistlich(es)?.*: religious
+          religioes: religious
+          HeiligenLied: saints
+          MarienLied: maria
+          Mord: murder
+          Hinrichtung: execution
+          Liebe: love
+          Leid: sorrow
+          Tod: death
+          Verf(ü|ue)hrung: seduction
+          KindsMord: child murder
+          Lied: song
+          WallfahrtsLied: pilgrimage
+          Gebet: prayer
+          LobLied: praise song
+          Weihnachten: christmas
+          Tanz(Lied)?: dance
+          Spiel: game
+          Kinder(Lied)?: children's song
+          Schlaf(l|L)ied: lullaby
+          Wiegen: lullaby
+          Reigen: round dance
+          TierLied: animals
+          ReiterLied: rider
+          GefangenenLied: prisoner's song
+          Soldaten(Lied)?: soldier's song
+          FreiheitsLied: freedom
+          NaturLied: nature
+          MoralLied: moral
+          Scherz(Lied)?: joke
+          Klage: lament
+          Spott(Lied)?: mockery
+          (b|B)iblischer Stoff: biblical
+          LuegenLied: lying
+          Abschieds?(Lied)?: farewell
+          SpottLied auf Wallfahrt: pilgrimage
+          Krankheit: disease
+          JesusLied: jesus
+          Dank(Lied)?: thanks
+          FestLied: festival
+          Ostern: easter
+          Choral: choral
+          Trost: comfort
+          Neujahr: new year
+          JaegerLied: hunt
+          Studenten(Lied)?: student's song
+          Satire: satire
+          Handwerker(Lied)?: craftsman's song
+          HandwerksburschenLied: craftsman's song
+          Hofe: court
+          Trink(Lied)?: drinking
+          Staende(Lied)?: social class #right?
+          Schneider: tailor
+          Wanderschaft: travel
+          WanderLied: travel
+          Gesellen: companion
+          StrassenRaeuber: robbery
+          Ehestands: marriage
+          Reimspiel: rhyme
+          BettelMoench: begging
+          Nachtwaechter: night watch
+          BauernLied: farmer's song
+          (bei der )?Arbeit: work
+          Fuhrmann: coachman
+          BergmannsLied: miner's song
+          SeemannsLied: sailor's song
+          Hirten(Lied)?: shepherd's song
+          SchaeferLied: shepherd's song
+          AlpenLied: mountain song
+          Wilderer: poacher
+          Krieg(slied)?: war
+          Schelmen(Lied)?: rogue
+          Schalke: rogue
+          Vergewaltigung: rape
+          betrogener Ehemann: betrayal
+          Schalk: farce
+          Schwank: farce
+          TierMaerchen: fable
+          PflanzenMaerchen: plants
+          FamilienGeschichte: family
+          Strafe: punishment
+          RaeuberSage: robbery
+          betrogene Liebe: cheating
+          historisches Lied: historical
+          Jahreszeiten: seasons
+          Fruehling: spring
+          Untreue: infidelity
+          Spott: mockery
+          Treue: fidelity
+          FensterLied: serenade
+          Versoehnung: reconciliation
+          Trennung: separation
+          Staendchen: serenade
+          Abend: evening
+          KerkerLied: prisoner's song
+          Auswanderung: emigration
+          Freundschaft: friendship
+          # TageLied: tagelied
+          # KiltLied: kiltlied
+          WaechterLied: watchman
+          Hochzeits?: wedding
+          Erotik: erotic
+          Verlobung: engagement
+          NonnenKlage: nun's lament
+          Brautwerbung: courtship
+          MaiTanz: may dance
+          Pfingsten: pentecost
+          Kirmes: fair
+          Walzer: walz
+          Raetsel: riddle
+          Jodler: yodel
+          Brauchtums(Lied)?: customs
+          LuegenMaerchen: lying
+          WunschLied: wishes
+          WettLied: gamble
+          Zech(Lied)?: drinking
+          Ansinge: serenade
+          KirchenFest: holiday
+      -
   # other_fields
   # warnings
   # description

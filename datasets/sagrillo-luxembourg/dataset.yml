@@ -28,7 +28,7 @@ authors:
     role: digitisation
 
 # List of tags
-tags: [symbolic,no lyrics,phrases]
+tags: [symbolic, no lyrics, phrases, genres]
 formats: [kern] 
 num_entries: 612
 
