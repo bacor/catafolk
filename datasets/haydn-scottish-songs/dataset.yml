@@ -6,7 +6,7 @@
 dataset_id: haydn-scottish-songs
 
 # Publication status (draft/beta/alpha/published)
-status: draft
+status: beta
 
 # Title of the dataset
 title: Haydn's Original Scots Songs
