@@ -167,7 +167,7 @@ function Details({row}) {
           <h6 className="card-title">Musical properties</h6>
           <PropsList asRow={false}>
             <Prop title="Language" {...opts}>
-              <Language language={orig.language} glottolog_id={orig.language_glottolog} />
+              <Language language={orig.language} glottolog_id={orig.glottolog_id} />
             </Prop>
             <Prop title="Key" {...opts}>{orig.key}</Prop>
             <Prop title="Modality" {...opts}>{orig.modality}</Prop>

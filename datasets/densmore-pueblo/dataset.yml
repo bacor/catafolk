@@ -175,15 +175,13 @@ transformations:
           Zuni: Zuni
   - map_values:
       inputs: [culture]
-      outputs: [language_glottolog]
+      outputs: [glottolog_id]
       params:
         mapping: 
           Acoma: acom1246
           Cochiti: coch1273
           Isleta: isle1245
           Zuñi: zuni1245
-  # language
-  # language_glottolog
   # lyrics
 
 

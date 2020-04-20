@@ -189,7 +189,7 @@ transformations:
           Makah: Makah
   - map_values:
       inputs: [culture]
-      outputs: [language_glottolog]
+      outputs: [glottolog_id]
       params:
         mapping: 
           Makah: maka1318

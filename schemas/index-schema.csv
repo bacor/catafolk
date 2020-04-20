@@ -8,7 +8,7 @@ latitude,101,location,geographic latitude coordinate of the location,no,float,
 longitude,102,location,geographic longitude coordinate of the location,no,float,
 auto_geocoded,103,location,whether the coordinates were automatically determined,no,boolean,This is required whenever location information is present.
 language,104,lyrics,the language of the lyrics,no,string,"If no lyrics are given, the language of the performer can be used."
-language_glottolog,105,lyrics,Gottolog id of the language,no,string,
+glottolog_id,105,lyrics,Gottolog id of the language,no,string,
 culture,120,culture,culture or nationality of the original performer,no,string,
 culture_dplace_id,120,culture,D-Place identifier of the culture/society,no,string,
 culture_hraf_id,121,culture,HRAF identifier of the culture,no,string,

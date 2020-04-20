@@ -364,7 +364,7 @@ export const query = graphql`
         longitude
         auto_geocoded
         language
-        language_glottolog
+        glottolog_id
         culture
         culture_dplace_id
         culture_hraf_id

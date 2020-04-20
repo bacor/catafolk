@@ -169,7 +169,7 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - rename: [file.OTL, title]
   - constant: [language, 'English']
-  - constant: [language_glottolog, atla1283]
+  - constant: [glottolog_id, atla1283]
   # title_translation
   # lyrics
 
