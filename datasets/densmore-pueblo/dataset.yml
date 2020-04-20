@@ -76,17 +76,6 @@ issues:
   - title: Copyright?
     description: >
       There is no copyright/license; are the ones used correct? 
-  - title: Ignored meta fields
-    description: >
-      The following fields are currently ignored: `LING_GROUP` (the 
-      language family, it seems) `LANG` (mostly value `'Tone'`, 
-      probably indicating it is a tone language). `REG` (we use the 
-      location information from `additional-metadata.csv`), and 
-      `SUPERFUNCTION` (the genre or `'tribename'`)
-  - title: Languages
-    description: >
-      Densmore reports the languages; these could be added in the 
-      additional metadata
   
 # —————————————————————————————————————————————————————————————————
 # Catafolk options
