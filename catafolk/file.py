@@ -160,10 +160,16 @@ class KernFile(File):
         metadata = {}
         with open(self.path, 'r', encoding=self.encoding) as handle:
             for line in handle:
-                match = re.match(r'^\!{3}([^:]+):[ \t]*(.+)', line)
-                if match:
-                    key = match[1]
-                    value = match[2]
+                key = False
+                if line.startswith('!! '):
+                    key = '_comments'
+                    value = line[3:].strip()
+                else:
+                    match = re.match(r'^\!{3}([^:]+):[ \t]*(.+)', line)
+                    if match:
+                        key = match[1]
+                        value = match[2]
+                if key:
                     # Key `id` is reserved
                     if key == 'id': key = '_id'
                     if key not in metadata:
