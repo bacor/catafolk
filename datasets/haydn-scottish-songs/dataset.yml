@@ -70,6 +70,10 @@ issues:
       contains many more. See e.g.
       [this overview on ISMLP]
       (https://imslp.org/wiki/List_of_works_by_Joseph_Haydn#Hob.XXXI_.28Scottish:_1-273.2C_Welsh:_1-61.29_Arrangements_of_Folksongs_and_other_vocal_arrangements)
+  - title: Collector?
+    description: >
+      Did Haydn actually collect these songs? Or did he use other
+      song books?
   
 # —————————————————————————————————————————————————————————————————
 # Catafolk options
@@ -120,7 +124,7 @@ transformations:
   - constant: [collectors, Joseph Haydn]
   # collection_date 
   # collection_date_earliest
-  # collection_date_latest
+  - constant: [collection_date_latest, 1792]
 
 
   # Culture
@@ -151,8 +155,8 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - rename: [file.OTL, title]
   # title_translation
-  # language
-  # glottolog_id
+  - constant: [language, English]
+  - constant: [glottolog_id, stan1293]
   # lyrics
 
 
@@ -181,7 +185,7 @@ transformations:
   # instrumentation
   # instrument_use
   # percussion_use
-  # voice_use
+  - constant: [voice_use, true]
   
   
   # Publication
@@ -195,11 +199,11 @@ transformations:
         groups: [1, 2]
   - [[to_int, add], page_min_1, publication_page_num, [{}, {value: 1}]]
   # publication_preview_url
-  # catalogue_number
-  # publication_type
-  # publication_title
-  # publication_authors
-  # publication_date
+  - format: [publication_song_num, catalogue_num, {pattern: "Hob.XXXIa:{}"}]
+  - constant: [publication_type, book]
+  - constant: [publication_title, A Selection of Original Scots Songs (Hob.XXXIa)]
+  - constant: [publication_authors, Joseph Haydn]
+  - constant: [publication_date, 1792]
 
   
   # Mixed

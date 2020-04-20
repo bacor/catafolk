@@ -6,7 +6,7 @@ if __name__ == '__main__':
     # TODO add command line args?
     datasets = [
         # 'bronson-child-ballads',
-        'creighton-nova-scotia',
+        # 'creighton-nova-scotia',
         # 'densmore-ojibway',
         # 'densmore-pawnee',
         # 'densmore-teton-sioux',
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         # 'sagrillo-ireland',
         # 'sagrillo-lorraine',
         # 'sagrillo-luxembourg',
-        # 'sagrillo-scotland',
+        'haydn-scottish-songs',
         
         # 'densmore-pueblo',
         # 'densmore-nootka',
