@@ -31,7 +31,7 @@ authors:
     role: encoder
 
 # List of tags
-tags: [symbolic, phrases]
+tags: [symbolic, phrases, genres]
 formats: [kern] 
 num_entries: 704
 
@@ -86,6 +86,10 @@ issues:
     description: >
       Sometimes mixed meters are indicated in the comments. Is
       it useful to add this?
+  - title: Genres correct?
+    description: >
+      Are the genres indeed correct? All of them have genre 
+      `romance`?
   
 # —————————————————————————————————————————————————————————————————
 # Catafolk options
@@ -101,9 +105,31 @@ transformations:
   # General 
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, volksthumliche-lieder]
-  - rename: [file.AGN, genres]
   - join: [file._comments, comments_1, {sep: "|"}]
   - join: [[comments_1, file.ONB], comments, {sep: '|'}]
+  - operations:
+      - split
+      - strip
+      - map_values
+      - to_string_list
+    inputs: [file.AGN]
+    outputs: [genres]
+    params:
+      - sep: ','
+      -
+      - return_missing: true,
+        mapping:
+          Ballade: ballad
+          Lied: song
+          Romanze: romance
+          religioeses Lied: religious
+          Jaegerlied: hunt
+          Kinderlied: children's song
+          Kriegslied: war
+          Trinklied: drinking
+          Personenlied: person
+      -
+  # - rename: [file.AGN, genres]
   # other_fields
   # comments
   # warnings
@@ -210,7 +236,8 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - extract_groups:
       inputs: [file.SCT]
-      outputs: [catalogue_num, publication_song_num, tune_family_id]
+      outputs: [catalogue_num, song_num, tune_family_id]
       params:
         pattern: "A0*((\\d+)(\\w+)?)"
         groups: [0, 1, 2]
+  - lowercase: [song_num, publication_song_num]
