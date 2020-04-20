@@ -115,7 +115,11 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, densmore-pueblo]
   - rename: [meta.genre, genre]
-  # TODO other_fields
+  - to_json_object:
+      inputs: [file.LANG, file.LING_GROUP, file.SUPERFUNCTION]
+      outputs: [other_fields]
+      params:
+        keys: [language_type, language_family, functions]
   # comments
   # warnings
   # description
@@ -171,6 +175,24 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   # title: see below
   # title_translation: left empty; titles are in English
+  - map_values:
+      inputs: [culture]
+      outputs: [language]
+      params:
+        mapping:
+          Acoma: Acoma
+          Cochiti: Cochiti
+          Isleta: Isleta
+          Zuni: Zuni
+  - map_values:
+      inputs: [culture]
+      outputs: [language_glottolog]
+      params:
+        mapping: 
+          Acoma: acom1246
+          Cochiti: coch1273
+          Isleta: isle1245
+          Zuñi: zuni1245
   # language
   # language_glottolog
   # lyrics
