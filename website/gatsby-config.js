@@ -7,6 +7,7 @@ const path = require(`path`)
 // const { typeNameFromDir, typeNameFromFile } = require("gatsby-transformer-csv")
 
 const excludedDatasets = [
+  // 'deutscher-liederhort',
   'bronson-child-ballads',
   // 'creighton-nova-scotia',
   'densmore-ojibway',
@@ -19,7 +20,7 @@ const excludedDatasets = [
   'essen-deutschl-altdeu1',
   'essen-deutschl-boehme',
   'essen-deutschl-erk',
-  'natural-history-of-song',
+  // 'natural-history-of-song',
   'sagrillo-ireland',
   'sagrillo-lorraine',
   'sagrillo-luxembourg',
