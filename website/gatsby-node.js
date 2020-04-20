@@ -105,9 +105,6 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
 
     // } else if(fieldType === 'date') {
     // TODO
-
-    // } else if(fieldType === 'JSON') {
-    // TODO
     
     // Default: String
     } else {
