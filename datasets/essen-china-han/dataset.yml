@@ -159,7 +159,7 @@ transformations:
   # ambitus
   # tempo
   # meter
-  - rename: [ifle.AMT, metric_classification]
+  - rename: [file.AMT, metric_classification]
   # tune_family_id
 
 
