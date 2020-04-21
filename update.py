@@ -5,29 +5,26 @@ from catafolk.dataset import Dataset
 if __name__ == '__main__':
     # TODO add command line args?
     datasets = [
-        # 'altdeutsches-liederbuch',
-        # 'deutscher-liederhort',
-        # 'bronson-child-ballads',
-        # 'creighton-nova-scotia',
-        # 'densmore-ojibway',
-        # 'densmore-pawnee',
-        # 'densmore-teton-sioux',
+        # # 'bronson-child-ballads',
+        # # 'densmore-ojibway',
+        # # 'densmore-pawnee',
+        # # 'densmore-teton-sioux',
         # 'essen-china-han',
         # 'essen-china-natmin',
         # 'essen-china-shanxi',
         # 'essen-china-xinhua',
-        # 'essen-deutschl-altdeu1',
-        # 'essen-deutschl-boehme',
-        # 'essen-deutschl-erk',
-        'natural-history-of-song',
+        # 'boehme-altdeutsches-liederbuch',
+        # 'erk-deutscher-liederhort',
+        # 'creighton-nova-scotia',
+        # 'natural-history-of-song',
         # 'sagrillo-ireland',
-        # 'sagrillo-lorraine',
         # 'sagrillo-luxembourg',
         # 'haydn-scottish-songs',
-        # 'densmore-pueblo',
+        'densmore-pueblo',
         # 'densmore-nootka',
         # 'finnish-folk-tunes'
-        # 'volksthumliche-lieder',
+        # 'boehme-volksthumliche-lieder',
+        # 'pinck-verklingende-weisen'
     ]
     for dataset_id in datasets:
         print(dataset_id)
