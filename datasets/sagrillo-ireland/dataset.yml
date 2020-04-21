@@ -9,7 +9,7 @@ dataset_id: sagrillo-ireland
 group_ids: [sagrillo]
 
 # Publication status (draft/beta/alpha/published)
-status: draft
+status: alpha
 
 # Title of the dataset
 title: Songs of Ireland

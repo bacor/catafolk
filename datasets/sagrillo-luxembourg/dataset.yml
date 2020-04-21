@@ -9,7 +9,7 @@ dataset_id: sagrillo-luxembourg
 group_ids: [sagrillo]
 
 # Publication status (draft/beta/alpha/published)
-status: draft
+status: alpha
 
 # Title of the dataset
 title: Songs of Luxembourg
@@ -115,7 +115,7 @@ transformations:
       -
       -
       -
-  
+
   - to_json_object:
       inputs: 
         - file.minrhy
