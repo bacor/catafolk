@@ -7,27 +7,23 @@ const path = require(`path`)
 // const { typeNameFromDir, typeNameFromFile } = require("gatsby-transformer-csv")
 
 const excludedDatasets = [
-  // 'deutscher-liederhort',
   'bronson-child-ballads',
-  // 'creighton-nova-scotia',
   'densmore-ojibway',
   'densmore-pawnee',
   'densmore-teton-sioux',
-  'essen-china-han',
-  'essen-china-natmin',
-  'essen-china-shanxi',
-  'essen-china-xinhua',
-  'essen-deutschl-altdeu1',
-  'essen-deutschl-boehme',
-  'essen-deutschl-erk',
+  // 'creighton-nova-scotia',
+  // 'deutscher-liederhort',
+  // 'essen-china-han',
+  // 'essen-china-natmin',
+  // 'essen-china-shanxi',
+  // 'essen-china-xinhua',
   // 'natural-history-of-song',
-  'sagrillo-ireland',
-  'sagrillo-lorraine',
-  'sagrillo-luxembourg',
+  // 'sagrillo-ireland',
+  // 'sagrillo-luxembourg',
   // 'sagrillo-scotland',
   // 'densmore-pueblo',
   // 'densmore-nootka',
-  'finnish-folk-tunes'
+  // 'finnish-folk-tunes'
 ];
 
 // Filenames that should be included
