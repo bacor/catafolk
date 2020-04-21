@@ -20,6 +20,13 @@ import html
 from pandas import isnull
 import logging
 import json
+import os
+import yaml
+
+CUR_DIR = os.path.dirname(__file__)
+ROOT_DIR = os.path.abspath(os.path.join(CUR_DIR, os.path.pardir))
+DATASETS_DIR = os.path.join(ROOT_DIR, 'datasets')
+MAPPING_CACHE = {}
 
 def _return(args):
     """Returns a single value if a single argument was passed,
@@ -294,7 +301,7 @@ def extract_groups(string, pattern=None, groups=None):
         raise Exception('Regex did not match, cannot determine how many groups to return.\
             Provide the `groups` argument should resolve this.')
 
-def map_values(*args, mapping={}, regex=True, return_missing=False):
+def map_values(*args, mapping={}, mapping_path=None, regex=True, return_missing=False):
     """Map input values to other values according to a dictionary mapping.
     It tests whether an input value matches any of the keys in the mapping
     dictionary using a regular expression. If so, the value is replaced
@@ -318,6 +325,9 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
     mapping : dict
         A dictionary with regex patterns as keys. If an input matches
         the pattern, it is replaced by the value in this dictionary.
+    mapping_path : file
+        The path to a YAML file containing the mapping. The path must
+        be relative to the datasets directory. By default None.
     regex : bool, optional
         Use regular expressions? If False, it performs a literal match.
         By default True.
@@ -334,9 +344,21 @@ def map_values(*args, mapping={}, regex=True, return_missing=False):
     """
     if type(args[0]) == list:
         outputs = [map_values(*arg, mapping=mapping, regex=regex, 
+                    mapping_path=mapping_path, 
                     return_missing=return_missing) for arg in args]
         return _return(outputs)
-        
+    
+    if mapping_path is not None:
+        path = os.path.join(DATASETS_DIR, mapping_path)
+        if not path in MAPPING_CACHE:
+            if not os.path.exists(path):
+                raise ValueError(f'Mapping file does not exist {path}')
+            with open(path, 'r') as stream:
+                mapping = yaml.safe_load(stream)
+                MAPPING_CACHE[path] = mapping
+        else:
+            mapping = MAPPING_CACHE[path]
+    # print(mapping)
     if not regex:
         if return_missing:
             outputs = [mapping.get(arg, arg) for arg in args]
