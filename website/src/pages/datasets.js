@@ -35,8 +35,8 @@ const DatasetRow = ({ dataset }) => {
     <td><Markdown source={dataset.description} /></td>
     <td>{dataset.num_entries}</td>
     <td>
-      <Link to={`/${dataset.fields.slug}`} className="btn btn-outline-secondary btn-sm">
-        {dataset.dataset_id}  <IoIosArrowForward />
+      <Link to={`/${dataset.fields.slug}`} className="btn btn-secondary btn-sm">
+        <span style={{whiteSpace: 'nowrap'}}>View <IoIosArrowForward /></span>
       </Link>
     </td>
   </tr>)
@@ -68,7 +68,7 @@ export default ({ data }) => {
                   <th scope="col">Groups</th>
                   <th scope="col" className="w-50">Description</th>
                   <th scope="col">Songs</th>
-                  <th scope="col">ID</th>
+                  <th scope="col"></th>
                   </tr>
               </thead>
               <tbody>
