@@ -118,18 +118,8 @@ transformations:
       - sep: ','
       -
       - return_missing: false,
-        mapping:
-          Ballade: ballad
-          Lied: song
-          Romanze: romance
-          religioeses Lied: religious
-          Jaegerlied: hunt
-          Kinderlied: children's song
-          Kriegslied: war
-          Trinklied: drinking
-          Personenlied: person
+        mapping_path: sagrillo-luxembourg/genre-mapping.yml
       -
-  # - rename: [file.AGN, genres]
   # other_fields
   # comments
   # warnings

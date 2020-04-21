@@ -111,16 +111,8 @@ transformations:
     params:
       - sep: ','
       -
-      - return_missing: false,
-        mapping:
-          Ballade: ballad
-          Lied: song
-          Romanze: romance
-          religioeses Lied: religious
-          Jaegerlied: hunt
-          Kinderlied: children's song
-          Kriegslied: war
-          Trinklied: drinking
+      - return_missing: false
+        mapping_path: sagrillo-luxembourg/genre-mapping.yml
       -
   # other_fields
   # comments
