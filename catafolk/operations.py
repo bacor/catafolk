@@ -533,7 +533,7 @@ def to_json_object(*values, keys=[]):
         A JSON string
     """
     if not len(values) == len(keys):
-        raise ValueError('Number of keys should match the number of values')
+        raise ValueError(f'Number of keys ({len(keys)}) should match the number of values ({len(values)}')
     obj = {k: v for k, v in zip(keys, values)}
     return json.dumps(obj)
 
