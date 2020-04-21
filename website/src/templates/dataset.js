@@ -258,7 +258,7 @@ export default ({ data }) => {
       },
       {
         Header: 'Genre',
-        accessor: 'genre',
+        accessor: 'genres',
         Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={30} />
       },
       {
@@ -357,6 +357,7 @@ export const query = graphql`
         url
       }
       show_columns
+      hide_columns
       issues {
         title
         description
@@ -376,7 +377,7 @@ export const query = graphql`
         culture
         culture_dplace_id
         culture_hraf_id
-        genre: genres
+        genres
         performer: performers
         performer_genders
         instrumentation

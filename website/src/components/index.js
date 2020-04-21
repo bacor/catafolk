@@ -84,14 +84,24 @@ function OptionsCell({ cell }) {
 
 function TruncatedCell({ cell, maxLength, omission }) {
   maxLength = maxLength || 30
-  if(typeof(cell.value) !== 'string' || cell.value.length < maxLength) {
-    return cell.value
+
+  let value;
+  if(typeof(cell.value !== 'string')) {
+    try {
+      value = cell.value.join(', ')
+    } catch {
+      value = cell.value
+    }
+  }
+
+  if(typeof(value) !== 'string' || value.length < maxLength) {
+    return value
   } else {
-    const tooltip = <Tooltip>{cell.value}</Tooltip>
+    const tooltip = <Tooltip>{value}</Tooltip>
     const truncateOptions = {length: maxLength, omission: omission || '...'}
     return (
       <OverlayTrigger placement="top" overlay={tooltip}>
-        <span>{_.truncate(cell.value, truncateOptions)}</span>
+        <span>{_.truncate(value, truncateOptions)}</span>
       </OverlayTrigger>
     );
   }
@@ -184,6 +194,7 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 )
 
+// Todo implement hide columns
 function Index({ columns, data, showColumns, bibliography }) {
   const defaultHiddenColumns = ['meter', 'key', 'ambitus', 'location']
   const hiddenColumns = []
