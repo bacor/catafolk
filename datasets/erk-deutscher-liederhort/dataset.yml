@@ -31,7 +31,10 @@ authors:
   - name: Franz Magnus Böhme
     role: editor
   - name: Helmuth Schaffrath
-    role: digitization
+    role: encoding
+contributors:
+  - name: David Huron
+    role: "**kern conversion"
 
 # List of tags
 tags: [symbolic, phrases, genres]
@@ -94,6 +97,15 @@ issues:
   - title: Geocoding
     description: >
       Locations have to be geocoded
+  - title: Absolute pitch height unreliable
+    description: >
+      Citing the README, "In summary, although the relative pitch 
+      information and tonic is accurate, the absolute pitch-height
+      information is unreliable in this database."
+  - title: minor/major mode unreliable
+    description: >
+      Citing the README: "In summary, major/minor designations in
+      this database are unreliable."
   
 # —————————————————————————————————————————————————————————————————
 # Catafolk options
@@ -173,7 +185,7 @@ transformations:
   # Encoding
   # —————————————————————————————————————————————————————————————————
   - rename: [file.EED, encoders]
-  - constant: [encoding_date, 1995]
+  - constant: [encoding_date, 1982–1995]
   - rename: [file.YEM, copyright]
   - rename: [file.EEV, version]
   # contributors
