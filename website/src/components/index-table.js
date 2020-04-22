@@ -112,37 +112,52 @@ function Language({ language, glottolog_id }) {
   }
 }
 
+function Location({ location, latitude, longitude}) {
+  if(latitude || longitude) {
+    return (
+      <a href={`https://www.openstreetmap.org/#map=10/${latitude}/${longitude}`} target="_blank">
+        {location}{' '}
+        ({latitude ? latitude : 'unknown'}, {longitude ? longitude : 'unknown'})
+      </a>
+    )
+  } else {
+    return location
+  }
+}
+
+function StringList({ list }) {
+  if (list.length == 0) {
+    return null
+  } else {
+    return list.join(', ')
+  }
+}
+
 function Details({row}) {
-  // id
-  // format
-  // genre
-  // has_lyrics
-  // has_music
-  // path
-  // preview_url
-  // source_key
-  // title_eng
-  // title
-  // url
-  // version
   const orig = row.original
+  const unknown = <em className="text-muted">Unknown</em>
   const opts = {
-    defaultValue: <em className="text-muted">Unknown</em>,
+    defaultValue: unknown,
     inRow: false
   }
-
-  const language = `${orig.language}${orig.language_iso ? ` (${orig.language_iso})` : '' }`;
-
+  
   return (
     <div className="card-deck w-100">
       <div className="card bg-light border-0">
         <div className="card-body">
-          <h6 className="card-title">Collection</h6>
+          {/* <h6 className="card-title">Collection</h6> */}
           <PropsList asRow={false}>
             <Prop title="Title" {...opts}>{orig.title}</Prop>
-            <Prop title="Performer" {...opts}>{orig.performer}</Prop>
-            <Prop title="Collector" {...opts}>{orig.collector}</Prop>
-            <Prop title="Collection date" {...opts}>
+            { orig.performer.length == 0 ? null :
+              <Prop title="Performer" {...opts}>{orig.performer}</Prop>}
+            {
+              orig.collector.length > 0
+              ? (<Prop title="Collectors" {...opts}>
+                  <StringList list={orig.collector} />
+                </Prop>)
+              : <Prop title="Collectors" {...opts}>{opts.defaultValue}</Prop>
+            }
+            <Prop title="Collection date" visible={orig.collection_date !== null} {...opts}>
               {
               orig.collection_date 
                 ? orig.collection_date
@@ -152,38 +167,42 @@ function Details({row}) {
                     : `after ${orig.collection_date_earliest}`
                   : orig.collection_date_latest 
                     ? `before ${orig.collection_date_latest}`
-                    : null
+                    : 'unknown'
               }
             </Prop>
-            <Prop title="Culture" {...opts}>{orig.culture}</Prop>
-            <Prop title="Location" {...opts}>{orig.location}</Prop>
-            <Prop title="Latitude" {...opts}>{orig.latitude}</Prop>
-            <Prop title="Longitude" {...opts}>{orig.longitude}</Prop>
-          </PropsList>
-        </div>
-      </div>
-      <div className="card bg-light border-0">
-        <div className="card-body">
-          <h6 className="card-title">Musical properties</h6>
-          <PropsList asRow={false}>
+            <Prop title="Culture" {...opts}>
+              {orig.culture}
+            </Prop>
             <Prop title="Language" {...opts}>
               <Language language={orig.language} glottolog_id={orig.glottolog_id} />
             </Prop>
-            <Prop title="Key" {...opts}>{orig.key}</Prop>
-            <Prop title="Modality" {...opts}>{orig.modality}</Prop>
-            <Prop title="Meter" {...opts}>{orig.meter}</Prop>
-            <Prop title="Metric" {...opts}>{orig.metric_classification}</Prop>
-            <Prop title="Ambitus" {...opts}>{orig.ambitus}</Prop>
+            <Prop title="Location" {...opts}>
+              <Location location={orig.location} 
+                latitude={orig.latitude} longitude={orig.longitude}/>
+            </Prop>
           </PropsList>
         </div>
       </div>
       <div className="card bg-light border-0">
         <div className="card-body">
-          <h6 className="card-title">Encoding</h6>
           <PropsList asRow={false}>
-            <Prop title="Encoder" {...opts}>{row.original.encoder}</Prop>
-            <Prop title="Encoding date" {...opts}>{row.original.encoding_date}</Prop>
-            <Prop title="Source" {...opts}>
+            {
+              orig.encoder.length > 0 
+                ? (<Prop title="Encoders" {...opts}>
+                    <StringList list={orig.encoder} />
+                  </Prop>)
+                : <Prop title="Encoders" {...opts}>{unknown}</Prop>
+            }
+            <Prop title="Encoding date" 
+              visible={orig.encoding_date !== null} {...opts}>
+              {orig.encoding_date}
+            </Prop>
+            <Prop title="Catalogue number" {...opts}>{orig.catalogue_num}</Prop>
+            <Prop title="Copyright" {...opts}>{orig.copyright}</Prop>
+            <Prop title="Checksum" {...opts}>
+              <code className="text-muted">{orig.checksum}</code>
+            </Prop>
+            {/* {<Prop title="Source" {...opts}>
               {orig.source ? orig.source : (
                 <Source 
                   author={orig.source_author}
@@ -193,12 +212,32 @@ function Details({row}) {
                   songNum={orig.source_song_num} 
                   publisher={orig.source_publisher} 
                   url={orig.source_url} />)}
+            </Prop>} */}
+            <Prop title="Warnings" 
+              visible={orig.warnings !== null}
+              className="text-danger" 
+              titleOptions={{className: 'text-danger'}} {...opts}>
+              {orig.warnings}
+              </Prop>
+            {
+              orig.comments
+              ? <Prop title="Comments" {...opts}>{orig.comments}</Prop>
+              : null
+            }
+            <Prop title="Other fields" visible={orig.other_fields !== null} {...opts}>
+              <code>{orig.other_fields}</code>
             </Prop>
-            <Prop title="Catalogue number" {...opts}>{orig.catalogue_num}</Prop>
-            <Prop title="Copyright" {...opts}>{orig.copyright}</Prop>
-            <Prop title="Checksum" {...opts}>
-              <code className="text-muted">{orig.checksum}</code>
-            </Prop>
+          </PropsList>
+        </div>
+      </div>
+      <div className="card bg-light border-0">
+        <div className="card-body">
+          <PropsList asRow={false}>
+            <Prop title="Tonality" {...opts}>{orig.key}</Prop>
+            <Prop title="Scale" {...opts}>{orig.modality}</Prop>
+            <Prop title="Meter" {...opts}>{orig.meter}</Prop>
+            <Prop title="Metric classificaiton" {...opts}>{orig.metric_classification}</Prop>
+            <Prop title="Ambitus" {...opts}>{orig.ambitus}</Prop>
           </PropsList>
         </div>
       </div>
