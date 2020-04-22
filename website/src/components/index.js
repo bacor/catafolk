@@ -196,7 +196,7 @@ const IndeterminateCheckbox = React.forwardRef(
 
 // Todo implement hide columns
 function Index({ columns, data, showColumns, bibliography }) {
-  const defaultHiddenColumns = ['meter', 'key', 'ambitus', 'location']
+  const defaultHiddenColumns = ['meter', 'key', 'ambitus', 'location', 'collector', 'language', 'culture']
   const hiddenColumns = []
   showColumns = showColumns || []
   defaultHiddenColumns.map(col => {

@@ -257,6 +257,21 @@ export default ({ data }) => {
         Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={30} />
       },
       {
+        Header: 'Collectors',
+        accessor: 'collector',
+        Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={30} />
+      },
+      {
+        Header: 'Culture',
+        accessor: 'culture',
+        Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={30} />
+      },
+      {
+        Header: 'Language',
+        accessor: 'language',
+        Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={30} />
+      },
+      {
         Header: 'Genre',
         accessor: 'genres',
         Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={30} />
