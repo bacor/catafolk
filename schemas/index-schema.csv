@@ -54,7 +54,7 @@ file_has_lyrics,1020,file,whether the file contains the lyrics,no,boolean,"Note 
 file_has_music,1021,file,whether the file contains notes,no,boolean,
 file_has_licence,1022,file,whether the file has a licences,no,boolean,
 other_fields,2000,general,a JSON string with any other metadata,no,JSON,
-comments,2010,general,"comments, mostly by the encoder",no,string,
+comments,2010,general,"comments, mostly by the encoder",no,string-list,
 warnings,2020,general,"warnings, e.g. about encoder assumptions",no,string,Warnings are comments so important that anyone working with the data should be aware of them.
 description,2030,general,a description or analysis of the song,no,string,
 lyrics,2040,lyrics,lyrics of the song,no,string,The full lyrics of the song
