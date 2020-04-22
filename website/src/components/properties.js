@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row"
 import _ from 'lodash';
 
 function Prop({ title, children, visible, defaultValue, inRow, titleOptions, hasContent, ...options }) {
-  console.log(title, content, hasContent)
   const content = (defaultValue && (!children || hasContent === false)) 
     ? defaultValue : children;
   if(visible === false) {

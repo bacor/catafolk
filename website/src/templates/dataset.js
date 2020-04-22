@@ -53,31 +53,33 @@ const DatasetHeader = ({ dataset }) => {
   )
 }
 
-function Licence({ abbreviation, name, url, unknown }) {
-  if(unknown) return <span className="text-danger">Unknown</span>;
+function License({ abbreviation, name, url, text, unknown }) {
+  console.log('ASDFASDFAS', abbreviation, name, url, unknown, text)
+  if(unknown) {
+    return <span className="text-danger">Unknown</span>;
+  } else {
+    return (
+      <>
+        <a href={url} target="_blank" className="bold" title={name}>{name}</a>.
+        {text ? <><br /><span>{_.truncate(text, {length: 200})}</span></> : null}
+      </>
+    )
+  }
+
   return (
     <a href={url} target="_blank" title={name}>{abbreviation}</a>
   )
 }
 
 function DatasetPropsCard({dataset, bibliography}) {
-  let footer;
-  if(!dataset.licence || !dataset.copyright) {
-    footer = (
-      <>
-        Some info is missing... 
-        Please consider <a href={`${dataset.github_directory}/dataset.yml`}>contributing</a> on GitHub.
-      </>
-    )
-  }
-
   return (
-    <PropsCard title="Properties" footer={footer}>
+    <PropsCard title="Properties">
       <Prop title="Dataset ID" ><code className="text-muted">{dataset.dataset_id}</code></Prop>
       {dataset.version && (
         <Prop title="Version"><code className="text-muted">{dataset.version}</code></Prop>)}
       {dataset.authors && (
         <Prop title="Authors"><People people={dataset.authors} /></Prop>)}
+
       {dataset.contributors && (
         <Prop title="Contributors"><People people={dataset.contributors} /></Prop>)}
       
@@ -87,6 +89,7 @@ function DatasetPropsCard({dataset, bibliography}) {
           return citation.slice(1, -1)
         }).join('; ')}
       </Prop>
+
       <Prop title="Sources">
         {dataset.publication_citation_keys.map(key => {
           const citation = bibliography.format('citation', {entry: key})
@@ -95,9 +98,13 @@ function DatasetPropsCard({dataset, bibliography}) {
       </Prop>
       
       {dataset.copyright && (
-        <Prop title="Copyright">{dataset.copyright}</Prop>)}
-      {dataset.licence && (
-        <Prop title="Licence"><Licence {...dataset.licence} /></Prop>)}
+        <Prop title="Copyright">
+          <Markdown source={dataset.copyright} />
+        </Prop>)}
+
+      {dataset.license && (
+        <Prop title="License"><License {...dataset.license} /></Prop>)}
+      
       {dataset.formats && (
         <Prop title="Formats"><TagList tags={dataset.formats} variant="secondary" /></Prop>)}
     </PropsCard>
@@ -188,7 +195,7 @@ function Sources({ bibliography, ...opts }) {
 
 export default ({ data }) => {
   const dataset = data.metadata
-  
+
   dataset.github_directory = `${data.site.siteMetadata.github}/tree/master/datasets/${dataset.dataset_id}`
   dataset.raw_index_url = '#'
   dataset.index = data.index
