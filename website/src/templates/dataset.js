@@ -60,7 +60,7 @@ function Licence({ abbreviation, name, url, unknown }) {
   )
 }
 
-function DatasetPropsCard({dataset}) {
+function DatasetPropsCard({dataset, bibliography}) {
   let footer;
   if(!dataset.licence || !dataset.copyright) {
     footer = (
@@ -73,14 +73,33 @@ function DatasetPropsCard({dataset}) {
 
   return (
     <PropsCard title="Properties" footer={footer}>
+      <Prop title="Dataset ID" ><code className="text-muted">{dataset.dataset_id}</code></Prop>
+      {dataset.version && (
+        <Prop title="Version"><code className="text-muted">{dataset.version}</code></Prop>)}
       {dataset.authors && (
         <Prop title="Authors"><People people={dataset.authors} /></Prop>)}
       {dataset.contributors && (
         <Prop title="Contributors"><People people={dataset.contributors} /></Prop>)}
+      
+      <Prop title="Citation">
+        {dataset.dataset_citation_keys.map(key => {
+          const citation = bibliography.format('citation', {entry: key})
+          return citation.slice(1, -1)
+        }).join('; ')}
+      </Prop>
+      <Prop title="Sources">
+        {dataset.publication_citation_keys.map(key => {
+          const citation = bibliography.format('citation', {entry: key})
+          return citation.slice(1, -1)
+        }).join('; ')}
+      </Prop>
+      
       {dataset.copyright && (
         <Prop title="Copyright">{dataset.copyright}</Prop>)}
       {dataset.licence && (
         <Prop title="Licence"><Licence {...dataset.licence} /></Prop>)}
+      {dataset.formats && (
+        <Prop title="Formats"><TagList tags={dataset.formats} variant="secondary" /></Prop>)}
     </PropsCard>
   );
 }
@@ -156,12 +175,12 @@ function Issues({ issues }) {
   )
 }
 
-function Sources({ bibliography }) {
+function Sources({ bibliography, ...opts }) {
   return (
     <Card>
-      <Card.Header>Sources</Card.Header>
+      <Card.Header>References</Card.Header>
       <Card.Body>
-        <Bibliography bibliography={bibliography} />
+        <Bibliography bibliography={bibliography} {...opts} />
       </Card.Body>
     </Card>
   )
@@ -176,11 +195,13 @@ export default ({ data }) => {
   dataset.readme = data.readme
 
   // Generate citation keys for all items
-  const bibtex = data.sources.content
+  const bibtex = data.sources.nodes.map(node => node.content).join("\n")
   const bibliography = new Cite(bibtex)
-  const sourceKeys = data.index.source_keys
+  let sourceKeys = data.index.source_keys
+  sourceKeys.push(...dataset.dataset_citation_keys)
+  sourceKeys.push(...dataset.publication_citation_keys)
+  sourceKeys = _.uniq(sourceKeys)
   const hasSources = (sourceKeys.length > 0 && sourceKeys !== [''])
-
   const citations = {}
   sourceKeys.forEach(key => {
     let citation
@@ -312,12 +333,10 @@ export default ({ data }) => {
         </Row>
         <Row>
           <CardDeck>
-            <DatasetPropsCard dataset={dataset} />
-            <Technicalities dataset={dataset} />
+            <DatasetPropsCard dataset={dataset} bibliography={bibliography} />
+            {/* <Technicalities dataset={dataset} /> */}
+            {hasIssues && <Issues issues={dataset.issues} />}
           </CardDeck>
-        </Row>
-        <Row className="mt-5">
-          <Readme dataset={dataset} />
         </Row>
       </Container>
       
@@ -331,10 +350,12 @@ export default ({ data }) => {
       </Container>
 
       <Container className="mt-5">
-        <Row>
+        <Row className="mt-5">
+          <Readme dataset={dataset} />
+        </Row>
+        <Row className="mt-5">
           <CardDeck className="w-100">
-            {hasSources && <Sources bibliography={bibliography} twoColumns={false} />}
-            {hasIssues && <Issues issues={dataset.issues} />}
+            {hasSources && <Sources bibliography={bibliography} twoColumns={true} />}
           </CardDeck>
         </Row>
       </Container>
@@ -363,6 +384,9 @@ export const query = graphql`
         role
         url
       }
+      credits
+      dataset_citation_keys
+      publication_citation_keys
       copyright
       license {
         unknown
@@ -449,8 +473,10 @@ export const query = graphql`
         }
       }
     }
-    sources: rawCode(name: {eq: "sources"}) {
-      content
+    sources: allRawCode {
+      nodes {
+        content
+      }
     }
     site {
       siteMetadata {
