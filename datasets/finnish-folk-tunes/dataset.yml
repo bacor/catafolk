@@ -19,10 +19,11 @@ url: http://esavelmat.jyu.fi/index_en.html
 
 # A full text description
 description: >
-  A large collection of over 8000 Finnish folk tunes collected mostly
-  in the 19th century and published in the series *Finnish Folk Tunes 
-  (Suomen Kansan Sävelmiä)* edited by Ilmari Krohn. The songs were 
-  encoded by Tuomas Eerola and Petri Toivainen.
+  A large collection of 8613 Finnish folk tunes collected mostly
+  in the 19th century and published by the Finnish Literary Society
+  in the series *Finnish Folk Tunes (Suomen Kansan Sävelmiä)*, edited
+  by Ilmari Krohn. The collection was digitized by Tuomas Eerola 
+  and Petri Toivainen in 2004.
 
 # Authors and contributors
 authors: 
@@ -33,9 +34,17 @@ authors:
   - name: Armas Launis
     role: author
   - name: Tuomas Eerola
-    role: encoder
+    role: design & development
   - name: Petri Toiviainen
-    role: encoder
+    role: design & development
+  - name: Janne Seppänen
+    role: encoding
+  - name: Sini Järvelä
+    role: encoding
+  - name: Juha Hämäläinen
+    role: development
+  - name: Santeri Laitinen
+    role: development
 
 # List of tags
 tags: [symbolic]
@@ -45,10 +54,18 @@ num_entries: 8613
 # The license, provide the name, and possibly even full text. 
 # If the license is unknown, make sure license.unknown = true
 license: 
-  unknown: true
+  name: Non-commercial
+  url: http://esavelmat.jyu.fi/collection_download.html
+  text: >
+    The Finnish folk song database is available for research 
+    purposes (that is, noncommercial) provided that the attribution
+    is maintained, i.e., you must give the original authors credit.
 
 # Copyright message for the dataset
-copyright:
+copyright: >
+  Copyright of the original collection: © [Suomalaisen 
+  Kirjallisuuden Seura (Finnish Literary Society)](http://www.finlit.fi/)
+  Copyright of the digital collection: © Tuomas Eerola & Petri Toiviainen.
 
 # How to give credits when using the dataset (text message)
 credits:
@@ -188,7 +205,7 @@ transformations:
 
   # Encoding
   # —————————————————————————————————————————————————————————————————
-  - constant: [encoders, Tuomas Eerola and Petri Toivainen]
+  - constant: [encoders, Janne Seppänen|Sini Järvelä|Tuomas Eerola|Petri Toiviainen]
   - constant: [encoding_date, 2004]
   - constant: [copyright, copyright © Tuomas Eerola & Petri Toiviainen]
   # contributors
