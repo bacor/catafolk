@@ -8,7 +8,6 @@ if __name__ == '__main__':
         # # 'bronson-child-ballads',
         # # 'densmore-ojibway',
         # # 'densmore-pawnee',
-        # # 'densmore-teton-sioux',
         # 'essen-china-han',
         # 'essen-china-natmin',
         # 'essen-china-shanxi',
@@ -20,8 +19,9 @@ if __name__ == '__main__':
         # 'sagrillo-ireland',
         # 'sagrillo-luxembourg',
         # 'haydn-scottish-songs',
-        'densmore-pueblo',
+        # 'densmore-pueblo',
         # 'densmore-nootka',
+        'densmore-teton-sioux',
         # 'finnish-folk-tunes'
         # 'boehme-volksthumliche-lieder',
         # 'pinck-verklingende-weisen'

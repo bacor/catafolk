@@ -10,7 +10,7 @@ const excludedDatasets = [
   'bronson-child-ballads',
   'densmore-ojibway',
   'densmore-pawnee',
-  'densmore-teton-sioux',
+  // 'densmore-teton-sioux',
   // 'creighton-nova-scotia',
   // 'deutscher-liederhort',
   // 'essen-china-han',
