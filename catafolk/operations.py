@@ -155,9 +155,17 @@ def rename(*args):
     """
     return _return(args)
 
-def to_int(*args):
-    integers = [int(arg) for arg in args]
-    return _return(integers)
+def to_int(*args, return_non_numeric_values=True):
+    outputs = []
+    for arg in args:
+        try: 
+            outputs.append(int(arg))
+        except Exception as e:
+            if return_non_numeric_values:
+                outputs.append(arg)
+            else:
+                raise e
+    return _return(outputs)
 
 def to_float(*args):
     floats = args([float(arg) for arg in args])
