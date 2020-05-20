@@ -9,7 +9,7 @@ dataset_id: densmore-teton-sioux
 group_ids: [densmore]
 
 # Publication status (draft/beta/alpha/published)
-status: draft
+status: alpha
 
 # Title of the dataset
 title: Densmore's Teton Sioux Music
