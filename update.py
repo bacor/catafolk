@@ -21,7 +21,8 @@ if __name__ == '__main__':
         # 'haydn-scottish-songs',
         # 'densmore-pueblo',
         # 'densmore-nootka',
-        'densmore-teton-sioux',
+        # 'densmore-teton-sioux',
+        'densmore-menominee'
         # 'finnish-folk-tunes'
         # 'boehme-volksthumliche-lieder',
         # 'pinck-verklingende-weisen'
