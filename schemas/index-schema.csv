@@ -22,7 +22,7 @@ voice_use,162,performance,whether the piece uses the voice,no,boolean,
 tonality,180,music,tonality of the piece,no,string,"Tonality in the broad sense. For Western pieces, this is usually the key."
 scale,181,music,scale used in the piece,no,string,
 ambitus,182,music,the ambitus of the song,no,int,
-tempo,190,music,the tempo of the piece,no,string/int,The tempo of the song can be specified by a string (e.g. largo) or an integer representing the number of beats per second.
+tempo,190,music,the tempo of the piece,no,string-list,The tempo of the song can be specified by a string (e.g. largo) or an integer representing the number of beats per second. Use a list if multiple tempi occur.
 beat_duration,191,music,The duration of the beat in quarter notes,no,string,
 meters,192,music,"the meters in a song, e.g. 2/4",no,string-list,
 metric_classification,193,music,"metric classification (duple, triple, etc)",no,string,

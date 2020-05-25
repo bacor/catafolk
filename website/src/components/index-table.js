@@ -152,7 +152,6 @@ function Details({row}) {
     defaultValue: unknown,
     inRow: false
   }
-  
   return (
     <div className="card-deck w-100">
       <div className="card bg-light border-0">
@@ -251,7 +250,7 @@ function Details({row}) {
           <PropsList asRow={false}>
             <Prop title="Tonality" {...opts}>{orig.key}</Prop>
             <Prop title="Scale" {...opts}>{orig.modality}</Prop>
-            <Prop title="Tempo" {...opts}>{orig.tempo}</Prop>
+            <Prop title="Tempo" {...opts}><StringList list={orig.tempo} /></Prop>
             <Prop title="Meters" {...opts}><StringList list={orig.meters} /></Prop>
             <Prop title="Metric classificaiton" {...opts}>{orig.metric_classification}</Prop>
             <Prop title="Ambitus" {...opts}>{orig.ambitus}</Prop>
