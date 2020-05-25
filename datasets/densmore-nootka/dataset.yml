@@ -197,6 +197,7 @@ transformations:
           Clayoquot: nuuc1236
           Quileute: quil1240
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -205,7 +206,8 @@ transformations:
   # scale
   # ambitus
   # tempo
-  # meter
+  # meters
+  # beat_duration
   # metric_classification
   # tune_family_id
 

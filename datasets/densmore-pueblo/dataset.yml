@@ -191,6 +191,7 @@ transformations:
           Isleta: isle1245
           Zuñi: zuni1245
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -202,7 +203,8 @@ transformations:
   # tempo: 
   #  --> Could also be added: there are tempo indications in the 
   #      original publication
-  # meter
+  # meters
+  # beat_duration
   # metric_classification
   # tune_family_id
 

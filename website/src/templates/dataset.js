@@ -305,9 +305,9 @@ export default ({ data }) => {
         Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={30} />
       },
       {
-        Header: 'Meter',
-        accessor: 'meter',
-        width: 30
+        Header: 'Meters',
+        accessor: 'meters',
+        Cell: ({cell}) => <TruncatedCell cell={cell} maxLength={30} />
       },
       {
         Header: 'Key',
@@ -434,7 +434,7 @@ export const query = graphql`
         modality: scale
         ambitus
         tempo
-        meter
+        meters
         metric_classification
         collector: collectors
         collection_date
@@ -469,6 +469,7 @@ export const query = graphql`
         warnings
         description
         lyrics
+        lyrics_translation
       }
       source_keys: distinct(field: publication_key)
     }

@@ -147,6 +147,7 @@ transformations:
   # language
   # glottolog_id
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -155,7 +156,8 @@ transformations:
   # scale
   # ambitus
   # tempo
-  # meter
+  # meters
+  # beat_duration
   - rename: [file.AMT, metric_classification]
   # tune_family_id
 

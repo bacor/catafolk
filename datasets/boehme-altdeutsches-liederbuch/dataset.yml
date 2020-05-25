@@ -181,6 +181,7 @@ transformations:
   - constant: [glottolog_id, stan1295]
   # title_translation
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -190,7 +191,8 @@ transformations:
   # scale
   # ambitus
   # tempo
-  # meter
+  # beat_duration
+  # meters
   # tune_family_id
 
 

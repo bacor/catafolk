@@ -64,7 +64,7 @@ version: unknown
 
 # Columns to show/hide on the catafolk website. This overrides 
 # default options
-show_columns: [key, meter, ambitus]
+show_columns: [key, meters, ambitus]
 hide_columns: []
 
 # Possible issues with the dataset. These are shown on the webpage,
@@ -205,6 +205,7 @@ transformations:
   - constant: [glottolog_id, iris1253]
   # title_translation
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -218,16 +219,20 @@ transformations:
       - {}
   - extract_groups:
       inputs: [file.key]
-      outputs: [tonality, meter_de]
+      outputs: [tonality, meters_de]
       params: 
         pattern: "(\\w+) +(\\d+) +([\\w\\#]+) ([ \\w\/]+) ?\\] +ZZ\\[(\\d+)"
         groups: [3, 4]
-  - map_values:
-    - meter_de
-    - meter
-    - mapping:
-        FREI: free
-      return_missing: true
+  - operations: [strip, replace, map_values]
+    inputs: [meters_de]
+    outputs: [meters]
+    params:
+      -
+      - old: " "
+        new: "|"
+      - mapping:
+          FREI: free
+        return_missing: true
   - map_values:
     - scale_de
     - scale
@@ -236,7 +241,7 @@ transformations:
   # scale
   # ambitus
   # tempo
-  # meter
+  # beat_duration
   # metric_classification
   # tune_family_id
 

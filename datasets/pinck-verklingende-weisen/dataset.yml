@@ -197,6 +197,7 @@ transformations:
   # language
   # glottolog_id
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -205,8 +206,8 @@ transformations:
   # scale
   # ambitus
   # tempo
-  # meter
   # metric_classification
+  # beat_duration
   # tune_family_id
   - operations: [extract_groups, lowercase]
     inputs: [file.mod]
@@ -217,15 +218,19 @@ transformations:
       - {}
   - extract_groups:
     - file.key
-    - [tonality, meter_de]
+    - [tonality, meters_de]
     - pattern: "(\\w+) +(\\d+) +([\\w\\#]+) ([ \\w\/]+) ?\\] +ZZ\\[(\\d+)"
       groups: [3, 4]
-  - map_values:
-    - meter_de
-    - meter
-    - mapping:
-        FREI: free
-      return_missing: true
+  - operations: [strip, replace, map_values]
+    inputs: [meters_de]
+    outputs: [meters]
+    params:
+      -
+      - old: " "
+        new: "|"
+      - mapping:
+          FREI: free
+        return_missing: true
   - map_values:
     - scale_de
     - scale

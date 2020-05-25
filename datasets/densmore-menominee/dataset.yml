@@ -190,7 +190,8 @@ transformations:
   - replace: [title_underscore, title, {old: _, new: " "}]
   - constant: [language, Menominee]
   - constant: [glottolog_id, meno1252]
-  - rename: [meta.free_translation, lyrics]
+  - rename: [meta.free_translation, lyrics_translation]
+  # lyrics
   # title_translation
 
 
@@ -200,7 +201,8 @@ transformations:
   # scale
   # ambitus
   # tempo
-  # meter
+  # meters
+  # beat_duration
   # metric_classification
   # tune_family_id
 

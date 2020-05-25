@@ -98,7 +98,7 @@ version:
 show_columns:
   - collector
   - location
-  - meter
+  - meters
   - key
 hide_columns: [title]
 
@@ -227,16 +227,17 @@ transformations:
   # title
   # title_translation
   # lyrics
+  # lyrics_translation
 
 
   # Music
   # —————————————————————————————————————————————————————————————————
   - rename: [data.key, tonality]
-  - rename: [data.time-signature, meter]
+  - rename: [data.time-signature, meters]
   # scale
   # ambitus
   # tempo
-  # meter
+  # beat_duration
   # metric_classification
   # tune_family_id
 

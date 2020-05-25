@@ -121,9 +121,9 @@ transformations:
   - constant: [dataset_id, densmore-papago]
   - to_string_list: [file.SUPERFUNCTION, genres]
   - to_json_object:
-    - [file.LANG, file.LING_GROUP, meta.beat, file.SOCIAL_FUNCTION]
+    - [file.LANG, file.LING_GROUP, file.SOCIAL_FUNCTION]
     - other_fields
-    - keys: [lang, ling_group, beat_duration, social_function]
+    - keys: [lang, ling_group, social_function]
   - rename: [meta.comments, comments]
   # warnings
   # description
@@ -196,6 +196,7 @@ transformations:
   - rename: [meta.tonality, tonality]
   - rename: [meta.meters, meters]
   - rename: [meta.bpm, tempo]
+  - rename: [meta.beat_duration, beat_duration]
   # scale
   # ambitus
   # metric_classification

@@ -159,6 +159,7 @@ transformations:
   - constant: [language, English]
   - constant: [glottolog_id, stan1293]
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -169,11 +170,14 @@ transformations:
       params:
         pattern: "(\\w+) +(\\d+) +(\\w+) +([\\w\/]+)"
         groups: [3]
-  - join: [[file.meter, file.meters], meter, {sep: "; "}]
+  - strip: [file.meters, meters_stripped]
+  - replace: [meters_stripped, meters_string_list, {old: " ", new: "|"}]
+  - join: [[file.meter, meters_string_list], meters, {sep: "|"}]
   # tonality
   # scale
   # ambitus
   # tempo
+  # beat_duration
   # metric_classification
   # tune_family_id
   

@@ -179,6 +179,7 @@ transformations:
   # language
   # glottolog_id
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -187,7 +188,8 @@ transformations:
   # scale
   - rename: [transcription_features.range, ambitus]
   # tempo
-  # meter
+  # meters
+  # beat_duration
   # metric_classification
   # tune_family_id
 

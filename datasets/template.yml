@@ -152,6 +152,7 @@ transformations:
   # language
   # glottolog_id
   # lyrics
+  # lyrics_translation
 
 
   # Music
@@ -160,7 +161,8 @@ transformations:
   # scale
   # ambitus
   # tempo
-  # meter
+  # beat_duration
+  # meters
   # metric_classification
   # tune_family_id
 

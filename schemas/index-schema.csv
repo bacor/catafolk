@@ -23,8 +23,9 @@ tonality,180,music,tonality of the piece,no,string,"Tonality in the broad sense.
 scale,181,music,scale used in the piece,no,string,
 ambitus,182,music,the ambitus of the song,no,int,
 tempo,190,music,the tempo of the piece,no,string/int,The tempo of the song can be specified by a string (e.g. largo) or an integer representing the number of beats per second.
-meter,191,music,"the meter of the song, e.g. 2/4",no,string,
-metric_classification,192,music,"metric classification (duple, triple, etc)",no,string,
+beat_duration,191,music,The duration of the beat in quarter notes,no,string,
+meters,192,music,"the meters in a song, e.g. 2/4",no,string-list,
+metric_classification,193,music,"metric classification (duple, triple, etc)",no,string,
 collectors,200,collection,names of the collectors,no,string-list,
 collection_date,201,collection,date when the song was collected,no,date,"Date in a ISO8601-like format: 2020-02-16. However, often the month and day will be unknown, so these are also acceptable: `1824` for somewhere in 1824 and `1957-02` for somewhere in February 1957. Note that you cannot specify the day, unless you have specified the month and similarly, a month requires a year."
 collection_date_earliest,202,collection,earliest date of collection,no,date,"When the collection date is uncertain, this field specifies a a *lower* bound on the collection date. See the `date` field for details on the format"
@@ -58,3 +59,4 @@ comments,2010,general,"comments, mostly by the encoder",no,string-list,
 warnings,2020,general,"warnings, e.g. about encoder assumptions",no,string,Warnings are comments so important that anyone working with the data should be aware of them.
 description,2030,general,a description or analysis of the song,no,string,
 lyrics,2040,lyrics,lyrics of the song,no,string,The full lyrics of the song
+lyrics_translation,2041,lyrics,Translation of the lyrics,no,string,
