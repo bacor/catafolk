@@ -139,7 +139,7 @@ function StringListAsList({ list }) {
   } else {
     return (
       <ul className="pl-0">
-        {list.map(el => <li>{el}</li>)}
+        {list.map((el, i) => <li key={i}>{el}</li>)}
       </ul>
     )
   }
