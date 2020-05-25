@@ -190,19 +190,19 @@ transformations:
   - replace: [title_underscore, title, {old: _, new: " "}]
   - constant: [language, Menominee]
   - constant: [glottolog_id, meno1252]
+  - rename: [meta.lyrics, lyrics]
   - rename: [meta.free_translation, lyrics_translation]
-  # lyrics
   # title_translation
 
 
   # Music
   # —————————————————————————————————————————————————————————————————
   - rename: [meta.tonality, tonality]
+  - rename: [meta.bpm, tempo]
+  - rename: [meta.meters, meters]
+  - rename: [meta.beat_duration, beat_duration]
   # scale
   # ambitus
-  # tempo
-  # meters
-  # beat_duration
   # metric_classification
   # tune_family_id
 
@@ -220,7 +220,7 @@ transformations:
   # Publication
   # —————————————————————————————————————————————————————————————————
   - constant: [publication_key, densmore1932menominee]
-  - to_string: [meta.song_num, publication_song_num]
+  - [[to_int, to_string], meta.song_num, publication_song_num]
   - rename: [meta.page_num, publication_page_num]
   - rename: [meta.catalogue_num, catalogue_num]
   - constant: [publication_type, book]

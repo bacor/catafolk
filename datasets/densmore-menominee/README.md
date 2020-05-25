@@ -20,7 +20,6 @@ Additional metadata can be found in this
 
 - If there was no indication of the use of a drum (e.g. a drum tempo, or a drum trancription),
     the song is assumed to be monophonic.
-- In some songs, the drums play in a different tempo than the melody. These have a `bpm` 
-value `'mixed'`. (Note that both values can be found in the additional metadata, but they
-are not used in catafolk).
+- Meters were transcribed (mostly) in order of occurance (but every meter is included only once)
+- Tempo transcriptions generally follow the tempo indication for the voice (sometimes a drum tempo is also indicated)
 
