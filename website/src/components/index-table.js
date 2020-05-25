@@ -133,6 +133,18 @@ function StringList({ list }) {
   }
 }
 
+function StringListAsList({ list }) {
+  if (list.length == 0) {
+    return null
+  } else {
+    return (
+      <ul className="pl-0">
+        {list.map(el => <li>{el}</li>)}
+      </ul>
+    )
+  }
+}
+
 function Details({row}) {
   const orig = row.original
   const unknown = <em className="text-muted">Unknown</em>
@@ -180,6 +192,8 @@ function Details({row}) {
               <Location location={orig.location} 
                 latitude={orig.latitude} longitude={orig.longitude}/>
             </Prop>
+            <Prop title="Lyrics" {...opts}>{orig.lyrics}</Prop>
+            <Prop title="Lyrics (translation)" {...opts}>{orig.lyrics_translation}</Prop>
           </PropsList>
         </div>
       </div>
@@ -221,7 +235,9 @@ function Details({row}) {
               </Prop>
             {
               orig.comments
-              ? <Prop title="Comments" {...opts}>{orig.comments}</Prop>
+              ? <Prop title="Comments" {...opts}>
+                  <StringListAsList list={orig.comments} />
+                </Prop>
               : null
             }
             <Prop title="Other fields" visible={orig.other_fields !== null} {...opts}>
@@ -235,6 +251,7 @@ function Details({row}) {
           <PropsList asRow={false}>
             <Prop title="Tonality" {...opts}>{orig.key}</Prop>
             <Prop title="Scale" {...opts}>{orig.modality}</Prop>
+            <Prop title="Tempo" {...opts}>{orig.tempo}</Prop>
             <Prop title="Meters" {...opts}><StringList list={orig.meters} /></Prop>
             <Prop title="Metric classificaiton" {...opts}>{orig.metric_classification}</Prop>
             <Prop title="Ambitus" {...opts}>{orig.ambitus}</Prop>
