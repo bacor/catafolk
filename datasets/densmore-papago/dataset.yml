@@ -195,7 +195,7 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - rename: [meta.tonality, tonality]
   - rename: [meta.meters, meters]
-  - rename: [meta.bpm, tempo]
+  - [[to_int, to_string], meta.bpm, tempo]
   - rename: [meta.beat_duration, beat_duration]
   # scale
   # ambitus

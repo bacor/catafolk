@@ -14,7 +14,7 @@ if __name__ == '__main__':
         # 'creighton-nova-scotia',
         # 'densmore-menominee'
         # 'densmore-nootka',
-        # 'densmore-papago',
+        'densmore-papago',
         # 'densmore-pueblo',
         # 'densmore-teton-sioux',
         # 'erk-deutscher-liederhort',
