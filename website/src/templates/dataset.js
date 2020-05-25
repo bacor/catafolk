@@ -54,7 +54,6 @@ const DatasetHeader = ({ dataset }) => {
 }
 
 function License({ abbreviation, name, url, text, unknown }) {
-  console.log('ASDFASDFAS', abbreviation, name, url, unknown, text)
   if(unknown) {
     return <span className="text-danger">Unknown</span>;
   } else {
