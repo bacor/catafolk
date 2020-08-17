@@ -9,7 +9,7 @@ dataset_id: densmore-northern-ute
 group_ids: [densmore]
 
 # Publication status (draft/beta/alpha/published)
-status: draft
+status: beta
 
 # Title of the dataset
 title: Densmore's Northern Ute Music
