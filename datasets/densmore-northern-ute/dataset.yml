@@ -3,31 +3,30 @@
 # —————————————————————————————————————————————————————————————————
 
 # Unique id of the dataset
-dataset_id: densmore-papago
+dataset_id: densmore-northern-ute
 
 # List of groups dataset belongs (see groups.yml) Optional.
 group_ids: [densmore]
 
 # Publication status (draft/beta/alpha/published)
-status: beta
+status: draft
 
 # Title of the dataset
-title: Densmore's Papago Music
+title: Densmore's Northern Ute Music
 
 # A URL to the dataset's webpage
-url: https://github.com/shanahdt/densmore/tree/master/Densmore/papago
+url: https://github.com/shanahdt/densmore/tree/master/Densmore/northern_ute
 
 # A full text description
 description: >
-  A collection of songs of the Tohono Oʼodham people  (formerly known 
-  as the Papago), collected by Frances Densmore in 1920–21 and 
-  published as her 1929 *Papago Music*. The songs were digitally
-  encoded by Daniel Shanahan and Eva Shanahan.
+  A collection of songs of the Northern Ute people, collected by Frances 
+  Densmore in 1914 and 1916 and published as her *Northern Ute Music* in 1922.
+  The songs were digitally encoded by Daniel Shanahan and Eva Shanahan.
 
 # Authors and contributors
 authors: 
   - name: Frances Densmore
-    role: collector
+    role: author
   - name: Daniel Shanahan
     role: encoder
     url: https://music.osu.edu/people/shanahan.37
@@ -36,11 +35,12 @@ authors:
 contributors:
   - name: Bas Cornelissen
     role: additional metadata
+    url: https://bascornelissen.nl
 
 # List of tags
 tags: [symbolic,densmore]
-formats: [kern]
-num_entries: 169
+formats: [kern] 
+num_entries: 115
 
 # The license, provide the name, and possibly even full text. 
 # If the license is unknown, make sure license.unknown = true
@@ -60,7 +60,7 @@ credits:
 # Citation keys for the original publications and the dataset.
 # Typically, the former are older folk song books, and the latter
 # more recent papers
-publication_citation_keys: [densmore1929papago]
+publication_citation_keys: [densmore1922ute]
 dataset_citation_keys: [shanahan2014]
 
 # Date on which the dataset which is analyzed by catafolk was 
@@ -79,11 +79,10 @@ hide_columns: []
 # Possible issues with the dataset. These are shown on the webpage,
 # so people using the dataset are aware of them.
 issues:
-  - title: Publication preview incorrect page numbers 
+  - title: Analyis/description not shown
     description: >
-      The publication preview links sometimes point to wrong page
-      numbers, because the `seq` parameter in the HathiTrust 
-      library does not correspond directly to page numbers.
+      Densmore's analyses of all songs have been included as a description 
+      for every song, but are not shown in the webinterface.
   
 # —————————————————————————————————————————————————————————————————
 # Catafolk options
@@ -93,22 +92,27 @@ sources:
   - name: file
     type: file
     file_pattern: data/*.krn
-    id_transformations:
+    exclude: [Duplication_of_No_39]
+    id_transformations: 
     - operation: map_values
       inputs: [OTL]
       outputs: [song_num]
       params:
         mapping:
-          Flute Melody 1: No_168
-          Flute Melody 2: No_169
+          Rudimentary Song (a): No_111
+          Rudimentary Song B: No_112
+          Rudimentary Song C: No_113
+          Rudimentary Song D: No_114
+          Untitled Game Song: No_115
+        regex: false
         return_missing: True
     - operation: extract_groups
       inputs: [song_num]
       outputs: [source_song_num]
       params:
-        pattern: .*No_+(\d+)
+        pattern: No_+(\d+).*
         groups: [1]
-    - [format, source_song_num, new_id, {pattern: "papago{:0>3}"}]
+    - [format, source_song_num, new_id, {pattern: "ute{:0>3}"}]
   - name: meta
     type: csv
     path: additional-metadata.csv
@@ -118,15 +122,15 @@ transformations:
   
   # General 
   # —————————————————————————————————————————————————————————————————
-  - constant: [dataset_id, densmore-papago]
+  - constant: [dataset_id, densmore-northern-ute]
   - to_string_list: [file.SUPERFUNCTION, genres]
   - to_json_object:
-    - [file.LANG, file.LING_GROUP, file.SOCIAL_FUNCTION]
+    - [file.LANG, file.LING_GROUP, file.SOCIAL_FUNCTION, meta.genre]
     - other_fields
-    - keys: [lang, ling_group, social_function]
+    - keys: [lang, ling_group, social_function, genre]
   - rename: [meta.comments, comments]
+  - rename: [meta.analysis, description]
   # warnings
-  # description
   
 
   # File 
@@ -140,22 +144,23 @@ transformations:
   - format: 
     - file.cf_name
     - file_url
-    - pattern: https://github.com/shanahdt/densmore/blob/master/Densmore/papago/{}.krn
+    - pattern: https://github.com/shanahdt/densmore/blob/master/Densmore/northern_ute/{}.krn
   # file_preview_url
 
 
   # Collection 
   # —————————————————————————————————————————————————————————————————
   - constant: [collectors, Frances Densmore]
-  - constant: [collection_date_earliest, 1920]
-  - constant: [collection_date_latests, 1921]
+  - constant: [collection_date_earliest, 1914]
+  - constant: [collection_date_latests, 1916]
   # collection_date 
+
 
   # Culture
   # —————————————————————————————————————————————————————————————————
-  - constant: [culture, Tohono Oʼodham]
-  - constant: [culture_dplace_id, WNAI146]
-  # culture_hraf_id
+  - constant: [culture, Ute]
+  - rename: [meta.culture_dplace_id, culture_dplace_id] 
+  - constant: [culture_hraf_id, NT19]
 
 
   # Encoding
@@ -170,11 +175,10 @@ transformations:
 
   # Location
   # —————————————————————————————————————————————————————————————————
-  - rename: [meta.location, location]
-  - rename: [meta.latitude, latitude]
-  - rename: [meta.longitude, longitude]
+  - constant: [location, Whiterocks, Utah]
+  - constant: [latitude, 40.4675]
+  - constant: [longitude, -109.929722]
   - constant: [auto_geocoded, false]
-
 
   # Lyrics
   # —————————————————————————————————————————————————————————————————
@@ -185,18 +189,19 @@ transformations:
       pattern: (No_+\d+_)?([^\.]+)(.krn)?
       groups: [2]
   - replace: [title_underscore, title, {old: _, new: " "}]
+  - constant: [language, Ute]
+  - constant: [glottolog_id, utee1244]
   # title_translation
-  - constant: [language, Tohono O'odam]
-  - constant: [glottolog_id, toho1246]
-  - rename: [meta.lyrics, lyrics]
-  - rename: [meta.free_translation, lyrics_translation]
+  # lyrics
+  # lyrics_translation
+
 
   # Music
   # —————————————————————————————————————————————————————————————————
   - rename: [meta.tonality, tonality]
-  - rename: [meta.meters, meters]
-  - [[to_int, to_string], meta.bpm, tempo]
+  - rename: [meta.bpm, tempo] 
   - rename: [meta.beat_duration, beat_duration]
+  - rename: [meta.meters, meters]
   # scale
   # ambitus
   # metric_classification
@@ -215,22 +220,20 @@ transformations:
   
   # Publication
   # —————————————————————————————————————————————————————————————————
-  - constant: [publication_key, densmore1929papago]
+  - constant: [publication_key, densmore1922ute]
   - [[to_int, to_string], meta.song_num, publication_song_num]
   - rename: [meta.page_num, publication_page_num]
   - [[to_int, to_string], meta.catalogue_num, catalogue_num]
   - constant: [publication_type, book]
-  - constant: [publiation_title, Papago Music]
+  - constant: [publiation_title, Northern Ute Music]
   - constant: [publication_authors, Frances Densmore]
-  - constant: [publication_date, 1929]
-  - operations: [to_int, add, format]
+  - constant: [publication_date, 1922]
+  - operations: [to_int, format]
     inputs: [publication_page_num]
     outputs: [publication_preview_url]
     params:
-      - {}
-      - value: 36
-      - pattern: https://babel.hathitrust.org/cgi/pt?id=mdp.39015010760851&seq={}
-
+    - {}
+    - pattern: https://books.google.nl/books?id=fEhAAAAAYAAJ&hl=nl&pg=PA{}
   
   # Mixed
   # —————————————————————————————————————————————————————————————————

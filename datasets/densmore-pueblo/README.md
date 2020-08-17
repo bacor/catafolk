@@ -20,7 +20,7 @@ Catafolk notes
 Notes on additional metadata
 ----------------------------
 
-Additional metadata was collected from the original publication (Densmore 1957) by Bas Cornelissen in 2020. It is stored as a separate [CSV file](https://github.com/bacor/catafolk/blob/master/datasets/densmore-pueblo/additional-metadata.csv).
+Additional metadata was collected from the original publication (Densmore 1957) by Bas Cornelissen in 2020. It is stored as a separate [CSV file](https://github.com/bacor/catafolk/blob/master/datasets/densmore-pueblo/additional-metadata.csv), see also this [Google Sheet](https://docs.google.com/spreadsheets/d/17gFRuzpDddndbcpFqsChV6A9r5Etn98HaeN1X3WxeRU/edit?usp=sharing)
 
 - The first 16 acoma songs were recorded in Washington D.C. in 1928 by dr. M. W. Stirling and his assitant by Anthony Wilding (Densmore 1957, p. 4)
 - The remaining Acoma songs 17–40 were recorded by Densmore (p. 20)

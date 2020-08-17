@@ -13,7 +13,8 @@ if __name__ == '__main__':
         # 'bronson-child-ballads',
         # 'creighton-nova-scotia',
         # 'densmore-menominee'
-        'densmore-nootka',
+        # 'densmore-nootka',
+        'densmore-northern-ute',
         # 'densmore-papago',
         # 'densmore-pueblo',
         # 'densmore-teton-sioux',
