@@ -14,7 +14,8 @@ if __name__ == '__main__':
         # 'creighton-nova-scotia',
         # 'densmore-menominee'
         # 'densmore-nootka',
-        'densmore-northern-ute',
+        # 'densmore-northern-ute',
+        'densmore-maidu'
         # 'densmore-papago',
         # 'densmore-pueblo',
         # 'densmore-teton-sioux',
