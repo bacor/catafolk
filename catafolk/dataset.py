@@ -91,7 +91,7 @@ class Dataset(object):
             logging.info(f'YAML Configuration file loaded: {self.config_path}')
 
         else:
-            logging.warn(f'No configuration file found: {self.config_path}.')
+            raise Exception(f'No configuration file found: {self.config_path}.')
         
         return config
 
