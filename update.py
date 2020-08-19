@@ -12,10 +12,11 @@ if __name__ == '__main__':
         # 'boehme-volksthumliche-lieder',
         # 'bronson-child-ballads',
         # 'creighton-nova-scotia',
+        'densmore-choctaw',
         # 'densmore-menominee'
         # 'densmore-nootka',
         # 'densmore-northern-ute',
-        'densmore-maidu'
+        # 'densmore-maidu'
         # 'densmore-papago',
         # 'densmore-pueblo',
         # 'densmore-teton-sioux',
