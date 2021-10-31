@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Transformer &mdash; Catafolk 0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Operations" href="operations.html" />
+    <link rel="prev" title="Sources" href="source.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Catafolk
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">Sources</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Catafolk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Transformer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/content/transformer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-catafolk.transformer">
+<span id="transformer"></span><h1>Transformer<a class="headerlink" href="#module-catafolk.transformer" title="Permalink to this headline">¶</a></h1>
+<p>The idea behind Catafolk is to leave the original datasets
+untouched, but only analyse their contents and extract all sorts
+of metadata in a standardized form. In practice, the metadata of
+interest may be hidden in semistructered entries (e.g. the
+page number in a reference entry), and requires the use of complex
+regular expressions. All the operations required to map the original
+source files to meta-data entries, are specified in a computation
+graph.</p>
+<p>This is what the :py:class:Transformer class is for: to build,
+and apply, the computation graph. You can use any function as a
+operation in the computation graph, but we have provided a set of
+useful ones in :py:module:operations.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">add_operation</span><span class="p">(</span><span class="s1">&#39;rename&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">add_operation</span><span class="p">(</span><span class="s1">&#39;join&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;suffix&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;output_lower&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">add_operation</span><span class="p">(</span><span class="s1">&#39;uppercase&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;output_lower&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="p">({</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;suffix&#39;</span><span class="p">:</span> <span class="s1">&#39; world&#39;</span> <span class="p">})</span>
+<span class="go">{&#39;output&#39;: &#39;HELLO WORLD&#39;}</span>
+</pre></div>
+</div>
+<p>We have also made a special shorthand notation which allows us to
+specify all transformations in a YAML or JSON file. Here is an
+example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;lowercase&#39;</span><span class="p">],</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;output1&#39;</span><span class="p">,</span> <span class="s1">&#39;output2&#39;</span><span class="p">],</span> <span class="p">[{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span><span class="s1">&#39;-&#39;</span><span class="p">},</span> <span class="p">{}]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">([</span><span class="n">shorthand</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="p">({</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="s1">&#39;HELLO-WORLD&#39;</span><span class="p">})</span>
+<span class="go">{&#39;output1&#39;: &#39;hello&#39;, &#39;output2&#39;: &#39;world&#39;}</span>
+</pre></div>
+</div>
+<p>For details of the shorthand notation, see <a class="reference internal" href="#catafolk.transformer.expand_shorthand" title="catafolk.transformer.expand_shorthand"><code class="xref py py-func docutils literal notranslate"><span class="pre">expand_shorthand()</span></code></a>.
+In a JSON file this would look as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;transformations&#39;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[[</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;lowercase&#39;</span><span class="p">],</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;output1&#39;</span><span class="p">,</span> <span class="s1">&#39;output2&#39;</span><span class="p">],</span> <span class="p">[{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span><span class="s1">&#39;-&#39;</span><span class="p">},</span> <span class="p">{}]]</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or in a YAML file, two variants:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transformations</span><span class="p">:</span>
+  <span class="o">-</span> <span class="p">[[</span><span class="n">split</span><span class="p">,</span> <span class="n">lowercase</span><span class="p">],</span> <span class="nb">input</span><span class="p">,</span> <span class="p">[</span><span class="n">output1</span><span class="p">,</span> <span class="n">output2</span><span class="p">],</span> <span class="p">[{</span><span class="n">sep</span><span class="p">:</span> <span class="o">-</span><span class="p">},</span> <span class="p">{}]]</span>
+  <span class="o">-</span> <span class="o">-</span> <span class="p">[</span><span class="n">split</span><span class="p">,</span> <span class="n">lowercase</span><span class="p">]</span>
+    <span class="o">-</span> <span class="nb">input</span>
+    <span class="o">-</span> <span class="p">[</span><span class="n">output1</span><span class="p">,</span> <span class="n">output2</span><span class="p">]</span>
+    <span class="o">-</span> <span class="p">[{</span><span class="n">sep</span><span class="p">:</span> <span class="o">-</span><span class="p">},</span> <span class="p">{}]</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="catafolk.transformer.Transformer">
+<em class="property">class </em><code class="sig-prename descclassname">catafolk.transformer.</code><code class="sig-name descname">Transformer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operations</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.transformer.Transformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="catafolk.transformer.Transformer.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operations</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.transformer.Transformer.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a list of operations to the transformation.</p>
+<p>Operations are defined by (1) a function, the names of (2) the input and
+(3) output variables, and (4) some optional parameters (see also the
+method <cite>add_operation</cite>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_operation</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">my_func</span><span class="p">,</span>  <span class="c1"># or &quot;my_func&quot;</span>
+    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;input1&quot;</span><span class="p">,</span> <span class="s2">&quot;input2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;output1&quot;</span><span class="p">,</span> <span class="s2">&quot;output2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;param1&quot;</span><span class="p">:</span> <span class="s2">&quot;value1&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In many cases this dictionary representation is unnecessary lengthy and one
+can use a shorthand format instead. The shorthand also allows you to chain
+several operations. The following example splits a string <cite>my_input</cite> on
+a dash, and transform both of the two parts to uppercase:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_op</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;uppercase&#39;</span><span class="p">],</span> <span class="s1">&#39;my_input&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;part1&#39;</span><span class="p">,</span> <span class="s1">&#39;part2&#39;</span><span class="p">],</span> <span class="p">[{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span><span class="s1">&#39;-&#39;</span><span class="p">},</span> <span class="p">{}]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="n">my_op</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span><span class="p">({</span><span class="s2">&quot;my_input&quot;</span><span class="p">:</span> <span class="s2">&quot;foo-bar&quot;</span><span class="p">})</span>
+<span class="go">{&#39;part1&#39;: &#39;FOO&#39;, &#39;part2&#39;: &#39;BAR&#39;}</span>
+</pre></div>
+</div>
+<p>For details on the shorthand format, refer to <cite>expand_shorthand</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>operations</strong> (<em>list</em>) – List of operations; see above for details.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.transformer.Transformer.add_operation">
+<code class="sig-name descname">add_operation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operation</span></em>, <em class="sig-param"><span class="n">inputs</span></em>, <em class="sig-param"><span class="n">outputs</span></em>, <em class="sig-param"><span class="n">params</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.transformer.Transformer.add_operation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.transformer.Transformer.compose">
+<code class="sig-name descname">compose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.transformer.Transformer.compose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.transformer.Transformer.leafs">
+<em class="property">property </em><code class="sig-name descname">leafs</code><a class="headerlink" href="#catafolk.transformer.Transformer.leafs" title="Permalink to this definition">¶</a></dt>
+<dd><p>outputs of the computation graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List of names of leaf nodes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.transformer.Transformer.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.transformer.Transformer.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads operations from a JSON file.</p>
+<p>The file should contain a list with operation descriptions: either shorthands
+or complete dictionary descriptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>string</em>) – path to the JSON file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.transformer.Transformer.nodes">
+<em class="property">property </em><code class="sig-name descname">nodes</code><a class="headerlink" href="#catafolk.transformer.Transformer.nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.transformer.Transformer.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.transformer.Transformer.plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.transformer.Transformer.roots">
+<em class="property">property </em><code class="sig-name descname">roots</code><a class="headerlink" href="#catafolk.transformer.Transformer.roots" title="Permalink to this definition">¶</a></dt>
+<dd><p>the inputs to the computation graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List of names of root nodes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.transformer.expand_shorthand">
+<code class="sig-prename descclassname">catafolk.transformer.</code><code class="sig-name descname">expand_shorthand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">shorthand</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.transformer.expand_shorthand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expands a shorthand description to a series of full operations,
+described by dictionaries containing the <cite>operation</cite>, a list of <cite>inputs</cite>,
+a list of <cite>outputs</cite>, and finally some optional <cite>params</cite>.</p>
+<p>Operation shorthands are of the following general form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">[</span><span class="n">list_of_functions</span><span class="p">,</span> <span class="n">list_of_inputs</span><span class="p">,</span> <span class="n">list_of_outputs</span><span class="p">,</span> <span class="n">list_of_params</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Importantly, the first element is a <em>list</em> of function, which allows you
+specify a chain of operations. The conversion takes care of generating
+names for the intermediate nodes. For example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;uppercase&#39;</span><span class="p">],</span> <span class="s1">&#39;my_input&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;part1&#39;</span><span class="p">,</span> <span class="s1">&#39;part2&#39;</span><span class="p">],</span> <span class="p">[{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span><span class="s1">&#39;-&#39;</span><span class="p">},</span> <span class="p">{}]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">operations</span> <span class="o">=</span> <span class="n">expand_shorthand</span><span class="p">(</span><span class="n">shorthand</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">operations</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">operations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">{&#39;operation&#39;: &#39;split&#39;, &#39;inputs&#39;: [&#39;my_input&#39;], &#39;outputs&#39;: [&#39;part1_0_split&#39;, &#39;part2_0_split&#39;], &#39;params&#39;: {&#39;sep&#39;: &#39;-&#39;}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">operations</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">{&#39;operation&#39;: &#39;uppercase&#39;, &#39;inputs&#39;: [&#39;part1_0_split&#39;, &#39;part2_0_split&#39;], &#39;outputs&#39;: [&#39;part1&#39;, &#39;part2&#39;], &#39;params&#39;: {}}</span>
+</pre></div>
+</div>
+<p>Note that in this example, we provided function <em>names</em> (strings), rather than
+actual functions; but both are supported.</p>
+<p>The following examples illustrate how the shorthand format can be
+further simplified.</p>
+<p><strong>Single inputs/outputs.</strong>
+If you pass an element rather than a list, it is converted in a list
+with one item:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lowercase&#39;</span><span class="p">,</span> <span class="s1">&#39;my_input&#39;</span><span class="p">,</span> <span class="s1">&#39;my_output&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand_shorthand</span><span class="p">(</span><span class="n">shorthand</span><span class="p">)</span>
+<span class="go">[{&#39;operation&#39;: &#39;lowercase&#39;, &#39;inputs&#39;: [&#39;my_input&#39;], &#39;outputs&#39;: [&#39;my_output&#39;], &#39;params&#39;: {}}]</span>
+</pre></div>
+</div>
+<p><strong>Multiple inputs/outputs.</strong>
+You can also specify operations with multiple inputs or outputs:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;input1&#39;</span><span class="p">,</span> <span class="s1">&#39;input2&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;output1&#39;</span><span class="p">,</span> <span class="s1">&#39;output2&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand_shorthand</span><span class="p">(</span><span class="n">shorthand</span><span class="p">)</span>
+<span class="go">[{&#39;operation&#39;: &#39;lower&#39;, &#39;inputs&#39;: [&#39;input1&#39;, &#39;input2&#39;], &#39;outputs&#39;: [&#39;output1&#39;, &#39;output2&#39;], &#39;params&#39;: {}}]</span>
+</pre></div>
+</div>
+<p><strong>Chaining operations.</strong>
+You can specify a chain of operations by passing a list of operations
+as the first element to the shorthand. The conversion automatically
+creates names for the outputs of intermediate operations, but it cannot
+infer the number of outputs. Instead, <cite>it assumes that the number of
+outputs does not change after the first operation</cite>.
+To pass parameters to the operations, add a list containing a parameter
+dictionary for every operation:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;lower&#39;</span><span class="p">],</span> <span class="s1">&#39;input1&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;output1&#39;</span><span class="p">,</span> <span class="s1">&#39;output2&#39;</span><span class="p">],</span> <span class="p">[{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">},</span> <span class="p">{}]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">operations</span> <span class="o">=</span> <span class="n">expand_shorthand</span><span class="p">(</span><span class="n">shorthand</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">operations</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">operations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">{&#39;operation&#39;: &#39;split&#39;, &#39;inputs&#39;: [&#39;input1&#39;], &#39;outputs&#39;: [&#39;output1_0_split&#39;, &#39;output2_0_split&#39;], &#39;params&#39;: {&#39;sep&#39;: &#39;-&#39;}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">operations</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">{&#39;operation&#39;: &#39;lower&#39;, &#39;inputs&#39;: [&#39;output1_0_split&#39;, &#39;output2_0_split&#39;], &#39;outputs&#39;: [&#39;output1&#39;, &#39;output2&#39;], &#39;params&#39;: {}}</span>
+</pre></div>
+</div>
+<p>Note that intermediate outputs are always named as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">output_name</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">operation_index</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">operation_name</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also define chains using a variant of the dictionary form,
+containing the key <cite>operations</cite> (plural) rather than <cite>operation</cite>.
+This often improves readability. Note that all other fields must be
+lists, like in the normal dictionary output form.
+The previous example now looks like this:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;operations&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;lower&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;input1&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;outputs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;output1&#39;</span><span class="p">,</span> <span class="s1">&#39;output2&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">},</span> <span class="p">{}]</span>
+<span class="gp">... </span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Constants</strong>
+You can insert constants in the computation graph using the <cite>constant</cite>
+operation, which has a special shorthand:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;my_constant&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand_shorthand</span><span class="p">(</span><span class="n">shorthand</span><span class="p">)</span>
+<span class="go">[{&#39;operation&#39;: &#39;constant&#39;, &#39;inputs&#39;: [], &#39;outputs&#39;: [&#39;my_constant&#39;], &#39;params&#39;: {&#39;value&#39;: 10}}]</span>
+</pre></div>
+</div>
+<p><strong>YAML: simple dictionaries for single operations</strong>
+There is a final variant which allows a neat YAML syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transformations</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">lowercase</span><span class="p">:</span> <span class="p">[</span><span class="n">my_input</span><span class="p">,</span> <span class="n">my_output</span><span class="p">,</span> <span class="p">{}]</span>
+  <span class="o">-</span> <span class="n">split</span><span class="p">:</span> <span class="p">[</span><span class="n">my_input</span><span class="p">,</span> <span class="p">[</span><span class="n">output1</span><span class="p">,</span> <span class="n">output2</span><span class="p">],</span> <span class="p">{</span><span class="n">sep</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">}]</span>
+  <span class="o">-</span> <span class="n">split</span><span class="p">:</span>
+      <span class="n">inputs</span><span class="p">:</span> <span class="p">[</span><span class="n">my_input</span><span class="p">]</span>
+      <span class="n">outputs</span><span class="p">:</span> <span class="p">[</span><span class="n">output1</span><span class="p">,</span> <span class="n">output2</span><span class="p">]</span>
+      <span class="n">params</span><span class="p">:</span> <span class="p">{</span><span class="n">sep</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here you specify a transformation as a dictionary with one
+element, whose key is the operation. Its values can be
+a list or a dictionary. This is extended by adding the operation
+(as the first list, or under <cite>operation</cite>) and processed
+as usual. For example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lowercase&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;my_input&#39;</span><span class="p">,</span> <span class="s1">&#39;my_output&#39;</span><span class="p">,</span> <span class="p">{}]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand_shorthand</span><span class="p">(</span><span class="n">shorthand</span><span class="p">)</span>
+<span class="go">[{&#39;operation&#39;: &#39;lowercase&#39;, &#39;inputs&#39;: [&#39;my_input&#39;], &#39;outputs&#39;: [&#39;my_output&#39;], &#39;params&#39;: {}}]</span>
+</pre></div>
+</div>
+<p>Or even a nested dictionary:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shorthand</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lowercase&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;my_input&#39;</span><span class="p">],</span> <span class="s1">&#39;outputs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;my_output&#39;</span><span class="p">],</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{}}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand_shorthand</span><span class="p">(</span><span class="n">shorthand</span><span class="p">)</span>
+<span class="go">[{&#39;inputs&#39;: [&#39;my_input&#39;], &#39;outputs&#39;: [&#39;my_output&#39;], &#39;params&#39;: {}, &#39;operation&#39;: &#39;lowercase&#39;}]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>shorthand</strong> (<em>list</em><em> or </em><em>dict</em>) – A shorthand description of a transformation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of dictionaries with keys <cite>operation</cite>, <cite>inputs</cite>, <cite>outputs</cite>
+and <cite>params</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="operations.html" class="btn btn-neutral float-right" title="Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="source.html" class="btn btn-neutral float-left" title="Sources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bas Cornelissen
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

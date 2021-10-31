@@ -30,7 +30,7 @@ export default ({ data }) => {
         </Row>
         <Row className="mt-4">
           <CardColumns>
-            {data.allDataset.edges.map(node => (
+            {data.allCorpus.edges.map(node => (
               <DatasetCard dataset={node.dataset} key={node.dataset.dataset_id} />
             ))}
             <Card bg="dark" text="light">
@@ -50,7 +50,7 @@ export default ({ data }) => {
 }
 
 export const query = graphql`{
-  allDataset(filter: {dataset_id: {in: [
+  allCorpus(filter: {dataset_id: {in: [
     "finnish-folk-tunes",
     "essen-deutschl-erk",
     "densmore-teton-sioux",
@@ -72,7 +72,7 @@ export const query = graphql`{
       }
     }
   }
-  total: allDataset {
+  total: allCorpus {
     totalCount
   }
 }`

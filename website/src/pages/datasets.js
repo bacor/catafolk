@@ -73,7 +73,7 @@ export default ({ data }) => {
               </thead>
               <tbody>
                 {
-                  data.allDataset.edges.map(edge => (
+                  data.allCorpus.edges.map(edge => (
                     <DatasetRow dataset={edge.node} key={edge.node.dataset_id} />
                   ))
                 }
@@ -89,7 +89,7 @@ export default ({ data }) => {
 
 export const query = graphql`
   query {
-    allDataset {
+    allCorpus {
       edges {
         node {
           title

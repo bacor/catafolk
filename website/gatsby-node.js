@@ -5,13 +5,15 @@ const parse = require('csv-parse/lib/sync');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 // Options
-const indexSchemaFn = `${__dirname}/../schemas/index-schema.csv`;
-const datasetSchemaFn = `${__dirname}/../schemas/dataset-schema.graphql`;
+// Schemas probably have to move.
+// const indexSchemaFn = `${__dirname}/../schemas/index-schema.csv`;
+const indexSchemaFn = `./schemas/index-schema.csv`;
+const corpusSchemaFn = `./schemas/corpus-schema.graphql`;
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === 'dataset') {
-    const slug = `datasets/${node.dataset_id}/`
+  if (node.internal.type === 'corpus') {
+    const slug = `datasets/${node.dataset_id}/${node.version}`
     createNodeField({node, name: 'slug', value: slug})
   } 
 //   else if (node.internal.type == 'Song') {
@@ -31,7 +33,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(`
     query {
-      allDataset {
+      allCorpus {
         nodes {
           dataset_id
           fields {
@@ -41,7 +43,7 @@ exports.createPages = async ({ graphql, actions }) => {
       } 
     }
   `)
-  result.data.allDataset.nodes.forEach((node) => {
+  result.data.allCorpus.nodes.forEach((node) => {
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/dataset.js`),
@@ -58,8 +60,8 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.createSchemaCustomization = ({ actions, schema }) => {
   const { createTypes } = actions
   // Load schema from file schema.graphql
-  const datasetSchema = fs.readFileSync(datasetSchemaFn, {encoding: 'utf-8'})
-  createTypes(datasetSchema)
+  const corpusSchema = fs.readFileSync(corpusSchemaFn, {encoding: 'utf-8'})
+  createTypes(corpusSchema)
 
   // Load index sch
   const indexSchemaCSV = fs.readFileSync(indexSchemaFn, {encoding: 'utf-8'})
@@ -117,9 +119,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
 
     fields[fieldName] = fieldSpec
   });
-  // console.log(fields)
   
-
   const typeDefs = [
     schema.buildObjectType({
       name: "IndexCsv",

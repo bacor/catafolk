@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sources &mdash; Catafolk 0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Transformer" href="transformer.html" />
+    <link rel="prev" title="Index" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Catafolk
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Index</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ids-and-field-names">IDs and field names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id-transformations">ID transformations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Catafolk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Sources</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/content/source.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-catafolk.source">
+<span id="sources"></span><h1>Sources<a class="headerlink" href="#module-catafolk.source" title="Permalink to this headline">¶</a></h1>
+<p>An index bundles data from various sources. This module implements
+various classes that can pull data from different types of sources,
+such as CSV files or a collection of other files. They can then export
+the data they have collected as dataframes, which the index finally
+combines.</p>
+<p>All classes inherit from <a class="reference internal" href="#catafolk.source.BaseSource" title="catafolk.source.BaseSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSource</span></code></a>. The simplest source is
+<a class="reference internal" href="#catafolk.source.Source" title="catafolk.source.Source"><code class="xref py py-class docutils literal notranslate"><span class="pre">Source</span></code></a>, which collects the data you pass to it directly
+during initialization. It is basically a wrapper around some data:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entries</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;entry1&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;entry2&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mysource&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span>
+<span class="go">&lt;Source name=mysource&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="ids-and-field-names">
+<h2>IDs and field names<a class="headerlink" href="#ids-and-field-names" title="Permalink to this headline">¶</a></h2>
+<p>Every entry in a source nees a unique id. The parameter <cite>id_field</cite>
+specifies which field  is used as the id:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entries</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry1&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry2&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mysource&#39;</span><span class="p">,</span> <span class="n">id_field</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="go">[&#39;entry1&#39;, &#39;entry2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;cf_id&#39;</span>
+</pre></div>
+</div>
+<p>Note that the index of the dataframe is named <code class="docutils literal notranslate"><span class="pre">cf_id</span></code>. Generally,
+all fields that are generated by a source class (and not extracted
+from the underlying resource) are given a prefix so that they do
+not clash with fields in the underlying resource. Examples of such
+fields are <code class="docutils literal notranslate"><span class="pre">cf_path</span></code>, <code class="docutils literal notranslate"><span class="pre">cf_checksum</span></code> and <code class="docutils literal notranslate"><span class="pre">cf_format</span></code>.</p>
+</div>
+<div class="section" id="id-transformations">
+<h2>ID transformations<a class="headerlink" href="#id-transformations" title="Permalink to this headline">¶</a></h2>
+<p>In some cases you might have to generate an ID field for a, or
+transform an existing ID field. For this you can use an ID
+transformation. This is a function (or callable) that computes an
+ID for an entry based on all the fields of that entry. So it takes
+a dictionary describing the entry and outputs a dictionary with
+(at least) an <code class="docutils literal notranslate"><span class="pre">new_id</span></code> field. For example,</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entries</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry1&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry2&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">entry</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">new_id</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;entry&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="p">({</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry1&#39;</span><span class="p">})</span>
+<span class="go">{&#39;new_id&#39;: &#39;1&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mysource&#39;</span><span class="p">,</span> <span class="n">id_transformer</span><span class="o">=</span><span class="n">transformer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;]</span>
+</pre></div>
+</div>
+<p>You can use a <a class="reference internal" href="transformer.html#catafolk.transformer.Transformer" title="catafolk.transformer.Transformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">catafolk.transformer.Transformer</span></code></a> for this:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catafolk.transformer</span> <span class="kn">import</span> <span class="n">Transformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">([[</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;old&#39;</span><span class="p">:</span> <span class="s1">&#39;entry&#39;</span><span class="p">,</span> <span class="s1">&#39;new&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entries</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry1&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry2&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mysource&#39;</span><span class="p">,</span> <span class="n">id_transformer</span><span class="o">=</span><span class="n">transformer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;]</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="catafolk.source.BaseSource">
+<em class="property">class </em><code class="sig-prename descclassname">catafolk.source.</code><code class="sig-name descname">BaseSource</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">id_field</span><span class="o">=</span><span class="default_value">'id'</span></em>, <em class="sig-param"><span class="n">id_transformer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">internal_fields_prefix</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'cf_'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.source.BaseSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for data sources.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – A unique name for the data source</p></li>
+<li><p><strong>id_field</strong> (<em>str</em><em>, </em><em>optional</em>) – The name of the field to use as the index.
+By default <code class="docutils literal notranslate"><span class="pre">'id'</span></code>.</p></li>
+<li><p><strong>id_transformer</strong> (<em>callable</em><em>, </em><em>optional</em>) – A callable that takes a dictionary with all data for an
+entry as input, and returns a dictionary with (at least)
+an <code class="docutils literal notranslate"><span class="pre">new_id</span></code> field. This is used as the id for that entry.</p></li>
+<li><p><strong>internal_fields_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – The prefix used for all fields added by the source class.
+By default <code class="docutils literal notranslate"><span class="pre">'cf_'</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="catafolk.source.BaseSource.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#catafolk.source.BaseSource.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dataframe containing all data that has been extracted
+from the source.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="catafolk.source.Source">
+<em class="property">class </em><code class="sig-prename descclassname">catafolk.source.</code><code class="sig-name descname">Source</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entries</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.source.Source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#catafolk.source.BaseSource" title="catafolk.source.BaseSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">catafolk.source.BaseSource</span></code></a></p>
+<p>A source wrapping an iterable</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entries</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry1&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;entry2&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mysource&#39;</span><span class="p">,</span> <span class="n">id_field</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="go">[&#39;entry1&#39;, &#39;entry2&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entries</strong> (<em>iterable</em>) – The data, something that can be turned into a pandas
+dataframe.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="catafolk.source.Source.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#catafolk.source.Source.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dataframe containing all data that has been extracted
+from the source.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="catafolk.source.CSVSource">
+<em class="property">class </em><code class="sig-prename descclassname">catafolk.source.</code><code class="sig-name descname">CSVSource</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.source.CSVSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#catafolk.source.BaseSource" title="catafolk.source.BaseSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">catafolk.source.BaseSource</span></code></a></p>
+<p>Load data from a CSV file.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;tests/test_csv_source.csv&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="n">CSVSource</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">id_field</span><span class="o">=</span><span class="s1">&#39;item_id&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="go">[&#39;item0&#39;, &#39;item1&#39;, &#39;item2&#39;, &#39;item3&#39;, &#39;item4&#39;, &#39;item5&#39;, &#39;item6&#39;, &#39;item7&#39;, &#39;item8&#39;, &#39;item9&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The path to the csv file</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="catafolk.source.CSVSource.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#catafolk.source.CSVSource.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dataframe containing all data that has been extracted
+from the source.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="catafolk.source.FileSource">
+<em class="property">class </em><code class="sig-prename descclassname">catafolk.source.</code><code class="sig-name descname">FileSource</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_dir</span></em>, <em class="sig-param"><span class="n">file_pattern</span></em>, <em class="sig-param"><span class="n">file_options</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">use_filename_as_id</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.source.FileSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#catafolk.source.BaseSource" title="catafolk.source.BaseSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">catafolk.source.BaseSource</span></code></a></p>
+<p>Loads data from a collection of files, specified
+by a glob pattern.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;tests/datasets/bronson-child-ballads/data&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="s1">&#39;*.krn&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="n">FileSource</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="go">[&#39;child01&#39;, &#39;child02&#39;, &#39;child03&#39;, &#39;child04&#39;, &#39;child05&#39;, &#39;child06&#39;, &#39;child07&#39;, &#39;child09&#39;, &#39;child10&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em>) – The data directory path</p></li>
+<li><p><strong>file_pattern</strong> (<em>str</em>) – The glob pattern relative to the <code class="docutils literal notranslate"><span class="pre">data_dir</span></code></p></li>
+<li><p><strong>file_options</strong> (<em>dict</em><em>, </em><em>optional</em>) – Options passed to <a class="reference internal" href="file.html#catafolk.file.get_file" title="catafolk.file.get_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">catafolk.file.get_file()</span></code></a>.</p></li>
+<li><p><strong>use_filename_as_id</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the filename as the id, by default True</p></li>
+<li><p><strong>**kwargs</strong> – Optional keyword arguments passed to <a class="reference internal" href="#catafolk.source.BaseSource" title="catafolk.source.BaseSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSource</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="catafolk.source.FileSource.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#catafolk.source.FileSource.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dataframe containing all data that has been extracted
+from the source.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.source.FileSource.files">
+<em class="property">property </em><code class="sig-name descname">files</code><a class="headerlink" href="#catafolk.source.FileSource.files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="transformer.html" class="btn btn-neutral float-right" title="Transformer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bas Cornelissen
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

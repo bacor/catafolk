@@ -3,33 +3,23 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
+const { min } = require("lodash");
 const path = require(`path`)
+const yaml = require('js-yaml');
+const fs   = require('fs');
 // const { typeNameFromDir, typeNameFromFile } = require("gatsby-transformer-csv")
 
-const excludedDatasets = [
-  'bronson-child-ballads',
-  'densmore-ojibway',
-  'densmore-pawnee',
-  // 'densmore-teton-sioux',
-  // 'creighton-nova-scotia',
-  // 'deutscher-liederhort',
-  // 'essen-china-han',
-  // 'essen-china-natmin',
-  // 'essen-china-shanxi',
-  // 'essen-china-xinhua',
-  // 'natural-history-of-song',
-  // 'sagrillo-ireland',
-  // 'sagrillo-luxembourg',
-  // 'sagrillo-scotland',
-  // 'densmore-pueblo',
-  // 'densmore-nootka',
-  // 'finnish-folk-tunes'
-];
+// Load configuration file
+const configFn = './catafolk-config.yml';
+const catafolkConfig = yaml.load(fs.readFileSync(configFn, 'utf8'));
+const schemaDir = catafolkConfig['schemaDir'];
+const registryDir = catafolkConfig['registryDir'];
+const excludedCorpora = catafolkConfig['excludedCorpora']; 
 
 // Filenames that should be included
-allowedDatasetFiles = [
+allowedCorpusFiles = [
   'index.csv',
-  'dataset.yml',
+  'corpus.yml',
   'README.md',
   'readme.md',
   'groups.yml'
@@ -43,26 +33,27 @@ module.exports = {
     website: `https://bacor.github.io/catafolk`,
   },
   plugins: [
+    // Load all corpora from the registry
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        // name: `index`,
-        path: `${__dirname}/../datasets/`,
-        // You can use anymatch https://github.com/micromatch/anymatch
+        path: `${registryDir}/corpora/`,
         ignore: [
+          // Note: you can use anymatch https://github.com/micromatch/anymatch
           '**/data/*', 
-          '**/*.zip',
-          '**/template.yml',
-          
-          // Ignore all files that are not in allowedDatasetFiles
-          string => {
-            const isFile = path.extname(string) !== ''
-            const isAllowed = allowedDatasetFiles.includes(path.basename(string))
-            return isFile && !isAllowed
-          },
-          
+          '**/src/*',
+
           // Excluded datasets
-          ...excludedDatasets.map(id => `**/${id}/*`)
+          ...excludedCorpora.map(id => `**/${id}/*`),
+          
+          // Ignore all files that are not in allowedCorpusFiles
+          string => {
+            const basename = path.basename(string)
+            const isVersionDir = basename.match(/\d+\.\d+\.\d+/) !== null
+            const isFile = path.extname(string) !== '' && !isVersionDir
+            const isAllowed = allowedCorpusFiles.includes(basename)
+            return isFile && !isAllowed
+          }
         ]
       }
     },
@@ -71,8 +62,8 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `schema`,
-        path: `${__dirname}/../schemas`,
-        ignore: [`${__dirname}/../schemas/!(index-schema.csv)`]
+        path: schemaDir,
+        ignore: [`${schemaDir}/!(index-schema.csv)`]
       }
     },
     // Load all bibtex files 
@@ -80,7 +71,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `bibliography`,
-        path: `${__dirname}/../bibliography`
+        path: `${registryDir}/bibliography`
       }
     },
     {

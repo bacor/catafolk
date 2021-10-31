@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File &mdash; Catafolk 0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Index" href="index.html" />
+    <link rel="prev" title="Dataset" href="dataset.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Catafolk
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Catafolk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>File</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/content/file.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-catafolk.file">
+<span id="file"></span><h1>File<a class="headerlink" href="#module-catafolk.file" title="Permalink to this headline">¶</a></h1>
+<p>Most of the metadata included in Catafolk comes from music files,
+such as kern files. This metadata is extracted by the <cite>File</cite> classes:
+there is one for every file format. Currently supported are <cite>kern</cite>
+and <cite>xml</cite>.</p>
+<p>Files can be instantiated using <a class="reference internal" href="#catafolk.file.get_file" title="catafolk.file.get_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_file()</span></code></a> which automatically
+determines the file format based on the extension.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;tests/datasets/bronson-child-ballads/data&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file</span> <span class="o">=</span> <span class="n">get_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s1">/child01.krn&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file</span>
+<span class="go">&lt;KernFile name=child01 format=kern&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">dict_keys([&#39;ONM&#39;, &#39;PPG&#39;, &#39;AMT&#39;, &#39;YOR&#39;, &#39;OVM&#39;, &#39;PPE&#39;, &#39;PSR&#39;, &#39;PSP&#39;, &#39;PSD&#39;, &#39;ENC&#39;, &#39;EMD&#39;, &#39;EEV&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;ONM&#39;</span><span class="p">]</span>
+<span class="go">&#39;Child Ballad No. 1, Tune No. 1&#39;</span>
+</pre></div>
+</div>
+<p>Note that metadata is collected only once and then stored internally.
+In the code above, we accessed <code class="docutils literal notranslate"><span class="pre">file.metadata</span></code> twice, but the file
+was only read out once. You can reset the stored metadata using
+<a class="reference internal" href="#catafolk.file.File.reset" title="catafolk.file.File.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">File.reset()</span></code></a>.</p>
+<dl class="py class">
+<dt id="catafolk.file.File">
+<em class="property">class </em><code class="sig-prename descclassname">catafolk.file.</code><code class="sig-name descname">File</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.file.File" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class for music files.</p>
+<dl class="py method">
+<dt id="catafolk.file.File.checksum">
+<em class="property">property </em><code class="sig-name descname">checksum</code><a class="headerlink" href="#catafolk.file.File.checksum" title="Permalink to this definition">¶</a></dt>
+<dd><p>An md5 checksum of the file.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">file</span> <span class="o">=</span> <span class="n">get_file</span><span class="p">(</span><span class="s1">&#39;tests/datasets/bronson-child-ballads/data/child01.krn&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file</span><span class="o">.</span><span class="n">checksum</span>
+<span class="go">&#39;350fc2b9839d7d7669d83f77efdc03c2&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="catafolk.file.File.format">
+<code class="sig-name descname">format</code><em class="property"> = None</em><a class="headerlink" href="#catafolk.file.File.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>The file format, e.g. <code class="docutils literal notranslate"><span class="pre">'kern'</span></code> or <code class="docutils literal notranslate"><span class="pre">'xml'</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.file.File.metadata">
+<em class="property">property </em><code class="sig-name descname">metadata</code><a class="headerlink" href="#catafolk.file.File.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary with metadata collected from the file.
+Which properties are are included in the metadata depends
+completely on the contents of the file. Properties like
+the path are <em>not</em> included in the metadata.</p>
+<p>Metadata is collected only once, and then stored in the
+class. You can reset the file using <a class="reference internal" href="#catafolk.file.File.reset" title="catafolk.file.File.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.file.File.relpath">
+<code class="sig-name descname">relpath</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.file.File.relpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the relative path with respect to some
+root directory.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">file</span> <span class="o">=</span> <span class="n">get_file</span><span class="p">(</span><span class="s1">&#39;tests/datasets/bronson-child-ballads/data/child01.krn&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file</span><span class="o">.</span><span class="n">path</span>
+<span class="go">&#39;tests/datasets/bronson-child-ballads/data/child01.krn&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;tests/datasets/bronson-child-ballads&#39;</span><span class="p">)</span>
+<span class="go">&#39;data/child01.krn&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root</strong> (<em>str</em>) – The root directory</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="catafolk.file.File.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.file.File.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the file instance: remove stored metadata and
+checksum. This only affects the class instance, the file
+itself is (as always) left untouched. This might be useful
+if the file  has changed and you want to refresh the
+metadata.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="catafolk.file.KernFile">
+<em class="property">class </em><code class="sig-prename descclassname">catafolk.file.</code><code class="sig-name descname">KernFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.file.KernFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#catafolk.file.File" title="catafolk.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">catafolk.file.File</span></code></a></p>
+<p>A class for loading <code class="docutils literal notranslate"><span class="pre">**kern**</span></code> files.</p>
+<p>When extracting metadata, the class looks for kern <em>reference
+records</em> of the form <code class="docutils literal notranslate"><span class="pre">!!![key]:</span> <span class="pre">[value]</span></code>. These are collected
+in a dictionary. If a key is encountered multiple times, all
+values are collected in a list.</p>
+<dl class="py attribute">
+<dt id="catafolk.file.KernFile.format">
+<code class="sig-name descname">format</code><em class="property"> = 'kern'</em><a class="headerlink" href="#catafolk.file.KernFile.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="catafolk.file.XMLFile">
+<em class="property">class </em><code class="sig-prename descclassname">catafolk.file.</code><code class="sig-name descname">XMLFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.file.XMLFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#catafolk.file.File" title="catafolk.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">catafolk.file.File</span></code></a></p>
+<dl class="py attribute">
+<dt id="catafolk.file.XMLFile.format">
+<code class="sig-name descname">format</code><em class="property"> = 'xml'</em><a class="headerlink" href="#catafolk.file.XMLFile.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.file.get_file">
+<code class="sig-prename descclassname">catafolk.file.</code><code class="sig-name descname">get_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">format</span><span class="o">=</span><span class="default_value">'infer'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.file.get_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>File factory that returns a File instance of the right type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – Path to the file</p></li>
+<li><p><strong>format</strong> (<em>str</em><em>, </em><em>optional</em>) – File format. Currently supported are <cite>kern</cite> and <cite>xml</cite>. When
+<cite>format=’infer’</cite> the format is inferred from the extension.
+By default ‘infer’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The File instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#catafolk.file.File" title="catafolk.file.File">File</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="index.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dataset.html" class="btn btn-neutral float-left" title="Dataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bas Cornelissen
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

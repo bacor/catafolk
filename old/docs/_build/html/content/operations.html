@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Operations &mdash; Catafolk 0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utilities" href="utils.html" />
+    <link rel="prev" title="Transformer" href="transformer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Catafolk
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Catafolk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Operations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/content/operations.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-catafolk.operations">
+<span id="operations"></span><h1>Operations<a class="headerlink" href="#module-catafolk.operations" title="Permalink to this headline">¶</a></h1>
+<p>This module collects all operations that can be used in a
+transformation using the Transformer class.</p>
+<p>Most operations accept multiple inputs. The output size will always
+match the input size. So if you pass just a single argument, you
+will get a single output, and not a list with one item:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lowercase</span><span class="p">(</span><span class="s1">&#39;THIS&#39;</span><span class="p">,</span> <span class="s1">&#39;IS&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;TEST&#39;</span><span class="p">)</span>
+<span class="go">[&#39;this&#39;, &#39;is&#39;, &#39;a&#39;, &#39;test&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lowercase</span><span class="p">(</span><span class="s1">&#39;THIS IS A TEST&#39;</span><span class="p">)</span>
+<span class="go">&#39;this is a test&#39;</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt id="catafolk.operations.add">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add something to each of the arguments</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="go">&#39;ab&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">[1, 2]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>mixed</em><em>, </em><em>optional</em>) – Anything that can be added in Python</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.constant">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">constant</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a constant value. This allows you to introduce constant
+or default values into the computation graph. The function returns
+as many values as you provide input argument. The inputs are otherwise
+ignored.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">constant</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">constant</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="go">[&#39;foo&#39;, &#39;foo&#39;, &#39;foo&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>mixed</em><em>, </em><em>optional</em>) – The value of the constant, by default None</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value, or a list of values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>mixed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.extract_groups">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">extract_groups</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">groups</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.extract_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract parts of a string using a regular expression:
+it returns the groups of the regular expression</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_groups</span><span class="p">(</span><span class="s1">&#39;foo-bar&#39;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;(.+)\-(.+)&#39;</span><span class="p">)</span>
+<span class="go">[&#39;foo-bar&#39;, &#39;foo&#39;, &#39;bar&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extract_groups</span><span class="p">(</span><span class="s1">&#39;foo-bar&#39;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;(.+)\-(.+)&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">[&#39;foo&#39;, &#39;bar&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> (<em>str</em>) – The input string from which the groups are extracted</p></li>
+<li><p><strong>pattern</strong> (<em>str</em>) – The regular expression, by default None</p></li>
+<li><p><strong>groups</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) – A list of indices (!) of groups to return. Note that group 0
+is the entire input string, so group 1 is the first group
+specified by the regex. Defaults to returning all groups.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of extracted groups (strings), or a string if only
+one group has to be returned</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.first">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">first</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first argument</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.format">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">format</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a string using positional placeholders.</p>
+<p>There are two ways of calling this function. First, you can
+provide a <cite>pattern</cite> keyword, which will then be formatted using
+the input arguments:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">format</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> world&quot;</span><span class="p">)</span>
+<span class="go">&#39;hello world&#39;</span>
+</pre></div>
+</div>
+<p>Second, if the <cite>pattern</cite> is omitted, the first argument is used
+as pattern, and the other arguments are used for formatting:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">format</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> world&#39;</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="go">&#39;hello world&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pattern</strong> (<em>string</em><em>, </em><em>optional</em>) – The pattern to format using the input args, by default None</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The formatted string</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.join">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">join</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">sep</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Joins the arguments with a separator in between.
+Arguments that are None or np.nan are skipped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sep</strong> (<em>str</em><em>, </em><em>optional</em>) – The separator placed between the arguments, by default <code class="docutils literal notranslate"><span class="pre">''</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The concatenated string</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.last">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">last</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.last" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last argument</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.lowercase">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">lowercase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.lowercase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform all arguments to lowercase</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.map_numeric_bins">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">map_numeric_bins</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">bins</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.map_numeric_bins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map numbers to values corresponding to certain bins.
+Bins are dictionaries with a <cite>min</cite>, <cite>max</cite> (exclusive)
+and <cite>value</cite> attribute. For example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bins</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>   <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">},</span>
+<span class="gp">... </span>   <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">}</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">map_numeric_bins</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="go">&#39;foo&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">map_numeric_bins</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="go">&#39;bar&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bins</strong> (<em>list</em>) – A list of bins; see above.</p></li>
+<li><p><strong>default</strong> (<em>string</em><em>, </em><em>optional</em>) – Default value if none of the bins matched,
+by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of output values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.map_values">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">map_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">mapping</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">regex</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">return_missing</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.map_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map input values to other values according to a dictionary mapping.
+It tests whether an input value matches any of the keys in the mapping
+dictionary using a regular expression. If so, the value is replaced
+by the value in the mapping dictionary. When there is no match,
+the input string is returned if <cite>return_missing</cite> is True; else <cite>None</cite>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">map_values</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;fop&#39;</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fo.&#39;</span><span class="p">:</span> <span class="s1">&#39;FOO!&#39;</span><span class="p">})</span>
+<span class="go">[&#39;FOO!&#39;, None, &#39;FOO!&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">map_values</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;fop&#39;</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fo.&#39;</span><span class="p">:</span> <span class="s1">&#39;FOO!&#39;</span><span class="p">},</span> <span class="n">return_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[&#39;FOO!&#39;, &#39;bar&#39;, &#39;FOO!&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">map_values</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;fo.&#39;</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fo.&#39;</span><span class="p">:</span> <span class="s1">&#39;FOO!&#39;</span><span class="p">},</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[None, None, &#39;FOO!&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mapping</strong> (<em>dict</em>) – A dictionary with regex patterns as keys. If an input matches
+the pattern, it is replaced by the value in this dictionary.</p></li>
+<li><p><strong>regex</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use regular expressions? If False, it performs a literal match.
+By default True.</p></li>
+<li><p><strong>return_missing</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return input values when they are not matched to any entry in
+the mapping? Otherwise, it returns None for those values.
+Default to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of new values, or just the new value if only a
+single argument is passed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.rename">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">rename</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passes the arguments allowing you to rename them.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="go">&#39;foo&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rename</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">(1, 2, 3)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whatever you pass as arguments is returned</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>mixed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.replace">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">replace</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">old</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">new</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace a substring by another substring</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;foobar&#39;</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="s1">&#39;oo&#39;</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="s1">&#39;ood&#39;</span><span class="p">)</span>
+<span class="go">&#39;foodbar&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;foobar&#39;</span><span class="p">,</span> <span class="s1">&#39;broom&#39;</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="s1">&#39;oo&#39;</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="s1">&#39;ood&#39;</span><span class="p">)</span>
+<span class="go">[&#39;foodbar&#39;, &#39;broodm&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>old</strong> (<em>str</em>) – The substring to search for, by default None</p></li>
+<li><p><strong>new</strong> (<em>str</em>) – The substring to replace it with, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The string with replacements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.split">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">split</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">sep</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the input string at the separator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*args</strong> – list containing a single string</p></li>
+<li><p><strong>sep</strong> (<em>string</em><em>, </em><em>optional</em>) – The separator, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of parts</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.titlecase">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">titlecase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.titlecase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform all arguments to titlecase</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">titlecase</span><span class="p">(</span><span class="s1">&#39;this is a test&#39;</span><span class="p">)</span>
+<span class="go">&#39;This Is A Test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">titlecase</span><span class="p">(</span><span class="s1">&#39;This is&#39;</span><span class="p">,</span> <span class="s1">&#39;another test&#39;</span><span class="p">)</span>
+<span class="go">[&#39;This Is&#39;, &#39;Another Test&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The titlecased input strings</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string(s)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.unescape_html">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">unescape_html</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.unescape_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unescape an html string: replace html special characters
+by utf-8 characters.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unescape_html</span><span class="p">(</span><span class="s1">&#39;f&amp;ouml;&amp;ograve; bar&#39;</span><span class="p">)</span>
+<span class="go">&#39;föò bar&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Unescaped html string</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string(s)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="catafolk.operations.uppercase">
+<code class="sig-prename descclassname">catafolk.operations.</code><code class="sig-name descname">uppercase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#catafolk.operations.uppercase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform all arguments to uppercase</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">uppercase</span><span class="p">(</span><span class="s1">&#39;this is a test&#39;</span><span class="p">)</span>
+<span class="go">&#39;THIS IS A TEST&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uppercase</span><span class="p">(</span><span class="s1">&#39;this is&#39;</span><span class="p">,</span> <span class="s1">&#39;another test&#39;</span><span class="p">)</span>
+<span class="go">[&#39;THIS IS&#39;, &#39;ANOTHER TEST&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>[description]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="utils.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="transformer.html" class="btn btn-neutral float-left" title="Transformer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Bas Cornelissen
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

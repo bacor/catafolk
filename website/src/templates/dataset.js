@@ -371,7 +371,7 @@ export default ({ data }) => {
 
 export const query = graphql`
   query ($dataset_id: String!) {
-    metadata: dataset(dataset_id: {eq: $dataset_id}) {
+    metadata: corpus(dataset_id: {eq: $dataset_id}) {
       title
       dataset_id
       status

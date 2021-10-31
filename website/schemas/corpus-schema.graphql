@@ -1,5 +1,6 @@
-type dataset implements Node @dontInfer {
+type corpus implements Node @dontInfer {
     dataset_id: String!
+    version: String
     group_ids: [String]
     status: String
     title: String
@@ -17,15 +18,15 @@ type dataset implements Node @dontInfer {
     publication_citation_keys: [String]
     show_columns: [String]
     hide_columns: [String]
-    version: String
     dataset_retrieval_date: Date
     issues: [Issue]
+    corpus_own_version: String
     # Ignore Catafolk options
     # sources: JSON
     # transformations: JSON
 
     # Required for the website to work properly
-    fields: DatasetFields
+    fields: CorpusFields
 }
 
 type Person {
@@ -47,6 +48,6 @@ type License {
     url: String
 }
 
-type DatasetFields {
+type CorpusFields {
     slug: String
 }
