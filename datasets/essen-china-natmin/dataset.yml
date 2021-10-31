@@ -83,7 +83,7 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, essen-china-natmin]
   - rename: [file.AGN, genre]
-  - to_string_list: [file._comments, comments]
+  - to_string_list: [file._comments, comments_with_ethnicity]
   # other_fields
   # warnings
   # description
@@ -117,7 +117,17 @@ transformations:
 
   # Culture
   # —————————————————————————————————————————————————————————————————
-  # culture
+  - extract_groups:
+    - comments_with_ethnicity
+    - [culture]
+    - pattern: ".*Ethnic Group: ([^\\|]+)"
+      groups: [1]
+  - replace:
+    - comments_with_ethnicity
+    - comments
+    - old: "Ethnic Group: ([^\\|]+)\\|?"
+      new: ""
+      regex: true
   # culture_dplace_id
   # culture_hraf_id
 

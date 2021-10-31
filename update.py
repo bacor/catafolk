@@ -12,7 +12,7 @@ if __name__ == '__main__':
         # 'boehme-volksthumliche-lieder',
         # 'bronson-child-ballads',
         # 'creighton-nova-scotia',
-        'densmore-choctaw',
+        # 'densmore-choctaw',
         # 'densmore-menominee'
         # 'densmore-nootka',
         # 'densmore-northern-ute',
@@ -21,10 +21,10 @@ if __name__ == '__main__':
         # 'densmore-pueblo',
         # 'densmore-teton-sioux',
         # 'erk-deutscher-liederhort',
-        # 'essen-china-han',
-        # 'essen-china-natmin',
-        # 'essen-china-shanxi',
-        # 'essen-china-xinhua',
+        'essen-china-han',
+        'essen-china-natmin',
+        'essen-china-shanxi',
+        'essen-china-xinhua',
         # 'finnish-folk-tunes'
         # 'haydn-scottish-songs',
         # 'natural-history-of-song',

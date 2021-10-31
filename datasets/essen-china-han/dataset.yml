@@ -86,7 +86,7 @@ transformations:
   # —————————————————————————————————————————————————————————————————
   - constant: [dataset_id, essen-china-han]
   - rename: [file.AGN, genre]
-  - to_string_list: [file._comments, comments]
+  - to_string_list: [file._comments, comments_with_ethnicity]
   # other_fields
   # warnings
   # description
@@ -121,7 +121,17 @@ transformations:
   # Culture
   # —————————————————————————————————————————————————————————————————
   # Files contain 'Ethnic Group: Han'
-  - constant: [culture, Han]
+  - extract_groups:
+    - comments_with_ethnicity
+    - [culture]
+    - pattern: ".*Ethnic Group: ([^\\|]+)"
+      groups: [1]
+  - replace:
+    - comments_with_ethnicity
+    - comments
+    - old: "Ethnic Group: ([^\\|]+)\\|?"
+      new: ""
+      regex: true
   # culture_dplace_id
   # culture_hraf_id
 
