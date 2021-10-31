@@ -1,0 +1,6 @@
+from https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjIz_eZjaLsAhWPGewKHTrnA00QFjAAegQIAhAC&url=https%3A%2F%2Fccposters.com%2Fwp-content%2Fuploads%2F2018%2F11%2FFeng-Zikai-and-Kaiming-Book-Co.pdf&usg=AOvVaw3qOJxNjhBvcWhkemVOREn2
+
+    Besides publishing textbooks, New Literature and fairy tales, the Kaiming Book
+    Company made a lot of effort to promote art and music. According to Qian Juntao and Feng Yiying, Feng Zikai’s Introduction to Music (Yingyue rumen 音樂入門, 1926) (Fig.
+    239) was reprinted 28 times by 1949. Introduction to Music was adopted as a textbook by many schools and was widely circulated. It influenced many pioneering Chinese musicians.165 Besides the Introduction to Music, the Book Company published Feng’s Music for Children (Haizi men de yingyue 孩子們的音樂) (Fig. 240), Knowledge of
+    Music (Yingyue de changshi 音樂的常識) (Fig. 241), Fifty Well-known Chinese Songs (Zhongwen mingge wushi qu 中文名歌五十曲, 1927), Huang Hanqiu’s (黃涵秋) How to Play the Harmonica (Koqin chuizou fa 口琴吹奏法), and Qian Juntao’s Collections of Well-known Chinese Songs (Zhongguo mingge xuan 中國名歌選), Collections of Songs for Harmonica (Koqin mingqu xuan 口琴名曲選, 1935), and Music Collections for
