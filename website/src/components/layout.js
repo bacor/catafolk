@@ -25,7 +25,7 @@ export default ({ children, pageName }) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <Link to="/datasets/" className="nav-link" activeClassName="active">Datasets</Link>
+              <Link to="/datasets/" className="nav-link" activeClassName="active">Corpora</Link>
               <Link to="/sources/" className="nav-link" activeClassName="active">Sources</Link>
               <Link to="/about/" className="nav-link" activeClassName="active">About</Link>
             </Nav>

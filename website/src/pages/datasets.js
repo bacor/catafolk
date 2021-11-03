@@ -48,16 +48,16 @@ export default ({ data }) => {
       <Container>
         <Row className="mt-5">
           <Jumbotron className="col-12">
-            <h1 className="display-4">Datasets</h1>
+            <h1 className="display-4">Corpora</h1>
             <p className="lead w-75">
-            A list of all datasets in Catafolk
+            A list of all corpora in Catafolk
             </p>
           </Jumbotron>
         </Row>
         <Row>
           <div className="card w-100">
             <div className="card-header">
-              Analyzed datasets
+              List of corpora.
             </div>
             <div className="card-body">
               <table className="table table-responsive-md table-hover small">

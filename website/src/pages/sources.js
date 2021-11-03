@@ -25,6 +25,9 @@ export default () => {
           <Jumbotron className="col-12">
             <h1 className="display-4">Sources</h1>
             <p className="lead w-75">
+              The project pays special attention to bibliography, to ensure the
+              origins of all the songs are clearly documented.
+              All sources currently included in Catafolk are listed below.
             </p>
           </Jumbotron>
         </Row>

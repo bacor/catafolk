@@ -18,12 +18,15 @@ export default ({ data }) => {
             <div  style={{ maxWidth: '700px' }}>
               <h1 className="display-4">Catafolk</h1>
               <p className="lead">
-                A catalogue of folk music datasets for computational ethnomusicology
+                A catalogue of folk music corpora for computational ethnomusicology
               </p>
               <hr className="my-4" />
               <p>
-                The project hopes to make datasets of folk music more easily accessible. 
-                It provides a reference of datasets, but also aims to include some basic automatic analyses.
+                The project aims to make cross-cultural music corpora more easily accessible.
+                It is a catalogue of music corpora, but also an index of songs in
+                those corpora, providing metadata in a consistent format.
+                We hope the project contributes to diversifying computational music research 
+                and to the creation of large, cross-cultural musical corpora.              
               </p>
             </div> 
           </Jumbotron>
