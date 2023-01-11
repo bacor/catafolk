@@ -24,7 +24,7 @@
     "gatsby-transformer-code": "^0.1.0",
     "gatsby-transformer-csv": "^2.1.28",
     "gatsby-transformer-json": "^2.3.0",
-    "gatsby-transformer-remark": "^2.7.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-yaml": "^2.3.0",
     "gh-pages": "^2.2.0",
     "lodash": "^4.17.21",
